@@ -1,0 +1,45 @@
+{
+  "id": "00001",
+  "preference_id":"202809963-218c96b7-2342-4110-9b5e-1761a2d1a624",
+  "date_created":"2016-06-27T16:23:01.000-04:00",
+  "last_updated":"2016-06-27T16:23:01.000-04:00",
+  "application_id":"",
+  "status":"opened",
+  "site_id":"MLA",
+  "payer":null,
+  "collector":{
+    "id":202809963,
+    "email":"niohnex@gmail.com",
+    "nickname":"JOEL IBACETA"
+  },
+  "sponsor_id":0,
+  "payments":[
+
+  ],
+  "paid_amount":0.0,
+  "refunded_amount":0.0,
+  "shipping_cost":0.0,
+  "cancelled":false,
+  "items":[
+    {
+      "attributes":{
+        "category_id":"",
+        "currency_id":"ARS",
+        "description":"Lorem ipsum dolor sit amet.",
+        "id":"item-ID-1234",
+        "picture_url":"http://placehold.it/350x150",
+        "quantity":2,
+        "unit_price":14.5,
+        "title":"Practical Granite Shirt"
+      }
+    }
+  ],
+  "marketplace":"MP-MKT-6295877106812064",
+  "shipments":[
+
+  ],
+  "external_reference":"",
+  "additional_info":"",
+  "notification_url":"",
+  "total_amount":29.0
+}

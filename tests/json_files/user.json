@@ -1,0 +1,10 @@
+{  
+   "access_token":"TEST-3964826791704277-070416-b6e6cbfced7dab08b0bc24371e4aac0a__LA_LC__-202809963",
+   "public_key":"TEST-98638d24-eb00-4dd5-82d8-4e573fac6a80",
+   "refresh_token":"TG-577acdb0e4b0d077e088c7e6-202809963",
+   "live_mode":false,
+   "user_id":202809963,
+   "token_type":"bearer",
+   "expires_in":15552000,
+   "scope":"offline_access read write"
+}

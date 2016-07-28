@@ -1,0 +1,78 @@
+{
+  "collector_id": 202809963,
+  "operation_type": "regular_payment",
+  "items": [
+    {
+      "id": "item-ID-1234",
+      "title": "Title of what you are paying for. It will be displayed in the payment process.",
+      "description": "Item description",
+      "category_id": "art",
+      "picture_url": "https://www.mercadopago.com/org-img/MP3/home/logomp3.gif",
+      "currency_id": "ARS",
+      "quantity": 1,
+      "unit_price": 100
+    }
+  ],
+  "payer": {
+    "name": "user-name",
+    "surname": "user-surname",
+    "email": "user@email.com",
+    "date_created": "2015-06-02T12:58:41.425-04:00",
+    "phone": {
+      "area_code": "11",
+      "number": "4444-4444"
+    },
+    "identification": {
+      "type": "DNI",
+      "number": "12345678"
+    },
+    "address": {
+      "street_name": "Street",
+      "street_number": 123,
+      "zip_code": "5700"
+    }
+  },
+  "back_urls": {
+    "success": "https://www.success.com",
+    "pending": "http://www.pending.com",
+    "failure": "http://www.failure.com"
+  },
+  "auto_return": "approved",
+  "payment_methods": {
+    "excluded_payment_methods": [
+      {
+        "id": "master"
+      }
+    ],
+    "excluded_payment_types": [
+      {
+        "id": "ticket"
+      }
+    ],
+    "installments": 12,
+    "default_payment_method_id": null,
+    "default_installments": null
+  },
+  "client_id": "6295877106812064",
+  "marketplace": "MP-MKT-6295877106812064",
+  "marketplace_fee": 0,
+  "shipments": {
+    "receiver_address": {
+      "zip_code": "5700",
+      "street_number": 123,
+      "street_name": "Street",
+      "floor": "4",
+      "apartment": "C"
+    }
+  },
+  "notification_url": "https://www.your-site.com/ipn",
+  "external_reference": "Reference_1234",
+  "additional_info": "",
+  "expires": true,
+  "expiration_date_from": "2016-02-01T12:00:00.000-04:00",
+  "expiration_date_to": "2016-02-28T12:00:00.000-04:00",
+  "date_created": "2016-05-09T12:49:18.970-04:00",
+  "id": "202809963-a2901d2b-b2e0-4479-ac4c-97950c09b2e4",
+  "init_point": "https://www.mercadopago.com/mla/checkout/start?pref_id=202809963-a2901d2b-b2e0-4479-ac4c-97950c09b2e4",
+  "sandbox_init_point": "https://sandbox.mercadopago.com/mla/checkout/pay?pref_id=202809963-a2901d2b-b2e0-4479-ac4c-97950c09b2e4"
+}

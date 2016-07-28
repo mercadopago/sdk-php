@@ -1,0 +1,37 @@
+[
+  {
+    "id": "DNI",
+    "name": "DNI",
+    "type": "number",
+    "min_length": 7,
+    "max_length": 8
+  },
+  {
+    "id": "CI",
+    "name": "Cédula",
+    "type": "number",
+    "min_length": 1,
+    "max_length": 9
+  },
+  {
+    "id": "LC",
+    "name": "L.C.",
+    "type": "number",
+    "min_length": 6,
+    "max_length": 7
+  },
+  {
+    "id": "LE",
+    "name": "L.E.",
+    "type": "number",
+    "min_length": 6,
+    "max_length": 7
+  },
+  {
+    "id": "Otro",
+    "name": "Otro",
+    "type": "number",
+    "min_length": 5,
+    "max_length": 20
+  }
+]

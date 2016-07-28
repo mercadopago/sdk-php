@@ -1,0 +1,63 @@
+{
+  "id": "211713195-rvTmbHpnqmwdKK",
+  "email": "mail@demo.com",
+  "first_name": null,
+  "last_name": null,
+  "phone": {
+    "area_code": null,
+    "number": null
+  },
+  "identification": {
+    "type": null,
+    "number": null
+  },
+  "address": {
+    "id": null,
+    "zip_code": null,
+    "street_name": null,
+    "street_number": null
+  },
+  "date_registered": null,
+  "description": null,
+  "date_created": "2016-04-19T00:00:00.000-04:00",
+  "date_last_updated": "2016-06-23T00:00:00.000-04:00",
+  "metadata": {},
+  "default_card": "1461087305698",
+  "default_address": null,
+  "cards": [
+    {
+      "id": "1461087305698",
+      "customer_id": "211713195-rvTmbHpnqmwdKK",
+      "expiration_month": 11,
+      "expiration_year": 2020,
+      "first_six_digits": "503175",
+      "last_four_digits": "0604",
+      "payment_method": {
+        "id": "master",
+        "name": "master",
+        "payment_type_id": "credit_card",
+        "thumbnail": "http://img.mlstatic.com/org-img/MP3/API/logos/master.gif",
+        "secure_thumbnail": "https://www.mercadopago.com/org-img/MP3/API/logos/master.gif"
+      },
+      "security_code": {
+        "length": 3,
+        "card_location": "back"
+      },
+      "issuer": {
+        "id": 3,
+        "name": "Mastercard"
+      },
+      "cardholder": {
+        "name": "Joel Ibaceta",
+        "identification": {
+          "number": "46819233",
+          "type": "DNI"
+        }
+      },
+      "date_created": "2016-04-19T13:34:34.890-04:00",
+      "date_last_updated": "2016-04-19T13:35:03.995-04:00"
+    }
+  ],
+  "addresses": [],
+  "live_mode": false
+}

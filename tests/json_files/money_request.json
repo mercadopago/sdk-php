@@ -1,0 +1,18 @@
+{
+	"id": 1234567,
+	"status": "pending",
+	"site_id": "MLA",
+	"currency_id": "ARS",
+	"amount": 2.1,
+	"collector_id": 202809963,
+	"collector_email": "collector@email.com",
+	"payer_id": "PAYER_ID",
+	"payer_email": "payer@email.com",
+	"description": "Description",
+	"concept_type": "off_platform",
+	"init_point": "checkout-access-URL",
+	"external_reference": "Reference_1234",
+	"pref_id": "PREFERENCE_IDENTIFIER",
+	"date_created": "2014-04-24T16:37:22.032-04:00",
+	"last_updated": "2014-04-24T16:37:22.032-04:00"
+}
