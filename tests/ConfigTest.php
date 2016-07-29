@@ -182,6 +182,30 @@ class ConfigTest
     }
 
     /**
+     * @covers                   \MercadoPago\Config::load
+     * @covers                   \MercadoPago\Config::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+     * @covers                   \MercadoPago\Config::getDefaults
+     * @covers                   \MercadoPago\Config\AbstractConfig::has
+     * @covers                   \MercadoPago\Config\AbstractConfig::get
+     * @covers                   \MercadoPago\Config\Json::getSupportedExtensions
+     * @covers                   \MercadoPago\Config\Yaml::getSupportedExtensions
+     * @covers                   \MercadoPago\Config\Json::parse
+     * @covers                   \MercadoPago\Config::_getParser
+     * @covers                   \MercadoPago\Config::all
+     */
+    public function testGetAll()
+    {
+        $config = Config::load(dirname(__FILE__) . '/settings.json');
+        $all = $config->all();
+        $this->assertEquals('CLIENT_ID_JSON', $all['CLIENT_ID']);
+        $this->assertEquals('CLIENT_SECRET_JSON', $all['CLIENT_SECRET']);
+        $this->assertEquals('CLIENT_ACCESS_TOKEN_JSON', $all['ACCESS_TOKEN']);
+        $this->assertEquals('https://api.mercadopago.com', $all['base_url']);
+        $this->assertEquals(true, $all['sandbox_mode']);
+    }
+
+    /**
      * @covers                   \MercadoPago\Config::__construct
      * @covers                   \MercadoPago\Config\AbstractConfig::__construct
      * @covers                   \MercadoPago\Config\AbstractConfig::has

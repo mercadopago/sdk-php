@@ -17,6 +17,7 @@ class CurlRequest
     private $handle = null;
 
     /**
+     * @codeCoverageIgnore
      * CurlRequest constructor.
      *
      * @param null $uri
