@@ -18,7 +18,8 @@
     "symfony/yaml": "~2.5",
     "phpmd/phpmd": "@stable",
     "squizlabs/php_codesniffer": "2.3.*",
-    "sebastian/phpcpd": "*"
+    "sebastian/phpcpd": "*",
+    "satooshi/php-coveralls":"dev-master"
   },
   "autoload": {
     "psr-4": {

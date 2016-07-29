@@ -16,9 +16,14 @@ class RestClientTest
     }
 
     /**
-     * @covers                   RestClient::setHttpRequest()
-     * @covers                   RestClient::exec()
-     * @covers                   RestClient::get()
+     * @covers                   \MercadoPago\RestClient::__construct
+     * @covers                   \MercadoPago\RestClient::setHttpRequest
+     * @covers                   \MercadoPago\RestClient::getHttpRequest
+     * @covers                   \MercadoPago\RestClient::exec
+     * @covers                   \MercadoPago\RestClient::get
+     * @covers                   \MercadoPago\RestClient::getArrayValue
+     * @covers                   \MercadoPago\RestClient::setHeaders
+     * @covers                   \MercadoPago\Http\CurlRequest::__construct
      */
     public function testDoGetTokenRequest()
     {

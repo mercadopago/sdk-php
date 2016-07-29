@@ -10,3 +10,8 @@ before_script:
 
 script:
   - vendor/bin/phpunit
+  - vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
+
+after_script:
+  - vendor/bin/coveralls -v
+

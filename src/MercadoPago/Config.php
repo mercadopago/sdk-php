@@ -2,8 +2,6 @@
 namespace MercadoPago;
 
 use Exception;
-use MercadoPago\Config\Json;
-use MercadoPago\Config\Yaml;
 
 /**
  * Config Class Doc Comment

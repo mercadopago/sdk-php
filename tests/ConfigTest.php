@@ -1,23 +1,41 @@
 <?php
 
 namespace MercadoPago;
-use Exception;
 
+/**
+ * ConfigTest Class Doc Comment
+ *
+ * @package MercadoPago
+ */
 class ConfigTest
     extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var
+     */
     protected $config;
 
+    /**
+     *
+     */
     protected function setUp()
     {
     }
 
+    /**
+     *
+     */
     protected function tearDown()
     {
     }
 
     /**
-     * @covers                   Config::load()
+     * @covers                   \MercadoPago\Config::load
+     * @covers                   \MercadoPago\Config::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+     * @covers                   \MercadoPago\Config::getDefaults
+     * @covers                   \MercadoPago\Config\AbstractConfig::get
+     * @covers                   \MercadoPago\Config\AbstractConfig::has
      */
     public function testDefaultSettings()
     {
@@ -31,9 +49,14 @@ class ConfigTest
     }
 
     /**
-     * @covers                   Config::load()
-     * @covers                   Config::set()
-     * @covers                   Config::get()
+     * @covers                   \MercadoPago\Config::load
+     * @covers                   \MercadoPago\Config::set
+     * @covers                   \MercadoPago\Config::__construct
+     * @covers                   \MercadoPago\Config::getDefaults
+     * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::get
+     * @covers                   \MercadoPago\Config\AbstractConfig::set
+     * @covers                   \MercadoPago\Config\AbstractConfig::has
      */
     public function testDifferentSetField()
     {
@@ -43,8 +66,12 @@ class ConfigTest
     }
 
     /**
-     * @covers                   Config::load()
-     * @covers                   Config::get()
+     * @covers                   \MercadoPago\Config::load
+     * @covers                   \MercadoPago\Config::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+     * @covers                   \MercadoPago\Config::getDefaults
+     * @covers                   \MercadoPago\Config\AbstractConfig::get
+     * @covers                   \MercadoPago\Config\AbstractConfig::has
      */
     public function testDefaultSettingsWithInvalidPath()
     {
@@ -53,17 +80,23 @@ class ConfigTest
     }
 
     /**
-     * @covers            Config::load()
-     * @covers            Config::configure()
-     * @covers            Config::get()
+     * @covers                   \MercadoPago\Config::load
+     * @covers                   \MercadoPago\Config::set
+     * @covers                   \MercadoPago\Config::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+     * @covers                   \MercadoPago\Config::getDefaults
+     * @covers                   \MercadoPago\Config\AbstractConfig::configure
+     * @covers                   \MercadoPago\Config\AbstractConfig::get
+     * @covers                   \MercadoPago\Config\AbstractConfig::set
+     * @covers                   \MercadoPago\Config\AbstractConfig::has
      */
     public function testSettingsFromArray()
     {
         $config = Config::load();
-        $config->configure(['base_url'      => 'https://custom.com',
-                            'CLIENT_ID'     => 'RANDOM_ID',
-                            'APP_ID'        => 'APP_ID',
-                            'ACCESS_TOKEN'  => 'RANDOM_TOKEN']
+        $config->configure(['base_url'     => 'https://custom.com',
+                            'CLIENT_ID'    => 'RANDOM_ID',
+                            'APP_ID'       => 'APP_ID',
+                            'ACCESS_TOKEN' => 'RANDOM_TOKEN']
         );
         $this->assertEquals($config->get('base_url'), 'https://custom.com');
         $this->assertEquals($config->get('CLIENT_ID'), 'RANDOM_ID');
@@ -72,8 +105,16 @@ class ConfigTest
     }
 
     /**
-     * @covers Config::load()
-     * @covers Config::get()
+     * @covers                   \MercadoPago\Config::load
+     * @covers                   \MercadoPago\Config::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+     * @covers                   \MercadoPago\Config::getDefaults
+     * @covers                   \MercadoPago\Config\AbstractConfig::has
+     * @covers                   \MercadoPago\Config\AbstractConfig::get
+     * @covers                   \MercadoPago\Config\Json::getSupportedExtensions
+     * @covers                   \MercadoPago\Config\Yaml::getSupportedExtensions
+     * @covers                   \MercadoPago\Config\Yaml::parse
+     * @covers                   \MercadoPago\Config::_getParser
      */
     public function testSettingsFromYml()
     {
@@ -84,8 +125,12 @@ class ConfigTest
     }
 
     /**
-     * @covers Config::load()
-     * @covers Config::get()
+     * @covers                   \MercadoPago\Config::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::has
+     * @covers                   \MercadoPago\Config::getDefaults
+     * @covers                   \MercadoPago\Config::load()
+     * @covers                   \MercadoPago\Config::get()
      */
     public function testNonExistentValueCall()
     {
