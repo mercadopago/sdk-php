@@ -1,6 +1,7 @@
 <?php
 
 namespace MercadoPago;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * ConfigTest Class Doc Comment
@@ -125,6 +126,62 @@ class ConfigTest
     }
 
     /**
+     * @covers                   \MercadoPago\Config::load
+     * @covers                   \MercadoPago\Config::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+     * @covers                   \MercadoPago\Config::getDefaults
+     * @covers                   \MercadoPago\Config\AbstractConfig::has
+     * @covers                   \MercadoPago\Config\AbstractConfig::get
+     * @covers                   \MercadoPago\Config\Json::getSupportedExtensions
+     * @covers                   \MercadoPago\Config\Yaml::getSupportedExtensions
+     * @covers                   \MercadoPago\Config\Yaml::parse
+     * @covers                   \MercadoPago\Config::_getParser
+     * @expectedException        \Exception
+     */
+    public function testSettingsFromBrokenYml()
+    {
+        Config::load(dirname(__FILE__) . '/settings_broken.yml');
+    }
+    
+    /**
+     * @covers                   \MercadoPago\Config::load
+     * @covers                   \MercadoPago\Config::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+     * @covers                   \MercadoPago\Config::getDefaults
+     * @covers                   \MercadoPago\Config\AbstractConfig::has
+     * @covers                   \MercadoPago\Config\AbstractConfig::get
+     * @covers                   \MercadoPago\Config\Json::getSupportedExtensions
+     * @covers                   \MercadoPago\Config\Yaml::getSupportedExtensions
+     * @covers                   \MercadoPago\Config\Json::parse
+     * @covers                   \MercadoPago\Config::_getParser
+     */
+    public function testSettingsFromJson()
+    {
+        $config = Config::load(dirname(__FILE__) . '/settings.json');
+        $this->assertEquals('CLIENT_ID_JSON', $config->get('CLIENT_ID'));
+        $this->assertEquals('CLIENT_SECRET_JSON', $config->get('CLIENT_SECRET'));
+        $this->assertEquals('CLIENT_ACCESS_TOKEN_JSON', $config->get('ACCESS_TOKEN'));
+    }
+
+    /**
+     * @covers                   \MercadoPago\Config::load
+     * @covers                   \MercadoPago\Config::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+     * @covers                   \MercadoPago\Config::getDefaults
+     * @covers                   \MercadoPago\Config\AbstractConfig::has
+     * @covers                   \MercadoPago\Config\AbstractConfig::get
+     * @covers                   \MercadoPago\Config\Json::getSupportedExtensions
+     * @covers                   \MercadoPago\Config\Yaml::getSupportedExtensions
+     * @covers                   \MercadoPago\Config\Json::parse
+     * @covers                   \MercadoPago\Config::_getParser
+     * @expectedException        \Exception
+     */
+    public function testSettingsFromBrokenJson()
+    {
+        Config::load(dirname(__FILE__) . '/settings_broken.json');
+    }
+
+    /**
      * @covers                   \MercadoPago\Config::__construct
      * @covers                   \MercadoPago\Config\AbstractConfig::__construct
      * @covers                   \MercadoPago\Config\AbstractConfig::has
@@ -136,5 +193,71 @@ class ConfigTest
     {
         $config = Config::load();
         $this->assertEquals(null, $config->get('wrong_config_key'));
+    }
+
+   /**
+    * @covers                   \MercadoPago\Config::load
+    * @covers                   \MercadoPago\Config::__construct
+    * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+    * @covers                   \MercadoPago\Config::getDefaults
+    * @covers                   \MercadoPago\Config\Json::getSupportedExtensions
+    * @covers                   \MercadoPago\Config\Yaml::getSupportedExtensions
+    * @covers                   \MercadoPago\Config\Json::parse
+    * @covers                   \MercadoPago\Config::_getParser
+    * @expectedException        \Exception
+    * @expectedExceptionMessage Unsupported configuration format
+    */
+    public function testNotSupportedExtension()
+    {
+        Config::load(dirname(__FILE__) . '/settings.ini');
+    }
+
+    /**
+     * @covers                   \MercadoPago\Config::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::__construct
+     * @covers                   \MercadoPago\Config\AbstractConfig::get
+     * @covers                   \MercadoPago\Config\AbstractConfig::has
+     * @covers                   \MercadoPago\Config\AbstractConfig::set
+     * @covers                   \MercadoPago\Config::getToken
+     * @covers                   \MercadoPago\Config::set
+     * @covers                   \MercadoPago\Config::getDefaults
+     * @covers                   \MercadoPago\RestClient::__construct
+     * @covers                   \MercadoPago\RestClient::setHttpRequest
+     * @covers                   \MercadoPago\RestClient::getHttpRequest
+     * @covers                   \MercadoPago\RestClient::exec
+     * @covers                   \MercadoPago\RestClient::post
+     * @covers                   \MercadoPago\RestClient::setData
+     * @covers                   \MercadoPago\RestClient::setHttpParam
+     * @covers                   \MercadoPago\RestClient::getArrayValue
+     * @covers                   \MercadoPago\RestClient::setHeaders
+     * @covers                   \MercadoPago\Http\CurlRequest::__construct
+     */
+    public function testDoGetToken()
+    {
+        $restClient = new RestClient();
+        $restClient->setHttpRequest($this->_getMockedRequest());
+        
+        $config = new Config(null, $restClient);
+        
+        $config->set('CLIENT_ID', '446950613712741');
+        $config->set('CLIENT_SECRET', '0WX05P8jtYqCtiQs6TH1d9SyOJ04nhEv');
+        
+        $this->assertEquals('APP_USR-6295877106812064-042916-5ab7e29152843f61b4c218a551227728__LC_LB__-202809963', $config->get('ACCESS_TOKEN'));
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function _getMockedRequest() {
+        $hub = new FakeApiHub();
+        $request = $this->getMockBuilder('MercadoPago\Http\CurlRequest')->getMock();
+        $request->expects($this->once())
+            ->method('execute')
+            ->will($this->returnValue($hub->getJson('GET', '/oauth/token')));
+        $request->expects($this->once())
+            ->method('getInfo')->withAnyParameters()
+            ->will($this->returnValue('200'));
+        
+        return $request;
     }
 }

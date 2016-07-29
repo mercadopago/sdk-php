@@ -21,12 +21,7 @@ class Yaml implements ParserInterface
         try {
             $data = YamlParser::parse(file_get_contents($path));
         } catch (Exception $exception) {
-            throw new Exception(
-                array(
-                    'message'   => 'Error parsing YAML file',
-                    'exception' => $exception,
-                )
-            );
+            throw new Exception('Error parsing YAML file');
         }
         return $data;
     }

@@ -32,6 +32,7 @@ class CurlRequest
     }
 
     /**
+     * @codeCoverageIgnore
      * @param $name
      * @param $value
      */
@@ -41,6 +42,7 @@ class CurlRequest
     }
 
     /**
+     * @codeCoverageIgnore
      * @return mixed
      */
     public function execute()
@@ -49,6 +51,7 @@ class CurlRequest
     }
 
     /**
+     * @codeCoverageIgnore
      * @param $name
      *
      * @return mixed
@@ -59,7 +62,7 @@ class CurlRequest
     }
 
     /**
-     *
+     *@codeCoverageIgnore
      */
     public function close()
     {
@@ -67,6 +70,7 @@ class CurlRequest
     }
 
     /**
+     * @codeCoverageIgnore
      * @return string
      */
     public function error()

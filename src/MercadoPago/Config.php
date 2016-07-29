@@ -20,6 +20,8 @@ class Config
         'MercadoPago\\Config\\Yaml',
     ];
 
+    private $_restclient = null;
+
     /**
      * Default values
      * @return array
@@ -51,8 +53,9 @@ class Config
      * Config constructor.
      *
      * @param null $path
+     * @param null $restClient
      */
-    public function __construct($path = null)
+    public function __construct($path = null, $restClient = null)
     {
         $this->data = [];
         if (is_file($path)) {
@@ -62,6 +65,8 @@ class Config
             $parser = $this->_getParser($extension);
             $this->data = array_replace_recursive($this->data, (array)$parser->parse($path));
         }
+        $this->_restclient = $restClient;
+        
         parent::__construct($this->data);
     }
 
@@ -112,13 +117,16 @@ class Config
      */
     public function getToken()
     {
-        $restClient = new RestClient();
+
+        if (!$this->_restclient) {
+            $this->_restclient = new RestClient();
+        }
         $data = ['grant_type'    => 'client_credentials',
                  'client_id'     => $this->get('CLIENT_ID'),
                  'client_secret' => $this->get('CLIENT_SECRET')];
-        $restClient->setHttpParam('address', $this->get('base_url'));
-        $restClient->setHttpParam('use_ssl', true);
-        $response = $restClient->post("/oauth/token", ['json_data' => json_encode($data)]);
+        $this->_restclient->setHttpParam('address', $this->get('base_url'));
+        $this->_restclient->setHttpParam('use_ssl', true);
+        $response = $this->_restclient->post("/oauth/token", ['json_data' => json_encode($data)]);
         return $response['body'];
     }
 

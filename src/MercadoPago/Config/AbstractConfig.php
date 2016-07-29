@@ -57,7 +57,6 @@ abstract class AbstractConfig
      */
     public function set($key, $value)
     {
-        // Assign value at target node
         $this->data[$key] = $value;
     }
 

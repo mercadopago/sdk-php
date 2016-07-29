@@ -24,12 +24,8 @@ class Json implements ParserInterface
             if (function_exists('json_last_error_msg')) {
                 $error_message = json_last_error_msg();
             }
-            $error = array(
-                'message' => $error_message,
-                'type'    => json_last_error(),
-                'file'    => $path,
-            );
-            throw new Exception($error);
+            
+            throw new Exception($error_message);
         }
         return $data;
     }
