@@ -6,15 +6,10 @@ use Doctrine\Common\Annotations\Annotation;
 /**
  * @Annotation
  */
-class RestMethod extends Annotation
+class RequestParam extends Annotation
 {
     /**
      * @var
      */
-    public $resource;
-
-    /**
-     * @var
-     */
-    public $method;
+    public $param;
 }

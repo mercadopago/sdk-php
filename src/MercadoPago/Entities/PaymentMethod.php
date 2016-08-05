@@ -1,25 +1,25 @@
 <?php
 namespace MercadoPago\Entities;
 
-use Doctrine\ORM\Mapping as ORM;
 use MercadoPago;
+use Doctrine\ORM\Mapping as ORM;
 use MercadoPago\Annotation\RestMethod;
+use MercadoPago\Annotation\RequestParam;
 
 /**
  * @RestMethod(resource="/v1/payment_methods", method="list")
+ * @RequestParam("access_token")
  */
 
 class PaymentMethod extends MercadoPago\Entity
 {
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var
      */
     private $name;
 

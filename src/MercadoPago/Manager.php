@@ -4,17 +4,39 @@ namespace MercadoPago;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
+/**
+ * Manager Class Doc Comment
+ *
+ * @package MercadoPago
+ */
 class Manager
 {
+    /**
+     * @var RestClient
+     */
     private $_client;
+    /**
+     * @var Config
+     */
     private $_config;
 
+    /**
+     * Manager constructor.
+     *
+     * @param RestClient $client
+     * @param Config     $config
+     */
     public function __construct(RestClient $client, Config $config)
     {
         $this->_client = $client;
         $this->_config = $config;
     }
 
+    /**
+     * @param $entity
+     *
+     * @return \stdClass
+     */
     public function getEntityMetaData($entity)
     {
         AnnotationRegistry::registerLoader('class_exists');
@@ -26,6 +48,13 @@ class Manager
         return $metaData->getMetaData($entity);
     }
 
+    /**
+     * @param        $entity
+     * @param string $method
+     * @param null   $parameters
+     *
+     * @return mixed
+     */
     public function execute($entity, $method = 'get', $parameters = null)
     {
         if (is_object($entity)) {
@@ -36,7 +65,18 @@ class Manager
         
         $configuration = $this->getEntityMetaData($className);
 
-        return $this->_client->{$method}($configuration->resource, ['url_query' => ['access_token' => $this->_config->get('ACCESS_TOKEN')]]);
-        
+        $query = [];
+        $params = [];
+        if (isset($configuration->params)) {
+            foreach ($configuration->params as $value) {
+                $params[$value] = $this->_config->get(strtoupper($value));
+            }
+            if (count($params) > 0) {
+                $query = ['url_query' => $params];
+            }
+        }
+        return $this->_client->{$method}($configuration->resource, $query);
+
+
     }
 }
