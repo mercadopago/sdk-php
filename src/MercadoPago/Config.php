@@ -58,6 +58,7 @@ class Config
     public function __construct($path = null, $restClient = null)
     {
         $this->data = [];
+        $this->_restclient = $restClient;
         if (is_file($path)) {
             $info = pathinfo($path);
             $parts = explode('.', $info['basename']);
@@ -65,11 +66,10 @@ class Config
             $parser = $this->_getParser($extension);
 
             foreach ((array)$parser->parse($path) as $key => $value) {
-                    $this->set($key, $value);
+                $this->set($key, $value);
             }
         }
-        $this->_restclient = $restClient;
-        
+
         parent::__construct($this->data);
     }
 
