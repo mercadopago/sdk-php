@@ -6,16 +6,20 @@ use Doctrine\Common\Annotations\Annotation;
 /**
  * @Annotation
  */
-class RestMethod extends Annotation
+class Attribute extends Annotation
 {
     /**
      * @var
      */
-    public $resource;
+    public $type;
 
     /**
      * @var
      */
-    public $method;
+    public $required = false;
+    public $readOnly;
+    public $primaryKey;
     public $idempotency;
+    public $defaultValue;
+    public $maxLength;
 }

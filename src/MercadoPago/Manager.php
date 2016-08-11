@@ -1,8 +1,7 @@
 <?php
 
 namespace MercadoPago;
-use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\AnnotationRegistry;
+
 
 /**
  * Manager Class Doc Comment
@@ -19,6 +18,8 @@ class Manager
      * @var Config
      */
     private $_config;
+    private $_entityConfiguration;
+    private $_metadataReader;
 
     /**
      * Manager constructor.
@@ -30,6 +31,7 @@ class Manager
     {
         $this->_client = $client;
         $this->_config = $config;
+        $this->_metadataReader = new MetaData();
     }
 
     /**
@@ -39,13 +41,13 @@ class Manager
      */
     public function getEntityMetaData($entity)
     {
-        AnnotationRegistry::registerLoader('class_exists');
-        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\RestMethod');
+        if (isset($this->_entityConfiguration[$entity])) {
+            return $this->_entityConfiguration[$entity];
+        }
 
-        $reader = new AnnotationReader();
-        $metaData = new MetaData($reader);
-
-        return $metaData->getMetaData($entity);
+        $this->_entityConfiguration[$entity] =  $this->_metadataReader->getMetaData($entity);
+        
+        return $this->_entityConfiguration[$entity];
     }
 
     /**
@@ -62,7 +64,7 @@ class Manager
         } else {
             $className = $entity;
         }
-        
+
         $configuration = $this->getEntityMetaData($className);
 
         $query = [];
@@ -75,8 +77,14 @@ class Manager
                 $query = ['url_query' => $params];
             }
         }
+
         return $this->_client->{$method}($configuration->resource, $query);
+    }
 
+    public function getPropertyType($entity, $property)
+    {
+        $metaData = $this->getEntityMetaData($entity);
 
+        return $metaData->attribute[$property]['type'];
     }
 }

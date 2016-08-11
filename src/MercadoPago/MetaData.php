@@ -1,6 +1,9 @@
 <?php
 namespace MercadoPago;
+
 use Doctrine\Common\Annotations\Reader;
+use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
  * MetaData Class Doc Comment
@@ -12,16 +15,24 @@ class MetaData
     /**
      * @var Reader
      */
-    private $reader;
+    private $_reader;
 
     /**
      * MetaData constructor.
      *
      * @param Reader $reader
      */
-    public function __construct(Reader $reader)
+    public function __construct()
     {
-        $this->reader = $reader;
+        AnnotationRegistry::registerLoader('class_exists');
+        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\RestMethod');
+        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\RequestParam');
+        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\Attribute');
+
+        $this->_reader = new AnnotationReader();
+        
+        return $this;
+
     }
 
     /**
@@ -31,20 +42,32 @@ class MetaData
      */
     public function getMetaData($entity)
     {
+        $propertyAnnotations = [];
         $result = new \stdClass;
         $class = new \ReflectionClass($entity);
-        $classAnnotations = $this->reader->getClassAnnotations($class);
+        $classAnnotations = $this->_reader->getClassAnnotations($class);
+        foreach ($class->getProperties() as $key => $value) {
+            $annotation = $this->_reader->getPropertyAnnotations(new \ReflectionProperty($entity, $value->name));
+            if (count($annotation)) {
+                $propertyAnnotations[$value->name] = array_pop($annotation);
+            }
+        }
 
         foreach ($classAnnotations as $annotation) {
             if ($annotation instanceof \MercadoPago\Annotation\RestMethod) {
                 $result->resource = $annotation->resource;
-                $result->method = $annotation->method;
+                $result->method[] = $annotation->method;
             }
             if ($annotation instanceof \MercadoPago\Annotation\RequestParam) {
-                $result->params[] = $annotation->value;
+                $result->params[] = $annotation->param;
             }
         }
 
+        foreach ($propertyAnnotations as $key => $annotation) {
+            if ($annotation instanceof \MercadoPago\Annotation\Attribute) {
+                $result->attribute[$key] = get_object_vars($annotation);
+            }
+        }
 
         return $result;
     }
