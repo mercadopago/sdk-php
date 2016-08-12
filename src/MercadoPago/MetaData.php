@@ -55,8 +55,7 @@ class MetaData
 
         foreach ($classAnnotations as $annotation) {
             if ($annotation instanceof \MercadoPago\Annotation\RestMethod) {
-                $result->resource = $annotation->resource;
-                $result->method[] = $annotation->method;
+                $result->methods[$annotation->method] = get_object_vars($annotation);
             }
             if ($annotation instanceof \MercadoPago\Annotation\RequestParam) {
                 $result->params[] = $annotation->param;
@@ -65,7 +64,7 @@ class MetaData
 
         foreach ($propertyAnnotations as $key => $annotation) {
             if ($annotation instanceof \MercadoPago\Annotation\Attribute) {
-                $result->attribute[$key] = get_object_vars($annotation);
+                $result->attributes[$key] = get_object_vars($annotation);
             }
         }
 
