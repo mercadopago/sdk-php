@@ -1,41 +1,29 @@
 <?php
 namespace MercadoPago\Entities;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use MercadoPago;
 use Doctrine\ORM\Mapping as ORM;
-use MercadoPago\Annotations as DataSource;
-//use DrestCommon\Request\Request;
+use MercadoPago\Annotation\RestMethod;
+use MercadoPago\Annotation\RequestParam;
+use MercadoPago\Annotation\Attribute;
+
 /**
- * MercadoPago\Entities\PaymentMethod
- *
- * @ORM\Table(name="payment_methods")
- * @ORM\Entity
- * @DataSource\Fetch("/v1/payment_methods")
+ * @RestMethod(resource="/v1/payment_methods", method="list")
+ * @RequestParam(param="access_token")
  */
-class PaymentMethod
+
+class PaymentMethod extends MercadoPago\Entity
 {
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Attribute(primaryKey = true)
+     * @var
      */
-    private $id;
+    protected $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @Attribute(type = "string")
+     * @var
      */
-    private $name;
+    protected $name;
 
-    public function getId() {
-        return $this->id;
-    }
-
-    public function setName($name) {
-        $this->name = $name;
-        return $this;
-    }
-
-    public function getName() {
-        return $this->name;
-    }
 }
