@@ -1,72 +1,74 @@
 <?php
-/**
- * This file is part of DoctrineRestDriver.
- *
- * DoctrineRestDriver is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * DoctrineRestDriver is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 namespace MercadoPago;
 
+use Doctrine\Common\Annotations\Reader;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Provider for doctrine meta data
+ * MetaData Class Doc Comment
  *
- * @author    Tobias Hauck <tobias@circle.ai>
- * @copyright 2015 TeeAge-Beatz UG
+ * @package MercadoPago
  */
-class MetaData {
+class MetaData
+{
+    /**
+     * @var Reader
+     */
+    private $_reader;
 
     /**
-     * MetaDataProvider constructor
+     * MetaData constructor.
      *
-     * @SuppressWarnings("PHPMD.StaticAccess")
+     * @param Reader $reader
      */
-    public function __construct() {
-        //AnnotationRegistry::registerFile(__DIR__ . DIRECTORY_SEPARATOR . 'Annotations' . DIRECTORY_SEPARATOR . 'Insert.php');
-        //AnnotationRegistry::registerFile(__DIR__ . DIRECTORY_SEPARATOR . 'Annotations' . DIRECTORY_SEPARATOR . 'Update.php');
-        //AnnotationRegistry::registerFile(__DIR__ . DIRECTORY_SEPARATOR . 'Annotations' . DIRECTORY_SEPARATOR . 'Select.php');
-        AnnotationRegistry::registerFile(__DIR__ . DIRECTORY_SEPARATOR . 'Annotations' . DIRECTORY_SEPARATOR . 'Fetch.php');
-        //AnnotationRegistry::registerFile(__DIR__ . DIRECTORY_SEPARATOR . 'Annotations' . DIRECTORY_SEPARATOR . 'Delete.php');
+    public function __construct()
+    {
+        AnnotationRegistry::registerLoader('class_exists');
+        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\RestMethod');
+        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\RequestParam');
+        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\Attribute');
+
+        $this->_reader = new AnnotationReader();
+        
+        return $this;
+
     }
 
     /**
-     * returns all namespaces of managed entities
+     * @param $entity
      *
-     * @return array
+     * @return \stdClass
      */
-    public function getEntityNamespaces() {
-        $meta = $this->getMetaData(debug_backtrace());
+    public function getMetaData($entity)
+    {
+        $propertyAnnotations = [];
+        $result = new \stdClass;
+        $class = new \ReflectionClass($entity);
+        $classAnnotations = $this->_reader->getClassAnnotations($class);
+        foreach ($class->getProperties() as $key => $value) {
+            $annotation = $this->_reader->getPropertyAnnotations(new \ReflectionProperty($entity, $value->name));
+            if (count($annotation)) {
+                $propertyAnnotations[$value->name] = array_pop($annotation);
+            }
+        }
 
-        return array_reduce($meta, function($carry, $item) {
-            $carry[$item->table['name']] = $item->getName();
-            return $carry;
-        }, []);
-    }
+        foreach ($classAnnotations as $annotation) {
+            if ($annotation instanceof \MercadoPago\Annotation\RestMethod) {
+                $result->resource = $annotation->resource;
+                $result->method[] = $annotation->method;
+            }
+            if ($annotation instanceof \MercadoPago\Annotation\RequestParam) {
+                $result->params[] = $annotation->param;
+            }
+        }
 
-    /**
-     * returns all entity meta data if existing
-     *
-     * @param  array $traces
-     * @return array
-     */
-    private function getMetaData(array $traces) {
-        $em = array_filter($traces, function($trace) {
-            return isset($trace['object']) && $trace['object'] instanceof ObjectManager;
-        });
+        foreach ($propertyAnnotations as $key => $annotation) {
+            if ($annotation instanceof \MercadoPago\Annotation\Attribute) {
+                $result->attribute[$key] = get_object_vars($annotation);
+            }
+        }
 
-        return empty($em) ? [] : array_pop($em)['object']->getMetaDataFactory()->getAllMetaData();
+        return $result;
     }
 }
