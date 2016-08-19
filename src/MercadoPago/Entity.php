@@ -28,8 +28,11 @@ abstract class Entity
      * @codeCoverageIgnore
      * @return mixed
      */
-    public static function loadAll()
+    public function loadAll()
     {
+        self::$_manager->setEntityMetaData($this);
+        self::$_manager->setEntityUrl($this, 'list');
+
         return self::$_manager->execute(get_called_class(), 'get');
     }
 
@@ -73,9 +76,26 @@ abstract class Entity
      * @codeCoverageIgnore
      * @return mixed
      */
-    public static function save()
+    public function create()
     {
-        //return self::$_manager->execute(get_called_class(), '');
+        //return self::$_manager->execute($this, 'post');
+    }
+
+    /**
+     * @codeCoverageIgnore
+     * @return mixed
+     */
+    public function save()
+    {
+        self::$_manager->setEntityMetaData($this);
+        self::$_manager->setEntityUrl($this, 'save');
+        self::$_manager->setEntityQueryJsonData($this);
+
+        $response = self::$_manager->execute($this, 'post');
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            self::$_manager->fillFromResponse($this, $response['body']);
+        }
+
     }
 
     /**
@@ -103,9 +123,13 @@ abstract class Entity
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray($attributes = null)
     {
-        return get_object_vars($this);
+        if (is_null($attributes)) {
+            return get_object_vars($this);
+        }
+
+        return array_intersect_key(get_object_vars($this), $attributes);
     }
 
     /**
@@ -187,8 +211,16 @@ abstract class Entity
         if (!is_object($value)) {
             switch ($type) {
                 case 'float':
+                    if (!is_numeric($value)) {
+                        break;
+                    }
+
                     return (float)$value;
                 case 'int':
+                    if (!is_numeric($value)) {
+                        break;
+                    }
+
                     return (int)$value;
                 case 'string':
                     return (string)$value;
@@ -196,7 +228,7 @@ abstract class Entity
                     return date(\DateTime::ISO8601, strtotime($value));
             }
         }
-        
+
         throw new Exception('Wrong type ' . gettype($value) . '. It should be ' . $type . ' for property ' . $property);
     }
 

@@ -1,5 +1,5 @@
 <?php
-namespace MercadoPago\Entities;
+namespace MercadoPago\Entities\Shared;
 
 use MercadoPago;
 use Doctrine\ORM\Mapping as ORM;
