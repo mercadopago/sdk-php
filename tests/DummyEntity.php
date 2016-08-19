@@ -8,7 +8,7 @@ use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
 
 /**
- * @RestMethod(resource="/dummies", method="list")
+ * @RestMethod(resource="/dummies", method="list", idempotency=true)
  * @RestMethod(resource="/dummy/:id", method="read")
  * @RestMethod(resource="/dummy/:id", method="update")
  * @RequestParam(param="access_token")
@@ -17,7 +17,7 @@ use MercadoPago\Annotation\Attribute;
 class DummyEntity extends MercadoPago\Entity
 {
     /**
-     * @Attribute(primaryKey = true, type="integer")
+     * @Attribute(primaryKey = true, type="integer", idempotency=true)
      * @var
      */
     protected $id;

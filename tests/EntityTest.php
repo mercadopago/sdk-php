@@ -3,7 +3,7 @@
 namespace MercadoPago;
 
 /**
- * ConfigTest Class Doc Comment
+ * EntityTest Class Doc Comment
  *
  * @package MercadoPago
  */
@@ -180,17 +180,6 @@ class EntityTest
     public function save()
     {
 
-    }
-
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    public function _getMockedRequest()
-    {
-
-
-        return $request;
     }
 
 }
