@@ -82,7 +82,6 @@ abstract class Entity
     }
 
     /**
-     * @codeCoverageIgnore
      * @return mixed
      */
     public function save()

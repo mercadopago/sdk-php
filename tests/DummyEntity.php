@@ -11,6 +11,7 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/dummies", method="list", idempotency=true)
  * @RestMethod(resource="/dummy/:id", method="read")
  * @RestMethod(resource="/dummy/:id", method="update")
+ * @RestMethod(resource="/v1/payments", method="save")
  * @RequestParam(param="access_token")
  */
 
