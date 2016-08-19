@@ -149,6 +149,33 @@ class EntityTest
 
     /**
      */
+    public function testSave()
+    {
+        $hub = new FakeApiHub();
+        $request = $this->getMockBuilder('MercadoPago\Http\CurlRequest')->getMock();
+        $request->expects($this->once())
+            ->method('execute')
+            ->will($this->returnValue($hub->getJson('POST', '/v1/payments')));
+        $request->expects($this->once())
+            ->method('getInfo')->withAnyParameters()
+            ->will($this->returnValue('200'));
+
+        $restClient = new RestClient();
+        $restClient->setHttpRequest($request);
+        $config = new Config(null, $restClient);
+
+        $manager = new Manager($restClient, $config);
+        Entity::setManager($manager);
+
+        $this->_entity = new DummyEntity();
+
+        $this->_entity->save();
+        $this->assertEquals('1340404', $this->_entity->getId());
+
+    }
+
+    /**
+     */
     public function testLoad()
     {
 
