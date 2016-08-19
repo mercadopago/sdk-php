@@ -71,7 +71,7 @@ class EntityTest
         $this->_entity->setTitle(12);
         $this->_entity->setDesc('Description');
         $this->_entity->setPrice(100.5);
-        $this->_entity->setQuantity("5x");
+        $this->_entity->setQuantity("5");
         $this->_entity->setRegisteredAt('02/14/2015');
         $object = new \stdClass();
         $this->_entity->setObject($object);
