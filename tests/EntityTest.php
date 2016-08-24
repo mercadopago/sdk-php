@@ -41,14 +41,14 @@ class EntityTest
      */
     public function testSetVariables()
     {
-        $this->_entity->setTitle('Title');
-        $this->_entity->setDesc('Description');
-        $this->_entity->setPrice(100.5);
-        $this->_entity->setQuantity(3);
-        $this->_entity->setRegisteredAt('02/14/2015');
+        $this->_entity->title = 'Title';
+        $this->_entity->desc = 'Description';
+        $this->_entity->price =100.5;
+        $this->_entity->quantity = 3;
+        $this->_entity->registered_at = '02/14/2015';
         $object = new \stdClass();
-        $this->_entity->setObject($object);
-        $this->_entity->setOther('other');
+        $this->_entity->object = $object;
+        $this->_entity->other = 'other';
 
         $expectedValues = [
             "id"            => null,
@@ -68,48 +68,38 @@ class EntityTest
      */
     public function testGetVariables()
     {
-        $this->_entity->setTitle(12);
-        $this->_entity->setDesc('Description');
-        $this->_entity->setPrice(100.5);
-        $this->_entity->setQuantity("5");
-        $this->_entity->setRegisteredAt('02/14/2015');
+        $this->_entity->title = 'Title';
+        $this->_entity->desc = 'Description';
+        $this->_entity->price =100.5;
+        $this->_entity->quantity = 3;
+        $this->_entity->registered_at = '02/14/2015';
         $object = new \stdClass();
-        $this->_entity->setObject($object);
-        $this->_entity->setOther('other');
+        $this->_entity->object = $object;
+        $this->_entity->other = 'other';
 
         $expectedValues = [
             "id"            => null,
-            "title"         => "12",
+            "title"         => "Title",
             "desc"          => "Description",
             "price"         => 100.5,
-            "quantity"      => "5",
+            "quantity"      => "3",
             "registered_at" => "2015-02-14T00:00:00+0000",
             "object"        => $object,
             "other"        => 'other'
         ];
 
         $actualValues = [
-            "id"            => $this->_entity->getId(),
-            "title"         => $this->_entity->getTitle(),
-            "desc"          => $this->_entity->getDesc(),
-            "price"         => $this->_entity->getPrice(),
-            "quantity"      => $this->_entity->getQuantity(),
-            "registered_at" => $this->_entity->getRegisteredAt(),
-            "object"        => $this->_entity->getObject(),
-            "other"        => $this->_entity->getOther(),
+            "id"            => $this->_entity->id,
+            "title"         => $this->_entity->title,
+            "desc"          => $this->_entity->desc,
+            "price"         => $this->_entity->price,
+            "quantity"      => $this->_entity->quantity,
+            "registered_at" => $this->_entity->registered_at,
+            "object"        => $this->_entity->object,
+            "other"        => $this->_entity->other,
         ];
 
         $this->assertEquals($expectedValues, $actualValues);
-    }
-
-    /**
-     * @expectedException        \Exception
-     * @expectedExceptionMessage Invalid method MercadoPago\DummyEntity::invalidMethod
-     */
-    public function testInvalidMethod()
-    {
-        $this->_entity->invalidMethod();
-
     }
 
     /**
@@ -118,7 +108,7 @@ class EntityTest
      */
     public function testInvalidType()
     {
-        $this->_entity->setQuantity(new \stdClass());
+        $this->_entity->quantity = new \stdClass();
     }
 
     /**
@@ -170,9 +160,19 @@ class EntityTest
         $this->_entity = new DummyEntity();
 
         $this->_entity->save();
-        $this->assertEquals('1340404', $this->_entity->getId());
+        $this->assertEquals('1340404', $this->_entity->id);
 
     }
+
+    /**
+     */
+    public function testDynamicAttributes()
+    {
+        $this->_entity->dynamicAttribute = 100;
+
+        $this->assertEquals(100, $this->_entity->dynamicAttribute);
+    }
+
 
     /**
      */
