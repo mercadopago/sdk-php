@@ -28,6 +28,7 @@ class MetaData
         AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\RestMethod');
         AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\RequestParam');
         AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\Attribute');
+        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\DenyDynamicAttribute');
 
         $this->_reader = new AnnotationReader();
         
@@ -59,6 +60,9 @@ class MetaData
             }
             if ($annotation instanceof \MercadoPago\Annotation\RequestParam) {
                 $result->params[] = $annotation->param;
+            }
+            if ($annotation instanceof \MercadoPago\Annotation\DenyDynamicAttribute) {
+                $result->denyDynamicAttribute = true;
             }
         }
 
