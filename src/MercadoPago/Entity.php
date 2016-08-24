@@ -22,7 +22,7 @@ abstract class Entity
     public function __construct()
     {
         if (empty(self::$_manager)) {
-            throw new \Exception('Please initialize library first');
+            throw new \Exception('Please initialize SDK first');
         }
     }
 
