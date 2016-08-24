@@ -2,8 +2,11 @@
 
 namespace MercadoPago;
 
-use Symfony\Component\Config\Definition\Exception\Exception;
-
+/**
+ * Entity Class Doc Comment
+ *
+ * @package MercadoPago
+ */
 /**
  * Entity Class Doc Comment
  *
@@ -15,6 +18,13 @@ abstract class Entity
      * @var
      */
     protected static $_manager;
+
+    public function __construct()
+    {
+        if (empty(self::$_manager)) {
+            throw new \Exception('Please initialize library first');
+        }
+    }
 
     /**
      * @param Manager $manager
@@ -98,25 +108,27 @@ abstract class Entity
     }
 
     /**
-     * @param $call
-     * @param $arguments
+     * @param $name
      *
-     * @return $this
+     * @return mixed
      */
-    public function __call($call, $arguments)
+    public function __get($name)
     {
-        $name = $this->_underscore(substr($call, 3));
-        switch (substr($call, 0, 3)) {
-            case 'set' :
-                $this->_setValue($name, array_shift($arguments));
+        return $this->{$name};
+    }
 
-                return $this;
+    /**
+     * @param $name
+     * @param $value
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function __set($name, $value)
+    {
+        $this->_setValue($name, $value);
 
-            case 'get' :
-                return $this->{$name};
-        }
-        throw new Exception("Invalid method " . get_class($this) . "::" . $call);
-
+        return $this->{$name};
     }
 
     /**
@@ -132,16 +144,6 @@ abstract class Entity
     }
 
     /**
-     * @param $name
-     *
-     * @return string
-     */
-    protected function _underscore($name)
-    {
-        return strtolower(preg_replace('/(.)([A-Z])/', "$1_$2", $name));
-    }
-
-    /**
      * @param $property
      * @param $value
      */
@@ -153,9 +155,12 @@ abstract class Entity
             } else {
                 $this->{$property} = $this->tryFormat($value, $this->_getPropertyType($property), $property);
             }
+        } else {
+            if ($this->_getDynamicAttributeDenied()) {
+                throw new \Exception('Dynamic attribute not allowed for entity');
+            }
+            $this->{$property} = $value;
         }
-        //TODO : check if dynamic attribute is allowed
-
     }
 
     /**
@@ -199,6 +204,15 @@ abstract class Entity
     }
 
     /**
+     * @return mixed
+     */
+    protected function _getDynamicAttributeDenied()
+    {
+        return self::$_manager->getDynamicAttributeDenied(get_called_class());
+    }
+
+
+    /**
      * @param $value
      * @param $type
      * @param $property
@@ -228,7 +242,7 @@ abstract class Entity
             }
         }
 
-        throw new Exception('Wrong type ' . gettype($value) . '. It should be ' . $type . ' for property ' . $property);
+        throw new \Exception('Wrong type ' . gettype($value) . '. It should be ' . $type . ' for property ' . $property);
     }
 
 }

@@ -135,8 +135,7 @@ class Manager
             //if (is_array($value)) {
             //    continue; // TODO build object nested structure
             //}
-            $attribute = 'set' . str_replace('_', '', ucwords($key, '_'));
-            $entity->$attribute($value);
+            $entity->{$key} = $value;
         }
     }
 
@@ -167,6 +166,13 @@ class Manager
         $metaData = $this->_getEntityConfiguration($entity);
 
         return $metaData->attributes[$property]['type'];
+    }
+
+    public function getDynamicAttributeDenied($entity)
+    {
+        $metaData = $this->_getEntityConfiguration($entity);
+
+        return isset($metaData->denyDynamicAttribute);
     }
 
     /**
