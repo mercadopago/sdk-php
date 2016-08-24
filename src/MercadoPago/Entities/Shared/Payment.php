@@ -1,11 +1,10 @@
 <?php
-namespace MercadoPago\Entities\Shared;
+namespace MercadoPago;
 
-use MercadoPago;
-use Doctrine\ORM\Mapping as ORM;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
+use MercadoPago\Annotation\DenyDynamicAttribute;
 
 /**
  * @RestMethod(resource="/v1/payments", method="save")
@@ -14,8 +13,7 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/payments/:id", method="update")
  * @RequestParam(param="access_token")
  */
-
-class Payment extends MercadoPago\Entity
+class Payment extends Entity
 {
     /**
      * @Attribute(primaryKey = true)
@@ -109,6 +107,10 @@ class Payment extends MercadoPago\Entity
      * @Attribute()
      */
     protected $collector;
+    /**
+     * @Attribute()
+     */
+    protected $payment_method_id;
 
 
     // For flavor 1

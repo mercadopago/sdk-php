@@ -1,8 +1,6 @@
 <?php
-namespace MercadoPago\Entities\Shared;
+namespace MercadoPago;
 
-use MercadoPago;
-use Doctrine\ORM\Mapping as ORM;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
@@ -12,7 +10,7 @@ use MercadoPago\Annotation\Attribute;
  * @RequestParam(param="access_token")
  */
 
-class PaymentMethod extends MercadoPago\Entity
+class PaymentMethod extends Entity
 {
     /**
      * @Attribute(primaryKey = true)
