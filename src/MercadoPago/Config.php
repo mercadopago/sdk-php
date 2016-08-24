@@ -84,7 +84,7 @@ class Config
     {
         $parser = null;
         foreach ($this->_supportedFileParsers as $fileParser) {
-            $tempParser = new  $fileParser;
+            $tempParser = new $fileParser;
             if (in_array($extension, $tempParser->getSupportedExtensions($extension))) {
                 $parser = $tempParser;
                 continue;
