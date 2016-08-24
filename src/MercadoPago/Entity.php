@@ -2,11 +2,11 @@
 
 namespace MercadoPago;
 
-/**
- * Entity Class Doc Comment
- *
- * @package MercadoPago
- */
+    /**
+     * Entity Class Doc Comment
+     *
+     * @package MercadoPago
+     */
 /**
  * Entity Class Doc Comment
  *
@@ -32,6 +32,13 @@ abstract class Entity
     public static function setManager(Manager $manager)
     {
         self::$_manager = $manager;
+    }
+
+    /**
+     */
+    public static function unSetManager()
+    {
+        self::$_manager = null;
     }
 
     /**
