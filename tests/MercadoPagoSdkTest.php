@@ -11,17 +11,11 @@ class MercadopagoSdkTest
     extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var
-     */
-    protected $_config;
-    protected $_entity;
-    protected $_manager;
-
-    /**
      *
      */
     protected function setUp()
     {
+        Entity::unSetManager();
     }
 
     /**
@@ -32,21 +26,21 @@ class MercadopagoSdkTest
     }
 
     /**
-     */
-    public function testInitialization()
-    {
-        MercadoPagoSdk::initialize();
-        $this->_entity = new DummyEntity();
-        $this->assertInstanceOf(DummyEntity::class, $this->_entity);
-    }
-    
-    /**
      * @expectedException        \Exception
      * @expectedExceptionMessage Please initialize SDK first
      */
     public function testWrongInitialization()
     {
-        $this->_entity = new DummyEntity();
+        $entity = new DummyEntity();
+    }
+
+    /**
+     */
+    public function testInitialization()
+    {
+        MercadoPagoSdk::initialize();
+        $entity = new DummyEntity();
+        $this->assertInstanceOf(DummyEntity::class, $entity);
     }
 
 
