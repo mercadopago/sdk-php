@@ -2,8 +2,11 @@
 
 namespace MercadoPago;
 
-use Symfony\Component\Config\Definition\Exception\Exception;
-
+    /**
+     * Entity Class Doc Comment
+     *
+     * @package MercadoPago
+     */
 /**
  * Entity Class Doc Comment
  *
@@ -16,6 +19,13 @@ abstract class Entity
      */
     protected static $_manager;
 
+    public function __construct()
+    {
+        if (empty(self::$_manager)) {
+            throw new \Exception('Please initialize SDK first');
+        }
+    }
+
     /**
      * @param Manager $manager
      */
@@ -25,11 +35,21 @@ abstract class Entity
     }
 
     /**
+     */
+    public static function unSetManager()
+    {
+        self::$_manager = null;
+    }
+
+    /**
      * @codeCoverageIgnore
      * @return mixed
      */
-    public static function loadAll()
+    public function loadAll()
     {
+        self::$_manager->setEntityMetaData($this);
+        self::$_manager->setEntityUrl($this, 'list');
+
         return self::$_manager->execute(get_called_class(), 'get');
     }
 
@@ -73,49 +93,61 @@ abstract class Entity
      * @codeCoverageIgnore
      * @return mixed
      */
-    public static function save()
+    public function create()
     {
-        //return self::$_manager->execute(get_called_class(), '');
+        //return self::$_manager->execute($this, 'post');
     }
 
     /**
-     * @param $call
-     * @param $arguments
-     *
-     * @return $this
+     * @return mixed
      */
-    public function __call($call, $arguments)
+    public function save()
     {
-        $name = $this->_underscore(substr($call, 3));
-        switch (substr($call, 0, 3)) {
-            case 'set' :
-                $this->_setValue($name, array_shift($arguments));
+        self::$_manager->setEntityMetaData($this);
+        self::$_manager->setEntityUrl($this, 'save');
+        self::$_manager->setEntityQueryJsonData($this);
 
-                return $this;
-
-            case 'get' :
-                return $this->{$name};
+        $response = self::$_manager->execute($this, 'post');
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            self::$_manager->fillFromResponse($this, $response['body']);
         }
-        throw new Exception("Invalid method " . get_class($this) . "::" . $call);
 
-    }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        return get_object_vars($this);
     }
 
     /**
      * @param $name
      *
-     * @return string
+     * @return mixed
      */
-    protected function _underscore($name)
+    public function __get($name)
     {
-        return strtolower(preg_replace('/(.)([A-Z])/', "$1_$2", $name));
+        return $this->{$name};
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function __set($name, $value)
+    {
+        $this->_setValue($name, $value);
+
+        return $this->{$name};
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray($attributes = null)
+    {
+        if (is_null($attributes)) {
+            return get_object_vars($this);
+        }
+
+        return array_intersect_key(get_object_vars($this), $attributes);
     }
 
     /**
@@ -130,9 +162,12 @@ abstract class Entity
             } else {
                 $this->{$property} = $this->tryFormat($value, $this->_getPropertyType($property), $property);
             }
+        } else {
+            if ($this->_getDynamicAttributeDenied()) {
+                throw new \Exception('Dynamic attribute not allowed for entity');
+            }
+            $this->{$property} = $value;
         }
-        //TODO : check if dynamic attribute is allowed
-
     }
 
     /**
@@ -176,6 +211,15 @@ abstract class Entity
     }
 
     /**
+     * @return mixed
+     */
+    protected function _getDynamicAttributeDenied()
+    {
+        return self::$_manager->getDynamicAttributeDenied(get_called_class());
+    }
+
+
+    /**
      * @param $value
      * @param $type
      * @param $property
@@ -187,8 +231,16 @@ abstract class Entity
         if (!is_object($value)) {
             switch ($type) {
                 case 'float':
+                    if (!is_numeric($value)) {
+                        break;
+                    }
+
                     return (float)$value;
                 case 'int':
+                    if (!is_numeric($value)) {
+                        break;
+                    }
+
                     return (int)$value;
                 case 'string':
                     return (string)$value;
@@ -196,8 +248,8 @@ abstract class Entity
                     return date(\DateTime::ISO8601, strtotime($value));
             }
         }
-        
-        throw new Exception('Wrong type ' . gettype($value) . '. It should be ' . $type . ' for property ' . $property);
+
+        throw new \Exception('Wrong type ' . gettype($value) . '. It should be ' . $type . ' for property ' . $property);
     }
 
 }

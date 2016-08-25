@@ -1,8 +1,6 @@
 <?php
 namespace MercadoPago;
 
-use MercadoPago;
-use Doctrine\ORM\Mapping as ORM;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
@@ -11,10 +9,11 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/dummies", method="list", idempotency=true)
  * @RestMethod(resource="/dummy/:id", method="read")
  * @RestMethod(resource="/dummy/:id", method="update")
+ * @RestMethod(resource="/v1/payments", method="save")
  * @RequestParam(param="access_token")
  */
 
-class DummyEntity extends MercadoPago\Entity
+class DummyEntity extends Entity
 {
     /**
      * @Attribute(primaryKey = true, type="integer", idempotency=true)

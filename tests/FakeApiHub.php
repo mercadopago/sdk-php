@@ -8,6 +8,7 @@ class FakeApiHub
     private $_files = [
         '/oauth/token'        => 'mp_connect.json',
         '/v1/payment_methods' => 'payment_methods.json',
+        '/v1/payments' => 'payment.json',
         '/dummies' => 'mp_connect.json'
     ];
 
