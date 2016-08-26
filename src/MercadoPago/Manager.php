@@ -2,8 +2,6 @@
 
 namespace MercadoPago;
 
-use Symfony\Component\Config\Definition\Exception\Exception;
-
 /**
  * Class Manager
  *
@@ -24,7 +22,7 @@ class Manager
      */
     private $_entityConfiguration;
     /**
-     * @var MetaData
+     * @var MetaDataReader
      */
     private $_metadataReader;
     /**
@@ -42,22 +40,19 @@ class Manager
     {
         $this->_client = $client;
         $this->_config = $config;
-        $this->_metadataReader = new MetaData();
+        $this->_metadataReader = new MetaDataReader();
     }
 
-    /**
-     * @param $entity
-     *
-     */
     protected function _getEntityConfiguration($entity)
     {
-        if (isset($this->_entityConfiguration[$entity])) {
-            return $this->_entityConfiguration[$entity];
+        $className = $this->_getEntityClassName($entity);
+        if (isset($this->_entityConfiguration[$className])) {
+            return $this->_entityConfiguration[$className];
         }
 
-        $this->_entityConfiguration[$entity] = $this->_metadataReader->getMetaData($entity);
+        $this->_entityConfiguration[$className] = $this->_metadataReader->getMetaData($entity);
 
-        return $this->_entityConfiguration[$entity];
+        return $this->_entityConfiguration[$className];
     }
 
     /**
@@ -69,8 +64,11 @@ class Manager
      */
     public function execute($entity, $method = 'get')
     {
-        $className = $this->_getEntityClassName($entity);
-        $configuration = $this->_entityConfiguration[$className];
+        $configuration = $this->_getEntityConfiguration($entity);
+
+        foreach ($configuration->attributes as $key => $attribute) {
+            $this->validateAttribute($entity, $key, ['required']);
+        }
 
         $this->_setDefaultHeaders($configuration->query);
         $this->_setIdempotencyHeader($configuration->query, $configuration, $method);
@@ -79,20 +77,63 @@ class Manager
         return $this->_client->{$method}($configuration->url, $configuration->query);
     }
 
+    public function validateAttribute($entity, $attribute, array $properties, $value = null)
+    {
+        $configuration = $this->_getEntityConfiguration($entity);
+        foreach ($properties as $property) {
+            if ($configuration->attributes[$attribute][$property]) {
+                $result = $this->_isValidProperty($attribute, $property, $entity, $configuration->attributes[$attribute], $value);
+                if (!$result) {
+                    throw new \Exception('Error ' . $property . ' in attribute ' . $attribute);
+                }
+            }
+        }
+    }
+
+    protected function _isValidProperty($key, $property, $entity, $attribute, $value)
+    {
+        switch ($property) {
+            case 'required':
+                return ($entity->{$key} !== null);
+            case 'maxLength':
+                return (strlen($value) <= $attribute['maxLength']);
+            case 'readOnly':
+                return !$attribute['readOnly'];
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $entity
+     * @param $ormMethod
+     *
+     * @throws \Exception
+     */
     public function setEntityUrl($entity, $ormMethod)
     {
         $className = $this->_getEntityClassName($entity);
         if (!isset($this->_entityConfiguration[$className]->methods[$ormMethod])) {
-            throw new Exception('ORM method ' . $ormMethod . ' not available for entity:' . $className);
+            throw new \Exception('ORM method ' . $ormMethod . ' not available for entity:' . $className);
         }
         $this->_entityConfiguration[$className]->url = $this->_entityConfiguration[$className]->methods[$ormMethod]['resource'];
     }
 
+    /**
+     * @param $entity
+     *
+     * @return mixed
+     */
     public function setEntityMetadata($entity)
     {
         return $this->_getEntityConfiguration($this->_getEntityClassName($entity));
     }
 
+    /**
+     * @param $entity
+     *
+     * @return string
+     */
     protected function _getEntityClassName($entity)
     {
         if (is_object($entity)) {
@@ -104,6 +145,9 @@ class Manager
         return $className;
     }
 
+    /**
+     * @param $entity
+     */
     public function setEntityQueryJsonData($entity)
     {
         $className = $this->_getEntityClassName($entity);
@@ -112,6 +156,9 @@ class Manager
         $this->_entityConfiguration[$className]->query['json_data'] = json_encode($result);
     }
 
+    /**
+     * @param $configuration
+     */
     public function setQueryParams($configuration)
     {
         $params = [];
@@ -126,29 +173,57 @@ class Manager
     }
 
     /**
+     * Fill entity from data with nested object creation
      *
-     * @return mixed
+     * @param $entity
+     * @param $data
      */
     public function fillFromResponse($entity, $data)
     {
         foreach ($data as $key => $value) {
-            //if (is_array($value)) {
-            //    continue; // TODO build object nested structure
-            //}
+            if (is_array($value)) {
+                $className = 'MercadoPago\\' . $this->_camelize($key);
+                if (class_exists($className)) {
+                    $entity->{$key} = new $className;
+                    $this->fillFromResponse($entity->{$key}, $value);
+                } else {
+                    $entity->{$key} = json_decode(json_encode($value));
+                }
+                continue;
+            }
             $entity->{$key} = $value;
         }
     }
 
     /**
+     * @param        $input
+     * @param string $separator
      *
      * @return mixed
      */
-    protected function _attributesToJson($entity, &$result, $configuration)
+    protected function _camelize($input, $separator = '_')
     {
-        $attributes = array_filter($entity->toArray($configuration->attributes));
+        return str_replace($separator, '', ucwords($input, $separator));
+    }
+
+
+    /**
+     * @param $entity
+     * @param $result
+     * @param $configuration
+     */
+    protected function _attributesToJson($entity, &$result)
+    {
+        if (!is_array($entity)) {
+            $currentEntity = $this->_getEntityConfiguration($this->_getEntityClassName($entity));
+            $attributes = array_filter($entity->toArray($currentEntity->attributes));
+        } else {
+            $attributes = $entity;
+        }
+
         foreach ($attributes as $key => $value) {
-            if ($value instanceof Entity) {
-                $this->_attributesToJson($value, $result[$key], $configuration);
+            if ($value instanceof Entity || is_array($value)) {
+                $this->_attributesToJson($value, $result[$key]);
             } else {
                 $result[$key] = $value;
             }
@@ -168,6 +243,11 @@ class Manager
         return $metaData->attributes[$property]['type'];
     }
 
+    /**
+     * @param $entity
+     *
+     * @return bool
+     */
     public function getDynamicAttributeDenied($entity)
     {
         $metaData = $this->_getEntityConfiguration($entity);
@@ -181,6 +261,7 @@ class Manager
     protected function _setDefaultHeaders(&$query)
     {
         $query['headers']['Accept'] = 'application/json';
+        $query['headers']['Content-Type'] = 'application/json';
         $query['headers']['User-Agent'] = 'Mercado Pago Php SDK v' . Version::$_VERSION;
     }
 

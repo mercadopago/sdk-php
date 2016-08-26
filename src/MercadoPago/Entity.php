@@ -50,7 +50,7 @@ abstract class Entity
         self::$_manager->setEntityMetaData($this);
         self::$_manager->setEntityUrl($this, 'list');
 
-        return self::$_manager->execute(get_called_class(), 'get');
+        return self::$_manager->execute($this, 'get');
     }
 
     /**
@@ -157,6 +157,8 @@ abstract class Entity
     protected function _setValue($property, $value)
     {
         if ($this->_propertyExists($property)) {
+            self::$_manager->validateAttribute($this, $property, ['maxLength','readOnly'], $value);
+
             if ($this->_propertyTypeAllowed($property, $value)) {
                 $this->{$property} = $value;
             } else {
@@ -164,7 +166,7 @@ abstract class Entity
             }
         } else {
             if ($this->_getDynamicAttributeDenied()) {
-                throw new \Exception('Dynamic attribute not allowed for entity');
+                throw new \Exception('Dynamic attribute: ' . $property . ' not allowed for entity ' . get_class($this));
             }
             $this->{$property} = $value;
         }
@@ -228,7 +230,7 @@ abstract class Entity
      */
     protected function tryFormat($value, $type, $property)
     {
-        if (!is_object($value)) {
+        try {
             switch ($type) {
                 case 'float':
                     if (!is_numeric($value)) {
@@ -244,12 +246,17 @@ abstract class Entity
                     return (int)$value;
                 case 'string':
                     return (string)$value;
+                case 'array':
+                    return (array)$value;
                 case 'date':
                     return date(\DateTime::ISO8601, strtotime($value));
             }
+        } catch (\Exception $e) {
+            throw new \Exception('Wrong type ' . gettype($value) . '. Cannot convert ' . $type . ' for property ' . $property);
         }
 
         throw new \Exception('Wrong type ' . gettype($value) . '. It should be ' . $type . ' for property ' . $property);
+
     }
 
 }

@@ -41,14 +41,17 @@ class RestClient
      * @param Http\HttpRequest $connect
      * @param                  $headers
      */
-    protected function setHeaders(Http\HttpRequest $connect, $headers)
+    protected function setHeaders(Http\HttpRequest $connect, $customHeaders)
     {
         $default_header = ['Content-Type' => 'application/json'];
-        if ($headers) {
-            $default_header = array_merge($default_header, $headers);
+        if ($customHeaders) {
+            $default_header = array_merge($default_header, $customHeaders);
         }
 
-        $connect->setOption(CURLOPT_HTTPHEADER, $default_header);
+        foreach ($default_header as $key => $value) {
+            $headers[] = $key . ': ' . $value;
+        }
+        $connect->setOption(CURLOPT_HTTPHEADER, $headers);
     }
 
     /**
@@ -129,7 +132,7 @@ class RestClient
         if ($userAgent = $this->getArrayValue($connectionParams, 'user_agent')) {
             $connect->setOption(CURLOPT_USERAGENT, $userAgent);
         }
-        
+
         $connect->setOption(CURLOPT_RETURNTRANSFER, true);
         $connect->setOption(CURLOPT_CUSTOMREQUEST, $verb);
 
