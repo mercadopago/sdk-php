@@ -6,11 +6,11 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
- * MetaData Class Doc Comment
+ * MetaDataReader Class Doc Comment
  *
  * @package MercadoPago
  */
-class MetaData
+class MetaDataReader
 {
     /**
      * @var Reader

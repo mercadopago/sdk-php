@@ -30,6 +30,7 @@
         "src/MercadoPago/",
         "tests/",
         "src/MercadoPago/Entities/Flavor1/",
+        "src/MercadoPago/Entities/Flavor3/",
         "src/MercadoPago/Entities/Shared/"
       ]
     }
