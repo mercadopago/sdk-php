@@ -2,11 +2,6 @@
 
 namespace MercadoPago;
 
-    /**
-     * Entity Class Doc Comment
-     *
-     * @package MercadoPago
-     */
 /**
  * Entity Class Doc Comment
  *
@@ -19,11 +14,12 @@ abstract class Entity
      */
     protected static $_manager;
 
-    public function __construct()
+    public function __construct($params = [])
     {
         if (empty(self::$_manager)) {
             throw new \Exception('Please initialize SDK first');
         }
+        self::$_manager->setEntityMetaData($this);
     }
 
     /**
@@ -47,19 +43,24 @@ abstract class Entity
      */
     public function loadAll()
     {
-        self::$_manager->setEntityMetaData($this);
         self::$_manager->setEntityUrl($this, 'list');
-
-        return self::$_manager->execute(get_called_class(), 'get');
+        return self::$_manager->execute($this, 'get');
     }
 
     /**
      * @codeCoverageIgnore
      * @return mixed
      */
-    public static function load()
+    public function load($urlParams = [])
     {
-        //return self::$_manager->execute(get_called_class(), 'get');
+        self::$_manager->setEntityUrl($this, 'load');
+        self::$_manager->setQueryParams($this, $urlParams);
+        
+        $response = self::$_manager->execute($this, 'get');
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            self::$_manager->fillFromResponse($this, $response['body']['results'][0]);
+        }
+
     }
 
     /**
@@ -75,9 +76,10 @@ abstract class Entity
      * @codeCoverageIgnore
      * @return mixed
      */
-    public static function update()
+    public function update()
     {
-        //return self::$_manager->execute(get_called_class(), '');
+        //self::$_manager->setEntityUrl($this, 'update');
+        //return self::$_manager->execute($this, 'put');
     }
 
     /**
@@ -103,7 +105,6 @@ abstract class Entity
      */
     public function save()
     {
-        self::$_manager->setEntityMetaData($this);
         self::$_manager->setEntityUrl($this, 'save');
         self::$_manager->setEntityQueryJsonData($this);
 
@@ -139,6 +140,8 @@ abstract class Entity
     }
 
     /**
+     * @param null $attributes
+     *
      * @return array
      */
     public function toArray($attributes = null)
@@ -153,10 +156,14 @@ abstract class Entity
     /**
      * @param $property
      * @param $value
+     *
+     * @throws \Exception
      */
     protected function _setValue($property, $value)
     {
         if ($this->_propertyExists($property)) {
+            self::$_manager->validateAttribute($this, $property, ['maxLength','readOnly'], $value);
+
             if ($this->_propertyTypeAllowed($property, $value)) {
                 $this->{$property} = $value;
             } else {
@@ -164,7 +171,7 @@ abstract class Entity
             }
         } else {
             if ($this->_getDynamicAttributeDenied()) {
-                throw new \Exception('Dynamic attribute not allowed for entity');
+                throw new \Exception('Dynamic attribute: ' . $property . ' not allowed for entity ' . get_class($this));
             }
             $this->{$property} = $value;
         }
@@ -224,11 +231,12 @@ abstract class Entity
      * @param $type
      * @param $property
      *
-     * @return bool|float|int|string
+     * @return array|bool|float|int|string
+     * @throws \Exception
      */
     protected function tryFormat($value, $type, $property)
     {
-        if (!is_object($value)) {
+        try {
             switch ($type) {
                 case 'float':
                     if (!is_numeric($value)) {
@@ -244,12 +252,17 @@ abstract class Entity
                     return (int)$value;
                 case 'string':
                     return (string)$value;
+                case 'array':
+                    return (array)$value;
                 case 'date':
                     return date(\DateTime::ISO8601, strtotime($value));
             }
+        } catch (\Exception $e) {
+            throw new \Exception('Wrong type ' . gettype($value) . '. Cannot convert ' . $type . ' for property ' . $property);
         }
 
         throw new \Exception('Wrong type ' . gettype($value) . '. It should be ' . $type . ' for property ' . $property);
+
     }
 
 }
