@@ -72,7 +72,7 @@ class Manager
 
         $this->_setDefaultHeaders($configuration->query);
         $this->_setIdempotencyHeader($configuration->query, $configuration, $method);
-        $this->setQueryParams($configuration);
+        $this->setQueryParams($entity);
 
         return $this->_client->{$method}($configuration->url, $configuration->query);
     }
@@ -116,7 +116,14 @@ class Manager
         if (!isset($this->_entityConfiguration[$className]->methods[$ormMethod])) {
             throw new \Exception('ORM method ' . $ormMethod . ' not available for entity:' . $className);
         }
-        $this->_entityConfiguration[$className]->url = $this->_entityConfiguration[$className]->methods[$ormMethod]['resource'];
+        $url = $this->_entityConfiguration[$className]->methods[$ormMethod]['resource'];
+        $matches = [];
+        preg_match_all('/\\:\\w+/', $url, $matches);
+        foreach ($matches[0] as $match) {
+            $url = str_replace($match, $entity->{substr($match, 1)}, $url);
+        }
+
+        $this->_entityConfiguration[$className]->url = $url;
     }
 
     /**
@@ -159,15 +166,16 @@ class Manager
     /**
      * @param $configuration
      */
-    public function setQueryParams($configuration)
+    public function setQueryParams($entity, $urlParams = [])
     {
+        $configuration = $this->_getEntityConfiguration($entity);
         $params = [];
         if (isset($configuration->params)) {
             foreach ($configuration->params as $value) {
                 $params[$value] = $this->_config->get(strtoupper($value));
             }
             if (count($params) > 0) {
-                $configuration->query['url_query'] = $params;
+                $configuration->query['url_query'] = array_merge($urlParams, $params);
             }
         }
     }
