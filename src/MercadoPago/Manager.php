@@ -223,8 +223,7 @@ class Manager
     protected function _attributesToJson($entity, &$result)
     {
         if (!is_array($entity)) {
-            $currentEntity = $this->_getEntityConfiguration($this->_getEntityClassName($entity));
-            $attributes = array_filter($entity->toArray($currentEntity->attributes));
+            $attributes = array_filter($entity->toArray());
         } else {
             $attributes = $entity;
         }

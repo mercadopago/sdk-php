@@ -55,7 +55,9 @@ abstract class Entity
     {
         self::$_manager->setEntityUrl($this, 'load');
         self::$_manager->setQueryParams($this, $urlParams);
-        
+        self::$_manager->setEntityQueryJsonData($this);
+
+
         $response = self::$_manager->execute($this, 'get');
         if ($response['code'] == "200" || $response['code'] == "201") {
             self::$_manager->fillFromResponse($this, $response['body']['results'][0]);
