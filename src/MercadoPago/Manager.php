@@ -170,50 +170,19 @@ class Manager
     {
         $configuration = $this->_getEntityConfiguration($entity);
         $params = [];
+        if (!isset($configuration->query) || !isset($configuration->query['url_query'])) {
+            $configuration->query['url_query'] = $params;
+        }
         if (isset($configuration->params)) {
             foreach ($configuration->params as $value) {
                 $params[$value] = $this->_config->get(strtoupper($value));
             }
             if (count($params) > 0) {
-                $configuration->query['url_query'] = array_merge($urlParams, $params);
+                $arrayMerge = array_merge($urlParams, $params, $configuration->query['url_query']);
+                $configuration->query['url_query'] = $arrayMerge;
             }
         }
     }
-
-    /**
-     * Fill entity from data with nested object creation
-     *
-     * @param $entity
-     * @param $data
-     */
-    public function fillFromResponse($entity, $data)
-    {
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $className = 'MercadoPago\\' . $this->_camelize($key);
-                if (class_exists($className)) {
-                    $entity->{$key} = new $className;
-                    $this->fillFromResponse($entity->{$key}, $value);
-                } else {
-                    $entity->{$key} = json_decode(json_encode($value));
-                }
-                continue;
-            }
-            $entity->{$key} = $value;
-        }
-    }
-
-    /**
-     * @param        $input
-     * @param string $separator
-     *
-     * @return mixed
-     */
-    protected function _camelize($input, $separator = '_')
-    {
-        return str_replace($separator, '', ucwords($input, $separator));
-    }
-
 
     /**
      * @param $entity

@@ -3,7 +3,7 @@
 namespace MercadoPago;
 
 /**
- * Entity Class Doc Comment
+ * Class Entity
  *
  * @package MercadoPago
  */
@@ -14,12 +14,20 @@ abstract class Entity
      */
     protected static $_manager;
 
+    /**
+     * Entity constructor.
+     *
+     * @param array $params
+     *
+     * @throws \Exception
+     */
     public function __construct($params = [])
     {
         if (empty(self::$_manager)) {
             throw new \Exception('Please initialize SDK first');
         }
         self::$_manager->setEntityMetaData($this);
+        $this->_fillFromArray($this, $params);
     }
 
     /**
@@ -38,6 +46,37 @@ abstract class Entity
     }
 
     /**
+     * @return mixed
+     */
+    public function read()
+    {
+        self::$_manager->setEntityUrl($this, 'read');
+        self::$_manager->setQueryParams($this, $this->toArray());
+
+        $response =  self::$_manager->execute($this, 'get');
+
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $this->_fillFromArray($this, $response['body']);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function search()
+    {
+        self::$_manager->setEntityUrl($this, 'search');
+        self::$_manager->setQueryParams($this, $this->toArray());
+
+        $response = self::$_manager->execute($this, 'get');
+        
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $this->_fillFromArray($this, $response['body']['results'][0]);
+        }
+
+    }
+
+    /**
      * @codeCoverageIgnore
      * @return mixed
      */
@@ -51,37 +90,24 @@ abstract class Entity
      * @codeCoverageIgnore
      * @return mixed
      */
-    public function load($urlParams = [])
-    {
-        self::$_manager->setEntityUrl($this, 'load');
-        self::$_manager->setQueryParams($this, $urlParams);
-        self::$_manager->setEntityQueryJsonData($this);
-
-
-        $response = self::$_manager->execute($this, 'get');
-        if ($response['code'] == "200" || $response['code'] == "201") {
-            self::$_manager->fillFromResponse($this, $response['body']['results'][0]);
-        }
-
-    }
-
-    /**
-     * @codeCoverageIgnore
-     * @return mixed
-     */
     public static function addNew()
     {
         //return self::$_manager->execute(get_called_class(), '');
     }
 
     /**
-     * @codeCoverageIgnore
      * @return mixed
      */
     public function update()
     {
-        //self::$_manager->setEntityUrl($this, 'update');
-        //return self::$_manager->execute($this, 'put');
+        self::$_manager->setEntityUrl($this, 'update');
+        self::$_manager->setEntityQueryJsonData($this);
+
+        $response =  self::$_manager->execute($this, 'put');
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $this->_fillFromArray($this, $response['body']);
+        }
+
     }
 
     /**
@@ -94,12 +120,16 @@ abstract class Entity
     }
 
     /**
-     * @codeCoverageIgnore
+     * @param $params
+     *
      * @return mixed
      */
-    public function create()
+    public static function create($params)
     {
-        //return self::$_manager->execute($this, 'post');
+        $class = get_called_class();
+        $model = new $class($params);
+        $model->save();
+        return $model;
     }
 
     /**
@@ -107,12 +137,12 @@ abstract class Entity
      */
     public function save()
     {
-        self::$_manager->setEntityUrl($this, 'save');
+        self::$_manager->setEntityUrl($this, 'create');
         self::$_manager->setEntityQueryJsonData($this);
 
         $response = self::$_manager->execute($this, 'post');
         if ($response['code'] == "200" || $response['code'] == "201") {
-            self::$_manager->fillFromResponse($this, $response['body']);
+            $this->_fillFromArray($this, $response['body']);
         }
 
     }
@@ -161,10 +191,12 @@ abstract class Entity
      *
      * @throws \Exception
      */
-    protected function _setValue($property, $value)
+    protected function _setValue($property, $value, $validate = true)
     {
         if ($this->_propertyExists($property)) {
-            self::$_manager->validateAttribute($this, $property, ['maxLength','readOnly'], $value);
+            if ($validate) {
+                self::$_manager->validateAttribute($this, $property, ['maxLength','readOnly'], $value);
+            }
 
             if ($this->_propertyTypeAllowed($property, $value)) {
                 $this->{$property} = $value;
@@ -244,19 +276,20 @@ abstract class Entity
                     if (!is_numeric($value)) {
                         break;
                     }
-
                     return (float)$value;
                 case 'int':
                     if (!is_numeric($value)) {
                         break;
                     }
-
                     return (int)$value;
                 case 'string':
                     return (string)$value;
                 case 'array':
                     return (array)$value;
                 case 'date':
+                    if (empty($value)) {
+                        return $value;
+                    }
                     return date(\DateTime::ISO8601, strtotime($value));
             }
         } catch (\Exception $e) {
@@ -265,6 +298,40 @@ abstract class Entity
 
         throw new \Exception('Wrong type ' . gettype($value) . '. It should be ' . $type . ' for property ' . $property);
 
+    }
+
+    /**
+     * Fill entity from data with nested object creation
+     *
+     * @param $entity
+     * @param $data
+     */
+    protected function _fillFromArray($entity, $data)
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $className = 'MercadoPago\\' . $this->_camelize($key);
+                if (class_exists($className)) {
+                    $entity->_setValue($key, new $className, false);
+                    $entity->_fillFromArray($this->{$key}, $value);
+                } else {
+                    $entity->_setValue($key, json_decode(json_encode($value)), false);
+                }
+                continue;
+            }
+            $entity->_setValue($key, $value, false);
+        }
+    }
+
+    /**
+     * @param        $input
+     * @param string $separator
+     *
+     * @return mixed
+     */
+    protected function _camelize($input, $separator = '_')
+    {
+        return str_replace($separator, '', ucwords($input, $separator));
     }
 
 }
