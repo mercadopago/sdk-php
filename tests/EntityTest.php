@@ -167,7 +167,7 @@ class EntityTest
      */
     public function testObjectCreation()
     {
-        $this->_mockPaymentRequest();
+        $this->_mockRequest('/v1/payments');
         $this->_entity = new DummyEntity();
 
         $this->_entity->save();
