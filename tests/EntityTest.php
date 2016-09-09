@@ -143,11 +143,23 @@ class EntityTest
      */
     public function testSave()
     {
-        $this->_mockPaymentRequest();
+        $this->_mockRequest('/v1/payments');
         $this->_entity = new DummyEntity();
 
         $this->_entity->save();
         $this->assertEquals('1340404', $this->_entity->id);
+
+    }
+
+    /**
+     */
+    public function testRead()
+    {
+        $this->_mockRequest('/dummy/:id');
+        $this->_entity = new DummyEntity();
+        $this->_entity->id = 1340404;
+        $this->_entity->read();
+        $this->assertEquals('art', $this->_entity->category_id);
 
     }
 
@@ -219,20 +231,13 @@ class EntityTest
 
     }
 
-    /**
-     */
-    public function save()
-    {
-
-    }
-
-    public function _mockPaymentRequest()
+    public function _mockRequest($endpoint)
     {
         $hub = new FakeApiHub();
         $request = $this->getMockBuilder('MercadoPago\Http\CurlRequest')->getMock();
         $request->expects($this->once())
             ->method('execute')
-            ->will($this->returnValue($hub->getJson('POST', '/v1/payments')));
+            ->will($this->returnValue($hub->getJson('POST', $endpoint)));
         $request->expects($this->once())
             ->method('getInfo')->withAnyParameters()
             ->will($this->returnValue('200'));
