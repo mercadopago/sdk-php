@@ -8,7 +8,7 @@ use MercadoPago\Annotation\DenyDynamicAttribute;
 
 /**
  * @RestMethod(resource="/v1/payments", method="save")
- * @RestMethod(resource="/collections/notifications/:id", method="read")
+ * @RestMethod(resource="/v1/payments/:id", method="read")
  * @RestMethod(resource="/payments/search", method="search")
  * @RestMethod(resource="/payments/:id", method="update")
  * @RequestParam(param="access_token")
