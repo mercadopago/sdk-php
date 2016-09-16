@@ -11,7 +11,8 @@
     }
   ],
   "require": {
-    "php": ">=5.4.0"
+    "php": ">=5.4.0",
+    "doctrine/common": "~2.4"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",
@@ -20,7 +21,6 @@
     "squizlabs/php_codesniffer": "2.3.*",
     "sebastian/phpcpd": "*",
     "satooshi/php-coveralls":"dev-master",
-    "doctrine/common": "~2.4",
     "doctrine/orm": "~2.3"
   },
   "autoload": {
