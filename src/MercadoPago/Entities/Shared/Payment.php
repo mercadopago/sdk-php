@@ -1,14 +1,12 @@
 <?php
 namespace MercadoPago;
-
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
 use MercadoPago\Annotation\DenyDynamicAttribute;
-
 /**
- * @RestMethod(resource="/v1/payments", method="save")
- * @RestMethod(resource="/v1/payments/:id", method="read")
+ * @RestMethod(resource="/v1/payments", method="create")
+ * @RestMethod(resource="/collections/notifications/:id", method="read")
  * @RestMethod(resource="/payments/search", method="search")
  * @RestMethod(resource="/payments/:id", method="update")
  * @RequestParam(param="access_token")
@@ -111,8 +109,6 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $payment_method_id;
-
-
     // For flavor 1
     /**
      * @Attribute()
@@ -174,5 +170,4 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $description;
-
 }

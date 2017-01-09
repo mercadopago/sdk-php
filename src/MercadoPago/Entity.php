@@ -1,7 +1,5 @@
 <?php
-
 namespace MercadoPago;
-
 /**
  * Class Entity
  *
@@ -13,7 +11,6 @@ abstract class Entity
      * @var
      */
     protected static $_manager;
-
     /**
      * Entity constructor.
      *
@@ -29,7 +26,6 @@ abstract class Entity
         self::$_manager->setEntityMetaData($this);
         $this->_fillFromArray($this, $params);
     }
-
     /**
      * @param Manager $manager
      */
@@ -37,29 +33,25 @@ abstract class Entity
     {
         self::$_manager = $manager;
     }
-
     /**
      */
     public static function unSetManager()
     {
         self::$_manager = null;
     }
-
     /**
      * @return mixed
      */
-    public function read()
+    public function read($params = [])
     {
-        self::$_manager->setEntityUrl($this, 'read');
+        self::$_manager->setEntityUrl($this, 'read', $params);
         self::$_manager->setQueryParams($this, $this->toArray());
-
         $response =  self::$_manager->execute($this, 'get');
-
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
         }
+        return $response;
     }
-
     /**
      * @return mixed
      */
@@ -67,15 +59,13 @@ abstract class Entity
     {
         self::$_manager->setEntityUrl($this, 'search');
         self::$_manager->setQueryParams($this, $this->toArray());
-
         $response = self::$_manager->execute($this, 'get');
-        
+
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']['results'][0]);
         }
-
+        return $response;
     }
-
     /**
      * @codeCoverageIgnore
      * @return mixed
@@ -85,7 +75,6 @@ abstract class Entity
         self::$_manager->setEntityUrl($this, 'list');
         return self::$_manager->execute($this, 'get');
     }
-
     /**
      * @codeCoverageIgnore
      * @return mixed
@@ -94,22 +83,19 @@ abstract class Entity
     {
         //return self::$_manager->execute(get_called_class(), '');
     }
-
     /**
      * @return mixed
      */
-    public function update()
+    public function update($params = [])
     {
-        self::$_manager->setEntityUrl($this, 'update');
+        self::$_manager->setEntityUrl($this, 'update', $params);
         self::$_manager->setEntityQueryJsonData($this);
-
         $response =  self::$_manager->execute($this, 'put');
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
         }
-
+        return $response;
     }
-
     /**
      * @codeCoverageIgnore
      * @return mixed
@@ -118,7 +104,6 @@ abstract class Entity
     {
         //return self::$_manager->execute(get_called_class(), '');
     }
-
     /**
      * @param $params
      *
@@ -131,7 +116,6 @@ abstract class Entity
         $model->save();
         return $model;
     }
-
     /**
      * @return mixed
      */
@@ -139,14 +123,12 @@ abstract class Entity
     {
         self::$_manager->setEntityUrl($this, 'create');
         self::$_manager->setEntityQueryJsonData($this);
-
         $response = self::$_manager->execute($this, 'post');
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
         }
-
+        return $response;
     }
-
     /**
      * @param $name
      *
@@ -156,7 +138,6 @@ abstract class Entity
     {
         return $this->{$name};
     }
-
     /**
      * @param $name
      * @param $value
@@ -167,10 +148,8 @@ abstract class Entity
     public function __set($name, $value)
     {
         $this->_setValue($name, $value);
-
         return $this->{$name};
     }
-
     /**
      * @param null $attributes
      *
@@ -181,10 +160,8 @@ abstract class Entity
         if (is_null($attributes)) {
             return get_object_vars($this);
         }
-
         return array_intersect_key(get_object_vars($this), $attributes);
     }
-
     /**
      * @param $property
      * @param $value
@@ -197,7 +174,6 @@ abstract class Entity
             if ($validate) {
                 self::$_manager->validateAttribute($this, $property, ['maxLength','readOnly'], $value);
             }
-
             if ($this->_propertyTypeAllowed($property, $value)) {
                 $this->{$property} = $value;
             } else {
@@ -210,7 +186,6 @@ abstract class Entity
             $this->{$property} = $value;
         }
     }
-
     /**
      * @param $property
      *
@@ -220,7 +195,6 @@ abstract class Entity
     {
         return array_key_exists($property, get_object_vars($this));
     }
-
     /**
      * @param $property
      * @param $type
@@ -233,14 +207,11 @@ abstract class Entity
         if (!$definedType) {
             return true;
         }
-
         if (is_object($type) && class_exists($definedType)) {
             return ($type instanceof $definedType);
         }
-
         return gettype($type) == $definedType;
     }
-
     /**
      * @param $property
      *
@@ -250,7 +221,6 @@ abstract class Entity
     {
         return self::$_manager->getPropertyType(get_called_class(), $property);
     }
-
     /**
      * @return mixed
      */
@@ -258,8 +228,6 @@ abstract class Entity
     {
         return self::$_manager->getDynamicAttributeDenied(get_called_class());
     }
-
-
     /**
      * @param $value
      * @param $type
@@ -295,11 +263,8 @@ abstract class Entity
         } catch (\Exception $e) {
             throw new \Exception('Wrong type ' . gettype($value) . '. Cannot convert ' . $type . ' for property ' . $property);
         }
-
         throw new \Exception('Wrong type ' . gettype($value) . '. It should be ' . $type . ' for property ' . $property);
-
     }
-
     /**
      * Fill entity from data with nested object creation
      *
@@ -322,7 +287,6 @@ abstract class Entity
             $entity->_setValue($key, $value, false);
         }
     }
-
     /**
      * @param        $input
      * @param string $separator
@@ -333,5 +297,4 @@ abstract class Entity
     {
         return str_replace($separator, '', ucwords($input, $separator));
     }
-
 }

@@ -1,8 +1,5 @@
 <?php
-
 namespace MercadoPago;
-
-
 class FakeApiHub
 {
     private $_files = [
@@ -10,9 +7,9 @@ class FakeApiHub
         '/v1/payment_methods' => 'payment_methods.json',
         '/v1/payments' => 'payment.json',
         '/dummies' => 'mp_connect.json',
+        '/v1/dummies/search' => 'customer_search.json',
         '/dummy/:id' => 'dummy.json'
     ];
-
     public function getJson($method, $endPoint)
     {
         switch ($method) {
@@ -27,9 +24,7 @@ class FakeApiHub
             default:
                 return '';
         }
-
     }
-
     private function getFile($endpoint)
     {
         return file_get_contents(dirname(__FILE__) . '/json_files/' . $this->_files[$endpoint]);
