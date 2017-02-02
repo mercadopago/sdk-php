@@ -58,15 +58,18 @@ class Config
     public function __construct($path = null, $restClient = null)
     {
         $this->data = [];
+        $this->_restclient = $restClient;
         if (is_file($path)) {
             $info = pathinfo($path);
             $parts = explode('.', $info['basename']);
             $extension = array_pop($parts);
             $parser = $this->_getParser($extension);
-            $this->data = array_replace_recursive($this->data, (array)$parser->parse($path));
+
+            foreach ((array)$parser->parse($path) as $key => $value) {
+                $this->set($key, $value);
+            }
         }
-        $this->_restclient = $restClient;
-        
+
         parent::__construct($this->data);
     }
 
@@ -81,7 +84,7 @@ class Config
     {
         $parser = null;
         foreach ($this->_supportedFileParsers as $fileParser) {
-            $tempParser = new  $fileParser;
+            $tempParser = new $fileParser;
             if (in_array($extension, $tempParser->getSupportedExtensions($extension))) {
                 $parser = $tempParser;
                 continue;
@@ -102,7 +105,7 @@ class Config
     public function set($key, $value)
     {
         parent::set($key, $value);
-        if ($this->get('CLIENT_ID') != "" && $this->get('CLIENT_SECRET') != "") {
+        if ($this->get('CLIENT_ID') != "" && $this->get('CLIENT_SECRET') != "" && empty($this->get('ACCESS_TOKEN'))) {
             $response = $this->getToken();
             if (isset($response['access_token']) && isset($response['refresh_token'])) {
                 parent::set('ACCESS_TOKEN', $response['access_token']);
@@ -117,7 +120,6 @@ class Config
      */
     public function getToken()
     {
-
         if (!$this->_restclient) {
             $this->_restclient = new RestClient();
         }
@@ -125,9 +127,31 @@ class Config
                  'client_id'     => $this->get('CLIENT_ID'),
                  'client_secret' => $this->get('CLIENT_SECRET')];
         $this->_restclient->setHttpParam('address', $this->get('base_url'));
-        $this->_restclient->setHttpParam('use_ssl', true);
         $response = $this->_restclient->post("/oauth/token", ['json_data' => json_encode($data)]);
         return $response['body'];
     }
+
+    /**
+     * Refresh token
+     * @return mixed
+     * //TODO check valid response with production credentials
+     */
+    public function refreshToken()
+    {
+        if (!$this->_restclient) {
+            $this->_restclient = new RestClient();
+        }
+        $data = ['grant_type'    => 'refresh_token',
+                 'refresh_token'     => $this->get('REFRESH_TOKEN'),
+                 'client_secret' => $this->get('ACCESS_TOKEN')];
+        $this->_restclient->setHttpParam('address', $this->get('base_url'));
+        $response = $this->_restclient->post("/oauth/token", ['json_data' => json_encode($data)]);
+        if (isset($response['access_token']) && isset($response['refresh_token']) && isset($response['client_id']) && isset($response['client_secret'])) {
+            parent::set('ACCESS_TOKEN', $response['access_token']);
+            parent::set('REFRESH_TOKEN', $response['refresh_token']);
+        }
+        return $response['body'];
+    }
+
 
 }

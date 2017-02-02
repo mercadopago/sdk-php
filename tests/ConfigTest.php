@@ -119,7 +119,10 @@ class ConfigTest
      */
     public function testSettingsFromYml()
     {
-        $config = Config::load(dirname(__FILE__) . '/settings.yml');
+        $restClient = new RestClient();
+        $restClient->setHttpRequest($this->_getMockedRequest());
+
+        $config = new Config(dirname(__FILE__) . '/config_files/settings.yml', $restClient);
         $this->assertEquals('CLIENT_ID_YAML', $config->get('CLIENT_ID'));
         $this->assertEquals('CLIENT_SECRET_YAML', $config->get('CLIENT_SECRET'));
         $this->assertEquals('CLIENT_ACCESS_TOKEN_YAML', $config->get('ACCESS_TOKEN'));
@@ -140,7 +143,7 @@ class ConfigTest
      */
     public function testSettingsFromBrokenYml()
     {
-        Config::load(dirname(__FILE__) . '/settings_broken.yml');
+        Config::load(dirname(__FILE__) . '/config_files/settings_broken.yml');
     }
     
     /**
@@ -157,7 +160,10 @@ class ConfigTest
      */
     public function testSettingsFromJson()
     {
-        $config = Config::load(dirname(__FILE__) . '/settings.json');
+        $restClient = new RestClient();
+        $restClient->setHttpRequest($this->_getMockedRequest());
+
+        $config = new Config(dirname(__FILE__) . '/config_files/settings.json', $restClient);
         $this->assertEquals('CLIENT_ID_JSON', $config->get('CLIENT_ID'));
         $this->assertEquals('CLIENT_SECRET_JSON', $config->get('CLIENT_SECRET'));
         $this->assertEquals('CLIENT_ACCESS_TOKEN_JSON', $config->get('ACCESS_TOKEN'));
@@ -178,7 +184,7 @@ class ConfigTest
      */
     public function testSettingsFromBrokenJson()
     {
-        Config::load(dirname(__FILE__) . '/settings_broken.json');
+        Config::load(dirname(__FILE__) . '/config_files/settings_broken.json');
     }
 
     /**
@@ -196,7 +202,10 @@ class ConfigTest
      */
     public function testGetAll()
     {
-        $config = Config::load(dirname(__FILE__) . '/settings.json');
+        $restClient = new RestClient();
+        $restClient->setHttpRequest($this->_getMockedRequest());
+
+        $config = new Config(dirname(__FILE__) . '/config_files/settings.json', $restClient);
         $all = $config->all();
         $this->assertEquals('CLIENT_ID_JSON', $all['CLIENT_ID']);
         $this->assertEquals('CLIENT_SECRET_JSON', $all['CLIENT_SECRET']);
@@ -233,7 +242,7 @@ class ConfigTest
     */
     public function testNotSupportedExtension()
     {
-        Config::load(dirname(__FILE__) . '/settings.ini');
+        Config::load(dirname(__FILE__) . '/config_files/settings.ini');
     }
 
     /**
