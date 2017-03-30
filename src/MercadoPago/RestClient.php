@@ -108,6 +108,7 @@ class RestClient
         $method = key($options);
         $requestPath = reset($options);
         $verb = self::$verbArray[$method];
+        
         $headers = $this->getArrayValue($options, 'headers');
         $url_query = $this->getArrayValue($options, 'url_query');
         $formData = $this->getArrayValue($options, 'form_data');
@@ -164,6 +165,11 @@ class RestClient
         }
         
         $response['response'] = [];
+        
+        if ($apiHttpCode != "200" && $apiHttpCode != "201") {
+            error_log($apiResult);
+        }
+        
         $response['response'] = json_decode($apiResult, true);
         $response['code'] = $apiHttpCode;
 
