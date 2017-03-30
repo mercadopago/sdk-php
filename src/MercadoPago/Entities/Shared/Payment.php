@@ -6,7 +6,7 @@ use MercadoPago\Annotation\Attribute;
 
 /**
  * @RestMethod(resource="/v1/payments", method="create")
- * @RestMethod(resource="/collections/notifications/:id", method="read")
+ * @RestMethod(resource="/v1/payments/:id", method="read")
  * @RestMethod(resource="/v1/payments/search", method="search")
  * @RestMethod(resource="/v1/payments/:id", method="update")
  * @RestMethod(resource="/collections/:id/refunds", method="refund")
