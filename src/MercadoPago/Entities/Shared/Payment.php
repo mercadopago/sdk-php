@@ -175,7 +175,7 @@ class Payment extends Entity
     
     
     function refund(){
-      parent::custom_action("post", "refund") 
+      parent::custom_action("post", "refund");
       $restClient.post("https://api.mercadopago.com/collections/:id/refunds");
     }
      
