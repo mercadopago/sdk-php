@@ -2,13 +2,14 @@
 namespace MercadoPago;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute;
-use MercadoPago\Annotation\DenyDynamicAttribute;
+use MercadoPago\Annotation\Attribute; 
+
 /**
  * @RestMethod(resource="/v1/payments", method="create")
  * @RestMethod(resource="/collections/notifications/:id", method="read")
- * @RestMethod(resource="/payments/search", method="search")
- * @RestMethod(resource="/payments/:id", method="update")
+ * @RestMethod(resource="/v1/payments/search", method="search")
+ * @RestMethod(resource="/v1/payments/:id", method="update")
+ * @RestMethod(resource="/collections/:id/refunds", method="refund")
  * @RequestParam(param="access_token")
  */
 class Payment extends Entity
@@ -170,4 +171,14 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $description;
+    
+    
+    
+    function refund(){
+      parent::custom_action("post", "refund") 
+      $restClient.post("https://api.mercadopago.com/collections/:id/refunds");
+    }
+    
+    
+    
 }

@@ -119,14 +119,27 @@ abstract class Entity
     /**
      * @return mixed
      */
+    public function custom_action($method, $action){
+      self::$_manager->setEntityUrl($this, $action);
+      self::$_manager->setEntityQueryJsonData($this);
+      $response = self::$_manager->execute($this, $method);
+      if ($response['code'] == "200" || $response['code'] == "201") {
+          $this->_fillFromArray($this, $response['body']);
+      } 
+      return $response;
+    }
+    /**
+     * @return mixed
+     */
     public function save()
     {
+        
         self::$_manager->setEntityUrl($this, 'create');
         self::$_manager->setEntityQueryJsonData($this);
         $response = self::$_manager->execute($this, 'post');
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
-        }
+        } 
         return $response;
     }
     /**
