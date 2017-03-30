@@ -2,7 +2,7 @@
 namespace MercadoPago;
 
 use Exception;
-
+ 
 /**
  * MercadoPago cURL RestClient
  */
@@ -108,13 +108,11 @@ class RestClient
         $method = key($options);
         $requestPath = reset($options);
         $verb = self::$verbArray[$method];
-
         $headers = $this->getArrayValue($options, 'headers');
         $url_query = $this->getArrayValue($options, 'url_query');
         $formData = $this->getArrayValue($options, 'form_data');
         $jsonData = $this->getArrayValue($options, 'json_data');
         $defaultHttpParams = self::$defaultParams;
-
         $connectionParams = array_merge($defaultHttpParams, $this->customParams);
         $query = '';
         if ($url_query > 0) {
@@ -125,19 +123,14 @@ class RestClient
         if ($query != '') {
             $uri .= '?' . $query;
         }
-
         $connect = $this->getHttpRequest();
         $connect->setOption(CURLOPT_URL, $uri);
-
         if ($userAgent = $this->getArrayValue($connectionParams, 'user_agent')) {
             $connect->setOption(CURLOPT_USERAGENT, $userAgent);
         }
-
         $connect->setOption(CURLOPT_RETURNTRANSFER, true);
         $connect->setOption(CURLOPT_CUSTOMREQUEST, $verb);
-
         $this->setHeaders($connect, $headers);
-
         $proxyAddress = $this->getArrayValue($connectionParams, 'proxy_addr');
         $proxyPort = $this->getArrayValue($connectionParams, 'proxy_port');
         if (!empty($proxyAddress)) {
@@ -169,15 +162,13 @@ class RestClient
         if ($apiResult === false) {
             throw new Exception ($connect->error());
         }
+        
         $response['response'] = [];
-        if ($apiHttpCode == "200" || $apiHttpCode == "201") {
-            $response['response'] = json_decode($apiResult, true);
-        }
-
+        $response['response'] = json_decode($apiResult, true);
         $response['code'] = $apiHttpCode;
 
         $connect->error();
-
+        
         return ['code' => $response['code'], 'body' => $response['response']];
     }
 
@@ -201,7 +192,7 @@ class RestClient
      * @throws Exception
      */
     public function post($uri, $options = [])
-    {
+    {  
         return $this->exec(array_merge(['post' => $uri], $options));
     }
 
