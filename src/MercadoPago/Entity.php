@@ -10,7 +10,9 @@ abstract class Entity
     /**
      * @var
      */
+
     protected static $_manager;
+    protected $_last;
     /**
      * Entity constructor.
      *
@@ -44,13 +46,16 @@ abstract class Entity
      */
     public static function read($params = [])
     {
-        $entity = new get_called_class();
+        $class = get_called_class();
+        $entity = new $class();
+
         self::$_manager->setEntityUrl($entity, 'read', $params);
         self::$_manager->setQueryParams($entity, $entity->toArray());
         $response =  self::$_manager->execute($entity, 'get');
         if ($response['code'] == "200" || $response['code'] == "201") {
             $entity->_fillFromArray($entity, $response['body']);
         }
+        $entity->_last = clone $entity;
         return $entity;
     }
     /**
@@ -90,8 +95,10 @@ abstract class Entity
     public function update($params = [])
     {
         self::$_manager->setEntityUrl($this, 'update', $params);
-        self::$_manager->setEntityQueryJsonData($this);
+        self::$_manager->setEntityDeltaQueryJsonData($this);
+
         $response =  self::$_manager->execute($this, 'put');
+
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
         }
@@ -121,26 +128,26 @@ abstract class Entity
      * @return mixed
      */
     public function custom_action($method, $action){
-      self::$_manager->setEntityUrl($this, $action);
-      self::$_manager->setEntityQueryJsonData($this);
-      $response = self::$_manager->execute($this, $method);
-      if ($response['code'] == "200" || $response['code'] == "201") {
-          $this->_fillFromArray($this, $response['body']);
-      } 
-      return $response;
+        self::$_manager->setEntityUrl($this, $action);
+        self::$_manager->setEntityQueryJsonData($this);
+        $response = self::$_manager->execute($this, $method);
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $this->_fillFromArray($this, $response['body']);
+        }
+        return $response;
     }
     /**
      * @return mixed
      */
     public function save()
     {
-        
+
         self::$_manager->setEntityUrl($this, 'create');
         self::$_manager->setEntityQueryJsonData($this);
         $response = self::$_manager->execute($this, 'post');
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
-        } 
+        }
         return $response;
     }
     /**

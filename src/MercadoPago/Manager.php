@@ -149,6 +149,16 @@ class Manager
         $this->_entityConfiguration[$className]->query['json_data'] = json_encode($result);
     }
     /**
+     * @param $entity
+     */
+    public function setEntityDeltaQueryJsonData($entity)
+    {
+        $className = $this->_getEntityClassName($entity);
+        $result = [];
+        $this->_deltaToJson($entity, $result, $this->_entityConfiguration[$className]);
+        $this->_entityConfiguration[$className]->query['json_data'] = json_encode($result);
+    }
+    /**
      * @param $configuration
      */
     public function setQueryParams($entity, $urlParams = [])
@@ -175,18 +185,50 @@ class Manager
      */
     protected function _attributesToJson($entity, &$result)
     {
-        if (!is_array($entity)) {
+        $specialAttributes = array("_last"); // TODO: Refactor this
+        if (!is_array($entity)) {            // TODO: Refactor this
             $attributes = array_filter($entity->toArray());
         } else {
             $attributes = $entity;
         }
         foreach ($attributes as $key => $value) {
-            if ($value instanceof Entity || is_array($value)) {
-                $this->_attributesToJson($value, $result[$key]);
-            } else {
-                $result[$key] = $value;
+            if (!in_array($key, $specialAttributes)){
+                if ($value instanceof Entity || is_array($value)) {
+                    $this->_attributesToJson($value, $result[$key]);
+                } else {
+                    $result[$key] = $value;
+                }
             }
         }
+    }
+    /**
+     * @param $entity
+     * @param $result
+     * @param $configuration
+     */
+    protected function _deltaToJson($entity, &$result){
+        $specialAttributes = array("_last"); // TODO: Refactor this
+        if (!is_array($entity)) {            // TODO: Refactor this
+            $attributes = array_filter($entity->toArray());
+        } else {
+            $attributes = $entity;
+        }
+
+        foreach ($attributes as $key => $value) {
+            if (!in_array($key, $specialAttributes)){
+                if ($value instanceof Entity || is_array($value)) {
+                    //$this->_deltaToJson($value, $result[$key]);
+                } else {
+                    $last = $entity->_last;
+                    $last_value = $last->$key;
+                    if ($last_value != $value){
+                        $result[$key] = $value;
+                    }
+                }
+
+            }
+        }
+        var_dump($result);
     }
     /**
      * @param $entity
