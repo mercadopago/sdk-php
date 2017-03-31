@@ -28,7 +28,7 @@ class Config
      */
     protected function getDefaults()
     {
-        return ['base_url'      => 'https://api.mercadopago.com',
+        return ['base_url'      => 'https://api.mercadolibre.com',
                 'CLIENT_ID'     => '',
                 'CLIENT_SECRET' => '',
                 'APP_ID'        => '',
