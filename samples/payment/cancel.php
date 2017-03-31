@@ -7,10 +7,11 @@
   # Create a Payment
   require_once dirname(__FILE__).'/create.php';
 
-  # Cancel the previous payment, only works from a pending status
+  # Cancel the previous payment, only works from a pending or in_process status
   $payment->status = "canceled";
   $payment->update();
   
   echo $payment->status;
+  echo $payment->status_detail;
   
 ?>
