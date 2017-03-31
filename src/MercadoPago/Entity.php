@@ -44,7 +44,7 @@ abstract class Entity
      */
     public static function read($params = [])
     {
-        $entity = new $this();
+        $entity = new get_called_class();
         self::$_manager->setEntityUrl($entity, 'read', $params);
         self::$_manager->setQueryParams($entity, $entity->toArray());
         $response =  self::$_manager->execute($entity, 'get');
