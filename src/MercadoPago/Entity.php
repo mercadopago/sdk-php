@@ -42,15 +42,16 @@ abstract class Entity
     /**
      * @return mixed
      */
-    public function read($params = [])
+    public static function read($params = [])
     {
-        self::$_manager->setEntityUrl($this, 'read', $params);
-        self::$_manager->setQueryParams($this, $this->toArray());
-        $response =  self::$_manager->execute($this, 'get');
+        $entity = new $this()
+        self::$_manager->setEntityUrl($entity, 'read', $params);
+        self::$_manager->setQueryParams($entity, $entity->toArray());
+        $response =  self::$_manager->execute($entity, 'get');
         if ($response['code'] == "200" || $response['code'] == "201") {
-            $this->_fillFromArray($this, $response['body']);
+            $entity->_fillFromArray($entity, $response['body']);
         }
-        return $this;
+        return $entity;
     }
     /**
      * @return mixed
