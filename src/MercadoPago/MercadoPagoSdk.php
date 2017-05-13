@@ -42,6 +42,25 @@ class MercadoPagoSdk
     {
         return self::$_config;
     }
+    
+    
+    // Publishing generic functions 
+    
+    public static function get($uri, $options=[]){
+      self::$_restClient.get($uri, $options)
+    }
+    
+    public static function post($uri, $options=[]){
+      self::$_restClient.post($uri, $options)
+    }
+    
+    public static function put($uri, $options=[]){
+      self::$_restClient.put($uri, $options)
+    }
+    
+    public static function delete($uri, $options=[]){
+      self::$_restClient.deleted($uri, $options)
+    }
 
 }
 
