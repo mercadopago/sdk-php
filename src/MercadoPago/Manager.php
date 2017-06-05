@@ -48,6 +48,19 @@ class Manager
         $this->_entityConfiguration[$className] = $this->_metadataReader->getMetaData($entity);
         return $this->_entityConfiguration[$className];
     }
+    
+    /** 
+     * @param string $method
+     * @param null   $parameters
+     *
+     * @return mixed
+     */
+    public function simple_execute($method)
+    {
+      
+    }
+      
+      
     /**
      * @param        $entity
      * @param string $method
