@@ -4,7 +4,7 @@ namespace MercadoPago;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
-use MercadoPago\Annotation\DenyDynamicAttribute;
+ 
 
 /**
  * @RestMethod(resource="/checkout/preferences", method="create")

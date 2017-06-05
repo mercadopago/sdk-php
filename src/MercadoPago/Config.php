@@ -28,13 +28,14 @@ class Config
      */
     protected function getDefaults()
     {
-        return ['base_url'      => 'https://api.mercadolibre.com',
-                'CLIENT_ID'     => '',
-                'CLIENT_SECRET' => '',
-                'APP_ID'        => '',
-                'ACCESS_TOKEN'  => '',
-                'REFRESH_TOKEN' => '',
-                'sandbox_mode'  => true,
+        return [
+            'base_url'      => 'https://api.mercadopago.com',
+            'CLIENT_ID'     => '',
+            'CLIENT_SECRET' => '',
+            'APP_ID'        => '',
+            'ACCESS_TOKEN'  => '',
+            'REFRESH_TOKEN' => '',
+            'sandbox_mode'  => true,
         ];
     }
 
@@ -124,8 +125,8 @@ class Config
             $this->_restclient = new RestClient();
         }
         $data = ['grant_type'    => 'client_credentials',
-                 'client_id'     => $this->get('CLIENT_ID'),
-                 'client_secret' => $this->get('CLIENT_SECRET')];
+            'client_id'     => $this->get('CLIENT_ID'),
+            'client_secret' => $this->get('CLIENT_SECRET')];
         $this->_restclient->setHttpParam('address', $this->get('base_url'));
         $response = $this->_restclient->post("/oauth/token", ['json_data' => json_encode($data)]);
         return $response['body'];
@@ -142,8 +143,8 @@ class Config
             $this->_restclient = new RestClient();
         }
         $data = ['grant_type'    => 'refresh_token',
-                 'refresh_token'     => $this->get('REFRESH_TOKEN'),
-                 'client_secret' => $this->get('ACCESS_TOKEN')];
+            'refresh_token'     => $this->get('REFRESH_TOKEN'),
+            'client_secret' => $this->get('ACCESS_TOKEN')];
         $this->_restclient->setHttpParam('address', $this->get('base_url'));
         $response = $this->_restclient->post("/oauth/token", ['json_data' => json_encode($data)]);
         if (isset($response['access_token']) && isset($response['refresh_token']) && isset($response['client_id']) && isset($response['client_secret'])) {

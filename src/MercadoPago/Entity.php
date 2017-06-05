@@ -41,6 +41,14 @@ abstract class Entity
     {
         self::$_manager = null;
     }
+    
+    /**
+     * @return mixed
+     */
+    public static function get($id){
+      self::read(array("id" => $id));
+    }
+    
     /**
      * @return mixed
      */
@@ -76,7 +84,7 @@ abstract class Entity
      * @codeCoverageIgnore
      * @return mixed
      */
-    public function loadAll()
+    public function APCIteratorAll()
     {
         self::$_manager->setEntityUrl($this, 'list');
         return self::$_manager->execute($this, 'get');
