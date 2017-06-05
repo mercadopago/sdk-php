@@ -47,28 +47,28 @@ class MercadoPagoSdk
     // Publishing generic functions 
     
     public static function get($uri, $options=[]){
-      if (isset(self::$_config->get('ACCESS_TOKEN'))){
+      if ( self::$_config->get('ACCESS_TOKEN')){
         $uri = $uri . "?access_token=" . self::$_config->get('ACCESS_TOKEN');
       }
       self::$_restClient->get($uri, $options);
     }
     
     public static function post($uri, $options=[]){
-      if (isset(self::$_config->get('ACCESS_TOKEN'))){
+      if ( self::$_config->get('ACCESS_TOKEN')){
         $uri = $uri . "?access_token=" . self::$_config->get('ACCESS_TOKEN');
       }
       self::$_restClient->post($uri, $options);
     }
     
     public static function put($uri, $options=[]){
-      if (isset(self::$_config->get('ACCESS_TOKEN'))){
+      if ( self::$_config->get('ACCESS_TOKEN')){
         $uri = $uri . "?access_token=" . self::$_config->get('ACCESS_TOKEN');
       }
       self::$_restClient->put($uri, $options);
     }
     
     public static function delete($uri, $options=[]){
-      if (isset(self::$_config->get('ACCESS_TOKEN'))){
+      if ( self::$_config->get('ACCESS_TOKEN')){
         $uri = $uri . "?access_token=" . self::$_config->get('ACCESS_TOKEN');
       }
       self::$_restClient->deleted($uri, $options);
