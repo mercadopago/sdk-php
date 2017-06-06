@@ -2,14 +2,14 @@
 
 namespace MercadoPago;
 use Symfony\Component\Config\Definition\Exception\Exception;
+ 
 
 /**
  * ConfigTest Class Doc Comment
  *
  * @package MercadoPago
  */
-class ConfigTest
-    extends \PHPUnit_Framework_TestCase
+class ConfigTest extends \PHPUnit\Framework\TestCase                                                                                       
 {
     /**
      * @var

@@ -2,8 +2,7 @@
 
 namespace MercadoPago;
 
-class RestClientTest
-    extends \PHPUnit_Framework_TestCase
+class RestClientTestextends extends \PHPUnit\Framework\TestCase
 {
     protected $config;
 

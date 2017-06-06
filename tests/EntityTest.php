@@ -5,8 +5,7 @@ namespace MercadoPago;
  *
  * @package MercadoPago
  */
-class EntityTest
-    extends \PHPUnit_Framework_TestCase
+class EntityTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var

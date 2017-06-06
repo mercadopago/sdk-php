@@ -7,8 +7,7 @@ namespace MercadoPago;
  *
  * @package MercadoPago
  */
-class MercadopagoSdkTest
-    extends \PHPUnit_Framework_TestCase
+class MercadopagoSdkTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *

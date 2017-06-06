@@ -8,14 +8,10 @@
          beStrictAboutTestsThatDoNotTestAnything="true"
          beStrictAboutTodoAnnotatedTests="true"
          verbose="true">
-    <testsuite>
-        <directory suffix="Test.php">./tests/</directory>
+    <testsuite name="php_sdk_tests">
+        <directory>./tests/</directory>
     </testsuite>
                   
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
+
 
 </phpunit>
