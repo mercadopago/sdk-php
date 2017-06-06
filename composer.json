@@ -19,8 +19,7 @@
     "symfony/yaml": "~2.5",
     "phpmd/phpmd": "@stable",
     "squizlabs/php_codesniffer": "2.3.*",
-    "sebastian/phpcpd": "*",
-    "satooshi/php-coveralls":"dev-master",
+    "sebastian/phpcpd": "*", 
     "doctrine/orm": "~2.3"
   },
   "autoload": {

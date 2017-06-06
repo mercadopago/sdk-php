@@ -10,9 +10,6 @@ before_script:
   - composer install --no-interaction
 
 script:
-  - vendor/bin/phpunit
-  - vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
-
-after_script:
-  - vendor/bin/coveralls -v
+  - vendor/bin/phpunit 
+ 
 
