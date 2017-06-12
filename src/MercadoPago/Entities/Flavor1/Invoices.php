@@ -6,14 +6,11 @@ use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
 
 /**
- * @RestMethod(resource="/preapproval/:id", method="read")
- * @RestMethod(resource="/preapproval/search", method="search")
- * @RestMethod(resource="/preapproval/", method="create")
- * @RestMethod(resource="/preapproval/:id", method="update") 
+ * @RestMethod(resource="/invoices/:id", method="read") 
  * @RequestParam(param="access_token")
  */
 
-class Preapproval extends Entity
+class Inovice extends Entity
 {
   
   /**
@@ -24,27 +21,22 @@ class Preapproval extends Entity
   /**
    * @Attribute()
    */
-  protected $payer_id;
+  protected $subscription_id;
   
   /**
    * @Attribute()
    */
-  protected $payer_email;
+  protected $plan_id;
   
   /**
    * @Attribute()
    */
-  protected $back_url;
+  protected $payer;
   
   /**
    * @Attribute()
    */
-  protected $collector_id;
-  
-  /**
-   * @Attribute()
-   */
-  protected $application_id;
+  protected $application_fee;
   
   /**
    * @Attribute()
@@ -54,23 +46,7 @@ class Preapproval extends Entity
   /**
    * @Attribute()
    */
-  protected $auto_recurring;
-  
-  /**
-   * @Attribute()
-   */
-  protected $init_point;
-  
-  /**
-   * @Attribute()
-   */
-  protected $sandbox_init_point;
-  
-  /**
-   * @Attribute()
-   */
-  protected $reason;
-  
+  protected $description;
   
   /**
    * @Attribute()
@@ -90,8 +66,32 @@ class Preapproval extends Entity
   /**
    * @Attribute()
    */
-  protected $preapproval_plan_id;
+  protected $live_mode;
+  
+  
+  /**
+   * @Attribute()
+   */
+  protected $metadata;
+  
+  /**
+   * @Attribute()
+   */
+  protected $payments;
+  
+  /**
+   * @Attribute()
+   */
+  protected $debit_date;
+  
+  /**
+   * @Attribute()
+   */
+  protected $next_payment_date;
+  
+  
   
 }
 
 ?>
+  
