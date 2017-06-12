@@ -6,10 +6,10 @@ use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
 
 /**
- * @RestMethod(resource="/v1/preapproval/:id", method="read")
- * @RestMethod(resource="/v1/preapproval/search", method="search")
- * @RestMethod(resource="/v1/preapproval/", method="create")
- * @RestMethod(resource="/v1/preapproval/:id", method="update") 
+ * @RestMethod(resource="/preapproval/:id", method="read")
+ * @RestMethod(resource="/preapproval/search", method="search")
+ * @RestMethod(resource="/preapproval/", method="create")
+ * @RestMethod(resource="/preapproval/:id", method="update") 
  * @RequestParam(param="access_token")
  */
 
