@@ -1,0 +1,91 @@
+<?php
+namespace MercadoPago;
+
+use MercadoPago\Annotation\RestMethod;
+use MercadoPago\Annotation\RequestParam;
+use MercadoPago\Annotation\Attribute;
+
+/**
+ * @RestMethod(resource="/v1/preapproval/:id", method="read")
+ * @RestMethod(resource="/v1/preapproval/search", method="search")
+ * @RestMethod(resource="/v1/customers/", method="create")
+ * @RestMethod(resource="/v1/preapproval/:id", method="update") 
+ */
+
+class Preapproval extends Entity
+{
+  
+  /**
+   * @Attribute()
+   */
+  protected $payer_id;
+  
+  /**
+   * @Attribute()
+   */
+  protected $payer_email;
+  
+  /**
+   * @Attribute()
+   */
+  protected $back_url;
+  
+  /**
+   * @Attribute()
+   */
+  protected $collector_id;
+  
+  /**
+   * @Attribute()
+   */
+  protected $application_id;
+  
+  /**
+   * @Attribute()
+   */
+  protected $status;
+  
+  /**
+   * @Attribute()
+   */
+  protected $auto_recurring;
+  
+  /**
+   * @Attribute()
+   */
+  protected $init_point;
+  
+  /**
+   * @Attribute()
+   */
+  protected $sandbox_init_point;
+  
+  /**
+   * @Attribute()
+   */
+  protected $reason;
+  
+  
+  /**
+   * @Attribute()
+   */
+  protected $external_reference;
+  
+  /**
+   * @Attribute()
+   */
+  protected $date_created;
+  
+  /**
+   * @Attribute()
+   */
+  protected $last_modified;
+  
+  /**
+   * @Attribute()
+   */
+  protected $preapproval_plan_id;
+  
+}
+
+?>
