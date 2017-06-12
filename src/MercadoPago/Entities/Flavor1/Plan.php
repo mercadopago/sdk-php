@@ -6,9 +6,9 @@ use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
 
 /**
- * @RestMethod(resource="/plans/:id", method="read") 
- * @RestMethod(resource="/plans/", method="create")
- * @RestMethod(resource="/plans/:id", method="update") 
+ * @RestMethod(resource="/v1/plans/:id", method="read") 
+ * @RestMethod(resource="/v1/plans/", method="create")
+ * @RestMethod(resource="/v1/plans/:id", method="update") 
  * @RequestParam(param="access_token")
  */
 
