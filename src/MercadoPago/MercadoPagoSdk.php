@@ -34,13 +34,19 @@ class MercadoPagoSdk
         self::$_manager = new Manager(self::$_restClient, self::$_config);
         Entity::setManager(self::$_manager);
     }
+    
+    public static function configure($data=[]){
+      self::initialize();
+      self::$_config->configure($data);
+    }
 
     /**
      * @return Config
      */
     public static function config()
     {
-        return self::$_config;
+      
+      return self::$_config;
     }
     
     
