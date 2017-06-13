@@ -6,7 +6,7 @@ namespace MercadoPago;
  *
  * @package MercadoPago
  */
-class MercadoPagoSdk
+class SDK
 {
 
     /**
