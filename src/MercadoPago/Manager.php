@@ -198,21 +198,23 @@ class Manager
      */
     protected function _attributesToJson($entity, &$result)
     {
-        $specialAttributes = array("_last"); // TODO: Refactor this
-        if (!is_array($entity)) {            // TODO: Refactor this
-            $attributes = array_filter($entity->toArray());
-        } else {
-            $attributes = $entity;
-        }
-        foreach ($attributes as $key => $value) {
-            if (!in_array($key, $specialAttributes)){
-                if ($value instanceof Entity || is_array($value)) {
-                    $this->_attributesToJson($value, $result[$key]);
-                } else {
-                    $result[$key] = $value;
-                }
-            }
-        }
+      $specialAttributes = array("_last");  
+      if (is_array($entity)) {             
+          $attributes = array_filter($entity); 
+      } else { 
+          $attributes = $entity->toArray();
+      }
+
+      var_dump($attributes);
+
+
+       foreach ($attributes as $key => $value) {   
+           if ($value instanceof Entity || is_array($value)) {
+               $this->_attributesToJson($value, $result[$key]);
+           } else {
+               $result[$key] = $value;
+           } 
+       } 
     }
     /**
      * @param $entity
