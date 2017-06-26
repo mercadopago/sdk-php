@@ -63,9 +63,9 @@ class Manager
     }
       
       
-    public function add_custom_tracking_param(key, value)
+    public function add_custom_tracking_param($key, $value)
     {
-      $this->_customTrackingParams[key] = value;
+      $this->_customTrackingParams[$key] = $value;
     }
     
     /**
