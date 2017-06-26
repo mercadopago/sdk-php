@@ -49,6 +49,10 @@ class SDK
       return self::$_config;
     }
     
+    public static function add_custom_tracking_param(key, value){
+      self::$_manager->add_custom_tracking_param(key, value);
+    }
+    
     
     // Publishing generic functions 
     

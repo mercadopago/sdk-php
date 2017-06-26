@@ -18,6 +18,8 @@ class Manager
     /**
      * @var
      */
+    private $_customTrackingParams=array();
+    
     private $_entityConfiguration;
     /**
      * @var MetaDataReader
@@ -61,6 +63,11 @@ class Manager
     }
       
       
+    public function add_custom_tracking_param(key, value)
+    {
+      $this->_customTrackingParams[key] = value;
+    }
+    
     /**
      * @param        $entity
      * @param string $method
@@ -267,6 +274,7 @@ class Manager
         $metaData = $this->_getEntityConfiguration($entity);
         return isset($metaData->denyDynamicAttribute);
     }
+    
     /**
      * @param $query
      */
@@ -284,6 +292,9 @@ class Manager
         $query['headers']['Accept'] = 'application/json';
         $query['headers']['Content-Type'] = 'application/json';
         $query['headers']['User-Agent'] = 'Mercado Pago Php SDK v' . Version::$_VERSION;
+        foreach ($this->_customTrackingParams as $key => $value){ 
+            $query['headers'][$key] = $value;
+        }
     }
     /**
      * @param        $query
