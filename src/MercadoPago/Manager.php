@@ -75,6 +75,7 @@ class Manager
             $this->validateAttribute($entity, $key, ['required']);
         }
         $this->_setDefaultHeaders($configuration->query);
+        $this->_setCustomHeaders($entity, $configuration->query);
         $this->_setIdempotencyHeader($configuration->query, $configuration, $method);
         $this->setQueryParams($entity);
         return $this->_client->{$method}($configuration->url, $configuration->query);
@@ -265,6 +266,15 @@ class Manager
     {
         $metaData = $this->_getEntityConfiguration($entity);
         return isset($metaData->denyDynamicAttribute);
+    }
+    /**
+     * @param $query
+     */
+    protected function _setCustomHeaders(&$entity, &$query)
+    { 
+        foreach ($entity::getCustomHeaders() as $key => $value){ 
+            $query['headers'][$key] = $value;
+        }
     }
     /**
      * @param $query
