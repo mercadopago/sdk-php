@@ -213,10 +213,7 @@ class Manager
           $attributes = $entity->toArray();
       }
 
-      var_dump($attributes);
-
-
-       foreach ($attributes as $key => $value) {   
+       foreach ($attributes as $key => $value) {
            if ($value instanceof Entity || is_array($value)) {
                $this->_attributesToJson($value, $result[$key]);
            } else {
@@ -251,7 +248,6 @@ class Manager
 
             }
         }
-        var_dump($result);
     }
     /**
      * @param $entity
