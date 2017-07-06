@@ -24,11 +24,10 @@ class MetaDataReader
      */
     public function __construct()
     {
-        AnnotationRegistry::registerLoader('class_exists');
-        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\RestMethod');
-        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\RequestParam');
-        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\Attribute');
-        AnnotationRegistry::loadAnnotationClass('MercadoPago\\Annotation\\DenyDynamicAttribute');
+        AnnotationRegistry::registerFile(__DIR__ . '/Annotation/RestMethod.php');
+        AnnotationRegistry::registerFile(__DIR__ . '/Annotation/RequestParam.php');
+        AnnotationRegistry::registerFile(__DIR__ . '/Annotation/Attribute.php');
+        AnnotationRegistry::registerFile(__DIR__ . '/Annotation/DenyDynamicAttribute.php');
 
         $this->_reader = new AnnotationReader();
         
