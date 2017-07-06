@@ -122,7 +122,11 @@ class RestClient
         $address = $this->getArrayValue($connectionParams, 'address');
         $uri = $address . $requestPath;
         if ($query != '') {
-            $uri .= '?' . $query;
+            if (parse_url($uri, PHP_URL_QUERY)) {
+                $uri .= '&' . $query;
+            } else {
+                $uri .= '?' . $query;
+            }
         }
         $connect = $this->getHttpRequest();
         $connect->setOption(CURLOPT_URL, $uri);
