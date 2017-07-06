@@ -244,7 +244,7 @@ abstract class Entity
         if (!$definedType) {
             return true;
         }
-        if (is_object($type) && class_exists($definedType)) {
+        if (is_object($type) && class_exists($definedType, false)) {
             return ($type instanceof $definedType);
         }
         return gettype($type) == $definedType;
@@ -313,7 +313,7 @@ abstract class Entity
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $className = 'MercadoPago\\' . $this->_camelize($key);
-                if (class_exists($className)) {
+                if (class_exists($className, false)) {
                     $entity->_setValue($key, new $className, false);
                     $entity->_fillFromArray($this->{$key}, $value);
                 } else {
