@@ -81,7 +81,8 @@ abstract class AbstractConfig
     /**
      * @param array $data
      */
-    public function configure ($data = []) {
+    public function configure ($data = [])
+    {
         foreach ($data as $key => $value) {
             $this->set($key, $value);
         }
