@@ -78,16 +78,21 @@ abstract class Entity
     /**
      * @return mixed
      */
-    public function search()
+    public static function search($filters)
     {
-        self::$_manager->setEntityUrl($this, 'search');
-        self::$_manager->setQueryParams($this, $this->toArray());
-        $response = self::$_manager->execute($this, 'get');
+      $class = get_called_class();
+      
+      $entity = new $class();
+      
+      self::$_manager->setEntityUrl($entity, 'search');
+      self::$_manager->setQueryParams($entity, $filters);
+      $response = self::$_manager->execute($entity, 'get');
 
-        if ($response['code'] == "200" || $response['code'] == "201") {
-            $this->_fillFromArray($this, $response['body']['results'][0]);
-        }
-        return $response;
+      if ($response['code'] == "200" || $response['code'] == "201") {
+          $entity->_fillFromArray($entity, $response['body']['results'][0]);
+      }  
+      var_dump($response);
+      return $response;
     }
     /**
      * @codeCoverageIgnore
@@ -310,6 +315,9 @@ abstract class Entity
      */
     protected function _fillFromArray($entity, $data)
     {
+      
+      if ($data) {
+      
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $className = 'MercadoPago\\' . $this->_camelize($key);
@@ -323,6 +331,7 @@ abstract class Entity
             }
             $entity->_setValue($key, $value, false);
         }
+      }
     }
     /**
      * @param        $input

@@ -85,6 +85,9 @@ class Manager
         $this->_setCustomHeaders($entity, $configuration->query);
         $this->_setIdempotencyHeader($configuration->query, $configuration, $method);
         $this->setQueryParams($entity);
+        
+        var_dump($configuration->query);
+          
         return $this->_client->{$method}($configuration->url, $configuration->query);
     }
     public function validateAttribute($entity, $attribute, array $properties, $value = null)
@@ -169,6 +172,12 @@ class Manager
         $this->_attributesToJson($entity, $result, $this->_entityConfiguration[$className]);
         $this->_entityConfiguration[$className]->query['json_data'] = json_encode($result);
     }
+    public function setRawQueryJsonData($entity, $data)
+    {
+      $className = $this->_getEntityClassName($entity);
+      $this->_entityConfiguration[$className]->query['json_data'] = json_encode($data);
+    }
+    
     /**
      * @param $entity
      */
