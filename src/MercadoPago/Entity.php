@@ -52,6 +52,11 @@ abstract class Entity
     public static function setCustomHeader($key, $value){
       self::$_custom_headers[$key] = $value;
     }
+    public static function setCustomHeadersFromArray($array){
+      foreach ($array as $key => $value){ 
+        self::setCustomHeader($key, $value);
+      } 
+    }
     public static function getCustomHeader($key){
       return self::$_custom_headers[$key];
     }
@@ -66,9 +71,10 @@ abstract class Entity
         $class = get_called_class();
         $entity = new $class();
 
-        self::$_manager->setEntityUrl($entity, 'read', $params);
-        self::$_manager->setQueryParams($entity, $entity->toArray());
+        self::$_manager->setEntityUrl($entity, 'read'); 
+        self::$_manager->setQueryParams($entity, $params);
         $response =  self::$_manager->execute($entity, 'get');
+        var_dump($response);
         if ($response['code'] == "200" || $response['code'] == "201") {
             $entity->_fillFromArray($entity, $response['body']);
         }
@@ -90,9 +96,8 @@ abstract class Entity
 
       if ($response['code'] == "200" || $response['code'] == "201") {
           $entity->_fillFromArray($entity, $response['body']['results'][0]);
-      }  
-      var_dump($response);
-      return $response;
+      }   
+      return $entity;
     }
     /**
      * @codeCoverageIgnore
@@ -117,7 +122,8 @@ abstract class Entity
     public function update($params = [])
     {
         self::$_manager->setEntityUrl($this, 'update', $params);
-        self::$_manager->setEntityDeltaQueryJsonData($this);
+        self::$_manager->setEntityDeltaQueryJsonData($this); 
+        
 
         $response =  self::$_manager->execute($this, 'put');
 
@@ -162,9 +168,12 @@ abstract class Entity
      * @return mixed
      */
     public function save()
-    {
+    { 
+      
+      
       self::$_manager->setEntityUrl($this, 'create');
       self::$_manager->setEntityQueryJsonData($this);
+      
       $response = self::$_manager->execute($this, 'post');
       if ($response['code'] == "200" || $response['code'] == "201") {
           $this->_fillFromArray($this, $response['body']);
