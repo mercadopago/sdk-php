@@ -37,6 +37,15 @@ class Shipments extends Entity {
      * @Attribute()
      */
     protected $receiver_address;
+    /**
+     * @Attribute()
+     */
+    protected $dimensions;
+    /**
+     * @Attribute()
+     */
+    protected $default_shipping_method;
+    
 
 }
 
