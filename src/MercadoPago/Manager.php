@@ -85,8 +85,7 @@ class Manager
         $this->_setCustomHeaders($entity, $configuration->query);
         $this->_setIdempotencyHeader($configuration->query, $configuration, $method);
         $this->setQueryParams($entity);
-        
-        var_dump($configuration->query);
+         
           
         return $this->_client->{$method}($configuration->url, $configuration->query);
     }
@@ -130,13 +129,14 @@ class Manager
         $matches = [];
         preg_match_all('/\\:\\w+/', $url, $matches);
         foreach ($matches[0] as $match) {
-            $key = substr($match, 1);
-            if (array_key_exists($key, $params)) {
-                $url = str_replace($match, $params[$key], $url);
-            } else {
-                $url = str_replace($match, $entity->{$key}, $url);
-            }
-        }
+          
+          $key = substr($match, 1); 
+          if (array_key_exists($key, $params)) {
+              $url = str_replace($match, $params[$key], $url);
+          } else {
+              $url = str_replace($match, $entity->{$key}, $url);
+          }
+        } 
         $this->_entityConfiguration[$className]->url = $url;
     }
     /**
@@ -221,12 +221,14 @@ class Manager
       } else { 
           $attributes = $entity->toArray();
       }
-
+      
        foreach ($attributes as $key => $value) {
            if ($value instanceof Entity || is_array($value)) {
                $this->_attributesToJson($value, $result[$key]);
            } else {
+             if ($value != null){
                $result[$key] = $value;
+             } 
            } 
        } 
     }
@@ -289,6 +291,8 @@ class Manager
             $query['headers'][$key] = $value;
         }
     }
+    
+   
     /**
      * @param $query
      */

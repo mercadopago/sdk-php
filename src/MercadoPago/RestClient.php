@@ -154,6 +154,8 @@ class RestClient
         if ($caFile = $this->getArrayValue($connectionParams, 'ca_file')) {
             $connect->setOption(CURLOPT_CAPATH, $caFile);
         }
+        
+        $connect->setOption(CURLOPT_FOLLOWLOCATION, true);
 
         if ($formData) {
             $this->setData($connect, $formData);
