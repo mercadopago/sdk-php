@@ -46,21 +46,26 @@ abstract class Entity
     /**
      * @return mixed
      */
-    public static function get($id){
+    public static function get($id)
+    {
       self::read(array("id" => $id));
     }
-    public static function setCustomHeader($key, $value){
+    public static function setCustomHeader($key, $value)
+    {
       self::$_custom_headers[$key] = $value;
-    }
+    } 
+    public static function getCustomHeader($key)
+    {
+      return self::$_custom_headers[$key];
+    } 
     public static function setCustomHeadersFromArray($array){
       foreach ($array as $key => $value){ 
         self::setCustomHeader($key, $value);
       } 
     }
-    public static function getCustomHeader($key){
-      return self::$_custom_headers[$key];
-    }
-    public static function getCustomHeaders(){
+    public static function getCustomHeader($key){ 
+    public static function getCustomHeaders()
+    {
       return self::$_custom_headers;
     }
     /**
@@ -155,7 +160,8 @@ abstract class Entity
     /**
      * @return mixed
      */
-    public function custom_action($method, $action){
+    public function custom_action($method, $action)
+    {
       self::$_manager->setEntityUrl($this, $action);
       self::$_manager->setEntityQueryJsonData($this);
       $response = self::$_manager->execute($this, $method);
