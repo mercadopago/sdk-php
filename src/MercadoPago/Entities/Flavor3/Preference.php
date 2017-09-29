@@ -102,5 +102,10 @@ class Preference extends Entity
      * @Attribute(type = "date")
      */
     protected $date_created;
+    /**
+     * @Attribute(type = "string")
+     */
+    protected $sponsor_id;
+    
 
 }

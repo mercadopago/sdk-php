@@ -85,6 +85,8 @@ class Manager
         $this->_setCustomHeaders($entity, $configuration->query);
         $this->_setIdempotencyHeader($configuration->query, $configuration, $method);
         $this->setQueryParams($entity);
+         
+          
         return $this->_client->{$method}($configuration->url, $configuration->query);
     }
     public function validateAttribute($entity, $attribute, array $properties, $value = null)
@@ -127,13 +129,14 @@ class Manager
         $matches = [];
         preg_match_all('/\\:\\w+/', $url, $matches);
         foreach ($matches[0] as $match) {
-            $key = substr($match, 1);
-            if (array_key_exists($key, $params)) {
-                $url = str_replace($match, $params[$key], $url);
-            } else {
-                $url = str_replace($match, $entity->{$key}, $url);
-            }
-        }
+          
+          $key = substr($match, 1); 
+          if (array_key_exists($key, $params)) {
+              $url = str_replace($match, $params[$key], $url);
+          } else {
+              $url = str_replace($match, $entity->{$key}, $url);
+          }
+        } 
         $this->_entityConfiguration[$className]->url = $url;
     }
     /**
@@ -169,6 +172,12 @@ class Manager
         $this->_attributesToJson($entity, $result, $this->_entityConfiguration[$className]);
         $this->_entityConfiguration[$className]->query['json_data'] = json_encode($result);
     }
+    public function setRawQueryJsonData($entity, $data)
+    {
+      $className = $this->_getEntityClassName($entity);
+      $this->_entityConfiguration[$className]->query['json_data'] = json_encode($data);
+    }
+    
     /**
      * @param $entity
      */
@@ -212,12 +221,14 @@ class Manager
       } else { 
           $attributes = $entity->toArray();
       }
-
+      
        foreach ($attributes as $key => $value) {
            if ($value instanceof Entity || is_array($value)) {
                $this->_attributesToJson($value, $result[$key]);
            } else {
+             if ($value != null){
                $result[$key] = $value;
+             } 
            } 
        } 
     }
@@ -280,6 +291,8 @@ class Manager
             $query['headers'][$key] = $value;
         }
     }
+    
+   
     /**
      * @param $query
      */

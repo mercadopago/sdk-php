@@ -53,11 +53,17 @@ abstract class Entity
     public static function setCustomHeader($key, $value)
     {
       self::$_custom_headers[$key] = $value;
-    }
+    } 
     public static function getCustomHeader($key)
     {
       return self::$_custom_headers[$key];
+    } 
+    public static function setCustomHeadersFromArray($array){
+      foreach ($array as $key => $value){ 
+        self::setCustomHeader($key, $value);
+      } 
     }
+    public static function getCustomHeader($key){ 
     public static function getCustomHeaders()
     {
       return self::$_custom_headers;
@@ -70,9 +76,10 @@ abstract class Entity
         $class = get_called_class();
         $entity = new $class();
 
-        self::$_manager->setEntityUrl($entity, 'read', $params);
-        self::$_manager->setQueryParams($entity, $entity->toArray());
+        self::$_manager->setEntityUrl($entity, 'read'); 
+        self::$_manager->setQueryParams($entity, $params);
         $response =  self::$_manager->execute($entity, 'get');
+        var_dump($response);
         if ($response['code'] == "200" || $response['code'] == "201") {
             $entity->_fillFromArray($entity, $response['body']);
         }
@@ -82,16 +89,20 @@ abstract class Entity
     /**
      * @return mixed
      */
-    public function search()
+    public static function search($filters)
     {
-        self::$_manager->setEntityUrl($this, 'search');
-        self::$_manager->setQueryParams($this, $this->toArray());
-        $response = self::$_manager->execute($this, 'get');
+      $class = get_called_class();
+      
+      $entity = new $class();
+      
+      self::$_manager->setEntityUrl($entity, 'search');
+      self::$_manager->setQueryParams($entity, $filters);
+      $response = self::$_manager->execute($entity, 'get');
 
-        if ($response['code'] == "200" || $response['code'] == "201") {
-            $this->_fillFromArray($this, $response['body']['results'][0]);
-        }
-        return $response;
+      if ($response['code'] == "200" || $response['code'] == "201") {
+          $entity->_fillFromArray($entity, $response['body']['results'][0]);
+      }   
+      return $entity;
     }
     /**
      * @codeCoverageIgnore
@@ -116,7 +127,8 @@ abstract class Entity
     public function update($params = [])
     {
         self::$_manager->setEntityUrl($this, 'update', $params);
-        self::$_manager->setEntityDeltaQueryJsonData($this);
+        self::$_manager->setEntityDeltaQueryJsonData($this); 
+        
 
         $response =  self::$_manager->execute($this, 'put');
 
@@ -162,9 +174,12 @@ abstract class Entity
      * @return mixed
      */
     public function save()
-    {
+    { 
+      
+      
       self::$_manager->setEntityUrl($this, 'create');
       self::$_manager->setEntityQueryJsonData($this);
+      
       $response = self::$_manager->execute($this, 'post');
       if ($response['code'] == "200" || $response['code'] == "201") {
           $this->_fillFromArray($this, $response['body']);
@@ -315,6 +330,9 @@ abstract class Entity
      */
     protected function _fillFromArray($entity, $data)
     {
+      
+      if ($data) {
+      
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $className = 'MercadoPago\\' . $this->_camelize($key);
@@ -328,6 +346,7 @@ abstract class Entity
             }
             $entity->_setValue($key, $value, false);
         }
+      }
     }
     /**
      * @param        $input
