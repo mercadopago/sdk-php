@@ -1,0 +1,10 @@
+{
+  "access_token":   "APP_USR-6295877106812064-042916-5ab7e29152843f61b4c218a551227728__LC_LB__-202809963",
+  "public_key":     "APP_USR-acc2a2fb-d540-41a2-bf9b-7a40b5644358",
+  "refresh_token":  "APP_USR-6295877106812064-042916-5ab7e29152843f61b4c2",
+  "live_mode":      false,
+  "user_id":        123456789,
+  "token_type":     "bearer",
+  "expires_in":     15768000,
+  "scope":          "offline_access read write"
+}

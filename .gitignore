@@ -1,0 +1,20 @@
+#SOs
+Thumbs.db
+*~
+._*
+.DS_Store
+
+#IDEs
+nbproject
+/.idea
+
+#Vagrant
+/.vagrant
+/Vagrantfile.local
+
+#Project
+/vendor
+/composer.lock
+
+#Samples Vendor
+/samples/vendor
