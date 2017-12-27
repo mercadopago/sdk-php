@@ -63,7 +63,6 @@ abstract class Entity
         self::setCustomHeader($key, $value);
       } 
     }
-    public static function getCustomHeader($key){ 
     public static function getCustomHeaders()
     {
       return self::$_custom_headers;
