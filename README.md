@@ -80,4 +80,4 @@ The SDK supports PHP 5 or major
   
 ### Support 
 
-Write us on developers@mercadopago.com
+Write us at developers@mercadopago.com
