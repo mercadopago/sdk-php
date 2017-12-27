@@ -47,7 +47,7 @@ The SDK supports PHP 5 or major
   
 3. Use the resource objects.
 
-  You can interact with all the resources available on the public API for this, all the resource are represented as classes according to the next diagram.
+  You can interact with all the resources available in the public API, to this each resource is represented by classes according to the following diagram:
   
   ![sdk resource structure](https://user-images.githubusercontent.com/864790/34393059-9acad058-eb2e-11e7-9987-494eaf19d109.png)
   
