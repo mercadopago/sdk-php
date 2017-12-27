@@ -29,20 +29,20 @@ The SDK supports PHP 5 or major
   require __DIR__  . '/vendor/autoload.php';
   ```
 
-2. Set your credentials
+2. Setup your credentials
 
-  You can set two kind of credentials.
+  You have two types of credentials:
 
-  **For web-checkout:**
-  ```php
-  MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN");      // On Production
-  MercadoPago\SDK::setAccessToken("YOUR_TEST_ACCESS_TOKEN"); // On Sandbox
-  ```
+    **For web-checkout:**
+    ```php
+    MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN");      // On Production
+    MercadoPago\SDK::setAccessToken("YOUR_TEST_ACCESS_TOKEN"); // On Sandbox
+    ```
 
-  **For API or custom checkout:**
-  ```php
-  MercadoPago\SDK::setClientId("YOUR_CLIENT_ID");
-  MercadoPago\SDK::setClientSecret("YOUR_CLIENT_SECRET");
+    **For API or custom checkout:**
+    ```php
+    MercadoPago\SDK::setClientId("YOUR_CLIENT_ID");
+    MercadoPago\SDK::setClientSecret("YOUR_CLIENT_SECRET");
   ```
   
 3. Use the resource objects.
