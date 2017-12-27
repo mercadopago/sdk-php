@@ -126,11 +126,13 @@ class Manager
             throw new \Exception('ORM method ' . $ormMethod . ' not available for entity:' . $className);
         }
         $url = $this->_entityConfiguration[$className]->methods[$ormMethod]['resource'];
+        
         $matches = [];
         preg_match_all('/\\:\\w+/', $url, $matches);
+        
         foreach ($matches[0] as $match) {
           
-          $key = substr($match, 1); 
+          $key = substr($match, 1);
           if (array_key_exists($key, $params)) {
               $url = str_replace($match, $params[$key], $url);
           } else {
@@ -195,6 +197,7 @@ class Manager
     {
         $configuration = $this->_getEntityConfiguration($entity);
         $params = [];
+        
         if (!isset($configuration->query) || !isset($configuration->query['url_query'])) {
             $configuration->query['url_query'] = $params;
         }
@@ -207,6 +210,7 @@ class Manager
                 $configuration->query['url_query'] = $arrayMerge;
             }
         }
+        //var_dump($configuration);
     }
     /**
      * @param $entity

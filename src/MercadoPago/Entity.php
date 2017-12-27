@@ -42,13 +42,19 @@ abstract class Entity
     {
         self::$_manager = null;
     }
-    
     /**
      * @return mixed
      */
     public static function get($id)
     {
       self::read(array("id" => $id));
+    }
+    /**
+     * @return mixed
+     */
+    public static function find_by_id($id)
+    { 
+      return self::read(array("id" => $id));
     }
     public static function setCustomHeader($key, $value)
     {
@@ -63,7 +69,6 @@ abstract class Entity
         self::setCustomHeader($key, $value);
       } 
     }
-    public static function getCustomHeader($key){ 
     public static function getCustomHeaders()
     {
       return self::$_custom_headers;
@@ -73,18 +78,23 @@ abstract class Entity
      */
     public static function read($params = [])
     {
-        $class = get_called_class();
-        $entity = new $class();
+       
+      
+      
+      $class = get_called_class();
+      $entity = new $class();
 
-        self::$_manager->setEntityUrl($entity, 'read'); 
-        self::$_manager->setQueryParams($entity, $params);
-        $response =  self::$_manager->execute($entity, 'get');
-        var_dump($response);
-        if ($response['code'] == "200" || $response['code'] == "201") {
-            $entity->_fillFromArray($entity, $response['body']);
-        }
-        $entity->_last = clone $entity;
-        return $entity;
+      self::$_manager->setEntityUrl($entity, 'read', $params);
+      self::$_manager->setQueryParams($entity, $params); 
+      
+      $response =  self::$_manager->execute($entity, 'get');
+      
+      if ($response['code'] == "200" || $response['code'] == "201") {   
+        $entity->_fillFromArray($entity, $response['body']);
+      }
+       
+      $entity->_last = clone $entity;
+      return $entity;
     }
     /**
      * @return mixed
@@ -330,6 +340,8 @@ abstract class Entity
      */
     protected function _fillFromArray($entity, $data)
     {
+      
+      
       
       if ($data) {
       

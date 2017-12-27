@@ -35,6 +35,37 @@ class SDK
         Entity::setManager(self::$_manager);
     }
     
+    /**
+     * Set Access Token for SDK .
+     */
+    public static function setAccessToken($access_token){
+      if (!isset(self::$_config)){
+        self::initialize();
+      }
+      self::$_config->configure(['ACCESS_TOKEN' => $access_token]);
+      
+    }
+    
+    /**
+     * Set Access ClientId for SDK .
+     */
+    public static function setClientId($client_id){
+      if (!isset(self::$_config)){
+        self::initialize();
+      }
+      self::$_config->configure(['CLIENT_ID' => $client_id]); 
+    }
+    
+    /**
+     * Set Access ClientSecret for SDK .
+     */
+    public static function setClientSecret($client_secret){
+      if (!isset(self::$_config)){
+        self::initialize();
+      }
+      self::$_config->configure(['CLIENT_SECRET' => $client_secret]); 
+    }
+    
     public static function configure($data=[])
     {
       self::initialize();
