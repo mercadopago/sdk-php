@@ -1,13 +1,18 @@
 {
-  "name": "mercadopago/px-php",
+  "name": "mercadopago/dx-php",
   "type": "library",
-  "homepage": "https://github.com/mercadopago/px-php",
+  "homepage": "https://github.com/mercadopago/dx-php",
   "license": "MIT",
   "authors": [
     {
       "name": "imasson",
       "role": "Developer",
       "homepage": "https://github.com/imasson"
+    },
+    {
+      "name": "joelibaceta",
+      "role": "Developer",
+      "homepage": "https://github.com/joelibaceta"
     }
   ],
   "require": {
@@ -27,8 +32,7 @@
       "MercadoPago\\": [
         "src/MercadoPago/",
         "tests/",
-        "src/MercadoPago/Entities/Flavor1/",
-        "src/MercadoPago/Entities/Flavor3/",
+        "src/MercadoPago/Entities/",
         "src/MercadoPago/Entities/Shared/"
       ]
     }
