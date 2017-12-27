@@ -33,18 +33,18 @@ The SDK supports PHP 5 or major
 
   You have two types of credentials:
 
-    **For web-checkout:**
+  * **For web-checkout:**
     ```php
     MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN");      // On Production
     MercadoPago\SDK::setAccessToken("YOUR_TEST_ACCESS_TOKEN"); // On Sandbox
     ```
 
-    **For API or custom checkout:**
+  * **For API or custom checkout:**
     ```php
     MercadoPago\SDK::setClientId("YOUR_CLIENT_ID");
     MercadoPago\SDK::setClientSecret("YOUR_CLIENT_SECRET");
-  ```
-  
+    ```
+
 3. Use the resource objects.
 
   You can interact with all the resources available in the public API, to this each resource is represented by classes according to the following diagram:
