@@ -45,7 +45,7 @@ The SDK supports PHP 5 or major
     MercadoPago\SDK::setClientSecret("YOUR_CLIENT_SECRET");
     ```
 
-3. Use the resource objects.
+3. Using resource objects.
 
   You can interact with all the resources available in the public API, to this each resource is represented by classes according to the following diagram:
   
