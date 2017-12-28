@@ -14,7 +14,7 @@ The SDK supports PHP 5 or major
 #### Using Composer
 
 1. Download [Composer](https://getcomposer.org/download/) if not already installed
-2. Go to your project directory and Execute `composer require "mercadopago/dx-php"` on the command line.
+2. Go to your project directory and Execute `composer require "mercadopago/dx-php:dev-master"` on the command line.
 3. This how your directory structure would look like.
 
 ![screen shot 2017-12-27 at 7 07 47 pm](https://user-images.githubusercontent.com/864790/34394635-44f7745a-eb39-11e7-981d-77cf759cf05f.png)
