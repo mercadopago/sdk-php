@@ -339,9 +339,7 @@ abstract class Entity
      * @param $data
      */
     protected function _fillFromArray($entity, $data)
-    {
-      
-      
+    { 
       
       if ($data) {
       
