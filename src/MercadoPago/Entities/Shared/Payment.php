@@ -33,6 +33,10 @@ class Payment extends Entity
     /**
      * @Attribute()
      */
+    protected $binary_mode;
+    /**
+     * @Attribute()
+     */
     protected $external_reference;
     /**
      * @Attribute()
