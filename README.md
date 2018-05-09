@@ -33,13 +33,12 @@ The SDK supports PHP 5 or major
 
   You have two types of credentials:
 
-  * **For Web-checkout:**
+  * **For API or custom checkout:**
     ```php
     MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN");      // On Production
     MercadoPago\SDK::setAccessToken("YOUR_TEST_ACCESS_TOKEN"); // On Sandbox
     ```
-
-  * **For API or custom checkout:**
+  * **For Web-checkout:**
     ```php
     MercadoPago\SDK::setClientId("YOUR_CLIENT_ID");
     MercadoPago\SDK::setClientSecret("YOUR_CLIENT_SECRET");
