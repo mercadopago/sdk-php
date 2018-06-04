@@ -108,8 +108,11 @@ class Config
         parent::set($key, $value);
         if ($this->get('CLIENT_ID') != "" && $this->get('CLIENT_SECRET') != "" && empty($this->get('ACCESS_TOKEN'))) {
             $response = $this->getToken();
-            if (isset($response['access_token']) && isset($response['refresh_token'])) {
-                parent::set('ACCESS_TOKEN', $response['access_token']);
+            if (isset($response['access_token'])) {
+                parent::set('ACCESS_TOKEN', $response['access_token']); 
+            }
+            // Making refresh token optional
+            if (isset($response['refresh_token'])) { 
                 parent::set('REFRESH_TOKEN', $response['refresh_token']);
             }
         }
@@ -143,8 +146,8 @@ class Config
             $this->_restclient = new RestClient();
         }
         $data = ['grant_type'    => 'refresh_token',
-            'refresh_token'     => $this->get('REFRESH_TOKEN'),
-            'client_secret' => $this->get('ACCESS_TOKEN')];
+                'refresh_token'     => $this->get('REFRESH_TOKEN'),
+                'client_secret' => $this->get('ACCESS_TOKEN')];
         $this->_restclient->setHttpParam('address', $this->get('base_url'));
         $response = $this->_restclient->post("/oauth/token", ['json_data' => json_encode($data)]);
         if (isset($response['access_token']) && isset($response['refresh_token']) && isset($response['client_id']) && isset($response['client_secret'])) {
