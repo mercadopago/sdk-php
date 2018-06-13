@@ -346,7 +346,7 @@ abstract class Entity
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $className = 'MercadoPago\\' . $this->_camelize($key);
-                if (class_exists($className, false)) {
+                if (class_exists($className, true)) {
                     $entity->_setValue($key, new $className, false);
                     $entity->_fillFromArray($this->{$key}, $value);
                 } else {
