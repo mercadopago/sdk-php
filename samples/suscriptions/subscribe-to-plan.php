@@ -12,7 +12,7 @@
   
   $subscription->plan_id = $plan->id;
   
-  $subscription->payer = array("id": "customer_id");
+  $subscription->payer = array("id" => "customer_id");
   
   $subscription->save();
   

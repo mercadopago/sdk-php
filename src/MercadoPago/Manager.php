@@ -84,6 +84,7 @@ class Manager
                 $this->validateAttribute($entity, $key, ['required']);
             } 
         }
+
         $this->_setDefaultHeaders($configuration->query);
         $this->_setCustomHeaders($entity, $configuration->query);
         $this->_setIdempotencyHeader($configuration->query, $configuration, $method);
