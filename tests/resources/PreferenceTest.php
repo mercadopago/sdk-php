@@ -7,16 +7,18 @@
 class PreferenceTest extends \PHPUnit\Framework\TestCase
 {
 
-    private $last_preference = null;
+    private static $last_preference;
 
-    protected function setUp()
+    public static function setUpBeforeClass()
     {
         MercadoPago\SDK::setClientId($_ENV['CLIENT_ID']);
-        MercadoPago\SDK::setClientSecret($_ENV['CLIENT_SECRET']);
+        MercadoPago\SDK::setClientSecret($_ENV['CLIENT_SECRET']); 
+
     }
 
     public function testCreatePrefence()
     {
+
         $preference = new MercadoPago\Preference();
 
         # Building an item
@@ -27,17 +29,16 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
         $item->unit_price = 100;
 
         $preference->items = array($item);
-
         $preference->save();
 
-        $last_preference = $preference;
-
+        self::$last_preference = $preference;
+      
         $this->assertTrue($preference->sandbox_init_point != null);
     }
 
-    public function testFindPreferenceById(){
-        $preference = MercadoPago\Preference::find_by_id($this->$last_preference->id);
-        $this->assertEquals($preference->id, $this->$last_preference->id);
+    public function testFindPreferenceById(){  
+        $preference = MercadoPago\Preference::find_by_id(self::$last_preference->id);
+        $this->assertEquals($preference->id, self::$last_preference->id);
     }
 }
 ?>

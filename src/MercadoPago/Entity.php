@@ -77,17 +77,16 @@ abstract class Entity
      * @return mixed
      */
     public static function read($params = [])
-    {
-       
-      
+    { 
       
       $class = get_called_class();
       $entity = new $class();
 
       self::$_manager->setEntityUrl($entity, 'read', $params);
-      self::$_manager->setQueryParams($entity, $params); 
+      self::$_manager->setQueryParams($entity, $params);
       
       $response =  self::$_manager->execute($entity, 'get');
+ 
       
       if ($response['code'] == "200" || $response['code'] == "201") {   
         $entity->_fillFromArray($entity, $response['body']);
@@ -96,6 +95,7 @@ abstract class Entity
       $entity->_last = clone $entity;
       return $entity;
     }
+
     /**
      * @return mixed
      */
@@ -103,16 +103,27 @@ abstract class Entity
     {
       $class = get_called_class();
       
-      $entity = new $class();
+      $entities =  array();
+      $entityToQuery = new $class();
       
-      self::$_manager->setEntityUrl($entity, 'search');
-      self::$_manager->setQueryParams($entity, $filters);
-      $response = self::$_manager->execute($entity, 'get');
+      self::$_manager->setEntityUrl($entityToQuery, 'search');
+      self::$_manager->setQueryParams($entityToQuery, $filters);
+
+      $response = self::$_manager->execute($entityToQuery, 'get');
 
       if ($response['code'] == "200" || $response['code'] == "201") {
-          $entity->_fillFromArray($entity, $response['body']['results'][0]);
-      }   
-      return $entity;
+          $results = $response['body']['results'];
+
+          foreach ($results as $result) { 
+            
+            $entity = new $class();
+            $entity->_fillFromArray($entity, $result); 
+            array_push($entities, $entity);
+          }
+          
+      }
+      return $entities;
+
     }
     /**
      * @codeCoverageIgnore

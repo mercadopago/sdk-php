@@ -45,6 +45,10 @@ class SDK
       self::$_config->configure(['ACCESS_TOKEN' => $access_token]);
       
     }
+
+    public static function getAccessToken(){
+      self::$_config->get('ACCESS_TOKEN');
+    }
     
     /**
      * Set Access ClientId for SDK .
@@ -55,6 +59,10 @@ class SDK
       }
       self::$_config->configure(['CLIENT_ID' => $client_id]); 
     }
+
+    public static function getClientId(){
+      self::$_config->get('CLIENT_ID');
+    }
     
     /**
      * Set Access ClientSecret for SDK .
@@ -64,6 +72,21 @@ class SDK
         self::initialize();
       }
       self::$_config->configure(['CLIENT_SECRET' => $client_secret]); 
+    }
+
+    public static function getClientSecret(){
+      self::$_config->get('CLIENT_SECRET');
+    }
+
+    /**
+     * Set Access ClientSecret for SDK .
+     */
+    public static function setPublicKey($public_key){ 
+      self::$_config->configure(['PUBLIC_KEY' => $public_key]); 
+    }
+
+    public static function getPublicKey(){
+      self::$_config->get('PUBLIC_KEY');
     }
     
     public static function configure($data=[])
@@ -92,7 +115,7 @@ class SDK
     {
       if ($token = self::$_config->get('ACCESS_TOKEN')) {
         $uri = $uri . "?access_token=" . $token;
-      } 
+      }
       return self::$_restClient->get($uri, $options);
     }
     

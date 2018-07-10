@@ -104,7 +104,8 @@ class RestClient
      * @throws Exception
      */
     protected function exec($options)
-    {
+    {  
+
         $method = key($options);
         $requestPath = reset($options);
         $verb = self::$verbArray[$method];
@@ -113,6 +114,9 @@ class RestClient
         $url_query = $this->getArrayValue($options, 'url_query');
         $formData = $this->getArrayValue($options, 'form_data');
         $jsonData = $this->getArrayValue($options, 'json_data');
+
+        
+
         $defaultHttpParams = self::$defaultParams;
         $connectionParams = array_merge($defaultHttpParams, $this->customParams);
         $query = '';
@@ -163,7 +167,7 @@ class RestClient
         if ($jsonData) {
             $this->setData($connect, $jsonData, "application/json");
         }
-
+ 
         $apiResult = $connect->execute();
         $apiHttpCode = $connect->getInfo(CURLINFO_HTTP_CODE);
         if ($apiResult === false) {
