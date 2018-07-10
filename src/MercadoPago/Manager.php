@@ -78,9 +78,12 @@ class Manager
     public function execute($entity, $method = 'get')
     {
         $configuration = $this->_getEntityConfiguration($entity);
-        foreach ($configuration->attributes as $key => $attribute) {
-            $this->validateAttribute($entity, $key, ['required']);
+        if ($method != 'get'){
+            foreach ($configuration->attributes as $key => $attribute) {
+                $this->validateAttribute($entity, $key, ['required']);
+            }
         }
+
         $this->_setDefaultHeaders($configuration->query);
         $this->_setCustomHeaders($entity, $configuration->query);
         $this->_setIdempotencyHeader($configuration->query, $configuration, $method);
