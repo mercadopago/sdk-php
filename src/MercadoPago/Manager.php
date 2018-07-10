@@ -78,14 +78,18 @@ class Manager
     public function execute($entity, $method = 'get')
     {
         $configuration = $this->_getEntityConfiguration($entity);
-        foreach ($configuration->attributes as $key => $attribute) {
-            $this->validateAttribute($entity, $key, ['required']);
+
+        if ($method != 'get'){
+            foreach ($configuration->attributes as $key => $attribute) {
+                $this->validateAttribute($entity, $key, ['required']);
+            } 
         }
         $this->_setDefaultHeaders($configuration->query);
         $this->_setCustomHeaders($entity, $configuration->query);
         $this->_setIdempotencyHeader($configuration->query, $configuration, $method);
         $this->setQueryParams($entity);
-         
+        
+        
           
         return $this->_client->{$method}($configuration->url, $configuration->query);
     }
@@ -121,11 +125,15 @@ class Manager
      */
     public function setEntityUrl($entity, $ormMethod, $params = [])
     {
+
+
+
         $className = $this->_getEntityClassName($entity);
         if (!isset($this->_entityConfiguration[$className]->methods[$ormMethod])) {
             throw new \Exception('ORM method ' . $ormMethod . ' not available for entity:' . $className);
         }
         $url = $this->_entityConfiguration[$className]->methods[$ormMethod]['resource'];
+
         
         $matches = [];
         preg_match_all('/\\:\\w+/', $url, $matches);
