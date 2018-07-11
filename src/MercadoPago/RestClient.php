@@ -43,7 +43,11 @@ class RestClient
      */
     protected function setHeaders(Http\HttpRequest $connect, $customHeaders)
     {
-        $default_header = ['Content-Type' => 'application/json'];
+        $default_header = array(
+            'Content-Type' => 'application/json',
+            'User-Agent' => 'MercadoPago PHP SDK/1.1.2',
+            'x-product-id' => 'BC32A7RU643001OI3940'
+        );
         if ($customHeaders) {
             $default_header = array_merge($default_header, $customHeaders);
         }
