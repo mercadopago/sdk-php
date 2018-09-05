@@ -18,3 +18,5 @@ nbproject
 
 #Samples Vendor
 /samples/vendor
+
+.env
