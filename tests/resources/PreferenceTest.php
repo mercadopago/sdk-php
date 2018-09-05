@@ -11,6 +11,12 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
 
     public static function setUpBeforeClass()
     {
+
+        if (file_exists(__DIR__ . '/../../.env')) {
+            $dotenv = new Dotenv\Dotenv(__DIR__, '../../.env');
+            $dotenv->load();
+        }
+        
         MercadoPago\SDK::setClientId($_ENV['CLIENT_ID']);
         MercadoPago\SDK::setClientSecret($_ENV['CLIENT_SECRET']); 
 
