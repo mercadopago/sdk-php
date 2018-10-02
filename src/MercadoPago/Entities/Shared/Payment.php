@@ -179,7 +179,13 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $notification_url;
-    
-    
+    /**
+     * @Attribute()
+     */
+    protected $processing_mode;
+    /**
+     * @Attribute()
+     */
+    protected $merchant_account_id;
     
 }
