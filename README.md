@@ -1,7 +1,6 @@
 # Mercado Pago SDK for PHP
 
 [![Build Status](https://travis-ci.org/mercadopago/dx-php.png)](https://travis-ci.org/mercadopago/dx-php)
-[![Coverage Status](https://coveralls.io/repos/github/imasson/px-php/badge.svg?branch=feature-ci-configuration-restclient)](https://coveralls.io/github/imasson/px-php?branch=feature-ci-configuration-restclient)
 
 This library provides developers with a simple set of bindings to the Mercado Pago API.
 
