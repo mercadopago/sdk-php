@@ -176,8 +176,8 @@ class Payment extends Entity
      */
     protected $description;
     /**
-    * @Attribute()
-    */
+     * @Attribute()
+     */
     protected $notification_url;
     /** 
      * @Attribute()
