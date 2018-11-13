@@ -106,6 +106,9 @@ class Preference extends Entity
      * @Attribute(type = "string")
      */
     protected $sponsor_id;
-    
+    /**
+     * @Attribute(type = "array")
+     */
+    protected $processing_modes;
 
 }
