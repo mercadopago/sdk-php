@@ -110,5 +110,9 @@ class Preference extends Entity
      * @Attribute(type = "array")
      */
     protected $processing_modes;
+    /**
+     * @Attribute()
+     */
+    protected $binary_mode;
 
 }
