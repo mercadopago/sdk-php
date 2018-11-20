@@ -191,5 +191,8 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $merchant_account_id; 
-    
+    /**
+     * @Attribute()
+     */
+    protected $callback_url;
 }
