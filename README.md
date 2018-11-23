@@ -6,7 +6,7 @@ This library provides developers with a simple set of bindings to the Mercado Pa
 
 ### PHP Versions Supported:
 
-The SDK supports PHP 5 or major
+The SDK supports PHP 5.6 or major
 
 ### Installation 
 
