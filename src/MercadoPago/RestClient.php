@@ -109,7 +109,6 @@ class RestClient
      */
     protected function exec($options)
     {  
-
         $method = key($options);
         $requestPath = reset($options);
         $verb = self::$verbArray[$method];
@@ -119,14 +118,14 @@ class RestClient
         $formData = $this->getArrayValue($options, 'form_data');
         $jsonData = $this->getArrayValue($options, 'json_data');
 
-        
-
         $defaultHttpParams = self::$defaultParams;
         $connectionParams = array_merge($defaultHttpParams, $this->customParams);
         $query = '';
+
         if ($url_query > 0) {
             $query = http_build_query($url_query);
         }
+        
         $address = $this->getArrayValue($connectionParams, 'address');
         $uri = $address . $requestPath;
         if ($query != '') {
@@ -136,6 +135,13 @@ class RestClient
                 $uri .= '?' . $query;
             }
         }
+
+        // echo "\n";
+        // echo $method;
+        // echo $uri;
+        // echo json_encode($jsonData);
+        // echo "\n";
+
         $connect = $this->getHttpRequest();
         $connect->setOption(CURLOPT_URL, $uri);
         if ($userAgent = $this->getArrayValue($connectionParams, 'user_agent')) {
@@ -143,6 +149,7 @@ class RestClient
         }
         $connect->setOption(CURLOPT_RETURNTRANSFER, true);
         $connect->setOption(CURLOPT_CUSTOMREQUEST, $verb);
+        
         $this->setHeaders($connect, $headers);
         $proxyAddress = $this->getArrayValue($connectionParams, 'proxy_addr');
         $proxyPort = $this->getArrayValue($connectionParams, 'proxy_port');

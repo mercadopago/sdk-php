@@ -1,16 +1,14 @@
 <?php 
 
- 
+use PHPUnit\Framework\TestCase;
 
 /**
  * EntityTest Class Doc Comment
  *
  * @package MercadoPago
  */
-class PaymentTest extends \PHPUnit\Framework\TestCase
+class PaymentTest extends TestCase
 {
-
-    private static $last_payment;
 
 
     public static function setUpBeforeClass()
@@ -23,43 +21,44 @@ class PaymentTest extends \PHPUnit\Framework\TestCase
         MercadoPago\SDK::setAccessToken($_ENV['ACCESS_TOKEN']);
     }
 
-    public function testCreatePrefence()
-    {
     
-         
+
+    public function testCreatePendingPayment()
+    {
+
         $payment = new MercadoPago\Payment();
         $payment->transaction_amount = 141;
-        $payment->token = $this->SingleUseCardToken('approved');
+        $payment->token = $this->SingleUseCardToken('in_process');
         $payment->description = "Ergonomic Silk Shirt";
         $payment->installments = 1;
         $payment->payment_method_id = "visa";
         $payment->payer = array(
             "email" => "larue.nienow@hotmail.com"
         );
-        $payment->external_reference = uniqid(); 
+        $payment->external_reference = "reftest";
+        $payment->save();
 
-        $payment->save(); 
-
-        self::$last_payment = $payment;
-        
+        $this->assertEquals($payment->status, 'in_process'); 
  
-
-        $this->assertEquals($payment->status, 'approved'); 
+        return $payment;
 
     }
 
-    public function testFindPaymentById() { 
- 
-
-        $payment = MercadoPago\Payment::find_by_id(self::$last_payment->id); 
-
-        $this->assertEquals($payment->id, self::$last_payment->id);
+    /**
+     * @depends testCreatePendingPayment
+     */
+    public function testFindPaymentById(object $payment_created_previously) {
+        $payment = MercadoPago\Payment::find_by_id($payment_created_previously->id); 
+        $this->assertEquals($payment->id, $payment_created_previously->id);
     }
 
-    public function testPaymentsSearch() {
+    /**
+     * @depends testCreatePendingPayment
+     */
+    public function testPaymentsSearch(object $payment_created_previously) {
  
         $filters = array(
-            "external_reference" => self::$last_payment->$external_reference
+            "external_reference" => $payment_created_previously->external_reference
         );
 
         $payments = MercadoPago\Payment::search($filters); 
@@ -67,8 +66,20 @@ class PaymentTest extends \PHPUnit\Framework\TestCase
         $payment = end($payments);
 
         $this->assertTrue(count($payments) > 0);
-        $this->assertEquals($payment->external_reference, self::$last_payment->external_reference);
+        $this->assertEquals($payment->external_reference, $payment_created_previously->external_reference);
 
+    }
+    
+    /**
+     * @depends testCreatePendingPayment 
+     */
+    public function testCancelPayment(object $payment_created_previously) {
+        $payment_created_previously->status = "cancelled";
+        $payment_created_previously->update();
+        
+        $payment = MercadoPago\Payment::find_by_id($payment_created_previously->id);
+        $this->assertEquals("cancelled", $payment->status);
+        
     }
 
 
@@ -76,7 +87,7 @@ class PaymentTest extends \PHPUnit\Framework\TestCase
 
         $cards_name_for_status = array(
             "approved" => "APRO",
-            "pending" => "CONT",
+            "in_process" => "CONT",
             "call_for_auth" => "CALL",
             "not_founds" => "FUND",
             "expirated" => "EXPI",
@@ -107,7 +118,7 @@ class PaymentTest extends \PHPUnit\Framework\TestCase
                 )
             )
         );
-    
+
         $response = MercadoPago\SDK::post('/v1/card_tokens', $payload);
 
         return $response['body']['id'];

@@ -83,7 +83,8 @@ abstract class Entity
       $entity = new $class();
 
       self::$_manager->setEntityUrl($entity, 'read', $params);
-      self::$_manager->setQueryParams($entity, $params);
+      self::$_manager->cleanQueryParams($entity);
+      self::$_manager->cleanEntityDeltaQueryJsonData($entity);
       
       $response =  self::$_manager->execute($entity, 'get');
  
@@ -101,6 +102,7 @@ abstract class Entity
      */
     public static function search($filters)
     {
+    
       $class = get_called_class();
       
       $entities =  array();
@@ -147,11 +149,17 @@ abstract class Entity
      */
     public function update($params = [])
     {
+
+        echo "here";
+
         self::$_manager->setEntityUrl($this, 'update', $params);
+        echo "here1";
         self::$_manager->setEntityDeltaQueryJsonData($this); 
+        echo "here2";
         
 
         $response =  self::$_manager->execute($this, 'put');
+        echo "here3";
 
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
@@ -196,8 +204,6 @@ abstract class Entity
      */
     public function save()
     { 
-      
-      
       self::$_manager->setEntityUrl($this, 'create');
       self::$_manager->setEntityQueryJsonData($this);
       
@@ -205,7 +211,10 @@ abstract class Entity
       if ($response['code'] == "200" || $response['code'] == "201") {
           $this->_fillFromArray($this, $response['body']);
       }
-      return $response;
+
+      $this->_last = clone $this;
+      
+      return $this;
     }
     /**
      * @param $name
@@ -235,10 +244,19 @@ abstract class Entity
      */
     public function toArray($attributes = null)
     {
+        $result = null;
+
         if (is_null($attributes)) {
-            return get_object_vars($this);
+            $result = get_object_vars($this);
+        } else {
+            $result = array_intersect_key(get_object_vars($this), $attributes);
         }
-        return array_intersect_key(get_object_vars($this), $attributes);
+        
+        if (in_array('_last', $result)) {
+            unset($result['_last']);
+        }
+        return $result;
+    
     }
     /**
      * @param $property
