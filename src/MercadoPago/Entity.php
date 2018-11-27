@@ -353,8 +353,13 @@ abstract class Entity
                 case 'date':
                     if (empty($value)) {
                         return $value;
+                    };
+                    if (is_string($value)) {
+                        return date("Y-m-d\TH:i:s.vP", strtotime($value));
+                    } else {
+                        return $value->format('Y-m-d\TH:i:s.vP');
                     }
-                    return date(\DateTime::ISO8601, strtotime($value));
+                    
             }
         } catch (\Exception $e) {
             throw new \Exception('Wrong type ' . gettype($value) . '. Cannot convert ' . $type . ' for property ' . $property);

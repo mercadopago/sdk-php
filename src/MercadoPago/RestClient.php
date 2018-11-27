@@ -117,6 +117,7 @@ class RestClient
         $url_query = $this->getArrayValue($options, 'url_query');
         $formData = $this->getArrayValue($options, 'form_data');
         $jsonData = $this->getArrayValue($options, 'json_data');
+        
 
         $defaultHttpParams = self::$defaultParams;
         $connectionParams = array_merge($defaultHttpParams, $this->customParams);
@@ -139,7 +140,7 @@ class RestClient
         // echo "\n";
         // echo $method;
         // echo $uri;
-        // echo json_encode($jsonData);
+        //echo json_encode($jsonData);
         // echo "\n";
 
         $connect = $this->getHttpRequest();

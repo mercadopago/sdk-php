@@ -35,6 +35,7 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
         $item->unit_price = 100;
 
         $preference->items = array($item);
+        $preference->expiration_date_to = new DateTime('tomorrow');
         $preference->save();
 
         self::$last_preference = $preference;
