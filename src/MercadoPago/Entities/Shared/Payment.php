@@ -19,9 +19,21 @@ class Payment extends Entity
      */
     protected $id;
     /**
+     * @Attribute()
+     */
+    protected $acquirer;
+    /**
+     * @Attribute()
+     */
+    protected $acquirer_reconciliation;
+    /**
      * @Attribute(idempotency = true)
      */
     protected $site_id;
+    /**
+     * @Attribute()
+     */
+    protected $sponsor_id;
     /**
      * @Attribute()
      */
@@ -30,6 +42,10 @@ class Payment extends Entity
      * @Attribute(idempotency = true)
      */
     protected $order_id;
+    /**
+     * @Attribute()
+     */
+    protected $order;
     /**
      * @Attribute()
      */
@@ -47,6 +63,14 @@ class Payment extends Entity
      */
     protected $status_detail;
     /**
+     * @Attribute()
+     */
+    protected $store_id;
+    /**
+     * @Attribute()
+     */
+    protected $taxes_amount;
+    /**
      * @Attribute(type = "string")
      */
     protected $payment_type;
@@ -61,6 +85,22 @@ class Payment extends Entity
     /**
      * @Attribute()
      */
+    protected $live_mode;
+    /**
+     * @Attribute()
+     */
+    protected $date_last_updated;
+    /**
+     * @Attribute()
+     */
+    protected $date_of_expiration;
+    /**
+     * @Attribute()
+     */
+    protected $deduction_schema;
+    /**
+     * @Attribute()
+     */
     protected $date_approved;
     /**
      * @Attribute()
@@ -69,11 +109,19 @@ class Payment extends Entity
     /**
      * @Attribute()
      */
+    protected $money_release_schema;
+    /**
+     * @Attribute()
+     */
     protected $currency_id;
     /**
      * @Attribute(type = "float")
      */
     protected $transaction_amount;
+    /**
+     * @Attribute(type = "float")
+     */
+    protected $transaction_amount_refunded;
     /**
      * @Attribute()
      */
@@ -113,8 +161,24 @@ class Payment extends Entity
     /**
      * @Attribute()
      */
+    protected $collector_id;
+    /**
+     * @Attribute()
+     */
+    protected $counter_currency;
+    /**
+     * @Attribute()
+     */
     protected $payment_method_id;
     // For flavor 1
+    /**
+     * @Attribute()
+     */
+    protected $payment_type_id;
+    /**
+     * @Attribute()
+     */
+    protected $pos_id;
     /**
      * @Attribute()
      */
@@ -134,11 +198,19 @@ class Payment extends Entity
     /**
      * @Attribute()
      */
+    protected $authorization_code;
+    /**
+     * @Attribute()
+     */
     protected $capture;
     /**
      * @Attribute()
      */
     protected $captured;
+    /**
+     * @Attribute()
+     */
+    protected $card;
     /**
      * @Attribute()
      */
@@ -151,6 +223,10 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $refunds;
+    /**
+     * @Attribute()
+     */
+    protected $shipping_amount;
     /**
      * @Attribute()
      */
@@ -191,6 +267,14 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $merchant_account_id; 
+    /**
+     * @Attribute()
+     */
+    protected $merchant_number; 
+    /**
+     * @Attribute()
+     */
+    protected $metadata; 
     /**
      * @Attribute()
      */
