@@ -28,7 +28,7 @@ class PreApprovalTest extends \PHPUnit\Framework\TestCase
     {
         $preapproval_data = new MercadoPago\Preapproval();
         $preapproval_data->payer_email = "dummy@mail.com";
-        $preapproval_data->back_url = "http://google.com";
+        $preapproval_data->back_url = "https://google.com";
         $preapproval_data->reason = "Reason PreApproval";
         $preapproval_data->external_reference =  "VIP-0000";
         $preapproval_data->auto_recurring = array( 
@@ -41,6 +41,7 @@ class PreApprovalTest extends \PHPUnit\Framework\TestCase
         $preapproval_data->save();
 
         $this->assertTrue($preapproval_data->sandbox_init_point != null);
+
     }
 
 }

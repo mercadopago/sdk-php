@@ -116,8 +116,7 @@ abstract class Entity
       if ($response['code'] == "200" || $response['code'] == "201") {
           $results = $response['body']['results'];
 
-          foreach ($results as $result) { 
-            
+          foreach ($results as $result) {
             $entity = new $class();
             $entity->_fillFromArray($entity, $result); 
             array_push($entities, $entity);
