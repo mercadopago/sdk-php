@@ -275,7 +275,7 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
         $config->set('CLIENT_ID', '446950613712741');
         $config->set('CLIENT_SECRET', '0WX05P8jtYqCtiQs6TH1d9SyOJ04nhEv');
         
-        $this->assertEquals('APP_USR-6295877106812064-042916-5ab7e29152843f61b4c218a551227728__LC_LB__-202809963', $config->get('ACCESS_TOKEN'));
+        $this->assertEquals('ACCESS_TOKEN', $config->get('ACCESS_TOKEN'));
     }
 
     /**
