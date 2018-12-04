@@ -149,16 +149,10 @@ abstract class Entity
     public function update($params = [])
     {
 
-        echo "here";
-
         self::$_manager->setEntityUrl($this, 'update', $params);
-        echo "here1";
         self::$_manager->setEntityDeltaQueryJsonData($this); 
-        echo "here2";
-        
 
         $response =  self::$_manager->execute($this, 'put');
-        echo "here3";
 
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
