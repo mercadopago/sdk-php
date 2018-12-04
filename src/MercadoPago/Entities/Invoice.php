@@ -10,7 +10,7 @@ use MercadoPago\Annotation\Attribute;
  * @RequestParam(param="access_token")
  */
 
-class Inovice extends Entity
+class Invoice extends Entity
 {
   
   /**
