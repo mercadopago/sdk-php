@@ -354,9 +354,9 @@ abstract class Entity
                         return $value;
                     };
                     if (is_string($value)) {
-                        return date("Y-m-d\TH:i:s.vP", strtotime($value));
+                        return date("Y-m-d\TH:i:s.000P", strtotime($value));
                     } else {
-                        return $value->format('Y-m-d\TH:i:s.vP');
+                        return $value->format('Y-m-d\TH:i:s.000P');
                     }
                     
             }
