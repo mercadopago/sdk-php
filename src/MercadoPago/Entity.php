@@ -109,6 +109,7 @@ abstract class Entity
       $entityToQuery = new $class();
       
       self::$_manager->setEntityUrl($entityToQuery, 'search');
+      self::$_manager->cleanQueryParams($entityToQuery);
       self::$_manager->setQueryParams($entityToQuery, $filters);
 
       $response = self::$_manager->execute($entityToQuery, 'get');
