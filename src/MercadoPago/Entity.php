@@ -220,6 +220,15 @@ abstract class Entity
     }
     /**
      * @param $name
+     *
+     * @return mixed
+     */
+    public function __isset($name)
+    {
+        return isset($this->{$name});
+    }
+    /**
+     * @param $name
      * @param $value
      *
      * @return mixed
