@@ -6,7 +6,7 @@ class FakeApiHub
         '/oauth/token'        => 'mp_connect.json',
         '/v1/payment_methods' => 'payment_methods.json',
         '/v1/payments' => 'payment.json',
-        '/dummies' => 'mp_connect.json',
+        '/dummies' => 'dummies.json',
         '/v1/dummies/search' => 'customer_search.json',
         '/dummy/:id' => 'dummy.json'
     ];
