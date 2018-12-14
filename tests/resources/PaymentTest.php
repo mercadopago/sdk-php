@@ -10,7 +10,6 @@ use PHPUnit\Framework\TestCase;
 class PaymentTest extends TestCase
 {
 
-
     public static function setUpBeforeClass()
     {
         if (file_exists(__DIR__ . '/../../.env')) {
@@ -18,7 +17,7 @@ class PaymentTest extends TestCase
             $dotenv->load();
         }
         
-        MercadoPago\SDK::setAccessToken($_ENV['ACCESS_TOKEN']);
+        MercadoPago\SDK::setAccessToken(getenv('ACCESS_TOKEN'));
     }
 
     

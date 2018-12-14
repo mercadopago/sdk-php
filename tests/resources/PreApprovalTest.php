@@ -20,8 +20,8 @@ class PreApprovalTest extends \PHPUnit\Framework\TestCase
             $dotenv->load();
         }
 
-        MercadoPago\SDK::setClientId($_ENV['CLIENT_ID']);
-        MercadoPago\SDK::setClientSecret($_ENV['CLIENT_SECRET']); 
+        MercadoPago\SDK::setClientId(getenv('CLIENT_ID'));
+        MercadoPago\SDK::setClientSecret(getenv('CLIENT_SECRET')); 
     }
 
     public function testCreatePrefence()
