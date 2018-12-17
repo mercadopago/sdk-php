@@ -47,7 +47,11 @@ class SDK
     }
 
     public static function getAccessToken(){
-      self::$_config->get('ACCESS_TOKEN');
+      return self::$_config->get('ACCESS_TOKEN');
+    }
+
+    public static function cleanCredentials(){
+      self::$_config->clean();
     }
     
     /**
@@ -61,7 +65,7 @@ class SDK
     }
 
     public static function getClientId(){
-      self::$_config->get('CLIENT_ID');
+      return self::$_config->get('CLIENT_ID');
     }
     
     /**
@@ -75,7 +79,7 @@ class SDK
     }
 
     public static function getClientSecret(){
-      self::$_config->get('CLIENT_SECRET');
+      return self::$_config->get('CLIENT_SECRET');
     }
 
     /**
@@ -86,7 +90,7 @@ class SDK
     }
 
     public static function getPublicKey(){
-      self::$_config->get('PUBLIC_KEY');
+      return self::$_config->get('PUBLIC_KEY');
     }
     
     public static function configure($data=[])
