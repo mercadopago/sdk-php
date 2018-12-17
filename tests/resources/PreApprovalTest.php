@@ -13,7 +13,8 @@ class PreApprovalTest extends \PHPUnit\Framework\TestCase
     private static $last_preapproval;
 
     public static function setUpBeforeClass()
-    {
+    {   
+        MercadoPago\SDK::cleanCredentials();
         
         if (file_exists(__DIR__ . '/../../.env')) {
             $dotenv = new Dotenv\Dotenv(__DIR__, '../../.env');

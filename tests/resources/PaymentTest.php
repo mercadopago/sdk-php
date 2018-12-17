@@ -12,6 +12,8 @@ class PaymentTest extends TestCase
 
     public static function setUpBeforeClass()
     {
+        MercadoPago\SDK::cleanCredentials();
+        
         if (file_exists(__DIR__ . '/../../.env')) {
             $dotenv = new Dotenv\Dotenv(__DIR__, '../../.env');
             $dotenv->load();

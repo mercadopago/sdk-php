@@ -14,14 +14,13 @@ class ConfigTest extends TestCase
 
     public static function setUpBeforeClass()
     {
+
+        MercadoPago\SDK::cleanCredentials();
+
         if (file_exists(__DIR__ . '/../.env')) {
             $dotenv = new Dotenv\Dotenv(__DIR__, '/../.env');
             $dotenv->load();
         }
-
-        $sdk = new MercadoPago\SDK();
-
-        //print_r(get_class(MercadoPago\SDK));
 
         MercadoPago\SDK::setClientId(getenv('CLIENT_ID'));
         MercadoPago\SDK::setClientSecret(getenv('CLIENT_SECRET')); 
