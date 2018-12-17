@@ -198,17 +198,19 @@ abstract class Entity
      */
     public function save()
     { 
-      self::$_manager->setEntityUrl($this, 'create');
-      self::$_manager->setEntityQueryJsonData($this);
-      
-      $response = self::$_manager->execute($this, 'post');
-      if ($response['code'] == "200" || $response['code'] == "201") {
-          $this->_fillFromArray($this, $response['body']);
-      }
+        self::$_manager->setEntityUrl($this, 'create');
+        self::$_manager->setEntityQueryJsonData($this);
+        
+        $response = self::$_manager->execute($this, 'post');
+         
+        
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $this->_fillFromArray($this, $response['body']);
+        }
 
-      $this->_last = clone $this;
-      
-      return $this;
+        $this->_last = clone $this;
+        
+        return $this;
     }
     /**
      * @param $name
@@ -245,19 +247,42 @@ abstract class Entity
      *
      * @return array
      */
+    public function getAttributes() {
+        return get_object_vars($this);
+    }
+     /**
+     * @param null $attributes
+     *
+     * @return array
+     */
     public function toArray($attributes = null)
     {
         $result = null;
+
+        $excluded_attributes = self::$_manager->getExcludedAttributes($this);
 
         if (is_null($attributes)) {
             $result = get_object_vars($this);
         } else {
             $result = array_intersect_key(get_object_vars($this), $attributes);
         }
+
         
+
+        foreach ($excluded_attributes as $excluded_attribute) { 
+            unset($result[$excluded_attribute]);
+        }
+
         if (in_array('_last', $result)) {
             unset($result['_last']);
         }
+        
+        foreach ($result as $key => $value) { 
+            if (empty($value)) { 
+                unset($result[$key]);
+            }
+        }
+
         return $result;
     
     }
