@@ -17,6 +17,7 @@ class Attribute extends Annotation
      * @var
      */
     public $required = false;
+    public $serialize = true ;
     public $readOnly;
     public $primaryKey;
     public $idempotency;

@@ -67,11 +67,13 @@ class RestClient
      */
     protected function setData(Http\HttpRequest $connect, $data, $content_type = '')
     {
+        
         if ($content_type == "application/json") {
+                
             if (gettype($data) == "string") {
                 json_decode($data, true);
-            } else {
-                $data = json_encode($data);
+            } else { 
+                $data = json_encode($data); 
             }
 
             if (function_exists('json_last_error')) {
@@ -80,9 +82,15 @@ class RestClient
                     throw new Exception("JSON Error [{$json_error}] - Data: {$data}");
                 }
             }
+ 
+            
+        } 
+        if ($data != "[]") {
+            $connect->setOption(CURLOPT_POSTFIELDS, $data);
+        } else {
+            $connect->setOption(CURLOPT_POSTFIELDS, "");
         }
-
-        $connect->setOption(CURLOPT_POSTFIELDS, $data);
+        
     }
 
     /**
@@ -137,11 +145,6 @@ class RestClient
             }
         }
 
-        // echo "\n";
-        // echo $method;
-        // echo $uri;
-        //echo json_encode($jsonData);
-        // echo "\n";
 
         $connect = $this->getHttpRequest();
         $connect->setOption(CURLOPT_URL, $uri);
@@ -182,6 +185,7 @@ class RestClient
  
         $apiResult = $connect->execute();
         $apiHttpCode = $connect->getInfo(CURLINFO_HTTP_CODE);
+        
         if ($apiResult === false) {
             throw new Exception ($connect->error());
         }

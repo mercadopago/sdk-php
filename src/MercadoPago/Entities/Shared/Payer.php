@@ -12,13 +12,25 @@ use MercadoPago\Annotation\DenyDynamicAttribute;
 class Payer extends Entity
 {
     /**
-     * @Attribute(type = "string")
+     * @Attribute()
      */
-    protected $name;
+    protected $id;
     /**
      * @Attribute(type = "string")
      */
-    protected $surname;
+    protected $entity_type;
+    /**
+     * @Attribute(type = "string")
+     */
+    protected $type;
+    /**
+     * @Attribute(type = "string")
+     */
+    protected $first_name;
+    /**
+     * @Attribute(type = "string")
+     */
+    protected $last_name;
     /**
      * @Attribute(type = "string")
      */

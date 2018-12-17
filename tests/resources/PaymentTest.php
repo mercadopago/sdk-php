@@ -22,6 +22,26 @@ class PaymentTest extends TestCase
         MercadoPago\SDK::setAccessToken(getenv('ACCESS_TOKEN'));
     }
 
+    public function testCreateApprobedPayment()
+    {
+
+        $payment = new MercadoPago\Payment();
+        $payment->transaction_amount = 141;
+        $payment->token = $this->SingleUseCardToken('approved');
+        $payment->description = "Ergonomic Silk Shirt";
+        $payment->installments = 1;
+        $payment->payment_method_id = "visa";
+        $payment->payer = array(
+            "email" => "larue.nienow@hotmail.com"
+        );
+        $payment->external_reference = "reftest";
+        $payment->save();
+
+        $this->assertEquals($payment->status, 'approved'); 
+ 
+        return $payment;
+
+    }
     
 
     public function testCreatePendingPayment()
@@ -63,7 +83,6 @@ class PaymentTest extends TestCase
         );
 
         $payments = MercadoPago\Payment::search($filters); 
-
         $payment = end($payments);
 
         $this->assertTrue(count($payments) > 0);
@@ -80,6 +99,23 @@ class PaymentTest extends TestCase
         
         $payment = MercadoPago\Payment::find_by_id($payment_created_previously->id);
         $this->assertEquals("cancelled", $payment->status);
+        
+    }
+
+    /**
+     * @depends testCreateApprobedPayment 
+     */
+    public function testRefundPayment(object $payment_created_previously) {
+
+        $id = $payment_created_previously->id;
+        
+        $refund = new MercadoPago\Refund();
+        $refund->payment_id = $id;
+        $refund->save();
+
+        $payment = MercadoPago\Payment::find_by_id($id);
+        
+        $this->assertEquals("refunded", $payment->status);
         
     }
 
