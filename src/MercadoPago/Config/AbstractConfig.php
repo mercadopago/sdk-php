@@ -36,6 +36,14 @@ abstract class AbstractConfig
         return [];
     }
 
+    public function clean()
+    {
+        return $this->data = array(
+            'base_url'      => 'https://api.mercadopago.com',
+        );
+    }
+
+
     /**
      * @param      $key
      * @param null $default
@@ -44,6 +52,7 @@ abstract class AbstractConfig
      */
     public function get($key, $default = null)
     {
+        
         if ($this->has($key)) {
             return $this->data[$key];
         }
