@@ -109,6 +109,7 @@ abstract class Entity
       $entityToQuery = new $class();
       
       self::$_manager->setEntityUrl($entityToQuery, 'search');
+      self::$_manager->cleanQueryParams($entityToQuery);
       self::$_manager->setQueryParams($entityToQuery, $filters);
 
       $response = self::$_manager->execute($entityToQuery, 'get');
@@ -219,6 +220,15 @@ abstract class Entity
     public function __get($name)
     {
         return $this->{$name};
+    }
+    /**
+     * @param $name
+     *
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return isset($this->{$name});
     }
     /**
      * @param $name
