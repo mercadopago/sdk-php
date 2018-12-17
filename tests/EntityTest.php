@@ -38,7 +38,6 @@ class EntityTest extends \PHPUnit\Framework\TestCase
         $this->_entity->other = 'other';
         $this->_entity->email = 'other@test.com';
         $expectedValues = [
-            "id"                 => null,
             "title"              => "Title",
             "desc"               => "Description",
             "price"              => 100.5,
@@ -46,9 +45,7 @@ class EntityTest extends \PHPUnit\Framework\TestCase
             "registered_at"      => "2015-02-14T00:00:00.000+00:00",
             "object"             => $object,
             "other"              => 'other',
-            "readOnlyAttribute"  => null,
-            "email"              => 'other@test.com',
-            "maxLengthAttribute" => null
+            "email"              => 'other@test.com'
         ];
  
         $this->assertEquals($expectedValues, $this->_entity->toArray());
