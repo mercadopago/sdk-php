@@ -96,6 +96,8 @@ class PaymentTest extends TestCase
     public function testCancelPayment(MercadoPago\Payment $payment_created_previously) {
         $payment_created_previously->status = "cancelled";
         $payment_created_previously->update();
+
+        sleep(10);
         
         $payment = MercadoPago\Payment::find_by_id($payment_created_previously->id);
         $this->assertEquals("cancelled", $payment->status);
@@ -112,6 +114,8 @@ class PaymentTest extends TestCase
         $refund = new MercadoPago\Refund();
         $refund->payment_id = $id;
         $refund->save();
+
+        sleep(10);
 
         $payment = MercadoPago\Payment::find_by_id($id);
         
