@@ -273,9 +273,9 @@ abstract class Entity
             $result = array_intersect_key(get_object_vars($this), $attributes);
         }
 
-        //if (in_array('_last', $result)) {
+        if (in_array('_last', $result)) {
             unset($result['_last']);
-        //}
+        }
         return $result;
     
     }
