@@ -89,9 +89,10 @@ class Manager
         $this->_setCustomHeaders($entity, $configuration->query);
         //$this->_setIdempotencyHeader($configuration->query, $configuration, $method);
         $this->setQueryParams($entity);
+
         
         
-          
+        
         return $this->_client->{$method}($configuration->url, $configuration->query);
     }
     public function validateAttribute($entity, $attribute, array $properties, $value = null)
@@ -137,11 +138,14 @@ class Manager
         
         foreach ($matches[0] as $match) {
           $key = substr($match, 1);
-          if (array_key_exists($key, $params)) {
-              $url = str_replace($match, $params[$key], $url);
-          } else {
-              $url = str_replace($match, $entity->{$key}, $url);
-          }
+
+            if (array_key_exists($key, $params)) {
+                $url = str_replace($match, $params[$key], $url);
+            } elseif (!empty($entity->$key)) {
+                $url = str_replace($match, $entity->$key, $url);
+            } else {
+                $url = str_replace($match, $entity->{$key}, $url);
+            }
         }
         $this->_entityConfiguration[$className]->url = $url;
     }
@@ -167,6 +171,34 @@ class Manager
             $className = $entity;
         }
         return $className;
+    }
+    /**
+     * @param $entity
+     */
+    public function getExcludedAttributes($entity){
+
+        $className = $this->_getEntityClassName($entity);
+        $configuration = $this->_getEntityConfiguration($entity);
+        
+        $excluded_attributes = array();
+        $attributes = $entity->getAttributes();
+
+        // if ($className == "MercadoPago\Refund") {
+        //     print_r($configuration->attributes);
+        // }
+
+        foreach ($attributes as $key => $val) {
+
+            if (array_key_exists($key, $configuration->attributes)){
+                $attribute_conf = $configuration->attributes[$key];
+
+                if ($attribute_conf['serialize'] == False) {
+                    // Do nothing
+                    array_push($excluded_attributes, $key); 
+                }
+            }
+        }
+        return $excluded_attributes;
     }
     /**
      * @param $entity
@@ -224,6 +256,8 @@ class Manager
     {
         $configuration = $this->_getEntityConfiguration($entity);
         $params = [];
+
+        
         
         if (!isset($configuration->query) || !isset($configuration->query['url_query'])) {
             $configuration->query['url_query'] = $params;
@@ -245,7 +279,6 @@ class Manager
      */
     protected function _attributesToJson($entity, &$result)
     {
-      $specialAttributes = array("_last");
       if (is_array($entity)) {             
           $attributes = array_filter($entity); 
       } else { 
