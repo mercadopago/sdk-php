@@ -10,15 +10,16 @@ use PHPUnit\Framework\TestCase;
 class PaymentTest extends TestCase
 {
 
-
     public static function setUpBeforeClass()
     {
+        MercadoPago\SDK::cleanCredentials();
+        
         if (file_exists(__DIR__ . '/../../.env')) {
             $dotenv = new Dotenv\Dotenv(__DIR__, '../../.env');
             $dotenv->load();
         }
         
-        MercadoPago\SDK::setAccessToken($_ENV['ACCESS_TOKEN']);
+        MercadoPago\SDK::setAccessToken(getenv('ACCESS_TOKEN'));
     }
 
     public function testCreateApprobedPayment()
@@ -67,7 +68,7 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreatePendingPayment
      */
-    public function testFindPaymentById(object $payment_created_previously) {
+    public function testFindPaymentById(MercadoPago\Payment $payment_created_previously) {
         $payment = MercadoPago\Payment::find_by_id($payment_created_previously->id); 
         $this->assertEquals($payment->id, $payment_created_previously->id);
     }
@@ -75,7 +76,7 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreatePendingPayment
      */
-    public function testPaymentsSearch(object $payment_created_previously) {
+    public function testPaymentsSearch(MercadoPago\Payment $payment_created_previously) {
  
         $filters = array(
             "external_reference" => $payment_created_previously->external_reference
@@ -92,9 +93,11 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreatePendingPayment 
      */
-    public function testCancelPayment(object $payment_created_previously) {
+    public function testCancelPayment(MercadoPago\Payment $payment_created_previously) {
         $payment_created_previously->status = "cancelled";
         $payment_created_previously->update();
+
+        sleep(10);
         
         $payment = MercadoPago\Payment::find_by_id($payment_created_previously->id);
         $this->assertEquals("cancelled", $payment->status);
@@ -104,13 +107,15 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreateApprobedPayment 
      */
-    public function testRefundPayment(object $payment_created_previously) {
+    public function testRefundPayment(MercadoPago\Payment $payment_created_previously) {
 
         $id = $payment_created_previously->id;
         
         $refund = new MercadoPago\Refund();
         $refund->payment_id = $id;
         $refund->save();
+
+        sleep(10);
 
         $payment = MercadoPago\Payment::find_by_id($id);
         

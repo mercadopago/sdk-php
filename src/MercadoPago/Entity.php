@@ -100,7 +100,35 @@ abstract class Entity
     /**
      * @return mixed
      */
-    public static function search($filters)
+    public static function all($params = [])
+    { 
+        
+        $class = get_called_class();
+        $entity = new $class();
+        $entities =  array();
+
+        self::$_manager->setEntityUrl($entity, 'list', $params);
+        self::$_manager->cleanQueryParams($entity); 
+      
+        $response = self::$_manager->execute($entity, 'get');
+      
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $results = $response['body']['results'];
+
+            foreach ($results as $result) {
+                $entity = new $class();
+                $entity->_fillFromArray($entity, $result); 
+                array_push($entities, $entity);
+            }
+            
+        }
+        return $entities; 
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function search($filters = [])
     {
     
       $class = get_called_class();
@@ -265,9 +293,7 @@ abstract class Entity
             $result = get_object_vars($this);
         } else {
             $result = array_intersect_key(get_object_vars($this), $attributes);
-        }
-
-        
+        }        
 
         foreach ($excluded_attributes as $excluded_attribute) { 
             unset($result[$excluded_attribute]);
