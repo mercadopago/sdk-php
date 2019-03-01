@@ -1,5 +1,9 @@
 <?php
 namespace MercadoPago;
+
+
+
+use Exception;
 /**
  * Class Entity
  *
@@ -14,6 +18,7 @@ abstract class Entity
     protected static $_custom_headers = array();
     protected static $_manager;
     protected $_last;
+    protected $_errors;
     /**
      * Entity constructor.
      *
@@ -28,6 +33,13 @@ abstract class Entity
         }
         self::$_manager->setEntityMetaData($this);
         $this->_fillFromArray($this, $params);
+    }
+
+    /**
+     */
+    public function Error()
+    {
+        return $this->_error;
     }
     /**
      * @param Manager $manager
@@ -130,30 +142,25 @@ abstract class Entity
      */
     public static function search($filters = [])
     {
-    
-      $class = get_called_class();
-      
-      $entities =  array();
-      $entityToQuery = new $class();
-      
-      self::$_manager->setEntityUrl($entityToQuery, 'search');
-      self::$_manager->cleanQueryParams($entityToQuery);
-      self::$_manager->setQueryParams($entityToQuery, $filters);
+        $class = get_called_class();
+        $entities =  array();
+        $entityToQuery = new $class();
+        
+        self::$_manager->setEntityUrl($entityToQuery, 'search');
+        self::$_manager->cleanQueryParams($entityToQuery);
+        self::$_manager->setQueryParams($entityToQuery, $filters);
 
-      $response = self::$_manager->execute($entityToQuery, 'get');
+        $response = self::$_manager->execute($entityToQuery, 'get');
 
-      if ($response['code'] == "200" || $response['code'] == "201") {
-          $results = $response['body']['results'];
-
-          foreach ($results as $result) {
-            $entity = new $class();
-            $entity->_fillFromArray($entity, $result); 
-            array_push($entities, $entity);
-          }
-          
-      }
-      return $entities;
-
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $results = $response['body']['results'];
+            foreach ($results as $result) {
+                $entity = new $class();
+                $entity->_fillFromArray($entity, $result); 
+                array_push($entities, $entity);
+            }
+        }
+        return $entities;
     }
     /**
      * @codeCoverageIgnore
@@ -177,16 +184,17 @@ abstract class Entity
      */
     public function update($params = [])
     {
-
         self::$_manager->setEntityUrl($this, 'update', $params);
-        self::$_manager->setEntityDeltaQueryJsonData($this); 
+        self::$_manager->setEntityDeltaQueryJsonData($this);
 
         $response =  self::$_manager->execute($this, 'put');
 
         if ($response['code'] == "200" || $response['code'] == "201") {
-            $this->_fillFromArray($this, $response['body']);
+            $this->_fillFromArray($this, $response['body']); 
+            return true;
+        } else {
+            return false;
         }
-        return $this;
     }
     /**
      * @codeCoverageIgnore
@@ -230,16 +238,42 @@ abstract class Entity
         self::$_manager->setEntityQueryJsonData($this);
         
         $response = self::$_manager->execute($this, 'post');
-         
         
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
+            $this->_last = clone $this;
+            return true;
+        } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
+            // A recuperable error 
+            $this->process_error_body($response['body']); 
+            return false;
+        } else {
+            // Trigger an exception
+            throw new Exception ($response['error'] . " " . $response['message']);
         }
-
-        $this->_last = clone $this;
         
-        return $this;
     }
+
+    function process_error_body($message){
+        $recuperable_error = new RecuperableError(
+            $message['message'],
+            $message['error'],
+            $message['status']
+        );
+
+        foreach ($message['cause'] as $causes) { 
+            if(is_array($causes)) {
+                foreach ($causes as $cause) {
+                    $recuperable_error->add_cause($cause['code'], $cause['description']);
+                }
+            } else {
+                $recuperable_error->add_cause($cause['code'], $cause['description']);
+            }
+        }
+        $this->_error = $recuperable_error;
+    }
+    
+
     /**
      * @param $name
      *
