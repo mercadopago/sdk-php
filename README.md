@@ -69,9 +69,13 @@ The SDK supports PHP 5.6 or major
       "email" => "larue.nienow@hotmail.com"
     );
 
-    $payment->save();
+    if ($payment->save()) {
+      echo $payment->status;
+    } else {
+      echo "Bad params error: " . $payment->error;
+    }
 
-    echo $payment->status;
+    
 
   ?>
 ```
