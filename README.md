@@ -54,7 +54,7 @@ The SDK supports PHP 5.6 or major
 ```php
   <?php
   
-    require_once 'vendor/autoload.php';
+    require __DIR__  . '/vendor/autoload.php';
 
     MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN");
 
