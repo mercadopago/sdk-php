@@ -62,6 +62,7 @@
                     $recuperable_error->add_cause($cause['code'], $cause['description']);
                 }
             }
+          
             $this->errors = $recuperable_error;
         }
 
