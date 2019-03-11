@@ -20,7 +20,7 @@ The SDK supports PHP 5.6 or major
 
 4. Thats all, you have Mercado Pago SDK installed.
 
-![installation-demo](ezgif-2-f98e8701825e.gif)
+![installation-demo](img/ezgif-2-f98e8701825e.gif)
 
 ### Quick Start 
 
