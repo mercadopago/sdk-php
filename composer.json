@@ -39,6 +39,7 @@
       "MercadoPago\\": [
         "src/MercadoPago/",
         "tests/",
+        "src/MercadoPago/Generic/",
         "src/MercadoPago/Entities/",
         "src/MercadoPago/Entities/Shared/"
       ]

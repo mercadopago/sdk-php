@@ -210,6 +210,7 @@ class Manager
         $this->_attributesToJson($entity, $result, $this->_entityConfiguration[$className]);
         $this->_entityConfiguration[$className]->query['json_data'] = json_encode($result);
     }
+
     public function setRawQueryJsonData($entity, $data)
     {
       $className = $this->_getEntityClassName($entity);
@@ -256,8 +257,6 @@ class Manager
     {
         $configuration = $this->_getEntityConfiguration($entity);
         $params = [];
-
-        
         
         if (!isset($configuration->query) || !isset($configuration->query['url_query'])) {
             $configuration->query['url_query'] = $params;

@@ -51,7 +51,11 @@ class SDK
     }
 
     public static function cleanCredentials(){
-      self::$_config->clean();
+      if (self::$_config == null) {
+        // do nothing
+      } else {
+        self::$_config->clean();
+      }
     }
     
     /**
