@@ -8,7 +8,7 @@ class RecuperableError {
     public $status = "";
     public $error = "";
 
-    public $cause = array();
+    public $causes = array();
 
     function __construct($message, $error, $status) {
         $this->message = $message;
@@ -20,7 +20,7 @@ class RecuperableError {
         $error_cause = new MercadoPago\ErrorCause();
         $error_cause->code = $code;
         $error_cause->description = $description;
-        array_push($this->cause, $error_cause);
+        array_push($this->causes, $error_cause);
     }
 
     public function __toString()
