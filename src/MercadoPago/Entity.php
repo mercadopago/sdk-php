@@ -1,8 +1,6 @@
 <?php
 namespace MercadoPago;
 
-
-
 use Exception;
 /**
  * Class Entity
@@ -18,8 +16,9 @@ abstract class Entity
     protected static $_custom_headers = array();
     protected static $_manager;
     protected $_last;
-    protected $_errors;
+    protected $errors;
     protected $_pagination_params;
+    protected $_empty = false;
     /**
      * Entity constructor.
      *
@@ -40,7 +39,7 @@ abstract class Entity
      */
     public function Error()
     {
-        return $this->_error;
+        return $this->errors;
     }
     /**
      * @param Manager $manager
@@ -86,6 +85,17 @@ abstract class Entity
     {
       return self::$_custom_headers;
     }
+
+    /**
+     * @return mixed
+     */
+    public function not_found()
+    { 
+        return $this->_empty;
+    }
+
+    
+
     /**
      * @return mixed
      */
@@ -105,7 +115,9 @@ abstract class Entity
             $entity->_last = clone $entity;
             return $entity;
         } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
-            return null;
+            $entity->process_error_body($response['body']); 
+            $entity->empty=true;
+            return $entity;
         } else {
             throw new Exception ("Internal API Error");
         }
@@ -286,7 +298,7 @@ abstract class Entity
                 $recuperable_error->add_cause($cause['code'], $cause['description']);
             }
         }
-        $this->_error = $recuperable_error;
+        $this->errors = $recuperable_error;
     }
     
 
