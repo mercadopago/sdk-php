@@ -266,8 +266,6 @@ abstract class Entity
         self::$_manager->setEntityQueryJsonData($this);
         
         $response = self::$_manager->execute($this, 'post');
-        
-        
 
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
@@ -275,7 +273,7 @@ abstract class Entity
             return true;
         } elseif (intval($response['code']) >= 300 && intval($response['code']) < 500) {
             // A recuperable error
-            $this->process_error_body($response['body']); 
+            $this->process_error_body($response['body']);
             return false;
         } else {
             // Trigger an exception

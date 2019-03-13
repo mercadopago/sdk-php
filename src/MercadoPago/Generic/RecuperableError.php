@@ -8,7 +8,7 @@ class RecuperableError {
     public $status = "";
     public $error = "";
 
-    public $causes = array();
+    public $causes = [];
 
     function __construct($message, $error, $status) {
         $this->message = $message;

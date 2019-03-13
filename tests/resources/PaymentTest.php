@@ -59,7 +59,10 @@ class PaymentTest extends TestCase
         );
         $payment->external_reference = "reftest";
 
-        $this->assertFalse($payment->save()); 
+        $payment_status = $payment->save();
+
+        $this->assertFalse($payment_status);
+        $this->assertEquals($payment->error->causes[0]->description, "transaction_amount must be positive");
  
         return $payment;
 
