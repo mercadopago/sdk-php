@@ -291,7 +291,7 @@ abstract class Entity
             $message['status']
         );
 
-        foreach ($message['cause'] as $causes) {
+        foreach ($message['cause'] as $cause) {
             $recuperable_error->add_cause($cause['code'], $cause['description']);
             
         }
