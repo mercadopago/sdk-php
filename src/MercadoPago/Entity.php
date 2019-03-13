@@ -16,7 +16,7 @@ abstract class Entity
     protected static $_custom_headers = array();
     protected static $_manager;
     protected $_last;
-    protected $errors;
+    protected $error;
     protected $_pagination_params;
     protected $_empty = false;
     /**
@@ -39,7 +39,7 @@ abstract class Entity
      */
     public function Error()
     {
-        return $this->errors;
+        return $this->error;
     }
     /**
      * @param Manager $manager
@@ -289,16 +289,11 @@ abstract class Entity
             $message['status']
         );
 
-        foreach ($message['cause'] as $causes) { 
-            if(is_array($causes)) {
-                foreach ($causes as $cause) {
-                    $recuperable_error->add_cause($cause['code'], $cause['description']);
-                }
-            } else {
-                $recuperable_error->add_cause($cause['code'], $cause['description']);
-            }
+        foreach ($message['cause'] as $causes) {
+            $recuperable_error->add_cause($cause['code'], $cause['description']);
+            
         }
-        $this->errors = $recuperable_error;
+        $this->error = $recuperable_error;
     }
     
 

@@ -38,11 +38,34 @@ class PaymentTest extends TestCase
         $payment->save();
 
         $this->assertEquals($payment->status, 'approved'); 
+        
  
         return $payment;
 
     }
-    
+
+
+    public function testCreateAnInvalidPayment()
+    {
+
+        $payment = new MercadoPago\Payment();
+        $payment->transaction_amount = -200;
+        $payment->token = $this->SingleUseCardToken('approved');
+        $payment->description = "Ergonomic Silk Shirt";
+        $payment->installments = 1;
+        $payment->payment_method_id = "visa";
+        $payment->payer = array(
+            "email" => "larue.nienow@hotmail.com"
+        );
+        $payment->external_reference = "reftest";
+
+        $save_status = $payment->save();
+
+        $this->assertEquals($save_status, False); 
+ 
+        return $payment;
+
+    }
 
     public function testCreatePendingPayment()
     {
