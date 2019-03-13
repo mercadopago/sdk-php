@@ -267,12 +267,14 @@ abstract class Entity
         
         $response = self::$_manager->execute($this, 'post');
         
+        
+
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
             $this->_last = clone $this;
             return true;
         } elseif (intval($response['code']) >= 300 && intval($response['code']) < 500) {
-            // A recuperable error 
+            // A recuperable error
             $this->process_error_body($response['body']); 
             return false;
         } else {

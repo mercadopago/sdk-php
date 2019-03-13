@@ -16,7 +16,7 @@ class RecuperableError {
         $this->error = $error;
     }
 
-    public function add_cause($code, $description){
+    public function add_cause($code, $description) {
         $error_cause = new ErrorCause();
         $error_cause->code = $code;
         $error_cause->description = $description;
