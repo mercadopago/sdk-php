@@ -59,9 +59,7 @@ class PaymentTest extends TestCase
         );
         $payment->external_reference = "reftest";
 
-        $save_status = $payment->save();
-
-        $this->assertEquals($save_status, False); 
+        $this->assertFalse($payment->save()); 
  
         return $payment;
 
@@ -107,8 +105,7 @@ class PaymentTest extends TestCase
 
         $payments = MercadoPago\Payment::search($filters); 
         $payment = end($payments);
-
-        $this->assertTrue(count($payments) > 0);
+ 
         $this->assertEquals($payment->external_reference, $payment_created_previously->external_reference);
 
     }
@@ -138,7 +135,7 @@ class PaymentTest extends TestCase
         $refund->payment_id = $id;
         $refund->save();
 
-        sleep(10);
+        sleep(5);
 
         $payment = MercadoPago\Payment::find_by_id($id);
         
