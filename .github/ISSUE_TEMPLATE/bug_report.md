@@ -4,7 +4,7 @@ about: Create a report to help us improve
 
 ---
 
-> For support request no related with bugs or feature requests for this SDK, please use the official developers support channel http://mercadopago.com.ar/developers/es/support/
+> For support request no related with bugs or feature requests for this SDK, please use the official developers support channel https://mercadopago.com.ar/developers/es/support/
 
 
 **Describe the bug**
