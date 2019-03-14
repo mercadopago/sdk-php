@@ -193,7 +193,7 @@ class RestClient
         $response['response'] = [];
         
         if ($apiHttpCode != "200" && $apiHttpCode != "201") {
-            error_log($apiResult);
+            //error_log($apiResult);
         }
         
         $response['response'] = json_decode($apiResult, true);
