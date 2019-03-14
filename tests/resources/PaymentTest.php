@@ -105,6 +105,14 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreatePendingPayment
      */
+    public function testFindPaymentByNonExistentId(MercadoPago\Payment $payment_created_previously) {
+        $payment = MercadoPago\Payment::find_by_id("123456"); 
+        $this->assertEquals($payment, null);
+    }
+
+    /**
+     * @depends testCreatePendingPayment
+     */
     public function testPaymentsSearch(MercadoPago\Payment $payment_created_previously) {
  
         $filters = array(
@@ -115,7 +123,7 @@ class PaymentTest extends TestCase
         $payment = end($payments);
  
         $this->assertEquals($payment->external_reference, $payment_created_previously->external_reference);
-        
+
     }
     
     /**
