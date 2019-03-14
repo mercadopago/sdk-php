@@ -114,10 +114,10 @@ abstract class Entity
             $entity->_fillFromArray($entity, $response['body']);
             $entity->_last = clone $entity;
             return $entity;
+        } elseif (intval($response['code']) == 404) {
+            return null;
         } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
-            $entity->process_error_body($response['body']); 
-            $entity->empty=true;
-            return $entity;
+            throw new Exception ($response['body']['message']);
         } else {
             throw new Exception ("Internal API Error");
         }

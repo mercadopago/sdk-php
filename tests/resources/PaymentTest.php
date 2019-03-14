@@ -50,21 +50,26 @@ class PaymentTest extends TestCase
 
         $payment = new MercadoPago\Payment();
         $payment->transaction_amount = -200;
-        $payment->token = $this->SingleUseCardToken('approved');
-        $payment->description = "Ergonomic Silk Shirt";
-        $payment->installments = 1;
-        $payment->payment_method_id = "visa";
-        $payment->payer = array(
-            "email" => "larue.nienow@hotmail.com"
-        );
-        $payment->external_reference = "reftest";
 
         $payment_status = $payment->save();
 
         $this->assertFalse($payment_status);
-        $this->assertEquals($payment->error->causes[0]->description, "transaction_amount must be positive");
- 
-        return $payment;
+        $this->assertEquals($payment->error->causes[0]->description, "transaction_amount must be positive"); 
+
+    }
+
+    public function testSearchWithInvalidQueryFilters()
+    {
+
+        $filters = array(
+            "incorrect_param" => "000"
+        );
+
+        try {
+            $payments = MercadoPago\Payment::search($filters);  
+        } catch(Exception $e) {
+            $this->assertEquals($e->getMessage(), "the attribute incorrect_param is not a possible param");
+        }
 
     }
 
@@ -100,13 +105,21 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreatePendingPayment
      */
+    public function testFindPaymentByNonExistentId(MercadoPago\Payment $payment_created_previously) {
+        $payment = MercadoPago\Payment::find_by_id("123456"); 
+        $this->assertEquals($payment, null);
+    }
+
+    /**
+     * @depends testCreatePendingPayment
+     */
     public function testPaymentsSearch(MercadoPago\Payment $payment_created_previously) {
  
         $filters = array(
             "external_reference" => $payment_created_previously->external_reference
         );
 
-        $payments = MercadoPago\Payment::search($filters); 
+        $payments = MercadoPago\Payment::search($filters);
         $payment = end($payments);
  
         $this->assertEquals($payment->external_reference, $payment_created_previously->external_reference);
@@ -138,7 +151,7 @@ class PaymentTest extends TestCase
         $refund->payment_id = $id;
         $refund->save();
 
-        sleep(5);
+        sleep(10);
 
         $payment = MercadoPago\Payment::find_by_id($id);
         
