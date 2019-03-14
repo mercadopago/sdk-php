@@ -67,15 +67,9 @@ The SDK supports PHP 5.6 or major
     $payment->payer = array(
       "email" => "larue.nienow@hotmail.com"
     );
-
-    if ($payment->save()) {
-      echo $payment->status;
-    } else {
-      echo "Bad params error: " . $payment->error;
-    }
-
+ 
+    echo $payment->status;
     
-
   ?>
 ```
   
