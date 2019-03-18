@@ -26,6 +26,14 @@ class Payer extends Entity
     /**
      * @Attribute(type = "string")
      */
+    protected $name;
+    /**
+     * @Attribute(type = "string")
+     */
+    protected $surname;
+    /**
+     * @Attribute(type = "string")
+     */
     protected $first_name;
     /**
      * @Attribute(type = "string")
