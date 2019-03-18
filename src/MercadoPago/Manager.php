@@ -135,12 +135,16 @@ class Manager
         $url = $this->_entityConfiguration[$className]->methods[$ormMethod]['resource'];
         $matches = [];
         preg_match_all('/\\:\\w+/', $url, $matches);
+
+        $configuration_vars = $this->_config->all();
         
         foreach ($matches[0] as $match) {
           $key = substr($match, 1);
 
             if (array_key_exists($key, $params)) {
                 $url = str_replace($match, $params[$key], $url);
+            } elseif (array_key_exists(strtoupper($key), $configuration_vars)) {
+                $url = str_replace($match, $configuration_vars[strtoupper($key)]);
             } elseif (!empty($entity->$key)) {
                 $url = str_replace($match, $entity->$key, $url);
             } else {

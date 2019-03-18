@@ -32,6 +32,7 @@ class Config
             'base_url'      => 'https://api.mercadopago.com',
             'CLIENT_ID'     => '',
             'CLIENT_SECRET' => '',
+            'USER_ID'       => '',
             'APP_ID'        => '',
             'ACCESS_TOKEN'  => '',
             'REFRESH_TOKEN' => '',
@@ -106,16 +107,47 @@ class Config
     public function set($key, $value)
     {
         parent::set($key, $value);
-        if ($this->get('CLIENT_ID') != "" && $this->get('CLIENT_SECRET') != "" && empty($this->get('ACCESS_TOKEN'))) {
-            $response = $this->getToken();
-            if (isset($response['access_token'])) {
-                parent::set('ACCESS_TOKEN', $response['access_token']); 
-            }
-            // Making refresh token optional
-            if (isset($response['refresh_token'])) { 
-                parent::set('REFRESH_TOKEN', $response['refresh_token']);
-            }
+
+        if ($key == "ACCESS_TOKEN") { 
+            $user = $this->getUserId($value);
+            parent::set('USER_ID', $user['id']);
         }
+        
+        if (parent::get('CLIENT_ID') != "" && parent::get('CLIENT_SECRET') != "" && empty(parent::get('ACCESS_TOKEN'))) {
+            
+            $response = $this->getToken();
+
+            if (isset($response['access_token'])) {
+                parent::set('ACCESS_TOKEN', $response['access_token']);
+            
+
+                $user = $this->getUserId($response['access_token']);
+
+                if (isset($user['id'])) {
+                    parent::set('USER_ID', $user['id']);
+                }
+
+            }
+            
+        }
+    }
+
+
+    /** 
+     * @return mixed
+     */
+    public function getUserId($access_token)
+    {
+        if (!$this->_restclient) {
+            $this->_restclient = new RestClient();
+            $this->_restclient->setHttpParam('address', $this->get('base_url'));
+        }
+        $response = $this->_restclient->get("/users/me", array(
+                "url_query" => array("access_token" => $access_token)
+            )
+        );  
+
+        return $response["body"];
     }
 
     /**

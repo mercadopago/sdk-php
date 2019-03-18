@@ -37,7 +37,7 @@ class PaymentTest extends TestCase
         $payment->external_reference = "reftest";
         $payment->save();
 
-        $this->assertEquals($payment->status, 'approved'); 
+        $this->assertEquals($payment->status, 'approved');
         
  
         return $payment;
