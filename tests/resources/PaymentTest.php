@@ -20,6 +20,12 @@ class PaymentTest extends TestCase
         }
         
         MercadoPago\SDK::setAccessToken(getenv('ACCESS_TOKEN'));
+        MercadoPago\SDK::setMultipleCredentials(
+            array(
+                "MLA" => "MLA_ACCESS_TOKEN"
+            )
+        );
+
     }
 
     public function testCreateApprobedPayment()
@@ -157,6 +163,24 @@ class PaymentTest extends TestCase
         
         $this->assertEquals("refunded", $payment->status);
         
+    }
+
+    public function testPaymentWithCustomAccessToken() {
+        $payment = new MercadoPago\Payment();
+
+        $options = array(
+            "custom_access_token" => "MLA"
+        );
+        
+        $payment_status = $payment->save($options);
+
+        $this->assertFalse($payment_status); // Marlformed access token error 
+        
+        $payment_status = $payment->save();
+
+        $this->assertFalse($payment_status);
+       
+
     }
 
 

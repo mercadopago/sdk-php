@@ -58,6 +58,12 @@ class SDK
       }
     }
     
+    public static function setMultipleCredentials($array){
+        foreach($array as $key => $values) {
+          self::$_config->configure([$key => $values]); 
+        }
+    }
+
     /**
      * Set Access ClientId for SDK .
      */

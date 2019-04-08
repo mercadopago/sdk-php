@@ -50,18 +50,12 @@ class Manager
         $this->_entityConfiguration[$className] = $this->_metadataReader->getMetaData($entity);
         return $this->_entityConfiguration[$className];
     }
-    
-    /** 
-     * @param string $method
-     * @param null   $parameters
-     *
-     * @return mixed
-     */
-    public function simple_execute($method)
+
+    protected function _updateEntityConfiguration($entity, $new_configuration)
     {
-      
+        $className = $this->_getEntityClassName($entity);
+        $this->_entityConfiguration[$className] = $new_configuration;
     }
-      
       
     public function addCustomTrackingParam($key, $value)
     {
@@ -75,8 +69,10 @@ class Manager
      *
      * @return mixed
      */
-    public function execute($entity, $method = 'get')
+    public function execute($entity, $method = 'get', $options = [])
     {
+
+        $this->cleanQueryParams($entity);
         $configuration = $this->_getEntityConfiguration($entity);
 
         if ($method != 'get'){
@@ -85,16 +81,32 @@ class Manager
             } 
         }
 
+        $this->processOptions($options, $configuration);
+
         $this->_setDefaultHeaders($configuration->query);
         $this->_setCustomHeaders($entity, $configuration->query);
         //$this->_setIdempotencyHeader($configuration->query, $configuration, $method);
         $this->setQueryParams($entity);
-
-        
-        
         
         return $this->_client->{$method}($configuration->url, $configuration->query);
     }
+
+    public function processOptions($options, $configuration)
+    { 
+        $configuration_vars = $this->_config->all();
+
+        foreach($options as $option => $value) {
+            switch ($option) {
+                case "custom_access_token":
+                if (array_key_exists($value, $configuration_vars)) {
+                    $configuration->query["url_query"]["access_token"] = $configuration_vars[$value];
+                } else {
+                    $configuration->query["url_query"]["access_token"] = $value;
+                }
+            }
+        }
+    }
+
     public function validateAttribute($entity, $attribute, array $properties, $value = null)
     {
         $configuration = $this->_getEntityConfiguration($entity);
@@ -261,7 +273,9 @@ class Manager
     {
         $configuration = $this->_getEntityConfiguration($entity);
         $params = [];
-        
+
+       
+
         if (!isset($configuration->query) || !isset($configuration->query['url_query'])) {
             $configuration->query['url_query'] = $params;
         }
@@ -274,6 +288,7 @@ class Manager
                 $configuration->query['url_query'] = $arrayMerge;
             }
         }
+        
     }
     /**
      * @param $entity

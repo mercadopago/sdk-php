@@ -94,12 +94,10 @@ abstract class Entity
         return $this->_empty;
     }
 
-    
-
     /**
      * @return mixed
      */
-    public static function read($params = [])
+    public static function read($params = [], $options = [])
     { 
     
         $class = get_called_class();
@@ -127,9 +125,9 @@ abstract class Entity
     /**
      * @return mixed
      */
-    public static function all($params = [])
-    { 
-        
+    public static function all($options = [])
+    {
+        $params = [];
         $class = get_called_class();
         $entity = new $class();
         $entities =  array();
@@ -156,7 +154,7 @@ abstract class Entity
     /**
      * @return mixed
      */
-    public static function search($filters = [])
+    public static function search($filters = [], $options = [])
     {
         $class = get_called_class();
         $searchResult = new SearchResultsArray();
@@ -194,19 +192,13 @@ abstract class Entity
         self::$_manager->setEntityUrl($this, 'list');
         return self::$_manager->execute($this, 'get');
     }
-    /**
-     * @codeCoverageIgnore
-     * @return mixed
-     */
-    public static function addNew()
-    {
-        //return self::$_manager->execute(get_called_class(), '');
-    }
+
     /**
      * @return mixed
      */
-    public function update($params = [])
-    {
+    public function update($options = [])
+    {   
+        $params = [];
         self::$_manager->setEntityUrl($this, 'update', $params);
         self::$_manager->setEntityDeltaQueryJsonData($this);
 
@@ -232,18 +224,7 @@ abstract class Entity
     {
         //return self::$_manager->execute(get_called_class(), '');
     }
-    /**
-     * @param $params
-     *
-     * @return mixed
-     */
-    public static function create($params)
-    {
-        $class = get_called_class();
-        $model = new $class($params);
-        $model->save();
-        return $model;
-    }
+
     /**
      * @return mixed
      */
@@ -257,15 +238,16 @@ abstract class Entity
       }
       return $response;
     }
+
     /**
      * @return mixed
      */
-    public function save()
+    public function save($options = [])
     { 
         self::$_manager->setEntityUrl($this, 'create');
         self::$_manager->setEntityQueryJsonData($this);
         
-        $response = self::$_manager->execute($this, 'post');
+        $response = self::$_manager->execute($this, 'post', $options);
 
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
@@ -279,7 +261,6 @@ abstract class Entity
             // Trigger an exception
             throw new Exception ($response['error'] . " " . $response['message']);
         }
-        
     }
 
     function process_error_body($message){
@@ -288,15 +269,12 @@ abstract class Entity
             $message['error'],
             $message['status']
         );
-        
-
         foreach ($message['cause'] as $cause) {
             $recuperable_error->add_cause($cause['code'], $cause['description']);
             
         }
         $this->error = $recuperable_error;
     }
-    
 
     /**
      * @param $name
@@ -307,6 +285,9 @@ abstract class Entity
     {
         return $this->{$name};
     }
+
+    
+
     /**
      * @param $name
      *
@@ -515,3 +496,4 @@ abstract class Entity
         return str_replace($separator, '', ucwords($input, $separator));
     }
 }
+

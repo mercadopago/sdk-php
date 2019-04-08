@@ -28,10 +28,9 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
 
         # Building an item
         $item = new MercadoPago\Item();
-        $item->id = "00001";
         $item->title = "item";
         $item->quantity = 1;
-        $item->unit_price = 100;
+        $item->unit_price = 100; 
 
         $preference->items = array($item);
         $preference->expiration_date_to = new DateTime('tomorrow');
