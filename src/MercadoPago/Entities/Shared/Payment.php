@@ -274,9 +274,14 @@ class Payment extends Entity
     /**
      * @Attribute()
      */
-    protected $metadata; 
+    protected $metadata;
     /**
      * @Attribute()
      */
     protected $callback_url;
+    /**
+     * @Attribute()
+     */
+    protected $amount_refunded;
+    
 }
