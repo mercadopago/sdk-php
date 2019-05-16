@@ -72,7 +72,6 @@ class Manager
     public function execute($entity, $method = 'get', $options = [])
     {
 
-        $this->cleanQueryParams($entity);
         $configuration = $this->_getEntityConfiguration($entity);
 
         if ($method != 'get'){
