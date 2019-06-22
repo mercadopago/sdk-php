@@ -68,6 +68,8 @@ The SDK supports PHP 5.6 or major
       "email" => "larue.nienow@hotmail.com"
     );
  
+    $payment->save();
+    
     echo $payment->status;
     
   ?>
