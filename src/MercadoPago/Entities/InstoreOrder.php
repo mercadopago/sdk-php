@@ -19,6 +19,11 @@ class InstoreOrder extends Entity
     /**
      * @Attribute()
      */
+    protected $external_id;
+
+    /**
+     * @Attribute()
+     */
     protected $external_reference;
 
     /**
