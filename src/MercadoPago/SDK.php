@@ -154,7 +154,7 @@ class SDK
       if ($token = self::$_config->get('ACCESS_TOKEN')) {
         $uri = $uri . "?access_token=" . $token;
       }
-      return self::$_restClient->deleted($uri, $options);
+      return self::$_restClient->delete($uri, $options);
     }
 
 }
