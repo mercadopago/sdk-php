@@ -72,7 +72,6 @@ class Manager
     public function execute($entity, $method = 'get', $options = [])
     {
 
-        $this->cleanQueryParams($entity);
         $configuration = $this->_getEntityConfiguration($entity);
 
         if ($method != 'get'){
@@ -103,6 +102,8 @@ class Manager
                 } else {
                     $configuration->query["url_query"]["access_token"] = $value;
                 }
+                default:
+                    $configuration->query["url_query"][$option] = $value;
             }
         }
     }
