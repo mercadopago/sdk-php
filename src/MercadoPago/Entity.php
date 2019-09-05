@@ -106,7 +106,7 @@ abstract class Entity
         self::$_manager->setEntityUrl($entity, 'read', $params); 
         self::$_manager->cleanEntityDeltaQueryJsonData($entity);
         
-        $response =  self::$_manager->execute($entity, 'get');
+        $response =  self::$_manager->execute($entity, 'get', $options);
         
         if ($response['code'] == "200" || $response['code'] == "201") {
             $entity->_fillFromArray($entity, $response['body']);
@@ -259,7 +259,7 @@ abstract class Entity
             return false;
         } else {
             // Trigger an exception
-            throw new Exception ($response['error'] . " " . $response['message']);
+            throw new Exception ("Internal API Error");
         }
     }
 

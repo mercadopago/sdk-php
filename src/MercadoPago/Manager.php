@@ -72,7 +72,6 @@ class Manager
     public function execute($entity, $method = 'get', $options = [])
     {
 
-        $this->cleanQueryParams($entity);
         $configuration = $this->_getEntityConfiguration($entity);
 
         if ($method != 'get'){
@@ -103,6 +102,8 @@ class Manager
                 } else {
                     $configuration->query["url_query"]["access_token"] = $value;
                 }
+                default:
+                    $configuration->query["url_query"][$option] = $value;
             }
         }
     }
@@ -415,7 +416,8 @@ class Manager
     {
         $query['headers']['Accept'] = 'application/json';
         $query['headers']['Content-Type'] = 'application/json';
-        $query['headers']['User-Agent'] = 'Mercado Pago Php SDK v' . Version::$_VERSION;
+        $query['headers']['User-Agent'] = 'MercadoPago DX-PHP SDK/ v'. Version::$_VERSION;
+        $query['headers']['x-product-id'] = 'BC32A7RU643001OI3940';
         foreach ($this->_customTrackingParams as $key => $value){ 
             $query['headers'][$key] = $value;
         }

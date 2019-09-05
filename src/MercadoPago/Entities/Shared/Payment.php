@@ -283,5 +283,8 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $amount_refunded;
-    
+    /**
+     * @Attribute()
+     */
+    protected $coupon_code;
 }
