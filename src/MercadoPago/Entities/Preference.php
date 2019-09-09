@@ -102,7 +102,7 @@ class Preference extends Entity
      */
     protected $date_created;
     /**
-     * @Attribute(type = "string")
+     * @Attribute(type = "integer")
      */
     protected $sponsor_id;
     /**

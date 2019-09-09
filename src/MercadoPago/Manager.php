@@ -157,7 +157,7 @@ class Manager
             if (array_key_exists($key, $params)) {
                 $url = str_replace($match, $params[$key], $url);
             } elseif (array_key_exists(strtoupper($key), $configuration_vars)) {
-                $url = str_replace($match, $configuration_vars[strtoupper($key)]);
+                $url = str_replace($match, $configuration_vars[strtoupper($key)], $url);
             } elseif (!empty($entity->$key)) {
                 $url = str_replace($match, $entity->$key, $url);
             } else {
@@ -308,7 +308,7 @@ class Manager
            if ($value instanceof Entity || is_array($value)) {
                $this->_attributesToJson($value, $result[$key]);
            } else {
-             if ($value != null){
+             if ($value != null || is_bool($value)){
                $result[$key] = $value;
              } 
            } 

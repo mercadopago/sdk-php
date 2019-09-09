@@ -1,6 +1,6 @@
 <?php
 namespace MercadoPago;
-
+use MercadoPago\Annotation\Attribute;
 use Exception;
 /**
  * Class Entity
@@ -15,9 +15,15 @@ abstract class Entity
     
     protected static $_custom_headers = array();
     protected static $_manager;
+    /**
+     * @Attribute(serialize = false)
+     */
     protected $_last;
     protected $error;
     protected $_pagination_params;
+    /**
+     * @Attribute(serialize = false)
+     */
     protected $_empty = false;
     /**
      * Entity constructor.
@@ -338,12 +344,8 @@ abstract class Entity
             unset($result[$excluded_attribute]);
         }
 
-        if (in_array('_last', $result)) {
-            unset($result['_last']);
-        }
-        
         foreach ($result as $key => $value) { 
-            if (empty($value)) { 
+            if (!is_bool($value) && empty($value)) {
                 unset($result[$key]);
             }
         }
