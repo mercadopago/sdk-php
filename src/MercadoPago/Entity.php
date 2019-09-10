@@ -65,7 +65,7 @@ abstract class Entity
      */
     public static function get($id)
     {
-      self::read(array("id" => $id));
+      return self::read(array("id" => $id));
     }
     /**
      * @return mixed
