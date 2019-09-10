@@ -143,7 +143,7 @@ abstract class Entity
         $response = self::$_manager->execute($entity, 'get');
       
         if ($response['code'] == "200" || $response['code'] == "201") {
-            $results = $response['body']['results'];
+            $results = $response['body'];
             foreach ($results as $result) {
                 $entity = new $class();
                 $entity->_fillFromArray($entity, $result); 
