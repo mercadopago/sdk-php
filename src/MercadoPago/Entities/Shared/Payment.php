@@ -287,4 +287,12 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $coupon_code;
+    /**
+     * @Attribute()
+     */
+    protected $barcode;
+    /**
+     * @Attribute()
+     */
+    protected $marketplace_owner;
 }
