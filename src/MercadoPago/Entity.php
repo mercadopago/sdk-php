@@ -275,10 +275,7 @@ abstract class Entity
             $message['error'],
             $message['status']
         );
-        foreach ($message['cause'] as $cause) {
-            $recuperable_error->add_cause($cause['code'], $cause['description']);
-            
-        }
+        $recuperable_error->proccess_causes($message['cause']);
         $this->error = $recuperable_error;
     }
 

@@ -23,6 +23,16 @@ class RecuperableError {
         array_push($this->causes, $error_cause);
     }
 
+    public function proccess_causes($causes){
+        foreach ($causes as $cause){
+            if(is_array($cause) && (!isset($cause['code']) && !isset($cause['description']))){
+                $this->proccess_causes($cause);
+            }else{
+                $this->add_cause($cause['code'], $cause['description']);
+            }
+        }
+    }
+
     public function __toString()
     {
         return $this->error . ": " . $this->message;
