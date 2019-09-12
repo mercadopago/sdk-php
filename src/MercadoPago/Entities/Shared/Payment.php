@@ -295,4 +295,23 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $marketplace_owner;
+
+    public function refund($amount = 0){
+        $refund = new Refund(["payment_id" => $this->id]);
+        if ($amount > 0){
+            $refund->amount = $amount;
+        }
+
+        if ($refund->save()){
+            $payment = self::get($this->id);
+            $this->refunds = $payment->refunds;
+            $this->status = $payment->status;
+            $this->status_detail = $payment->status_detail;
+            $this->transaction_amount_refunded = $payment->transaction_amount_refunded;
+            return true;
+        }else{
+            $this->error = $refund->error;
+            return false;
+        }
+    }
 }
