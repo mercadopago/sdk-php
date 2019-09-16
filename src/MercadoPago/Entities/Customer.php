@@ -81,6 +81,9 @@ class Customer extends Entity
      * @Attribute()
      */
     protected $addresses;
-
+    /**
+     * @Attribute(type = "boolean")
+     */
+    protected $live_mode;
 
 }

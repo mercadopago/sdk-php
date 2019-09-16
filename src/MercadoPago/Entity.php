@@ -65,7 +65,7 @@ abstract class Entity
      */
     public static function get($id)
     {
-      self::read(array("id" => $id));
+      return self::read(array("id" => $id));
     }
     /**
      * @return mixed
@@ -143,7 +143,7 @@ abstract class Entity
         $response = self::$_manager->execute($entity, 'get');
       
         if ($response['code'] == "200" || $response['code'] == "201") {
-            $results = $response['body']['results'];
+            $results = $response['body'];
             foreach ($results as $result) {
                 $entity = new $class();
                 $entity->_fillFromArray($entity, $result); 
@@ -275,10 +275,7 @@ abstract class Entity
             $message['error'],
             $message['status']
         );
-        foreach ($message['cause'] as $cause) {
-            $recuperable_error->add_cause($cause['code'], $cause['description']);
-            
-        }
+        $recuperable_error->proccess_causes($message['cause']);
         $this->error = $recuperable_error;
     }
 
