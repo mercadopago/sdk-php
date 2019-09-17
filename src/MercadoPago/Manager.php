@@ -316,32 +316,26 @@ class Manager
     }
 
     protected function _arrayDiffRecursive($firstArray, $secondArray)
-    { 
+    {
         $difference = [];
-        foreach ($firstArray as $firstKey => $firstValue) {
-            
-            if ($firstValue instanceof Entity){
-                $firstValue = $firstValue->toArray();
+        $unifiedKeys = array_unique(array_merge_recursive(array_keys($firstArray), array_keys($secondArray)));
+
+        foreach ($unifiedKeys as $key) {
+            if (array_key_exists($key, $firstArray) && $firstArray[$key] instanceof MercadoPagoEntity){
+                $firstArray[$key] = $firstArray[$key]->toArray();
             }
-            
-            if (is_array($firstValue)) {
-                if (!array_key_exists($firstKey, $secondArray) || !is_array($secondArray[$firstKey])) {
-                    
-                } else {
-                    $secondValue = $secondArray[$firstKey];
-                    if ($secondValue instanceof Entity){
-                        $secondValue = $secondValue->toArray();
-                    }
-                    $newDiff = $this->_arrayDiffRecursive($firstValue, $secondValue);
+
+            if (array_key_exists($key, $secondArray)){
+                $secondArray[$key] = $secondArray[$key] instanceof MercadoPagoEntity ? $secondArray[$key]->toArray() : $secondArray[$key];
+                if (!array_key_exists($key, $firstArray)){
+                    $difference[$key] = $secondArray[$key];
+                }elseif (is_array($firstArray[$key]) && is_array($secondArray[$key])) {
+                    $newDiff = $this->_arrayDiffRecursive($firstArray[$key], $secondArray[$key]);
                     if (!empty($newDiff)) {
-                        $difference[$firstKey] = $newDiff;
+                        $difference[$key] = $newDiff;
                     }
-                }
-            } else {
-                if (!array_key_exists($firstKey, $secondArray) || $secondArray[$firstKey] != $firstValue) {
-                    if ($firstKey != "_last") {
-                        $difference[$firstKey] = $secondArray[$firstKey];
-                    }
+                }elseif ($firstArray[$key] != $secondArray[$key]){
+                    $difference[$key] = $secondArray[$key];
                 }
             }
         }
