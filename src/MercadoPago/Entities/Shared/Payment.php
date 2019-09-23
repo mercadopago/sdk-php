@@ -304,14 +304,21 @@ class Payment extends Entity
 
         if ($refund->save()){
             $payment = self::get($this->id);
-            $this->refunds = $payment->refunds;
-            $this->status = $payment->status;
-            $this->status_detail = $payment->status_detail;
-            $this->transaction_amount_refunded = $payment->transaction_amount_refunded;
+            $this->_fillFromArray($this, $payment->toArray());
             return true;
         }else{
             $this->error = $refund->error;
             return false;
         }
+    }
+
+    public function capture($amount = 0)
+    {
+        $this->capture = true;
+        if ($amount > 0){
+            $this->transaction_amount = $amount;
+        }
+
+        return $this->update();
     }
 }
