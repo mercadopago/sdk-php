@@ -494,5 +494,26 @@ abstract class Entity
     {
         return str_replace($separator, '', ucwords($input, $separator));
     }
+
+
+    public function delete($options = [])
+    {
+        $params = [];
+        self::$_manager->setEntityUrl($this, 'delete', $params);
+
+        $response =  self::$_manager->execute($this, 'delete');
+
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $this->_fillFromArray($this, $response['body']);
+            return true;
+        } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
+            if (!is_null($response['body'])){
+                $this->process_error_body($response['body']);
+            }
+            return false;
+        } else {
+            throw new Exception ("Internal API Error");
+        }
+    }
 }
 
