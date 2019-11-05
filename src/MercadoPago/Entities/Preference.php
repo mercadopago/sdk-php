@@ -4,7 +4,6 @@ namespace MercadoPago;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
- 
 
 /**
  * @RestMethod(resource="/checkout/preferences", method="create")
@@ -103,9 +102,20 @@ class Preference extends Entity
      */
     protected $date_created;
     /**
-     * @Attribute(type = "string")
+     * @Attribute(type = "integer")
      */
     protected $sponsor_id;
-    
+    /**
+     * @Attribute(type = "array")
+     */
+    protected $processing_modes;
+    /**
+     * @Attribute()
+     */
+    protected $binary_mode;
+    /**
+     * @Attribute(type = "array")
+     */
+    protected $taxes;
 
 }

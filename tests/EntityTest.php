@@ -23,12 +23,7 @@ class EntityTest extends \PHPUnit\Framework\TestCase
         Entity::setManager($manager);
         $this->_entity = new DummyEntity();
     }
-    /**
-     *
-     */
-    protected function tearDown()
-    {
-    }
+    
     /**
      */
     public function testSetVariables()
@@ -43,18 +38,16 @@ class EntityTest extends \PHPUnit\Framework\TestCase
         $this->_entity->other = 'other';
         $this->_entity->email = 'other@test.com';
         $expectedValues = [
-            "id"                 => null,
             "title"              => "Title",
             "desc"               => "Description",
             "price"              => 100.5,
             "quantity"           => 3,
-            "registered_at"      => "2015-02-14T00:00:00+0000",
+            "registered_at"      => "2015-02-14T00:00:00.000+00:00",
             "object"             => $object,
             "other"              => 'other',
-            "readOnlyAttribute"  => null,
-            "email"              => 'other@test.com',
-            "maxLengthAttribute" => null
+            "email"              => 'other@test.com'
         ];
+ 
         $this->assertEquals($expectedValues, $this->_entity->toArray());
     }
     /**
@@ -75,7 +68,7 @@ class EntityTest extends \PHPUnit\Framework\TestCase
             "desc"          => "Description",
             "price"         => 100.5,
             "quantity"      => "3",
-            "registered_at" => "2015-02-14T00:00:00+0000",
+            "registered_at" => "2015-02-14T00:00:00.000+00:00",
             "object"        => $object,
             "other"         => 'other'
         ];
@@ -101,23 +94,25 @@ class EntityTest extends \PHPUnit\Framework\TestCase
     }
     /**
      */
-    public function testLoadAll()
+    public function testAll()
     {
         $hub = new FakeApiHub();
         $request = $this->getMockBuilder('MercadoPago\Http\CurlRequest')->getMock();
         $request->expects($this->once())
             ->method('execute')
             ->will($this->returnValue($hub->getJson('GET', '/dummies')));
+
         $request->expects($this->once())
             ->method('getInfo')->withAnyParameters()
             ->will($this->returnValue('200'));
+
         $restClient = new RestClient();
         $restClient->setHttpRequest($request);
         $config = new Config(null, $restClient);
         $manager = new Manager($restClient, $config);
         Entity::setManager($manager);
         $this->_entity = new DummyEntity();
-        $this->assertEquals((array)json_decode($hub->getJson('GET', '/dummies')), $this->_entity->loadAll()['body']);
+        $this->assertEquals('MercadoPago\DummyEntity', get_class($this->_entity->All()[0]));
     }
     /**
      */
@@ -133,10 +128,8 @@ class EntityTest extends \PHPUnit\Framework\TestCase
     public function testRead()
     {
         $this->_mockRequest('/dummy/:id');
-        $this->_entity = new DummyEntity();
-        $this->_entity->id = 1340404;
-        $this->_entity->read();
-        $this->assertEquals('art', $this->_entity->category_id);
+        $this->_entity = DummyEntity::find_by_id('1340404');
+        $this->assertEquals('1340404', $this->_entity->id);
     }
     /**
      */
@@ -175,41 +168,27 @@ class EntityTest extends \PHPUnit\Framework\TestCase
     public function testSearch()
     {
         $this->_mockRequest('/v1/dummies/search');
-        $this->_entity = new DummyEntity();
-        $this->_entity->email = 'test_user_99529216@testuser.com';
-        $this->_entity->search();
-        $this->assertEquals('227166260-QeyHHDJ8TZ4L3R', $this->_entity->id);
+        $filters = array(
+            "email" =>"test_user_99529216@testuser.com"
+        ); 
+        $this->_entities = DummyEntity::search($filters);
+        $this->assertEquals('227166260-QeyHHDJ8TZ4L3R', $this->_entities[0]->id);
     }
     /**
      */
-    public function testLoad()
-    {
-    }
-    /**
-     */
-    public function testAddNew()
-    {
-    }
-    /**
-     */
-    public function testUpdate()
-    {
-    }
-    /**
-     */
-    public function testDestroy()
-    {
-    }
     public function _mockRequest($endpoint)
     {
         $hub = new FakeApiHub();
         $request = $this->getMockBuilder('MercadoPago\Http\CurlRequest')->getMock();
+
         $request->expects($this->once())
             ->method('execute')
             ->will($this->returnValue($hub->getJson('POST', $endpoint)));
+
         $request->expects($this->once())
             ->method('getInfo')->withAnyParameters()
             ->will($this->returnValue('200'));
+            
         $restClient = new RestClient();
         $restClient->setHttpRequest($request);
         $config = new Config(null, $restClient);

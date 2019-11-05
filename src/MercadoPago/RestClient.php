@@ -43,7 +43,11 @@ class RestClient
      */
     protected function setHeaders(Http\HttpRequest $connect, $customHeaders)
     {
-        $default_header = ['Content-Type' => 'application/json'];
+        $default_header = array(
+            'Content-Type' => 'application/json',
+            'User-Agent' => 'MercadoPago DX-PHP SDK/ v' . Version::$_VERSION,
+            'x-product-id' => 'BC32A7RU643001OI3940'
+        );
         if ($customHeaders) {
             $default_header = array_merge($default_header, $customHeaders);
         }
@@ -63,11 +67,13 @@ class RestClient
      */
     protected function setData(Http\HttpRequest $connect, $data, $content_type = '')
     {
+        
         if ($content_type == "application/json") {
+                
             if (gettype($data) == "string") {
                 json_decode($data, true);
-            } else {
-                $data = json_encode($data);
+            } else { 
+                $data = json_encode($data); 
             }
 
             if (function_exists('json_last_error')) {
@@ -76,9 +82,15 @@ class RestClient
                     throw new Exception("JSON Error [{$json_error}] - Data: {$data}");
                 }
             }
+ 
+            
+        } 
+        if ($data != "[]") {
+            $connect->setOption(CURLOPT_POSTFIELDS, $data);
+        } else {
+            $connect->setOption(CURLOPT_POSTFIELDS, "");
         }
-
-        $connect->setOption(CURLOPT_POSTFIELDS, $data);
+        
     }
 
     /**
@@ -104,7 +116,7 @@ class RestClient
      * @throws Exception
      */
     protected function exec($options)
-    {
+    {  
         $method = key($options);
         $requestPath = reset($options);
         $verb = self::$verbArray[$method];
@@ -113,12 +125,16 @@ class RestClient
         $url_query = $this->getArrayValue($options, 'url_query');
         $formData = $this->getArrayValue($options, 'form_data');
         $jsonData = $this->getArrayValue($options, 'json_data');
+        
+
         $defaultHttpParams = self::$defaultParams;
         $connectionParams = array_merge($defaultHttpParams, $this->customParams);
         $query = '';
+
         if ($url_query > 0) {
             $query = http_build_query($url_query);
         }
+        
         $address = $this->getArrayValue($connectionParams, 'address');
         $uri = $address . $requestPath;
         if ($query != '') {
@@ -128,6 +144,7 @@ class RestClient
                 $uri .= '?' . $query;
             }
         }
+
         $connect = $this->getHttpRequest();
         $connect->setOption(CURLOPT_URL, $uri);
         if ($userAgent = $this->getArrayValue($connectionParams, 'user_agent')) {
@@ -135,6 +152,7 @@ class RestClient
         }
         $connect->setOption(CURLOPT_RETURNTRANSFER, true);
         $connect->setOption(CURLOPT_CUSTOMREQUEST, $verb);
+        
         $this->setHeaders($connect, $headers);
         $proxyAddress = $this->getArrayValue($connectionParams, 'proxy_addr');
         $proxyPort = $this->getArrayValue($connectionParams, 'proxy_port');
@@ -163,9 +181,10 @@ class RestClient
         if ($jsonData) {
             $this->setData($connect, $jsonData, "application/json");
         }
-
+ 
         $apiResult = $connect->execute();
         $apiHttpCode = $connect->getInfo(CURLINFO_HTTP_CODE);
+        
         if ($apiResult === false) {
             throw new Exception ($connect->error());
         }

@@ -1,5 +1,7 @@
 <?php
 namespace MercadoPago;
+use MercadoPago\Annotation\Attribute;
+use Exception;
 /**
  * Class Entity
  *
@@ -13,7 +15,16 @@ abstract class Entity
     
     protected static $_custom_headers = array();
     protected static $_manager;
+    /**
+     * @Attribute(serialize = false)
+     */
     protected $_last;
+    protected $error;
+    protected $_pagination_params;
+    /**
+     * @Attribute(serialize = false)
+     */
+    protected $_empty = false;
     /**
      * Entity constructor.
      *
@@ -28,6 +39,13 @@ abstract class Entity
         }
         self::$_manager->setEntityMetaData($this);
         $this->_fillFromArray($this, $params);
+    }
+
+    /**
+     */
+    public function Error()
+    {
+        return $this->error;
     }
     /**
      * @param Manager $manager
@@ -47,7 +65,7 @@ abstract class Entity
      */
     public static function get($id)
     {
-      self::read(array("id" => $id));
+      return self::read(array("id" => $id));
     }
     /**
      * @return mixed
@@ -73,46 +91,103 @@ abstract class Entity
     {
       return self::$_custom_headers;
     }
+
     /**
      * @return mixed
      */
-    public static function read($params = [])
-    {
-       
-      
-      
-      $class = get_called_class();
-      $entity = new $class();
-
-      self::$_manager->setEntityUrl($entity, 'read', $params);
-      self::$_manager->setQueryParams($entity, $params); 
-      
-      $response =  self::$_manager->execute($entity, 'get');
-      
-      if ($response['code'] == "200" || $response['code'] == "201") {   
-        $entity->_fillFromArray($entity, $response['body']);
-      }
-       
-      $entity->_last = clone $entity;
-      return $entity;
+    public function not_found()
+    { 
+        return $this->_empty;
     }
+
     /**
      * @return mixed
      */
-    public static function search($filters)
-    {
-      $class = get_called_class();
-      
-      $entity = new $class();
-      
-      self::$_manager->setEntityUrl($entity, 'search');
-      self::$_manager->setQueryParams($entity, $filters);
-      $response = self::$_manager->execute($entity, 'get');
+    public static function read($params = [], $options = [])
+    { 
+    
+        $class = get_called_class();
+        $entity = new $class();
 
-      if ($response['code'] == "200" || $response['code'] == "201") {
-          $entity->_fillFromArray($entity, $response['body']['results'][0]);
-      }   
-      return $entity;
+        self::$_manager->setEntityUrl($entity, 'read', $params); 
+        self::$_manager->cleanEntityDeltaQueryJsonData($entity);
+        
+        $response =  self::$_manager->execute($entity, 'get', $options);
+        
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $entity->_fillFromArray($entity, $response['body']);
+            $entity->_last = clone $entity;
+            return $entity;
+        } elseif (intval($response['code']) == 404) {
+            return null;
+        } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
+            throw new Exception ($response['body']['message']);
+        } else {
+            throw new Exception ("Internal API Error");
+        }
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function all($options = [])
+    {
+        $params = [];
+        $class = get_called_class();
+        $entity = new $class();
+        $entities =  array();
+
+        self::$_manager->setEntityUrl($entity, 'list', $params);
+        self::$_manager->cleanQueryParams($entity);
+        $response = self::$_manager->execute($entity, 'get');
+      
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $results = $response['body'];
+            foreach ($results as $result) {
+                $entity = new $class();
+                $entity->_fillFromArray($entity, $result); 
+                array_push($entities, $entity);
+            }
+        } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
+            throw new Exception ($response['error'] . " " . $response['message']);
+        } else {
+            throw new Exception ("Internal API Error");
+        }
+        return $entities; 
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function search($filters = [], $options = [])
+    {
+        $class = get_called_class();
+        $searchResult = new SearchResultsArray();
+        $searchResult->setEntityTypes($class);
+        $entityToQuery = new $class();
+        
+        self::$_manager->setEntityUrl($entityToQuery, 'search');
+        self::$_manager->cleanQueryParams($entityToQuery);
+        self::$_manager->setQueryParams($entityToQuery, $filters);
+
+        $response = self::$_manager->execute($entityToQuery, 'get');
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $results = $response['body']['results'];
+            foreach ($results as $result) {
+                $entity = new $class();
+                $entity->_fillFromArray($entity, $result);
+                $searchResult->append($entity);
+            }
+            $searchResult->setPaginateParams($response['body']['paging']);
+            $searchResult->_filters = $filters;
+        } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
+            $searchResult->process_error_body($response['body']);
+            throw new Exception ($response['body']['message']);
+        } else {
+            throw new Exception ("Internal API Error");
+        }
+        return $searchResult;
     }
     /**
      * @codeCoverageIgnore
@@ -123,29 +198,29 @@ abstract class Entity
         self::$_manager->setEntityUrl($this, 'list');
         return self::$_manager->execute($this, 'get');
     }
-    /**
-     * @codeCoverageIgnore
-     * @return mixed
-     */
-    public static function addNew()
-    {
-        //return self::$_manager->execute(get_called_class(), '');
-    }
+
     /**
      * @return mixed
      */
-    public function update($params = [])
-    {
+    public function update($options = [])
+    {   
+        $params = [];
         self::$_manager->setEntityUrl($this, 'update', $params);
-        self::$_manager->setEntityDeltaQueryJsonData($this); 
-        
+        self::$_manager->setEntityDeltaQueryJsonData($this);
 
         $response =  self::$_manager->execute($this, 'put');
 
         if ($response['code'] == "200" || $response['code'] == "201") {
-            $this->_fillFromArray($this, $response['body']);
+            
+            $this->_fillFromArray($this, $response['body']); 
+            return true;
+        } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
+            // A recuperable error 
+            $this->process_error_body($response['body']); 
+            return false;
+        } else {
+            throw new Exception ("Internal API Error");
         }
-        return $this;
     }
     /**
      * @codeCoverageIgnore
@@ -155,18 +230,7 @@ abstract class Entity
     {
         //return self::$_manager->execute(get_called_class(), '');
     }
-    /**
-     * @param $params
-     *
-     * @return mixed
-     */
-    public static function create($params)
-    {
-        $class = get_called_class();
-        $model = new $class($params);
-        $model->save();
-        return $model;
-    }
+
     /**
      * @return mixed
      */
@@ -180,22 +244,41 @@ abstract class Entity
       }
       return $response;
     }
+
     /**
      * @return mixed
      */
-    public function save()
+    public function save($options = [])
     { 
-      
-      
-      self::$_manager->setEntityUrl($this, 'create');
-      self::$_manager->setEntityQueryJsonData($this);
-      
-      $response = self::$_manager->execute($this, 'post');
-      if ($response['code'] == "200" || $response['code'] == "201") {
-          $this->_fillFromArray($this, $response['body']);
-      }
-      return $response;
+        self::$_manager->setEntityUrl($this, 'create');
+        self::$_manager->setEntityQueryJsonData($this);
+        
+        $response = self::$_manager->execute($this, 'post', $options);
+
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $this->_fillFromArray($this, $response['body']);
+            $this->_last = clone $this;
+            return true;
+        } elseif (intval($response['code']) >= 300 && intval($response['code']) < 500) {
+            // A recuperable error
+            $this->process_error_body($response['body']);
+            return false;
+        } else {
+            // Trigger an exception
+            throw new Exception ("Internal API Error");
+        }
     }
+
+    function process_error_body($message){
+        $recuperable_error = new RecuperableError(
+            $message['message'],
+            $message['error'],
+            $message['status']
+        );
+        $recuperable_error->proccess_causes($message['cause']);
+        $this->error = $recuperable_error;
+    }
+
     /**
      * @param $name
      *
@@ -204,6 +287,18 @@ abstract class Entity
     public function __get($name)
     {
         return $this->{$name};
+    }
+
+    
+
+    /**
+     * @param $name
+     *
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return isset($this->{$name});
     }
     /**
      * @param $name
@@ -222,12 +317,38 @@ abstract class Entity
      *
      * @return array
      */
+    public function getAttributes() {
+        return get_object_vars($this);
+    }
+     /**
+     * @param null $attributes
+     *
+     * @return array
+     */
     public function toArray($attributes = null)
     {
+        $result = null;
+
+        $excluded_attributes = self::$_manager->getExcludedAttributes($this);
+
         if (is_null($attributes)) {
-            return get_object_vars($this);
+            $result = get_object_vars($this);
+        } else {
+            $result = array_intersect_key(get_object_vars($this), $attributes);
+        }        
+
+        foreach ($excluded_attributes as $excluded_attribute) { 
+            unset($result[$excluded_attribute]);
         }
-        return array_intersect_key(get_object_vars($this), $attributes);
+
+        foreach ($result as $key => $value) { 
+            if (!is_bool($value) && empty($value)) {
+                unset($result[$key]);
+            }
+        }
+
+        return $result;
+    
     }
     /**
      * @param $property
@@ -324,8 +445,13 @@ abstract class Entity
                 case 'date':
                     if (empty($value)) {
                         return $value;
+                    };
+                    if (is_string($value)) {
+                        return date("Y-m-d\TH:i:s.000P", strtotime($value));
+                    } else {
+                        return $value->format('Y-m-d\TH:i:s.000P');
                     }
-                    return date(\DateTime::ISO8601, strtotime($value));
+                    
             }
         } catch (\Exception $e) {
             throw new \Exception('Wrong type ' . gettype($value) . '. Cannot convert ' . $type . ' for property ' . $property);
@@ -339,16 +465,14 @@ abstract class Entity
      * @param $data
      */
     protected function _fillFromArray($entity, $data)
-    {
-      
-      
+    { 
       
       if ($data) {
-      
+        
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $className = 'MercadoPago\\' . $this->_camelize($key);
-                if (class_exists($className, false)) {
+                if (class_exists($className, true)) {
                     $entity->_setValue($key, new $className, false);
                     $entity->_fillFromArray($this->{$key}, $value);
                 } else {
@@ -370,4 +494,26 @@ abstract class Entity
     {
         return str_replace($separator, '', ucwords($input, $separator));
     }
+
+
+    public function delete($options = [])
+    {
+        $params = [];
+        self::$_manager->setEntityUrl($this, 'delete', $params);
+
+        $response =  self::$_manager->execute($this, 'delete');
+
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $this->_fillFromArray($this, $response['body']);
+            return true;
+        } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
+            if (!is_null($response['body'])){
+                $this->process_error_body($response['body']);
+            }
+            return false;
+        } else {
+            throw new Exception ("Internal API Error");
+        }
+    }
 }
+

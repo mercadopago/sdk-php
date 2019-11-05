@@ -42,8 +42,13 @@ class MetaDataReader
      */
     public function getMetaData($entity)
     {
+        if (get_parent_class($entity)){
+            $result = $this->getMetaData(get_parent_class($entity));
+        }else {
+            $result = new \stdClass;
+        }
+
         $propertyAnnotations = [];
-        $result = new \stdClass;
         $class = new \ReflectionClass($entity);
         $classAnnotations = $this->_reader->getClassAnnotations($class);
         foreach ($class->getProperties() as $key => $value) {

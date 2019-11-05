@@ -4,7 +4,7 @@ use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
 /**
- * @RestMethod(resource="/dummies", method="list", idempotency=true)
+ * @RestMethod(resource="/dummies", method="list")
  * @RestMethod(resource="/dummy/:id", method="read")
  * @RestMethod(resource="/dummy/:id", method="update")
  * @RestMethod(resource="/v1/payments", method="create")

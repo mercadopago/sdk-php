@@ -18,7 +18,7 @@ class Refund extends Entity {
      */
     protected $id;
     /**
-     * @Attribute()
+     * @Attribute(serialize=false)
      */
     protected $payment_id;
     /**
@@ -34,7 +34,7 @@ class Refund extends Entity {
      */
     protected $source;
     /**
-     * @Attribute()
+     * @Attribute(readOnly=true)
      */
     protected $date_created;
 
