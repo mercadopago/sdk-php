@@ -299,7 +299,9 @@ class Manager
     protected function _attributesToJson($entity, &$result)
     {
       if (is_array($entity)) {             
-          $attributes = array_filter($entity); 
+          $attributes = array_filter($entity, function($entity) {
+              return ($entity !== null && $entity !== false && $entity !== '');
+          });
       } else { 
           $attributes = $entity->toArray();
       }
@@ -308,7 +310,7 @@ class Manager
            if ($value instanceof Entity || is_array($value)) {
                $this->_attributesToJson($value, $result[$key]);
            } else {
-             if ($value != null || is_bool($value)){
+             if ($value != null || is_bool($value) || is_numeric($value)){
                $result[$key] = $value;
              } 
            } 
