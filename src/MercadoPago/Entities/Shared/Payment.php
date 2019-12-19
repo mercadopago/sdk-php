@@ -295,6 +295,18 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $marketplace_owner;
+    /**
+     * @Attribute()
+     */
+    protected $integrator_id;
+    /**
+     * @Attribute()
+     */
+    protected $corporation_id;
+    /**
+     * @Attribute()
+     */
+    protected $platform_id;
 
     public function refund($amount = 0){
         $refund = new Refund(["payment_id" => $this->id]);
