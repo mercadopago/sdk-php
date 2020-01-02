@@ -117,5 +117,13 @@ class Preference extends Entity
      * @Attribute(type = "array")
      */
     protected $taxes;
+    /**
+     * @Attribute()
+     */
+    protected $metadata;
+    /**
+     * @Attribute(type = "array")
+     */
+    protected $tracks;
 
 }
