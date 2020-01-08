@@ -154,8 +154,52 @@ class SDK
       if ($token = self::$_config->get('ACCESS_TOKEN')) {
         $uri = $uri . "?access_token=" . $token;
       }
-      return self::$_restClient->deleted($uri, $options);
+      return self::$_restClient->delete($uri, $options);
     }
 
+    /**
+     * Set Platform Id for SDK .
+     */
+    public static function setPlatformId($platform_id){
+      if (!isset(self::$_config)){
+        self::initialize();
+      }
+      self::$_config->configure(['x-platform-id' => $platform_id]);
+      self::addCustomTrackingParam('x-platform-id', $platform_id);
+    }
+
+    public static function getPlatformId(){
+      return self::$_config->get('x-platform-id');
+    }
+
+    /**
+     * Set Corporation Id for SDK .
+     */
+    public static function setCorporationId($corporation_id){
+      if (!isset(self::$_config)){
+        self::initialize();
+      }
+      self::$_config->configure(['x-corporation-id' => $corporation_id]);
+      self::addCustomTrackingParam('x-corporation-id', $corporation_id);
+    }
+
+    public static function getCorporationId(){
+      return self::$_config->get('x-corporation-id');
+    }
+
+    /**
+     * Set Integrator Id for SDK .
+     */
+    public static function setIntegratorId($integrator_id){
+      if (!isset(self::$_config)){
+        self::initialize();
+      }
+      self::$_config->configure(['x-integrator-id' => $integrator_id]);
+      self::addCustomTrackingParam('x-integrator-id', $integrator_id);
+    }
+
+    public static function getIntegratorId(){
+      return self::$_config->get('x-integrator-id');
+    }
 }
 

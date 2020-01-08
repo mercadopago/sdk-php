@@ -45,7 +45,7 @@ class RestClient
     {
         $default_header = array(
             'Content-Type' => 'application/json',
-            'User-Agent' => 'MercadoPago PHP SDK/1.1.2',
+            'User-Agent' => 'MercadoPago DX-PHP SDK/ v' . Version::$_VERSION,
             'x-product-id' => 'BC32A7RU643001OI3940'
         );
         if ($customHeaders) {

@@ -283,5 +283,54 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $amount_refunded;
-    
+    /**
+     * @Attribute()
+     */
+    protected $coupon_code;
+    /**
+     * @Attribute()
+     */
+    protected $barcode;
+    /**
+     * @Attribute()
+     */
+    protected $marketplace_owner;
+    /**
+     * @Attribute()
+     */
+    protected $integrator_id;
+    /**
+     * @Attribute()
+     */
+    protected $corporation_id;
+    /**
+     * @Attribute()
+     */
+    protected $platform_id;
+
+    public function refund($amount = 0){
+        $refund = new Refund(["payment_id" => $this->id]);
+        if ($amount > 0){
+            $refund->amount = $amount;
+        }
+
+        if ($refund->save()){
+            $payment = self::get($this->id);
+            $this->_fillFromArray($this, $payment->toArray());
+            return true;
+        }else{
+            $this->error = $refund->error;
+            return false;
+        }
+    }
+
+    public function capture($amount = 0)
+    {
+        $this->capture = true;
+        if ($amount > 0){
+            $this->transaction_amount = $amount;
+        }
+
+        return $this->update();
+    }
 }
