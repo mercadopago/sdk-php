@@ -9,7 +9,7 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/v1/customers/:customer_id/cards", method="create")
  * @RestMethod(resource="/v1/customers/:customer_id/cards/:id", method="read")
  * @RestMethod(resource="/v1/customers/:customer_id/cards/:id", method="update")
- * @RestMethod(resource="/v1/customers/:customer_id/cards/:id", method="destroy")
+ * @RestMethod(resource="/v1/customers/:customer_id/cards/:id", method="delete")
  * @RequestParam(param="access_token")
  */
 

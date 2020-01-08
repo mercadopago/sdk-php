@@ -72,7 +72,6 @@ class Manager
     public function execute($entity, $method = 'get', $options = [])
     {
 
-        $this->cleanQueryParams($entity);
         $configuration = $this->_getEntityConfiguration($entity);
 
         if ($method != 'get'){
@@ -103,6 +102,8 @@ class Manager
                 } else {
                     $configuration->query["url_query"]["access_token"] = $value;
                 }
+                default:
+                    $configuration->query["url_query"][$option] = $value;
             }
         }
     }
@@ -298,7 +299,9 @@ class Manager
     protected function _attributesToJson($entity, &$result)
     {
       if (is_array($entity)) {             
-          $attributes = array_filter($entity); 
+          $attributes = array_filter($entity, function($entity) {
+              return ($entity !== null && $entity !== false && $entity !== '');
+          });
       } else { 
           $attributes = $entity->toArray();
       }
@@ -307,7 +310,7 @@ class Manager
            if ($value instanceof Entity || is_array($value)) {
                $this->_attributesToJson($value, $result[$key]);
            } else {
-             if ($value != null){
+             if ($value != null || is_bool($value) || is_numeric($value)){
                $result[$key] = $value;
              } 
            } 
@@ -315,33 +318,24 @@ class Manager
     }
 
     protected function _arrayDiffRecursive($firstArray, $secondArray)
-    { 
+    {
         $difference = [];
-        foreach ($firstArray as $firstKey => $firstValue) {
-            
-            if ($firstValue instanceof Entity){
-                $firstValue = $firstValue->toArray();
+
+        foreach (array_keys($secondArray) as $key) {
+            $secondArray[$key] = $secondArray[$key] instanceof MercadoPagoEntity ? $secondArray[$key]->toArray() : $secondArray[$key];
+            if (array_key_exists($key, $firstArray) && $firstArray[$key] instanceof MercadoPagoEntity){
+                $firstArray[$key] = $firstArray[$key]->toArray();
             }
-            
-            if (is_array($firstValue)) {
-                if (!array_key_exists($firstKey, $secondArray) || !is_array($secondArray[$firstKey])) {
-                    
-                } else {
-                    $secondValue = $secondArray[$firstKey];
-                    if ($secondValue instanceof Entity){
-                        $secondValue = $secondValue->toArray();
-                    }
-                    $newDiff = $this->_arrayDiffRecursive($firstValue, $secondValue);
-                    if (!empty($newDiff)) {
-                        $difference[$firstKey] = $newDiff;
-                    }
+
+            if (!array_key_exists($key, $firstArray)){
+                $difference[$key] = $secondArray[$key];
+            }elseif (is_array($firstArray[$key]) && is_array($secondArray[$key])) {
+                $newDiff = $this->_arrayDiffRecursive($firstArray[$key], $secondArray[$key]);
+                if (!empty($newDiff)) {
+                    $difference[$key] = $newDiff;
                 }
-            } else {
-                if (!array_key_exists($firstKey, $secondArray) || $secondArray[$firstKey] != $firstValue) {
-                    if ($firstKey != "_last") {
-                        $difference[$firstKey] = $secondArray[$firstKey];
-                    }
-                }
+            }elseif ($firstArray[$key] !== $secondArray[$key]){
+                $difference[$key] = $secondArray[$key];
             }
         }
         return $difference;
@@ -415,7 +409,8 @@ class Manager
     {
         $query['headers']['Accept'] = 'application/json';
         $query['headers']['Content-Type'] = 'application/json';
-        $query['headers']['User-Agent'] = 'Mercado Pago Php SDK v' . Version::$_VERSION;
+        $query['headers']['User-Agent'] = 'MercadoPago DX-PHP SDK/ v'. Version::$_VERSION;
+        $query['headers']['x-product-id'] = 'BC32A7RU643001OI3940';
         foreach ($this->_customTrackingParams as $key => $value){ 
             $query['headers'][$key] = $value;
         }

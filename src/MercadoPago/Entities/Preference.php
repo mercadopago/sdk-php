@@ -102,7 +102,7 @@ class Preference extends Entity
      */
     protected $date_created;
     /**
-     * @Attribute(type = "string")
+     * @Attribute(type = "integer")
      */
     protected $sponsor_id;
     /**
@@ -113,5 +113,17 @@ class Preference extends Entity
      * @Attribute()
      */
     protected $binary_mode;
+    /**
+     * @Attribute(type = "array")
+     */
+    protected $taxes;
+    /**
+     * @Attribute()
+     */
+    protected $metadata;
+    /**
+     * @Attribute(type = "array")
+     */
+    protected $tracks;
 
 }

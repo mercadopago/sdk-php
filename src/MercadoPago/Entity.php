@@ -1,6 +1,6 @@
 <?php
 namespace MercadoPago;
-
+use MercadoPago\Annotation\Attribute;
 use Exception;
 /**
  * Class Entity
@@ -15,9 +15,15 @@ abstract class Entity
     
     protected static $_custom_headers = array();
     protected static $_manager;
+    /**
+     * @Attribute(serialize = false)
+     */
     protected $_last;
     protected $error;
     protected $_pagination_params;
+    /**
+     * @Attribute(serialize = false)
+     */
     protected $_empty = false;
     /**
      * Entity constructor.
@@ -59,7 +65,7 @@ abstract class Entity
      */
     public static function get($id)
     {
-      self::read(array("id" => $id));
+      return self::read(array("id" => $id));
     }
     /**
      * @return mixed
@@ -106,7 +112,7 @@ abstract class Entity
         self::$_manager->setEntityUrl($entity, 'read', $params); 
         self::$_manager->cleanEntityDeltaQueryJsonData($entity);
         
-        $response =  self::$_manager->execute($entity, 'get');
+        $response =  self::$_manager->execute($entity, 'get', $options);
         
         if ($response['code'] == "200" || $response['code'] == "201") {
             $entity->_fillFromArray($entity, $response['body']);
@@ -137,7 +143,7 @@ abstract class Entity
         $response = self::$_manager->execute($entity, 'get');
       
         if ($response['code'] == "200" || $response['code'] == "201") {
-            $results = $response['body']['results'];
+            $results = $response['body'];
             foreach ($results as $result) {
                 $entity = new $class();
                 $entity->_fillFromArray($entity, $result); 
@@ -259,7 +265,7 @@ abstract class Entity
             return false;
         } else {
             // Trigger an exception
-            throw new Exception ($response['error'] . " " . $response['message']);
+            throw new Exception ("Internal API Error");
         }
     }
 
@@ -269,10 +275,7 @@ abstract class Entity
             $message['error'],
             $message['status']
         );
-        foreach ($message['cause'] as $cause) {
-            $recuperable_error->add_cause($cause['code'], $cause['description']);
-            
-        }
+        $recuperable_error->proccess_causes($message['cause']);
         $this->error = $recuperable_error;
     }
 
@@ -338,12 +341,8 @@ abstract class Entity
             unset($result[$excluded_attribute]);
         }
 
-        if (in_array('_last', $result)) {
-            unset($result['_last']);
-        }
-        
         foreach ($result as $key => $value) { 
-            if (empty($value)) { 
+            if (!is_bool($value) && empty($value)) {
                 unset($result[$key]);
             }
         }
@@ -494,6 +493,27 @@ abstract class Entity
     protected function _camelize($input, $separator = '_')
     {
         return str_replace($separator, '', ucwords($input, $separator));
+    }
+
+
+    public function delete($options = [])
+    {
+        $params = [];
+        self::$_manager->setEntityUrl($this, 'delete', $params);
+
+        $response =  self::$_manager->execute($this, 'delete');
+
+        if ($response['code'] == "200" || $response['code'] == "201") {
+            $this->_fillFromArray($this, $response['body']);
+            return true;
+        } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
+            if (!is_null($response['body'])){
+                $this->process_error_body($response['body']);
+            }
+            return false;
+        } else {
+            throw new Exception ("Internal API Error");
+        }
     }
 }
 
