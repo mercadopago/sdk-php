@@ -275,7 +275,7 @@ abstract class Entity
             $message['error'],
             $message['status']
         );
-        $recuperable_error->proccess_causes($message['cause']);
+        $recuperable_error->proccess_causes(isset($message['cause']) ? $message['cause'] : []);
         $this->error = $recuperable_error;
     }
 
