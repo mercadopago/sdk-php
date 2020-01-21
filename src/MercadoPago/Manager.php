@@ -411,6 +411,7 @@ class Manager
         $query['headers']['Content-Type'] = 'application/json';
         $query['headers']['User-Agent'] = 'MercadoPago DX-PHP SDK/ v'. Version::$_VERSION;
         $query['headers']['x-product-id'] = 'BC32A7RU643001OI3940';
+        $query['headers']['x-tracking-id'] = 'platform:' . PHP_MAJOR_VERSION .'|' . PHP_VERSION . ',type:SDK' . Version::$_VERSION . ',so;';
         foreach ($this->_customTrackingParams as $key => $value){ 
             $query['headers'][$key] = $value;
         }
