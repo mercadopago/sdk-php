@@ -1,7 +1,7 @@
 {
-  "name": "mercadopago/dx-php",
+  "name": "fcwwebsites/dx-php",
   "type": "library",
-  "homepage": "https://github.com/mercadopago/dx-php",
+  "homepage": "https://github.com/fcwwebsites/dx-php",
   "license": "MIT",
   "version": "1.8.0",
   "config": {
