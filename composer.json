@@ -23,7 +23,7 @@
     }
   ],
   "require": {
-    "php": "^7.0",
+    "php": ">=7.0.0",
     "doctrine/common": "^2.6",
     "doctrine/annotations": "^1.8"
   },
