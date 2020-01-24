@@ -1,7 +1,7 @@
 {
   "name": "fcwwebsites/dx-php",
   "type": "library",
-  "description": "Fork from mercadopago/dx-php changing the dependencies versions",
+  "description": "Fork from mercadopago/dx-php changing the dependencies versions.",
   "homepage": "https://github.com/fcwwebsites/dx-php",
   "license": "MIT",
   "version": "1.8.1",
