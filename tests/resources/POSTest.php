@@ -1,6 +1,7 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
+use MercadoPago;
 
 /**
  * EntityTest Class Doc Comment
