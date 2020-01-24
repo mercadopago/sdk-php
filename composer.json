@@ -4,10 +4,10 @@
   "description": "Fork from mercadopago/dx-php changing the dependencies versions.",
   "homepage": "https://github.com/fcwwebsites/dx-php",
   "license": "MIT",
-  "version": "1.8.2",
+  "version": "1.9.0",
   "config": {
     "platform": {
-        "php": "7.0"
+        "php": "7.1"
     }
   },
   "authors": [
