@@ -7,7 +7,7 @@
   "version": "1.8.1",
   "config": {
     "platform": {
-        "php": "^7.0"
+        "php": "7.0"
     }
   },
   "authors": [
