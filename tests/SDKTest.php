@@ -35,4 +35,22 @@ class ConfigTest extends TestCase
         $this->assertEquals(getenv('CLIENT_SECRET'), MercadoPago\SDK::getClientSecret());
 
     }
+
+    /**
+     * @covers                   MercadoPago\SDK
+     */
+    public function testDoGetToken()
+    { 
+        $this->assertNotNull(MercadoPago\SDK::getAccessToken());
+    }
+
+    public function testSetMultipleAT(){
+        MercadoPago\SDK::setMultipleCredentials(
+            array(
+                "mla" => "MLA_AT",
+                "mlb" => "MLB_AT"
+            )
+        ); 
+        $this->assertNotNull(MercadoPago\SDK::config());
+    }
 }
