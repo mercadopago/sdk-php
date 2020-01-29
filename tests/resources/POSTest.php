@@ -1,7 +1,6 @@
 <?php 
 
 use PHPUnit\Framework\TestCase;
-use MercadoPago;
 
 /**
  * EntityTest Class Doc Comment
@@ -69,5 +68,3 @@ class InstoreTest extends TestCase
     // }
 
 }
-
-?>
