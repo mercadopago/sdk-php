@@ -59,6 +59,7 @@ class InstoreTest extends TestCase
         $poss = $search->search($filters);
         $last_pos = end($poss);
 
+        var_dump($poss);
         var_dump($last_pos);
 
         $last_id = $last_pos->external_id;
