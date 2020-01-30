@@ -1,19 +1,19 @@
-# Unoficial Mercado Pago SDK for PHP
+# Mercado Pago SDK for PHP
 
-[![Build Status](https://travis-ci.org/liveecommerce/dx-php.png)](https://travis-ci.org/liveecommerce/dx-php)
+[![Build Status](https://travis-ci.org/mercadopago/dx-php.png)](https://travis-ci.org/mercadopago/dx-php)
 
 This library provides developers with a simple set of bindings to the Mercado Pago API.
 
 ### PHP Versions Supported:
 
-The SDK supports PHP 7.1 or major
+The SDK supports PHP 5.6 or major
 
 ### Installation 
 
 #### Using Composer
 
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos) if not already installed
-2. Go to your project directory and run `composer require "liveecommerce/dx-php:1.9.0"` on the command line.
+2. Go to your project directory and run `composer require "mercadopago/dx-php:1.2.1"` on the command line.
 3. This how your directory structure would look like.
 4. Thats all, you have Mercado Pago SDK installed.
 
