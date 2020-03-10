@@ -117,12 +117,12 @@ class RestClient
      * @throws Exception
      */
     protected function exec($options)
-    {  
+    {
+        $startRequestMillis = round(microtime(true) * 1000);
         $method = key($options);
         $requestPath = reset($options);
         $verb = self::$verbArray[$method];
-        
-        $headers = $this->getArrayValue($options, 'headers');
+
         $url_query = $this->getArrayValue($options, 'url_query');
         $formData = $this->getArrayValue($options, 'form_data');
         $jsonData = $this->getArrayValue($options, 'json_data');
@@ -153,8 +153,22 @@ class RestClient
         }
         $connect->setOption(CURLOPT_RETURNTRANSFER, true);
         $connect->setOption(CURLOPT_CUSTOMREQUEST, $verb);
+        $connect->setOption(CURLOPT_CERTINFO, 1);
+        $responseHeaders = [];
+        $connect->setOption(CURLOPT_HEADERFUNCTION, function($curl, $header) use (&$responseHeaders)
+                    {
+                        $len = strlen($header);
+                        $header = explode(':', $header, 2);
+                        if (count($header) < 2) // ignore invalid headers
+                            return $len;
+
+                        $responseHeaders[strtolower(trim($header[0]))][] = trim($header[1]);
+
+                        return $len;
+                    }
+        );
         
-        $this->setHeaders($connect, $headers);
+        $this->setHeaders($connect, $responseHeaders);
         $proxyAddress = $this->getArrayValue($connectionParams, 'proxy_addr');
         $proxyPort = $this->getArrayValue($connectionParams, 'proxy_port');
         if (!empty($proxyAddress)) {
@@ -182,9 +196,12 @@ class RestClient
         if ($jsonData) {
             $this->setData($connect, $jsonData, "application/json");
         }
- 
+
+        $startMillis = round(microtime(true) * 1000);
         $apiResult = $connect->execute();
-        $apiHttpCode = $connect->getInfo(CURLINFO_HTTP_CODE);
+        $endMillis = round(microtime(true) * 1000);
+
+        $apiHttpCode = $connect->getInfo()['http_code'];
         
         if ($apiResult === false) {
             throw new Exception ($connect->error());
@@ -195,9 +212,15 @@ class RestClient
         if ($apiHttpCode != "200" && $apiHttpCode != "201") {
             error_log($apiResult);
         }
-        
+
         $response['response'] = json_decode($apiResult, true);
         $response['code'] = $apiHttpCode;
+
+        $requestInfo = $connect->getCurlInfo();
+        $requestInfo['headers'] = $this->getArrayValue($options, 'headers') ? $this->getArrayValue($options, 'headers') : [];
+        $requestInfo['method'] = $verb;
+        $stats = new Stats($requestInfo, $response, $startMillis, $endMillis, $startRequestMillis);
+        $stats->run();
 
         $connect->error();
         

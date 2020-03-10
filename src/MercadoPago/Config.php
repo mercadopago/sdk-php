@@ -170,7 +170,6 @@ class Config
     /**
      * Refresh token
      * @return mixed
-     * //TODO check valid response with production credentials
      */
     public function refreshToken()
     {
