@@ -3,6 +3,7 @@
 
 namespace MercadoPago\Entities\Insight\DTO;
 
+use MercadoPago\Annotation\Attribute;
 
 class BusinessFlowInfo
 {
@@ -10,11 +11,13 @@ class BusinessFlowInfo
 
     /**
      * @var string
+     * @Attribute(json = "name")
      */
     public $name;
 
     /**
      * @var string
+     * @Attribute(json = "uid")
      */
     public $uid;
 

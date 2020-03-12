@@ -3,6 +3,7 @@
 
 namespace MercadoPago\Entities\Insight\DTO;
 
+use MercadoPago\Annotation\Attribute;
 
 class StructuredMetricRequest
 {
@@ -10,31 +11,37 @@ class StructuredMetricRequest
 
     /**
      * @var ClientInfo
+     * @Attribute(json = "client-info")
      */
     public $clientInfo;
 
     /**
      * @var BusinessFlowInfo
+     * @Attribute(json = "business-flow-info")
      */
     public $businessFlowInfo;
 
     /**
      * @var EventInfo
+     * @Attribute(json = "event-info")
      */
     public $eventInfo;
 
     /**
      * @var ConnectionInfo
+     * @Attribute(json = "connection-info")
      */
     public $connectionInfo;
 
     /**
      * @var DeviceInfo
+     * @Attribute(json = "device-info")
      */
     public $deviceInfo;
 
     /**
      * @var string
+     * @Attribute(json = "encoded-data")
      */
     public $base64data;
 

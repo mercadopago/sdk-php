@@ -3,17 +3,34 @@
 
 namespace MercadoPago\Entities\Insight\DTO;
 
+use MercadoPago\Annotation\Attribute;
 
 class DeviceInfo
 {
     const SerialVersionUID = 1;
 
+    /**
+     * @var string
+     * @Attribute(json = "os-name")
+     */
     public $osName;
 
+    /**
+     * @var string
+     * @Attribute(json = "model-name")
+     */
     public $modelName;
 
+    /**
+     * @var string
+     * @Attribute(json = "cpu-type")
+     */
     public $cpuType;
 
+    /**
+     * @var string
+     * @Attribute(json = "ram-size")
+     */
     public $ramSize;
 
     /**

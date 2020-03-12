@@ -99,15 +99,13 @@ class InsightDataManager
      */
     public function __construct()
     {
-        self::$restClient = new CurlRequest('https://webhook.site/fb67abd2-b100-4719-8079-2456429161a2');
+        self::$restClient = new CurlRequest();
         $this->initializeDeviceInfo();
         self::$trafficLight = $this->callTrafficLight();
     }
 
     private function callTrafficLight()
     {
-        $options['headers'] = $this->getDefaultHeaders();
-
         $clientInfo = new ClientInfo();
         $clientInfo->name = 'MercadoPago-DX-PHP';
         $clientInfo->version = Version::$_VERSION;
@@ -116,8 +114,10 @@ class InsightDataManager
         $trafficLightRequest->clientInfo = $clientInfo;
 
         self::$restClient->setOption(CURLOPT_RETURNTRANSFER, 1);
-        self::$restClient->setOption(CURLOPT_POST, 1);
+        self::$restClient->setOption(CURLOPT_CUSTOMREQUEST, "POST");
         self::$restClient->setOption(CURLOPT_POSTFIELDS, $this->serialize($trafficLightRequest));
+        self::$restClient->setOption(CURLOPT_URL, self::INSIGHT_DEFAULT_BASE_URL . self::INSIGHTS_API_ENDPOINT_TRAFFIC_LIGHT);
+        self::$restClient->setOption(CURLOPT_HTTPHEADER, $this->getDefaultHeaders());
 
         $response = self::$restClient->execute();
         $trafficLightResponse = $this->deserialize(json_decode($response, true), TrafficLightResponse::class);
@@ -137,12 +137,17 @@ class InsightDataManager
                 }else{
                     $key = $attributeName;
                 }
-                if(is_object($entity->$attributeName)){
-                    $value = json_decode($this->serialize($entity->$attributeName));
-                }else {
-                    $value = $entity->$attributeName;
+
+                if (!empty($entity->$attributeName) && !is_null($entity->$attributeName)){
+                    if(is_object($entity->$attributeName)){
+                        $value = json_decode($this->serialize($entity->$attributeName));
+                    }else {
+                        $value = $entity->$attributeName;
+                    }
+                    $json[$key] = $value;
+                }else{
+                    $json[$key] = null;
                 }
-                $json[$key] = $value;
             }
         }
         return json_encode($json);
@@ -248,8 +253,6 @@ class InsightDataManager
 
     public function sendInsightMetrics($request, $response, $startMillis, $endMillis, $startRequestMillis)
     {
-        $options['headers'] = $this->getDefaultHeaders();
-
         $clientInfo = new ClientInfo();
         $clientInfo->name = 'MercadoPago-DX-PHP';
         $clientInfo->version = Version::$_VERSION;
@@ -276,8 +279,8 @@ class InsightDataManager
             ->setFirstByteTime($startMillis - $startRequestMillis)
             ->setLastByteTime($endMillis - $startMillis);
 
-        if (!empty($requestHeaders) && !is_null($requestHeaders)) {
-            foreach ($requestHeaders as $key => $value) {
+        if (!empty($request['headers']) && !is_null($request['headers'])) {
+            foreach ($request['headers'] as $key => $value) {
                 if(strtolower($key) === strtolower(self::HEADER_X_INSIGHTS_DATA_ID)){
                     continue;
                 }
@@ -288,8 +291,8 @@ class InsightDataManager
             }
         }
 
-        if (!empty($responseHeaders) && !is_null($responseHeaders)) {
-            foreach ($responseHeaders as $key => $value) {
+        if (!empty($response['headers']) && !is_null($response['headers'])) {
+            foreach ($response['headers'] as $key => $value) {
                 $protocolHttp->addResponseHeaders($key, $value);
             }
         }
@@ -301,7 +304,6 @@ class InsightDataManager
 
         $tcpInfo = new TcpInfo();
         $tcpInfo->setSourceAddress('');
-
 
         $dnsInfo = new DnsInfo();
         $dnsInfo->setLookupTime($request['namelookup_time']);
@@ -339,9 +341,13 @@ class InsightDataManager
 
         self::$restClient->setOption(CURLOPT_RETURNTRANSFER, 1);
         self::$restClient->setOption(CURLOPT_POST, 1);
-        self::$restClient->setOption(CURLOPT_POSTFIELDS, $this->serialize($structuredMetricRequest));
+        self::$restClient->setOption(CURLOPT_URL, self::INSIGHT_DEFAULT_BASE_URL . self::INSIGHTS_API_ENDPOINT_METRIC);
+        $json = $this->serialize($structuredMetricRequest);
+        self::$restClient->setOption(CURLOPT_POSTFIELDS, $json);
 
         $insightResponse = self::$restClient->execute();
+
+        echo "Insight response: " . $insightResponse . PHP_EOL;
 
         return $insightResponse;
     }
@@ -349,8 +355,9 @@ class InsightDataManager
     public function getDefaultHeaders()
     {
         return [
-            self::HEADER_X_INSIGHTS_METRIC_LAB_SCOPE => SDK::getMetricsScope(),
-            self::HEADER_ACCEPT_TYPE => 'application/json'
+            self::HEADER_X_INSIGHTS_METRIC_LAB_SCOPE . ':' . SDK::getMetricsScope(),
+            self::HEADER_ACCEPT_TYPE . ':application/json',
+            'Content-Type:application/json'
         ];
     }
 }

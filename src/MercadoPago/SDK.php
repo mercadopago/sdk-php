@@ -9,7 +9,8 @@ namespace MercadoPago;
 class SDK
 {
 
-    const DEFAULT_METRICS_SCOPE = "prod";
+    const DEFAULT_METRICS_SCOPE = 'prod';
+    const TEST_METRICS_SCOPE = 'test';
 
     /**
      * @var Config
@@ -219,7 +220,11 @@ class SDK
      * @param $value string
      */
     public static function setMetricsScope($value) {
-        self::$metricsScope = $value;
+        self::$metricsScope = strval($value);
+    }
+
+    public static function setTestMetricsScope(){
+        self::setMetricsScope(self::TEST_METRICS_SCOPE);
     }
 }
 

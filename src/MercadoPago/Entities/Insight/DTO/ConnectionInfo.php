@@ -3,6 +3,7 @@
 
 namespace MercadoPago\Entities\Insight\DTO;
 
+use MercadoPago\Annotation\Attribute;
 
 class ConnectionInfo
 {
@@ -10,46 +11,55 @@ class ConnectionInfo
 
     /**
      * @var string
+     * @Attribute(json = "network-type")
      */
     public $networkType;
 
     /**
      * @var string
+     * @Attribute(json = "network-speed")
      */
     public $networkSpeed;
 
     /**
      * @var string
+     * @Attribute(json = "user-agent")
      */
     public $userAgent;
 
     /**
      * @var boolean
+     * @Attribute(json = "was-reused")
      */
     public $wasReused;
 
     /**
      * @var DnsInfo
+     * @Attribute(json = "dns-info")
      */
     public $dnsInfo;
 
     /**
      * @var CertificateInfo
+     * @Attribute(json = "certificate-info")
      */
     public $certificateInfo;
 
     /**
      * @var TcpInfo
+     * @Attribute(json = "tcp-info")
      */
     public $tcpInfo;
 
     /**
      * @var ProtocolInfo
+     * @Attribute(json = "protocol-info")
      */
     public $protocolInfo;
 
     /**
      * @var boolean
+     * @Attribute(json = "is-complete")
      */
     public $completeData;
 
@@ -69,7 +79,7 @@ class ConnectionInfo
      */
     public function setNetworkSpeed($networkSpeed)
     {
-        $this->networkSpeed = $networkSpeed;
+        $this->networkSpeed = strval($networkSpeed);
         return $this;
     }
 
@@ -79,7 +89,7 @@ class ConnectionInfo
      */
     public function setUserAgent($userAgent)
     {
-        $this->userAgent = $userAgent;
+        $this->userAgent = strval($userAgent);
         return $this;
     }
 

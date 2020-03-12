@@ -3,27 +3,64 @@
 
 namespace MercadoPago\Entities\Insight\DTO;
 
+use MercadoPago\Annotation\Attribute;
 
 class ProtocolHttp
 {
     const SerialVersionUID = 1;
 
+    /**
+     * @var string
+     * @Attribute(json = "referer-url")
+     */
     public $refererUrl;
 
+    /**
+     * @var string
+     * @Attribute(json = "request-method")
+     */
     public $requestMethod;
 
+    /**
+     * @var string
+     * @Attribute(json = "request-url")
+     */
     public $requestUrl;
 
+    /**
+     * @var array
+     * @Attribute(json = "request-headers")
+     */
     public $requestHeaders = array();
 
+    /**
+     * @var integer
+     * @Attribute(json = "response-status-code")
+     */
     public $responseCode;
 
+    /**
+     * @var array
+     * @Attribute(json = "response-headers")
+     */
     public $responseHeaders = array();
 
+    /**
+     * @var integer
+     * @Attribute(json = "first-byte-time-millis")
+     */
     public $firstByteTime;
 
+    /**
+     * @var integer
+     * @Attribute(json = "last-byte-time-millis")
+     */
     public $lastByteTime;
 
+    /**
+     * @var boolean
+     * @Attribute(json = "was-cached")
+     */
     public $wasCached;
 
     /**

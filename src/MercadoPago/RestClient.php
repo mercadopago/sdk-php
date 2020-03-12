@@ -2,7 +2,8 @@
 namespace MercadoPago;
 
 use Exception;
- 
+use MercadoPago\Entities\Insight\Stats;
+
 /**
  * MercadoPago cURL RestClient
  */
@@ -123,6 +124,7 @@ class RestClient
         $requestPath = reset($options);
         $verb = self::$verbArray[$method];
 
+        $headers = $this->getArrayValue($options, 'headers');
         $url_query = $this->getArrayValue($options, 'url_query');
         $formData = $this->getArrayValue($options, 'form_data');
         $jsonData = $this->getArrayValue($options, 'json_data');
@@ -162,13 +164,13 @@ class RestClient
                         if (count($header) < 2) // ignore invalid headers
                             return $len;
 
-                        $responseHeaders[strtolower(trim($header[0]))][] = trim($header[1]);
+                        $responseHeaders[strtolower(trim($header[0]))] = trim($header[1]);
 
                         return $len;
                     }
         );
         
-        $this->setHeaders($connect, $responseHeaders);
+        $this->setHeaders($connect, $headers);
         $proxyAddress = $this->getArrayValue($connectionParams, 'proxy_addr');
         $proxyPort = $this->getArrayValue($connectionParams, 'proxy_port');
         if (!empty($proxyAddress)) {
@@ -201,7 +203,7 @@ class RestClient
         $apiResult = $connect->execute();
         $endMillis = round(microtime(true) * 1000);
 
-        $apiHttpCode = $connect->getInfo()['http_code'];
+        $apiHttpCode = $connect->getCurlInfo()['http_code'];
         
         if ($apiResult === false) {
             throw new Exception ($connect->error());
@@ -215,6 +217,7 @@ class RestClient
 
         $response['response'] = json_decode($apiResult, true);
         $response['code'] = $apiHttpCode;
+        $response['headers'] = $responseHeaders;
 
         $requestInfo = $connect->getCurlInfo();
         $requestInfo['headers'] = $this->getArrayValue($options, 'headers') ? $this->getArrayValue($options, 'headers') : [];
@@ -223,7 +226,7 @@ class RestClient
         $stats->run();
 
         $connect->error();
-        
+
         return ['code' => $response['code'], 'body' => $response['response']];
     }
 
