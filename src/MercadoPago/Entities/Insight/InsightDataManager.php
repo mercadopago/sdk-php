@@ -52,10 +52,6 @@ class InsightDataManager
      */
     private static $restClient;
 
-    private static $config;
-
-    private static $manager;
-
     /**
      * @var TrafficLightResponse
      */
@@ -74,17 +70,17 @@ class InsightDataManager
     /**
      * @var string
      */
-    private static $osName;
+    private static $osName = '';
 
     /**
      * @var string
      */
-    private static $deviceRam;
+    private static $deviceRam = '';
 
     /**
      * @var string
      */
-    private static $cpuType;
+    private static $cpuType = '';
 
     public static function getInstance()
     {
@@ -121,54 +117,9 @@ class InsightDataManager
 
         $response = self::$restClient->execute();
         $trafficLightResponse = $this->deserialize(json_decode($response, true), TrafficLightResponse::class);
-        self::$sendDataDeadlineMillis = round((microtime(true) + $trafficLightResponse->getSendTTL()) * 1000); //todo calculate info
+        self::$sendDataDeadlineMillis = round((microtime(true) + $trafficLightResponse->getSendTTL()) * 1000);
 
         return $trafficLightResponse;
-    }
-
-    public function serialize($entity){
-        $reader = new MetaDataReader();
-        $metadata = $reader->getMetaData($entity);
-        $json = [];
-        if (isset($metadata->attributes)){
-            foreach ($metadata->attributes as $attributeName => $attribute) {
-                if (!is_null($attribute['json']) && !empty($attribute['json'])) {
-                    $key = $attribute['json'];
-                }else{
-                    $key = $attributeName;
-                }
-
-                if (!empty($entity->$attributeName) && !is_null($entity->$attributeName)){
-                    if(is_object($entity->$attributeName)){
-                        $value = json_decode($this->serialize($entity->$attributeName));
-                    }else {
-                        $value = $entity->$attributeName;
-                    }
-                    $json[$key] = $value;
-                }else{
-                    $json[$key] = null;
-                }
-            }
-        }
-        return json_encode($json);
-    }
-
-    public function deserialize($json, $class) {
-        $reader = new MetaDataReader();
-        $object = new $class();
-        $metadata = $reader->getMetadata($object);
-
-        foreach ($metadata->attributes as $attributeName => $attributeValue) {
-            $setMethod = 'set'.ucfirst($attributeName);
-            if (method_exists($object, $setMethod)) {
-                if (!is_null($attributeValue['json']) && !empty($attributeValue['json'])) {
-                    $object->$setMethod($json[$attributeValue['json']]);
-                }else{
-                    $object->$setMethod($json[$attributeName]);
-                }
-            }
-        }
-        return $object;
     }
 
     private function initializeDeviceInfo()
@@ -176,7 +127,7 @@ class InsightDataManager
         $availableCPU = self::getNumberOfLogicalCPUCores();
         $osName = PHP_OS;
         $osVersion = php_uname('r');
-        $modelName = ""; //todo Better understand this param
+        $modelName = "";
         $ram = $this->getSystemMemInfo();
 
         if(!is_null($ram) && !empty($ram)) {
@@ -196,22 +147,14 @@ class InsightDataManager
     }
 
     public static function getNumberOfLogicalCPUCores() {
-        return 1; //todo implement logic
+        // Needs a different implementation for each OS
+        return 0;
     }
 
     public function getSystemMemInfo()
     {
-        /**
-         * todo add Windowns and MacOS support
-         * /usr/sbin/system_profiler SPHardwareDataType | grep "Memory" - Mac
-         */
-        $data = explode("\n", file_get_contents("/proc/meminfo"));
-        $meminfo = array();
-        foreach ($data as $line) {
-            list($key, $val) = explode(":", $line);
-            $meminfo[$key] = trim($val);
-        }
-        return $meminfo;
+        // Needs a different implementation for each OS
+        return false;
     }
 
     public function isInsightMetricsEnable($url)
@@ -302,33 +245,26 @@ class InsightDataManager
             ->setName('http')
             ->setProtocolHttp($protocolHttp);
 
-        $tcpInfo = new TcpInfo();
-        $tcpInfo->setSourceAddress('');
-
         $dnsInfo = new DnsInfo();
         $dnsInfo->setLookupTime($request['namelookup_time']);
 
         $connectionInfo = new ConnectionInfo();
         $connectionInfo
             ->setProtocolInfo($protocolInfo)
-            ->setTcpInfo($tcpInfo)
             ->setCompleteData($endMillis > 0)
             ->setNetworkSpeed($request['speed_download'])
             ->setDnsInfo($dnsInfo)
         ;
 
-
-
-        $deviceInfo = null;
-        if ((!empty($osName) && !is_null($osName)) ||
-            (!empty($deviceRam) && !is_null($deviceRam)) ||
-            (!empty($cpuType) && !is_null($cpuType))
+        $deviceInfo = new DeviceInfo();
+        if ((!empty(self::$osName) && !is_null(self::$osName)) ||
+            (!empty(self::$deviceRam) && !is_null(self::$deviceRam)) ||
+            (!empty(self::$cpuType) && !is_null(self::$cpuType))
         ) {
-            $deviceInfo = new DeviceInfo();
             $deviceInfo
-                ->setCpuType($cpuType)
-                ->setOsName($osName)
-                ->setRamSize($deviceRam);
+                ->setCpuType(self::$cpuType)
+                ->setOsName(self::$osName)
+                ->setRamSize(self::$deviceRam);
         }
 
         $structuredMetricRequest = new StructuredMetricRequest();
@@ -345,11 +281,7 @@ class InsightDataManager
         $json = $this->serialize($structuredMetricRequest);
         self::$restClient->setOption(CURLOPT_POSTFIELDS, $json);
 
-        $insightResponse = self::$restClient->execute();
-
-        echo "Insight response: " . $insightResponse . PHP_EOL;
-
-        return $insightResponse;
+        return self::$restClient->execute();
     }
 
     public function getDefaultHeaders()
@@ -359,5 +291,50 @@ class InsightDataManager
             self::HEADER_ACCEPT_TYPE . ':application/json',
             'Content-Type:application/json'
         ];
+    }
+
+    public function serialize($entity){
+        $reader = new MetaDataReader();
+        $metadata = $reader->getMetaData($entity);
+        $json = [];
+        if (isset($metadata->attributes)){
+            foreach ($metadata->attributes as $attributeName => $attribute) {
+                if (!is_null($attribute['json']) && !empty($attribute['json'])) {
+                    $key = $attribute['json'];
+                }else{
+                    $key = $attributeName;
+                }
+
+                if (!empty($entity->$attributeName) && !is_null($entity->$attributeName)){
+                    if(is_object($entity->$attributeName)){
+                        $value = json_decode($this->serialize($entity->$attributeName));
+                    }else {
+                        $value = $entity->$attributeName;
+                    }
+                    $json[$key] = $value;
+                }else{
+                    $json[$key] = null;
+                }
+            }
+        }
+        return json_encode($json);
+    }
+
+    public function deserialize($json, $class) {
+        $reader = new MetaDataReader();
+        $object = new $class();
+        $metadata = $reader->getMetadata($object);
+
+        foreach ($metadata->attributes as $attributeName => $attributeValue) {
+            $setMethod = 'set'.ucfirst($attributeName);
+            if (method_exists($object, $setMethod)) {
+                if (!is_null($attributeValue['json']) && !empty($attributeValue['json'])) {
+                    $object->$setMethod($json[$attributeValue['json']]);
+                }else{
+                    $object->$setMethod($json[$attributeName]);
+                }
+            }
+        }
+        return $object;
     }
 }
