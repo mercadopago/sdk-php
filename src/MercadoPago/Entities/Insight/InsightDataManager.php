@@ -6,6 +6,7 @@ namespace MercadoPago\Entities\Insight;
 
 use MercadoPago\Config;
 use MercadoPago\Entities\Insight\DTO\BusinessFlowInfo;
+use MercadoPago\Entities\Insight\DTO\CertificateInfo;
 use MercadoPago\Entities\Insight\DTO\ClientInfo;
 use MercadoPago\Entities\Insight\DTO\ConnectionInfo;
 use MercadoPago\Entities\Insight\DTO\DeviceInfo;
@@ -246,7 +247,21 @@ class InsightDataManager
             ->setProtocolHttp($protocolHttp);
 
         $dnsInfo = new DnsInfo();
-        $dnsInfo->setLookupTime($request['namelookup_time']);
+        $dnsInfo
+            ->setLookupTime($request['namelookup_time'])
+            ->setNameServerAddress($_SERVER['SERVER_NAME'])
+        ;
+
+        $certificateInfo = new CertificateInfo();
+        $certificateInfo
+            ->setCertificateVersion($request['certinfo'][1]['Version'])
+            ->setCertificateExpiration($request['certinfo'][1]['Expire date'])
+        ;
+
+        $tcpInfo = new TcpInfo();
+        $tcpInfo
+            ->setSourceAddress($_SERVER['REMOTE_ADDR'])
+        ;
 
         $connectionInfo = new ConnectionInfo();
         $connectionInfo
@@ -254,6 +269,8 @@ class InsightDataManager
             ->setCompleteData($endMillis > 0)
             ->setNetworkSpeed($request['speed_download'])
             ->setDnsInfo($dnsInfo)
+            ->setCertificateInfo($certificateInfo)
+            ->setUserAgent($_SERVER["HTTP_USER_AGENT"])
         ;
 
         $deviceInfo = new DeviceInfo();
