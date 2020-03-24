@@ -470,7 +470,7 @@ abstract class Entity
       if ($data) {
         
         foreach ($data as $key => $value) {
-            if ((!is_null($value) && !empty($value)) || is_bool($value) || is_numeric($value)){
+            if (!is_null($value)){
                 if (is_array($value)) {
                     $className = 'MercadoPago\\' . $this->_camelize($key);
                     if (class_exists($className, true)) {
