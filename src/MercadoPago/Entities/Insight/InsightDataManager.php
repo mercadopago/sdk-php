@@ -328,9 +328,9 @@ class InsightDataManager
                     }else {
                         $value = $entity->$attributeName;
                     }
-                    $json[$key] = $value;
-                }else{
-                    $json[$key] = null;
+                    if (!empty($value)){
+                        $json[$key] = $value;
+                    }
                 }
             }
         }

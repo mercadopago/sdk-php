@@ -11,6 +11,7 @@ class SDK
 
     const DEFAULT_METRICS_SCOPE = 'prod';
     const TEST_METRICS_SCOPE = 'test';
+    const PRODUCT_ID = 'BC32A7RU643001OI3940';
 
     /**
      * @var Config
