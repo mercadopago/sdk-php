@@ -4,7 +4,7 @@
   "description": "Fork from mercadopago/dx-php changing the dependencies versions.",
   "homepage": "https://github.com/liveecommerce/dx-php",
   "license": "MIT",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "config": {
     "platform": {
         "php": "7.1"
