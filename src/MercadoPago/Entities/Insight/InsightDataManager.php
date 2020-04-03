@@ -255,7 +255,7 @@ class InsightDataManager
         $certificateInfo = new CertificateInfo();
         $certificateInfo
             ->setCertificateVersion($request['certinfo'][1]['Version'])
-            ->setCertificateExpiration($request['certinfo'][1]['Expire date'])
+            ->setCertificateExpiration(date("d-m-Y", strtotime($request['certinfo'][1]['Expire date'])))
         ;
 
         $tcpInfo = new TcpInfo();
