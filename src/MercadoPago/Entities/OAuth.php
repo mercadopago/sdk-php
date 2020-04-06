@@ -59,10 +59,23 @@ class OAuth extends Entity
      */
     protected $scope;
 
+
+    /**
+     * @param $app_id
+     * @param $redirect_uri
+     * @return string
+     */
     public function getAuthorizationURL($app_id, $redirect_uri){
-      return "https://auth.mercadopago.com.br/authorization?client_id=${app_id}&response_type=code&platform_id=mp&redirect_uri=${redirect_uri}";
+        $county_id = strtolower(SDK::getCountryId());
+        return "https://auth.mercadopago.com.${county_id}/authorization?client_id=${app_id}&response_type=code&platform_id=mp&redirect_uri=${redirect_uri}";
     }
 
+    /**
+     * @param $authorization_code
+     * @param $redirect_uri
+     * @return mixed
+     * @throws \Exception
+     */
     public function getOAuthCredentials($authorization_code, $redirect_uri){
       $this->client_secret = SDK::getAccessToken();
       $this->grant_type = 'authorization_code';
@@ -72,6 +85,11 @@ class OAuth extends Entity
       return $this->save();
     }
 
+    /**
+     * @param $refresh_token
+     * @return mixed
+     * @throws \Exception
+     */
     public function refreshOAuthCredentials($refresh_token){
       $this->client_secret = SDK::getAccessToken();
       $this->grant_type = 'refresh_token';
