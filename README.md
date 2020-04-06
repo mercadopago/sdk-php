@@ -6,14 +6,17 @@ This library provides developers with a simple set of bindings to the Mercado Pa
 
 ### PHP Versions Supported:
 
-The SDK supports PHP 5.6 or major
+The SDK supports PHP 5.6, 7.1 or major
 
 ### Installation 
 
 #### Using Composer
 
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos) if not already installed
-2. Go to your project directory and run `composer require "mercadopago/dx-php:1.2.1"` on the command line.
+2. Go to your project directory and run on the command line
+`composer require "mercadopago/dx-php:2.0.0"` for PHP7 or `composer require "mercadopago/dx-php:1.8.1"` for PHP5.6.
+See the latest version (here)[https://github.com/mercadopago/dx-php/releases].
+
 3. This how your directory structure would look like.
 4. Thats all, you have Mercado Pago SDK installed.
 
@@ -29,19 +32,11 @@ The SDK supports PHP 5.6 or major
 
 2. Setup your credentials
 
-  You have two types of credentials:
-
-  * **For API or custom checkout:**
     ```php
     MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN");      // On Production
     MercadoPago\SDK::setAccessToken("YOUR_TEST_ACCESS_TOKEN"); // On Sandbox
     ```
-  * **For Web-checkout:**
-    ```php
-    MercadoPago\SDK::setClientId("YOUR_CLIENT_ID");
-    MercadoPago\SDK::setClientSecret("YOUR_CLIENT_SECRET");
-    ```
-
+    
 3. Using resource objects.
 
   You can interact with all the resources available in the public API, to this each resource is represented by classes according to the following diagram:
