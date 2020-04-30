@@ -1,6 +1,8 @@
 # Mercado Pago SDK for PHP
 
-[![Build Status](https://travis-ci.org/mercadopago/dx-php.png)](https://travis-ci.org/mercadopago/dx-php)
+[![Latest Stable Version](https://poser.pugx.org/mercadopago/dx-php/v/stable)](https://packagist.org/packages/mercadopago/dx-php)
+[![Total Downloads](https://poser.pugx.org/mercadopago/dx-php/downloads)](https://packagist.org/packages/mercadopago/dx-php)
+[![License](https://poser.pugx.org/mercadopago/dx-php/license)](https://packagist.org/packages/mercadopago/dx-php)
 
 This library provides developers with a simple set of bindings to the Mercado Pago API.
 
