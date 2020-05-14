@@ -24,13 +24,13 @@ Thats all, you have Mercado Pago SDK installed.
   Simple usage looks like:
   
 ```php
-<?php
-    require __DIR__  . '/vendor/autoload.php'; // You have to require the library from your Composer vendor folder
+  <?php
+    require_once 'vendor/autoload.php'; // You have to require the library from your Composer vendor folder
 
     MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN"); // You can inform your Production or SandBox AccessToken
 
     $payment = new MercadoPago\Payment();
-
+    
     $payment->transaction_amount = 141;
     $payment->token = "YOUR_CARD_TOKEN";
     $payment->description = "Ergonomic Silk Shirt";
@@ -39,9 +39,11 @@ Thats all, you have Mercado Pago SDK installed.
     $payment->payer = array(
       "email" => "larue.nienow@hotmail.com"
     );
- 
+
+    $payment->save();
+
     echo $payment->status;
-?>
+  ?>
 ```
 
 ## Documentation 
