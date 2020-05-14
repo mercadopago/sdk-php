@@ -37,7 +37,7 @@ Thats all, you have Mercado Pago SDK installed.
     $payment->installments = 1;
     $payment->payment_method_id = "visa";
     $payment->payer = array(
-      "email" => "larue.nienow@hotmail.com"
+      "email" => "larue.nienow@email.com"
     );
 
     $payment->save();
