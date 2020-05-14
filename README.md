@@ -14,7 +14,7 @@ PHP 5.6, 7.1 or major
 
 ### Using Composer
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos) if not already installed
+1. Download [Composer](https://getcomposer.org/doc/00-intro.md) if not already installed
 
 2. Go to your project directory and run on the command line
 `composer require "mercadopago/dx-php:2.0.0"` for PHP7 or `composer require "mercadopago/dx-php:1.8.1"` for PHP5.6.
@@ -60,3 +60,7 @@ See our Documentation with all APIs you can integrate and how do that [Spanish](
 ## Support 
 
 Write us at [developers.mercadopago.com](https://developers.mercadopago.com)
+
+## License 
+
+MIT license. For more information, see the LICENSE file.
