@@ -12,8 +12,6 @@ PHP 5.6, 7.1 or major
 
 ## Installation 
 
-### Using Composer
-
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md) if not already installed
 
 2. On your project directory run on the command line
