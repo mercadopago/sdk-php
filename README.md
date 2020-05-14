@@ -6,53 +6,36 @@
 
 This library provides developers with a simple set of bindings to the Mercado Pago API.
 
-### PHP Versions Supported:
+## Requirements
 
-The SDK supports PHP 5.6, 7.1 or major
+PHP 5.6, 7.1 or major
 
-### Installation 
+## Installation 
 
-#### Using Composer
+### Using Composer
 
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos) if not already installed
+
 2. Go to your project directory and run on the command line
 `composer require "mercadopago/dx-php:2.0.0"` for PHP7 or `composer require "mercadopago/dx-php:1.8.1"` for PHP5.6.
-See the latest version (here)[https://github.com/mercadopago/dx-php/releases].
+See the latest version ([here](https://github.com/mercadopago/dx-php/releases)).
 
-3. This how your directory structure would look like.
-4. Thats all, you have Mercado Pago SDK installed.
+3. Thats all, you have Mercado Pago SDK installed.
+
+This how your directory structure would look like:
 
 ![installation-demo](img/ezgif-2-f98e8701825e.gif)
 
-### Quick Start 
-
-1. You have to require the library from your Composer vendor folder.
-
-  ```php
-  require __DIR__  . '/vendor/autoload.php';
-  ```
-
-2. Setup your credentials
-
-    ```php
-    MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN");      // On Production
-    MercadoPago\SDK::setAccessToken("YOUR_TEST_ACCESS_TOKEN"); // On Sandbox
-    ```
-    
-3. Using resource objects.
-
-  You can interact with all the resources available in the public API, to this each resource is represented by classes according to the following diagram:
+## Getting Started
   
-  ![sdk resource structure](https://user-images.githubusercontent.com/864790/34393059-9acad058-eb2e-11e7-9987-494eaf19d109.png)
-  
-  **Sample**
+  Simple usage looks like:
   
 ```php
   <?php
   
-    require __DIR__  . '/vendor/autoload.php';
+    require __DIR__  . '/vendor/autoload.php'; // You have to require the library from your Composer vendor folder
 
-    MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN");
+    MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN"); // You can inform your Production or SandBox AccessToken
 
     $payment = new MercadoPago\Payment();
 
@@ -69,7 +52,11 @@ See the latest version (here)[https://github.com/mercadopago/dx-php/releases].
     
   ?>
 ```
-  
-### Support 
+
+## Documentation 
+
+See our Documentation with all APIs you can integrate and how do that [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/api/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/api/introduction/)
+
+## Support 
 
 Write us at [developers.mercadopago.com](https://developers.mercadopago.com)
