@@ -27,7 +27,7 @@ Thats all, you have Mercado Pago SDK installed.
   <?php
     require_once 'vendor/autoload.php'; // You have to require the library from your Composer vendor folder
 
-    MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN"); // You can inform your Production or SandBox AccessToken
+    MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN"); // Either Production or SandBox AccessToken
 
     $payment = new MercadoPago\Payment();
     
