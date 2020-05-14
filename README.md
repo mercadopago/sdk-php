@@ -16,11 +16,10 @@ PHP 5.6, 7.1 or major
 
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md) if not already installed
 
-2. Go to your project directory and run on the command line
+2. On your project directory run on the command line
 `composer require "mercadopago/dx-php:2.0.0"` for PHP7 or `composer require "mercadopago/dx-php:1.8.1"` for PHP5.6.
-See the latest version ([here](https://github.com/mercadopago/dx-php/releases)).
 
-3. Thats all, you have Mercado Pago SDK installed.
+Thats all, you have Mercado Pago SDK installed.
 
 This how your directory structure would look like:
 
