@@ -30,6 +30,7 @@ This how your directory structure would look like:
   Simple usage looks like:
   
 ```php
+<?php
     require __DIR__  . '/vendor/autoload.php'; // You have to require the library from your Composer vendor folder
 
     MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN"); // You can inform your Production or SandBox AccessToken
@@ -46,6 +47,7 @@ This how your directory structure would look like:
     );
  
     echo $payment->status;
+?>
 ```
 
 ## Documentation 
