@@ -21,10 +21,6 @@ PHP 5.6, 7.1 or major
 
 Thats all, you have Mercado Pago SDK installed.
 
-This how your directory structure would look like:
-
-![installation-demo](img/ezgif-2-f98e8701825e.gif)
-
 ## Getting Started
   
   Simple usage looks like:
