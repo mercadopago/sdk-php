@@ -58,7 +58,7 @@ Check our official code reference to explore all available functionalities.
 
 ## ❤️ Support 
 
-Write us at [developers.mercadopago.com](https://developers.mercadopago.com)
+If you require technical support, please contact our support team at [developers.mercadopago.com](https://developers.mercadopago.com)
 
 ## 🏻 License 
 
