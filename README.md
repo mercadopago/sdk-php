@@ -4,22 +4,26 @@
 [![Total Downloads](https://poser.pugx.org/mercadopago/dx-php/downloads)](https://packagist.org/packages/mercadopago/dx-php)
 [![License](https://poser.pugx.org/mercadopago/dx-php/license)](https://packagist.org/packages/mercadopago/dx-php)
 
-This library provides developers with a simple set of bindings to the Mercado Pago API.
+This library provides developers with a simple set of bindings to help you integrate Mercado Pago API to a website and start receiving payments.
 
-## Requirements
+## 💡 Requirements
 
 PHP 5.6, 7.1 or major
 
-## Installation 
+## 📲 Installation 
+
+First time using Mercado Pago? Create your Mercado Pago account, if you don’t have one already.
 
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md) if not already installed
 
 2. On your project directory run on the command line
 `composer require "mercadopago/dx-php:2.0.0"` for PHP7 or `composer require "mercadopago/dx-php:1.8.1"` for PHP5.6.
 
+3. Copy the access_token in the [credentials](https://www.mercadopago.com/mlb/account/credentials) section of the page and replace YOUR_ACCESS_TOKEN with it.
+
 Thats all, you have Mercado Pago SDK installed.
 
-## Getting Started
+## 🌟 Getting Started
   
   Simple usage looks like:
   
@@ -46,14 +50,19 @@ Thats all, you have Mercado Pago SDK installed.
   ?>
 ```
 
-## Documentation 
+## 📚 Documentation 
 
-See our Documentation with all APIs you can integrate and how do that [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/api/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/api/introduction/)
+See our Documentation with all APIs you can integrate in our DevSite: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/api/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/api/introduction/)
 
-## Support 
+Check our official code reference to explore all available functionalities.
+
+## ❤️ Support 
 
 Write us at [developers.mercadopago.com](https://developers.mercadopago.com)
 
-## License 
+## 🏻 License 
 
-MIT license. For more information, see the LICENSE file.
+```
+MIT license. Copyright (c) 2018 - Mercado Pago / Mercado Libre 
+For more information, see the LICENSE file.
+```
