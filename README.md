@@ -12,7 +12,7 @@ PHP 5.6, 7.1 or major
 
 ## 📲 Installation 
 
-First time using Mercado Pago? Create your Mercado Pago account, if you don’t have one already.
+First time using Mercado Pago? Create your [Mercado Pago account](https://www.mercadopago.com), if you don’t have one already.
 
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md) if not already installed
 
