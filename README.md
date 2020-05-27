@@ -8,7 +8,7 @@ This library provides developers with a simple set of bindings to help you integ
 
 ## 💡 Requirements
 
-PHP 5.6, 7.1 or major
+PHP 5.6, 7.1 or higher
 
 ## 📲 Installation 
 
@@ -52,7 +52,10 @@ Thats all, you have Mercado Pago SDK installed.
 
 ## 📚 Documentation 
 
-See our Documentation with all APIs you can integrate in our DevSite: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/api/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/api/introduction/)
+Visit our Dev Site for further information regarding:
+ - Payments APIs: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/api/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/api/introduction/)
+ - Mercado Pago checkout: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/web-payment-checkout/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/web-payment-checkout/introduction/)
+ - Web Tokenize checkout: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/web-tokenize-checkout/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/web-tokenize-checkout/introduction/)
 
 Check our official code reference to explore all available functionalities.
 
