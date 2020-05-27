@@ -21,7 +21,7 @@ First time using Mercado Pago? Create your [Mercado Pago account](https://www.me
 
 3. Copy the access_token in the [credentials](https://www.mercadopago.com/mlb/account/credentials) section of the page and replace YOUR_ACCESS_TOKEN with it.
 
-Thats all, you have Mercado Pago SDK installed.
+That's it! Mercado Pago SDK has been successfully installed.
 
 ## 🌟 Getting Started
   
