@@ -33,7 +33,8 @@
     "squizlabs/php_codesniffer": "2.3.*",
     "sebastian/phpcpd": "*", 
     "doctrine/orm": "~2.3",
-    "vlucas/phpdotenv": "^2.5"
+    "vlucas/phpdotenv": "^2.5",
+    "phpdocumentor/phpdocumentor": "^2.0"
   },
   "autoload": {
     "psr-4": {
