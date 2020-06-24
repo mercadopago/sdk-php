@@ -1,5 +1,6 @@
 {
   "name": "mercadopago/dx-php",
+  "description": "Mercado Pago PHP SDK",
   "type": "library",
   "homepage": "https://github.com/mercadopago/dx-php",
   "license": "MIT",
@@ -45,5 +46,8 @@
         "src/MercadoPago/Entities/Shared/"
       ]
     }
+  },
+  "scripts": {
+    "test": "./vendor/bin/phpunit tests"
   }
 }
