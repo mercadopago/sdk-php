@@ -46,5 +46,8 @@
         "src/MercadoPago/Entities/Shared/"
       ]
     }
+  },
+  "scripts": {
+    "generate-doc": "php phpDocumentor.phar --visibility=\"public,protected\" --template=\"responsive-twig\" --title=\"SDK Mercado Pago\" -d ./src/MercadoPaGo/Entities -t ./docs"
   }
 }

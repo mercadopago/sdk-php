@@ -1,4 +1,7 @@
 <?php
+/**
+ * Payment class file
+ */
 namespace MercadoPago;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
@@ -18,518 +21,518 @@ class Payment extends Entity
 {
 
     /**
-     * ID
-     * @var long
+     * id
+     * @var int
      * @Attribute(primaryKey = true)
      */
     protected $id;
 
     /**
-     * Acquirer
+     * acquirer
      * @var string
      * @Attribute()
      */
     protected $acquirer;
 
     /**
-     * Acquirer reconciliation
+     * acquirer_reconciliation
      * @var string
      * @Attribute()
      */
     protected $acquirer_reconciliation;
 
     /**
-     * Site ID
+     * site_id
      * @var string
      * @Attribute(idempotency = true)
      */
     protected $site_id;
 
     /**
-     * Sponsor ID
-     * @var long
+     * sponsor_id
+     * @var int
      * @Attribute()
      */
     protected $sponsor_id;
 
     /**
-     * Operation Type
+     * operation_type
      * @var string
      * @Attribute()
      */
     protected $operation_type;
 
     /**
-     * Order ID
-     * @var long
+     * order_id
+     * @var int
      * @Attribute(idempotency = true)
      */
     protected $order_id;
 
     /**
-     * Order
-     * @var long
+     * order
+     * @var int
      * @Attribute()
      */
     protected $order;
 
     /**
-     * Binary Mode
+     * binary_mode
      * @var boolean
      * @Attribute()
      */
     protected $binary_mode;
 
     /**
-     * External Reference
+     * external_reference
      * @var string
      * @Attribute()
      */
     protected $external_reference;
 
     /**
-     * Status
+     * status
      * @var string
      * @Attribute()
      */
     protected $status;
 
     /**
-     * Status Detail
+     * status_detail
      * @var string
      * @Attribute()
      */
     protected $status_detail;
 
     /**
-     * Status Detail
-     * @var long
+     * store_id
+     * @var int
      * @Attribute()
      */
     protected $store_id;
 
     /**
-     * Tax Amount
-     * @var array
+     * taxes_amount
+     * @var float
      * @Attribute()
      */
     protected $taxes_amount;
 
     /**
-     * Payment Type
+     * payment_type
      * @var string
      * @Attribute(type = "string")
      */
     protected $payment_type;
 
     /**
-     * Date Created
-     * @var string
+     * date_created
+     * @var \DateTime
      * @Attribute()
      */
     protected $date_created;
 
     /**
-     * Last Modified
-     * @var string
+     * last_modified
+     * @var \DateTime
      * @Attribute()
      */
     protected $last_modified;
 
     /**
-     * Live Mode
+     * live_mode
      * @var boolean
      * @Attribute()
      */
     protected $live_mode;
 
     /**
-     * Date last updated
-     * @var string
+     * date_last_update
+     * @var \DateTime
      * @Attribute()
      */
     protected $date_last_updated;
 
     /**
-     * Date of expiration
-     * @var string
+     * date_of_expiration
+     * @var \DateTime
      * @Attribute()
      */
     protected $date_of_expiration;
 
     /**
-     * Deduction schema
+     * deduction_schema
      * @var string
      * @Attribute()
      */
     protected $deduction_schema;
 
     /**
-     * Date approved
-     * @var string
+     * date_approved
+     * @var \DateTime
      * @Attribute()
      */
     protected $date_approved;
 
     /**
-     * Money release date
-     * @var string
+     * money_release_date
+     * @var \DateTime
      * @Attribute()
      */
     protected $money_release_date;
 
     /**
-     * Money release schema
+     * money_release_schema
      * @var string
      * @Attribute()
      */
     protected $money_release_schema;
 
     /**
-     * Currency id
+     * currency_id
      * @var string
      * @Attribute()
      */
     protected $currency_id;
 
     /**
-     * Transaction amount
+     * transaction_amount
      * @var float
      * @Attribute(type = "float")
      */
     protected $transaction_amount;
 
     /**
-     * Transaction amount refunded
+     * transaction_amount_refunded
      * @var float
      * @Attribute(type = "float")
      */
     protected $transaction_amount_refunded;
 
     /**
-     * Shipping cost
+     * shipping_cost
      * @var float
      * @Attribute()
      */
     protected $shipping_cost;
 
     /**
-     * Total paid amount
+     * total_paid_amount
      * @var float
      * @Attribute(idempotency = true)
      */
     protected $total_paid_amount;
 
     /**
-     * Finance charge
+     * finance_charge
      * @var float
      * @Attribute(type = "float")
      */
     protected $finance_charge;
 
     /**
-     * Net received amount
+     * net_received_amount
      * @var float
      * @Attribute()
      */
     protected $net_received_amount;
 
     /**
-     * Marketplace
+     * marketplace
      * @var string
      * @Attribute()
      */
     protected $marketplace;
 
     /**
-     * Marketplace fee
+     * marketplace_fee
      * @var float
      * @Attribute(type = "float")
      */
     protected $marketplace_fee;
 
     /**
-     * Reason
+     * reason
      * @var string
      * @Attribute()
      */
     protected $reason;
 
     /**
-     * Payer
-     * @var array
+     * payer
+     * @var object
      * @Attribute()
      */
     protected $payer;
 
     /**
-     * Collector
-     * @var array
+     * collector
+     * @var object
      * @Attribute()
      */
     protected $collector;
 
     /**
-     * Collector ID
-     * @var long
+     * collector_id
+     * @var int
      * @Attribute()
      */
     protected $collector_id;
 
     /**
-     * Counter currency
+     * counter_currency
      * @var string
      * @Attribute()
      */
     protected $counter_currency;
 
     /**
-     * Payment method ID
+     * payment_method_id
      * @var string
      * @Attribute()
      */
     protected $payment_method_id;
-    // For flavor 1
 
     /**
-     * Payment type ID
+     * payment_type_id
      * @var string
      * @Attribute()
      */
     protected $payment_type_id;
 
     /**
-     * POS ID
+     * pos_id
      * @var string
      * @Attribute()
      */
     protected $pos_id;
 
     /**
-     * Transaction details
-     * @var array
+     * transaction_details
+     * @var object
      * @Attribute()
      */
     protected $transaction_details;
 
     /**
-     * Fee details
-     * @var array
+     * fee_details
+     * @var object
      * @Attribute()
      */
     protected $fee_details;
 
     /**
-     * Differential pricing ID
-     * @var long
+     * differential_pricing_id
+     * @var int
      * @Attribute()
      */
     protected $differential_pricing_id;
 
     /**
-     * Application fee
+     * application_fee
      * @var float
      * @Attribute()
      */
     protected $application_fee;
 
     /**
-     * Authorization code
+     * authorization_code
      * @var string
      * @Attribute()
      */
     protected $authorization_code;
 
     /**
-     * Capture
+     * capture
      * @var boolean
      * @Attribute()
      */
     protected $capture;
 
     /**
-     * Captured
+     * captured
      * @var boolean
      * @Attribute()
      */
     protected $captured;
 
     /**
-     * Card
-     * @var long
+     * card
+     * @var int
      * @Attribute()
      */
     protected $card;
 
     /**
-     * Call for authorize ID
+     * call_for_authorize_id
      * @var string
      * @Attribute()
      */
     protected $call_for_authorize_id;
 
     /**
-     * Statement descriptor
+     * statement_descriptor
      * @var string
      * @Attribute()
      */
     protected $statement_descriptor;
 
     /**
-     * Refunds
-     * @var array
+     * refunds
+     * @var object
      * @Attribute()
      */
     protected $refunds;
 
     /**
-     * Shipping amount
+     * Shipping_amount
      * @var float
      * @Attribute()
      */
     protected $shipping_amount;
 
     /**
-     * Additional info
+     * additional_info
      * @var array
      * @Attribute()
      */
     protected $additional_info;
 
     /**
-     * Campaign ID
+     * campaign_id
      * @var string
      * @Attribute()
      */
     protected $campaign_id;
 
     /**
-     * Coupon amount
+     * coupon_amount
      * @var float
      * @Attribute()
      */
     protected $coupon_amount;
+
     /**
-     * Installments
+     * installments
      * @var int
      * @Attribute(type = "int")
      */
     protected $installments;
 
     /**
-     * Token
+     * token
      * @var string
      * @Attribute()
      */
     protected $token;
 
     /**
-     * Description
+     * description
      * @var string
      * @Attribute()
      */
     protected $description;
 
     /**
-     * Notification URL
+     * notification_url
      * @var string
      * @Attribute()
      */
     protected $notification_url;
 
     /**
-     * Issuer ID
+     * issuer_id
      * @var string
      * @Attribute()
      */
     protected $issuer_id;
 
     /**
-     * Processing mode
+     * processing_mode
      * @var string
      * @Attribute()
      */
     protected $processing_mode;
 
     /**
-     * Merchant account id
-     * @var long
+     * merchant_account_id
+     * @var int
      * @Attribute()
      */
     protected $merchant_account_id;
 
     /**
-     * Merchant number
-     * @var long
+     * merchant_number
+     * @var int
      * @Attribute()
      */
     protected $merchant_number;
 
     /**
-     * Metadata
-     * @var array
+     * metadata
+     * @var object
      * @Attribute()
      */
     protected $metadata;
 
     /**
-     * Callback URL
+     * callback_url
      * @var string
      * @Attribute()
      */
     protected $callback_url;
 
     /**
-     * Amount refunded
+     * amount_refunded
      * @var float
      * @Attribute()
      */
     protected $amount_refunded;
 
     /**
-     * Coupon code
+     * coupon_code
      * @var string
      * @Attribute()
      */
     protected $coupon_code;
 
     /**
-     * Barcode
+     * barcode
      * @var string
      * @Attribute()
      */
     protected $barcode;
 
     /**
-     * Marketplace owner
-     * @var long
+     * marketplace_owner
+     * @var int
      * @Attribute()
      */
     protected $marketplace_owner;
 
     /**
-     * Integrator ID
+     * integrator_id
      * @var string
      * @Attribute()
      */
     protected $integrator_id;
 
     /**
-     * Corporation ID
+     * corporation_id
      * @var string
      * @Attribute()
      */
     protected $corporation_id;
 
     /**
-     * Platform ID
+     * platform_id
      * @var string
      * @Attribute()
      */
     protected $platform_id;
 
     /**
-     * Refund
+     * refund
      * @param int $amount
      * @return bool
      * @throws \Exception
@@ -551,7 +554,7 @@ class Payment extends Entity
     }
 
     /**
-     * Capture
+     * capture
      * @param int $amount
      * @return Payment
      * @throws \Exception
