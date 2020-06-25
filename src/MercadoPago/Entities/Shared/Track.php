@@ -1,21 +1,27 @@
 <?php
+/**
+ * Track class file
+ */
 namespace MercadoPago;
 
 use MercadoPago\Annotation\Attribute;
 
 /**
- * Tack class
- *
- * @package MercadoPago
+ * Track class
  */
 class Track extends Entity
 {
     /**
+     * type
      * @Attribute(type = "string")
+     * @var string
      */
     protected $type;
+
     /**
+     * value
      * @Attribute(type = "object")
+     * @var object
      */
     protected $value;
 }
