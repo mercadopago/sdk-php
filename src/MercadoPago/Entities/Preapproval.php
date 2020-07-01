@@ -114,7 +114,7 @@ class Preapproval extends Entity
   /**
    * last_modified
    * @Attribute()
-   * @string
+   * @var string
    */
   protected $last_modified;
   
