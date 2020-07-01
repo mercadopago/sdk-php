@@ -51,5 +51,12 @@
   "scripts": {
     "test": "./vendor/bin/phpunit tests",
     "generate-doc": "php phpDocumentor.phar --visibility=\"public,protected\" --template=\"responsive-twig\" --title=\"SDK Mercado Pago\" -d ./src/MercadoPaGo/Entities -t ./docs"
-  }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.org"
+    },
+    { "packagist": false }
+  ]
 }
