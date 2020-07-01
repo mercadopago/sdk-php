@@ -50,8 +50,9 @@ class ConfigTest extends TestCase
                 "mla" => "MLA_AT",
                 "mlb" => "MLB_AT"
             )
-        ); 
-        print_r(MercadoPago\SDK::config());
+        );
+        $this->assertNotNull(MercadoPago\SDK::config()->getData()['mla']);
+        $this->assertNotNull(MercadoPago\SDK::config()->getData()['mlb']);
     }
 
 }

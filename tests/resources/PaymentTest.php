@@ -28,7 +28,7 @@ class PaymentTest extends TestCase
 
     }
 
-    public function testCreateApprobedPayment()
+    public function testCreateApprovedPayment()
     {
 
         $payment = new MercadoPago\Payment();
@@ -38,7 +38,7 @@ class PaymentTest extends TestCase
         $payment->installments = 1;
         $payment->payment_method_id = "visa";
         $payment->payer = array(
-            "email" => "larue.nienow@hotmail.com"
+            "email" => getenv('USER_EMAIL')
         );
         $payment->external_reference = "reftest";
         $payment->save();
@@ -47,6 +47,25 @@ class PaymentTest extends TestCase
         
  
         return $payment;
+
+    }
+
+    /**
+     * @depends testCreateApprovedPayment
+     */
+    public function testRefundPayment(MercadoPago\Payment $payment_created_previously) {
+
+        $id = $payment_created_previously->id;
+
+        $refund = new MercadoPago\Refund();
+        $refund->payment_id = $id;
+        $refund->save();
+
+        sleep(10);
+
+        $payment = MercadoPago\Payment::find_by_id($id);
+
+        $this->assertEquals("refunded", $payment->status);
 
     }
 
@@ -89,7 +108,7 @@ class PaymentTest extends TestCase
         $payment->installments = 1;
         $payment->payment_method_id = "visa";
         $payment->payer = array(
-            "email" => "larue.nienow@hotmail.com"
+            "email" => getenv('USER_EMAIL')
         );
         $payment->external_reference = "reftest";
         $payment->save();
@@ -146,25 +165,6 @@ class PaymentTest extends TestCase
         
     }
 
-    /**
-     * @depends testCreateApprobedPayment 
-     */
-    public function testRefundPayment(MercadoPago\Payment $payment_created_previously) {
-
-        $id = $payment_created_previously->id;
-        
-        $refund = new MercadoPago\Refund();
-        $refund->payment_id = $id;
-        $refund->save();
-
-        sleep(10);
-
-        $payment = MercadoPago\Payment::find_by_id($id);
-        
-        $this->assertEquals("refunded", $payment->status);
-        
-    }
-
     public function testPaymentWithCustomAccessToken() {
         $payment = new MercadoPago\Payment();
 
@@ -206,7 +206,7 @@ class PaymentTest extends TestCase
 
         $payload = array(
             "json_data" => array(
-                "card_number" => "4509953566233704",
+                "card_number" => "4508336715544174",
                 "security_code" => (string)$security_code,
                 "expiration_month" => str_pad($expiration_month, 2, '0', STR_PAD_LEFT),
                 "expiration_year" => str_pad($expiration_year, 4, '0', STR_PAD_LEFT),
