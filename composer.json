@@ -34,7 +34,8 @@
     "squizlabs/php_codesniffer": "2.3.*",
     "sebastian/phpcpd": "*", 
     "doctrine/orm": "~2.3",
-    "vlucas/phpdotenv": "^2.5"
+    "vlucas/phpdotenv": "^2.5",
+    "phpdocumentor/phpdocumentor": "^2.0"
   },
   "autoload": {
     "psr-4": {
@@ -48,6 +49,7 @@
     }
   },
   "scripts": {
-    "test": "./vendor/bin/phpunit tests"
+    "test": "./vendor/bin/phpunit tests",
+    "generate-doc": "php phpDocumentor.phar --visibility=\"public,protected\" --template=\"responsive-twig\" --title=\"SDK Mercado Pago\" -d ./src/MercadoPaGo/Entities -t ./docs"
   }
 }
