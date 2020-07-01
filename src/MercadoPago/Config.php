@@ -190,5 +190,7 @@ class Config
         return $response['body'];
     }
 
-
+    public function getData(){
+        return $this->data;
+    }
 }
