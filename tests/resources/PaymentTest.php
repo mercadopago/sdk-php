@@ -145,6 +145,7 @@ class PaymentTest extends TestCase
         );
 
         $payments = MercadoPago\Payment::search($filters);
+        $payments = $payments->getArrayCopy();
         $payment = end($payments);
  
         $this->assertEquals($payment->external_reference, $payment_created_previously->external_reference);

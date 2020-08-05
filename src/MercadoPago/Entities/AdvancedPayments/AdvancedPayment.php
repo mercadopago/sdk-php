@@ -17,7 +17,6 @@ use MercadoPago\Entity;
  * @RestMethod(resource="/v1/advanced_payments/search", method="search")
  * @RestMethod(resource="/v1/advanced_payments/:id", method="update")
  * @RestMethod(resource="/v1/advanced_payments/:id/refunds", method="refund")
- * @RequestParam(param="access_token")
  */
 class AdvancedPayment extends Entity
 {

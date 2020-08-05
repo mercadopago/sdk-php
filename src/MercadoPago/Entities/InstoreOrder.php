@@ -11,7 +11,6 @@ use MercadoPago\Annotation\Attribute;
 /**
  * Instore Order class
  * @RestMethod(resource="/mpmobile/instore/qr/:user_id/:external_id", method="create")
- * @RequestParam(param="access_token")
  */
 class InstoreOrder extends Entity
 {

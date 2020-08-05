@@ -15,7 +15,6 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/v1/payments/search", method="search")
  * @RestMethod(resource="/v1/payments/:id", method="update")
  * @RestMethod(resource="/v1/payments/:id/refunds", method="refund")
- * @RequestParam(param="access_token")
  */
 class Payment extends Entity
 {

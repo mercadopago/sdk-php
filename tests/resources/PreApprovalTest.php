@@ -41,7 +41,6 @@ class PreApprovalTest extends \PHPUnit\Framework\TestCase
         $preapproval_data->save();
 
         $this->assertTrue($preapproval_data->sandbox_init_point != null);
-
     }
 
 }

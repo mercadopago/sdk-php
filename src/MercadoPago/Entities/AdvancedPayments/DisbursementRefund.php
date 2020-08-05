@@ -13,7 +13,6 @@ use MercadoPago\Entity;
  * Disbursement Refund class
  * @RestMethod(resource="/v1/advanced_payments/:advanced_payment_id/disbursements/:disbursement_id/refunds", method="create")
  * @RestMethod(resource="/v1/advanced_payments/:advanced_payment_id/disbursements/:disbursement_id/refunds/:refund_id", method="read")
- * @RequestParam(param="access_token")
  */
 class DisbursementRefund extends Entity {
 

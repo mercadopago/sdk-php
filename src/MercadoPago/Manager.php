@@ -95,16 +95,7 @@ class Manager
         $configuration_vars = $this->_config->all();
 
         foreach($options as $option => $value) {
-            switch ($option) {
-                case "custom_access_token":
-                if (array_key_exists($value, $configuration_vars)) {
-                    $configuration->query["url_query"]["access_token"] = $configuration_vars[$value];
-                } else {
-                    $configuration->query["url_query"]["access_token"] = $value;
-                }
-                default:
-                    $configuration->query["url_query"][$option] = $value;
-            }
+            $configuration->query["url_query"][$option] = $value;
         }
     }
 

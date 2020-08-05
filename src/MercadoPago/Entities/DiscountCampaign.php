@@ -12,7 +12,6 @@ use MercadoPago\Annotation\Attribute;
 /**
  * discount Campaign class
  * @RestMethod(resource="/v1/discount_campaigns", method="read")
- * @RequestParam(param="access_token")
  */
 
 
