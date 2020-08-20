@@ -102,11 +102,24 @@ class OAuth extends Entity
      * getAuthorizationURL
      * @param $app_id
      * @param $redirect_uri
+     * @param $state
      * @return string
      */
-    public function getAuthorizationURL($app_id, $redirect_uri){
+    public function getAuthorizationURL($app_id, $redirect_uri, $state = ''){
         $country_id = strtolower(SDK::getCountryId());
-        return "https://auth.mercadopago.com.${country_id}/authorization?client_id=${app_id}&response_type=code&platform_id=mp&redirect_uri=${redirect_uri}";
+
+        $params = array(
+            'client_id' => $app_id,
+            'response_type' => 'code',
+            'platform_id' => 'mp',
+            'redirect_uri' => $redirect_uri,
+        );
+
+        if (!empty($state)) {
+            $params['state'] = $state;
+        }
+
+        return sprintf('https://auth.mercadopago.com.%s/authorization?%s', $country_id, http_build_query($params));
     }
 
 
