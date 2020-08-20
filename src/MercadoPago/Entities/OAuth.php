@@ -4,7 +4,7 @@
  */
 namespace MercadoPago;
 use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\Attribute; 
+use MercadoPago\Annotation\Attribute;
 
 /**
  * OAuth class
@@ -105,8 +105,8 @@ class OAuth extends Entity
      * @return string
      */
     public function getAuthorizationURL($app_id, $redirect_uri){
-        $county_id = strtolower(SDK::getCountryId());
-        return "https://auth.mercadopago.com.${county_id}/authorization?client_id=${app_id}&response_type=code&platform_id=mp&redirect_uri=${redirect_uri}";
+        $country_id = strtolower(SDK::getCountryId());
+        return "https://auth.mercadopago.com.${country_id}/authorization?client_id=${app_id}&response_type=code&platform_id=mp&redirect_uri=${redirect_uri}";
     }
 
 
