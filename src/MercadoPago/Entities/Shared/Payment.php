@@ -532,6 +532,13 @@ class Payment extends Entity
     protected $platform_id;
 
     /**
+     * charges details
+     * @var object
+     * @Attribute()
+     */
+    protected $charges_details;
+
+    /**
      * refund
      * @param int $amount
      * @return bool
