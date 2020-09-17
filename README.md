@@ -57,7 +57,7 @@ Visit our Dev Site for further information regarding:
  - Mercado Pago checkout: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/web-payment-checkout/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/web-payment-checkout/introduction/)
  - Web Tokenize checkout: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/web-tokenize-checkout/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/web-tokenize-checkout/introduction/)
 
-Check our official code reference to explore all available functionalities.
+Check [our official code reference](https://mercadopago.github.io/dx-php/) to explore all available functionalities.
 
 ## ❤️ Support 
 
