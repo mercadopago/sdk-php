@@ -54,8 +54,8 @@ class RestClient
             $default_header = array_merge($default_header, $customHeaders);
         }
 
-        if(!isset($default_header['access_token'])){
-            $default_header['access_token'] = SDK::getAccessToken();
+        if(!isset($default_header['Authorization'])){
+            $default_header['Authorization'] = 'Bearer '.SDK::getAccessToken();
         }
 
         foreach ($default_header as $key => $value) {
