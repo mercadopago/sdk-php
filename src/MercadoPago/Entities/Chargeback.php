@@ -12,7 +12,6 @@ use MercadoPago\Annotation\Attribute;
 /**
  * Chargeback class
  * @RestMethod(resource="/v1/chargebacks/:id", method="read")
- * @RequestParam(param="access_token")
  */
 class Chargeback extends Entity
 {

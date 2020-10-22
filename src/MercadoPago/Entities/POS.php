@@ -15,7 +15,6 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/pos/:id", method="update")
  * @RestMethod(resource="/pos/:id", method="delete")
  * @RestMethod(resource="/pos", method="search")
- * @RequestParam(param="access_token")
  */
 class POS extends Entity
 {

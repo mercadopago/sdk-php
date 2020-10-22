@@ -12,8 +12,7 @@ use MercadoPago\Annotation\Attribute;
  * Merchant order class
  * @RestMethod(resource="/merchant_orders/:id", method="read") 
  * @RestMethod(resource="/merchant_orders/", method="create")
- * @RestMethod(resource="/merchant_orders/:id", method="update") 
- * @RequestParam(param="access_token")
+ * @RestMethod(resource="/merchant_orders/:id", method="update")
  */
 
 class MerchantOrder extends Entity

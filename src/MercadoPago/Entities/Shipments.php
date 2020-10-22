@@ -13,7 +13,6 @@ use phpDocumentor\Descriptor\Type\FloatDescriptor;
  * Shipments class
  * @RestMethod(resource="/v1/payments/:payment_id/refunds", method="create")
  * @RestMethod(resource="/v1/payments/:payment_id/refunds/:id", method="read")
- * @RequestParam(param="access_token")
  * @deprecated This class is deprecated
  */
 class Shipments extends Entity {

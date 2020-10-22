@@ -15,7 +15,6 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/v1/customers/", method="create")
  * @RestMethod(resource="/v1/customers/:id", method="update")
  * @RestMethod(resource="/v1/customers/:id", method="delete")
- * @RequestParam(param="access_token")
  */
 
 class Customer extends Entity
