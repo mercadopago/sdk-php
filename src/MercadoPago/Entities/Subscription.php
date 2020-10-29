@@ -12,8 +12,7 @@ use MercadoPago\Annotation\Attribute;
  * Subscription class
  * @RestMethod(resource="/v1/subscriptions/:id", method="read") 
  * @RestMethod(resource="/v1/subscriptions/", method="create")
- * @RestMethod(resource="/v1/subscriptions/:id", method="update") 
- * @RequestParam(param="access_token")
+ * @RestMethod(resource="/v1/subscriptions/:id", method="update")
  */
 
 class Subscription extends Entity

@@ -54,9 +54,10 @@ class InstoreTest extends TestCase
             "external_id" => $pos->external_id
         );
         $poss = MercadoPago\POS::search($filters);
-        $last_pos = end($poss);
+        $poss = $poss->getArrayCopy();
+        $poss = end($poss);
 
-        $this->assertEquals($last_pos->external_id, $pos->external_id);
+        $this->assertEquals($poss->external_id, $pos->external_id);
     }
 
     

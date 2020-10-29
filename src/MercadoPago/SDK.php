@@ -131,33 +131,21 @@ class SDK
     
     public static function get($uri, $options=[])
     {
-      if ($token = self::$_config->get('ACCESS_TOKEN')) {
-        $uri = $uri . "?access_token=" . $token;
-      }
       return self::$_restClient->get($uri, $options);
     }
     
     public static function post($uri, $options=[])
     {
-      if ($token = self::$_config->get('ACCESS_TOKEN')) {
-        $uri = $uri . "?access_token=" . $token;
-      }
       return self::$_restClient->post($uri, $options);
     }
     
     public static function put($uri, $options=[])
     {
-      if ($token = self::$_config->get('ACCESS_TOKEN')) {
-        $uri = $uri . "?access_token=" . $token;
-      }
       return self::$_restClient->put($uri, $options);
     }
     
     public static function delete($uri, $options=[])
     {
-      if ($token = self::$_config->get('ACCESS_TOKEN')) {
-        $uri = $uri . "?access_token=" . $token;
-      }
       return self::$_restClient->delete($uri, $options);
     }
 

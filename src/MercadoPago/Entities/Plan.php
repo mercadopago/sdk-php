@@ -12,8 +12,7 @@ use MercadoPago\Annotation\Attribute;
  * Plan class
  * @RestMethod(resource="/v1/plans/:id", method="read") 
  * @RestMethod(resource="/v1/plans/", method="create")
- * @RestMethod(resource="/v1/plans/:id", method="update") 
- * @RequestParam(param="access_token")
+ * @RestMethod(resource="/v1/plans/:id", method="update")
  */
 
 class Plan extends Entity
