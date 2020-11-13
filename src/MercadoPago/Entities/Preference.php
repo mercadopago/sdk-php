@@ -199,6 +199,13 @@ class Preference extends Entity
     protected $taxes;
 
     /**
+     * statement_descriptor
+     * @var string
+     * @Attribute()
+     */
+    protected $statement_descriptor;
+
+    /**
      * metadata
      * @Attribute()
      * @var object

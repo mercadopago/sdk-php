@@ -538,6 +538,20 @@ class Payment extends Entity
     protected $charges_details;
 
     /**
+     * taxes
+     * @Attribute(type = "array")
+     * @var array
+     */
+    protected $taxes;
+
+    /**
+     * net_amount
+     * @var float
+     * @Attribute(type = "float")
+     */
+    protected $net_amount;
+
+    /**
      * refund
      * @param int $amount
      * @return bool
