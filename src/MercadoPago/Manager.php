@@ -264,23 +264,20 @@ class Manager
     public function setQueryParams($entity, $urlParams = [])
     {
         $configuration = $this->_getEntityConfiguration($entity);
-        $params = [];
-
-       
 
         if (!isset($configuration->query) || !isset($configuration->query['url_query'])) {
-            $configuration->query['url_query'] = $params;
+            $configuration->query['url_query'] = [];
         }
+
+        $params = [];
         if (isset($configuration->params)) {
             foreach ($configuration->params as $value) {
                 $params[$value] = $this->_config->get(strtoupper($value));
             }
-            if (count($params) > 0) {
-                $arrayMerge = array_merge($urlParams, $params, $configuration->query['url_query']);
-                $configuration->query['url_query'] = $arrayMerge;
-            }
         }
-        
+
+        $arrayMerge = array_merge($urlParams, $params, $configuration->query['url_query']);
+        $configuration->query['url_query'] = $arrayMerge;
     }
     /**
      * @param $entity
