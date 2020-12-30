@@ -1,6 +1,7 @@
 <?php
 /**
  * Payment Method class file
+ * @link https://www.mercadopago.com/developers/en/reference/payment_methods/_payment_methods/get/ Click here for more infos
  */
 namespace MercadoPago;
 

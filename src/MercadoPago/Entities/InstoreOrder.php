@@ -1,6 +1,7 @@
 <?php
 /**
  * Instore Order class file
+ * @link https://www.mercadopago.com/developers/en/reference/instore_orders/_mpmobile_instore_qr_user_id_external_id/post/ Click here for more infos
  */
 namespace MercadoPago;
 use MercadoPago\Annotation\RestMethod;

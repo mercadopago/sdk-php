@@ -1,6 +1,7 @@
 <?php
 /**
  * AdvancedPayment class file
+ * @link https://www.mercadopago.com/developers/en/reference/advanced_payments/_advanced_payments_id_search/get/ Click here for more infos
  */
 
 namespace MercadoPago\AdvancedPayments;

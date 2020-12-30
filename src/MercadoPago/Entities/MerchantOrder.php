@@ -1,6 +1,7 @@
 <?php
 /**
- * Merchant Order class file
+ * This class will allow you to create and manage your orders. You can attach one or more payments in your merchant order.
+ * @link https://www.mercadopago.com/developers/en/reference/merchant_orders/_merchant_orders_search/get/ Click here for more infos
  */
 namespace MercadoPago;
 

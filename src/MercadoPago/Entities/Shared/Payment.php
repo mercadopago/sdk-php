@@ -1,6 +1,10 @@
 <?php
 /**
- * Payment class file
+ * This class provides the methods to access the API that will allow you to create your own payment experience on your website.
+ *  
+ * From basic to advanced configurations, you control the whole experience.
+ *  
+ * @link https://www.mercadopago.com/developers/en/guides/online-payments/checkout-api/introduction/ Click here for more infos
  */
 namespace MercadoPago;
 use MercadoPago\Annotation\RestMethod;

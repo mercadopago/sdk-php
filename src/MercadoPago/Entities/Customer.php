@@ -1,6 +1,10 @@
 <?php
 /**
- * Customer class file
+ * This class allows you to store customers data safely to improve the shopping experience.
+ *  
+ * This will allow your customer to complete their purchases much faster and easily when used in conjunction with the Cards class.
+ *
+ * @link https://mercadopago.com/developers/en/guides/online-payments/web-tokenize-checkout/customers-and-cards Click here for more infos
  */
 namespace MercadoPago;
 

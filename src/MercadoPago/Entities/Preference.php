@@ -1,6 +1,8 @@
 <?php
 /**
- * Preference class file
+ * This class will allow you to charge your customers through our web form from any device in a simple, fast and secure way.
+ *  
+ * @link https://www.mercadopago.com/developers/en/guides/online-payments/checkout-pro/introduction Click here for more infos
  */
 namespace MercadoPago;
 

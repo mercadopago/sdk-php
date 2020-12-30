@@ -1,6 +1,7 @@
 <?php
 /**
  * POS class file
+ * @link https://www.mercadopago.com/developers/en/reference/pos/_pos/post/ Click here for more infos
  */
 namespace MercadoPago;
 use MercadoPago\Annotation\RestMethod;
