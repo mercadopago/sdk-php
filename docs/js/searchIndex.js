@@ -558,7 +558,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MercadoPago\\CardToken",
             "name": "CardToken",
-            "summary": "Card\u0020Token\u0020class",
+            "summary": "Card\u0020Token\u0020class\nThis\u0020class\u0020will\u0020allow\u0020you\u0020to\u0020send\u0020your\u0020customers\u0020card\u0020data\u0020for\u0020Mercado\u0020Pago\u0020server\u0020and\u0020receive\u0020a\u0020token\u0020to\u0020complete\u0020the\u0020payments\u0020transactions.",
             "url": "classes/MercadoPago-CardToken.html"
         },                {
             "fqsen": "\\MercadoPago\\CardToken\u003A\u003A\u0024card_id",
@@ -708,7 +708,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MercadoPago\\Customer",
             "name": "Customer",
-            "summary": "Customer\u0020class",
+            "summary": "This\u0020class\u0020allows\u0020you\u0020to\u0020store\u0020customers\u0020data\u0020safely\u0020to\u0020improve\u0020the\u0020shopping\u0020experience.",
             "url": "classes/MercadoPago-Customer.html"
         },                {
             "fqsen": "\\MercadoPago\\Customer\u003A\u003A\u0024email",
@@ -943,7 +943,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MercadoPago\\MerchantOrder",
             "name": "MerchantOrder",
-            "summary": "Merchant\u0020order\u0020class",
+            "summary": "This\u0020class\u0020will\u0020allow\u0020you\u0020to\u0020create\u0020and\u0020manage\u0020your\u0020orders.\u0020You\u0020can\u0020attach\u0020one\u0020or\u0020more\u0020payments\u0020in\u0020your\u0020merchant\u0020order.",
             "url": "classes/MercadoPago-MerchantOrder.html"
         },                {
             "fqsen": "\\MercadoPago\\MerchantOrder\u003A\u003A\u0024id",
@@ -1348,7 +1348,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MercadoPago\\Preference",
             "name": "Preference",
-            "summary": "Preference\u0020class",
+            "summary": "This\u0020class\u0020will\u0020allow\u0020you\u0020to\u0020charge\u0020your\u0020customers\u0020through\u0020our\u0020web\u0020form\u0020from\u0020any\u0020device\u0020in\u0020a\u0020simple,\u0020fast\u0020and\u0020secure\u0020way.",
             "url": "classes/MercadoPago-Preference.html"
         },                {
             "fqsen": "\\MercadoPago\\Preference\u003A\u003A\u0024id",
@@ -1663,7 +1663,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MercadoPago\\Payment",
             "name": "Payment",
-            "summary": "Payments\u0020class",
+            "summary": "This\u0020class\u0020provides\u0020the\u0020methods\u0020to\u0020access\u0020the\u0020API\u0020that\u0020will\u0020allow\u0020you\u0020to\u0020create\u0020your\u0020own\u0020payment\u0020experience\u0020on\u0020your\u0020website.",
             "url": "classes/MercadoPago-Payment.html"
         },                {
             "fqsen": "\\MercadoPago\\Payment\u003A\u003Arefund\u0028\u0029",
