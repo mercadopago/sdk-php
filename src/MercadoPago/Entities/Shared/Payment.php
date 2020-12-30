@@ -1,6 +1,6 @@
 <?php
 /**
- * Payment class file
+ 
  */
 namespace MercadoPago;
 use MercadoPago\Annotation\RestMethod;
@@ -8,7 +8,11 @@ use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute; 
 
 /**
- * Payments class
+ * This class provides the methods to access the API that will allow you to create your own payment experience on your website.
+ *  
+ * From basic to advanced configurations, you control the whole experience.
+ *  
+ * @link https://www.mercadopago.com/developers/en/guides/online-payments/checkout-api/introduction/ Click here for more infos
  *
  * @RestMethod(resource="/v1/payments", method="create")
  * @RestMethod(resource="/v1/payments/:id", method="read")

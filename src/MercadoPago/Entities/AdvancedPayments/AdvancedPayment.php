@@ -1,8 +1,4 @@
 <?php
-/**
- * AdvancedPayment class file
- */
-
 namespace MercadoPago\AdvancedPayments;
 
 use MercadoPago\Annotation\RestMethod;
@@ -12,6 +8,8 @@ use MercadoPago\Entity;
 
 /**
  * Advanced Payment class
+ * @link https://www.mercadopago.com/developers/en/reference/advanced_payments/_advanced_payments_id_search/get/ Click here for more infos
+ * 
  * @RestMethod(resource="/v1/advanced_payments", method="create")
  * @RestMethod(resource="/v1/advanced_payments/:id", method="read")
  * @RestMethod(resource="/v1/advanced_payments/search", method="search")
