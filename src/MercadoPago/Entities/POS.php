@@ -1,8 +1,4 @@
 <?php
-/**
- * POS class file
- * @link https://www.mercadopago.com/developers/en/reference/pos/_pos/post/ Click here for more infos
- */
 namespace MercadoPago;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
@@ -11,6 +7,8 @@ use MercadoPago\Annotation\Attribute;
 
 /**
  * POS class
+ * @link https://www.mercadopago.com/developers/en/reference/pos/_pos/post/ Click here for more infos
+ * 
  * @RestMethod(resource="/pos/:id", method="read")
  * @RestMethod(resource="/pos", method="create")
  * @RestMethod(resource="/pos/:id", method="update")

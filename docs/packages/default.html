@@ -1,355 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-    <meta charset="utf-8"/>
-    <title>     &raquo; \Default
-</title>
-    <meta name="author" content=""/>
-    <meta name="description" content=""/>
-
-            <link href="../css/template.css" rel="stylesheet" media="all"/>
-    
-            <!--[if lt IE 9]>
-        <script src="https://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-        <![endif]-->
-        <script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
-        <script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
-        <script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script>
-        <script src="../js/bootstrap.js" type="text/javascript"></script>
-        <script src="../js/template.js" type="text/javascript"></script>
-        <script src="../js/prettify/prettify.min.js" type="text/javascript"></script>
-    
-            <link rel="shortcut icon" href="../img/favicon.ico"/>
-        <link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
-        <link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png"/>
-        <link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png"/>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js" integrity="sha256-0vuk8LXoyrmCjp1f0O300qo1M75ZQyhH9X3J6d+scmk=" crossorigin="anonymous"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
     </head>
-<body>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">Documentation</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
 
-        <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span> <span class="icon-bar"></span>
-                    <span class="icon-bar"></span> </a>
-                <a class="brand" href="../index.html">SDK Mercado Pago</a>
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
 
-                <div class="nav-collapse">
-                    <ul class="nav">
-                        <li class="dropdown">
-                            <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
-                                API Documentation <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                                                    <li><a>Namespaces</a></li>
-                                                                        <li><a href="../namespaces/MercadoPago.html">MercadoPago</a></li>
-                                                                                                    
-Warning: count(): Parameter must be an array or an object that implements Countable in phar:///Users/pgoncalves/git/mercadopago/dx-php/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
-                            </ul>
-                        </li>
-                        <li class="dropdown" id="charts-menu">
-                            <a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
-                                Charts <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="../graph_class.html">
-                                        <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown" id="reports-menu">
-                            <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
-                                Reports <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="../errors.html">
-                                        <i class="icon-list-alt"></i>&#160;Errors
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../markers.html">
-                                        <i class="icon-list-alt"></i>&#160;Markers
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../deprecated.html">
-                                        <i class="icon-list-alt"></i>&#160;Deprecated
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="go_to_top">
-            <a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>
-        </div>
-    </div>
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
     
-    <div id="___" class="container">
-        <noscript>
-            <div class="alert alert-warning">
-                Javascript is disabled; several features are only available if Javascript is enabled.
-            </div>
-        </noscript>
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                <h3 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
+                                        <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/mercadopago.html"><abbr title="\MercadoPago">MercadoPago</abbr></a></h4>
+                <ul class="phpdocumentor-list">
+                                            <li><a href="namespaces/mercadopago-annotation.html"><abbr title="\MercadoPago\Annotation">Annotation</abbr></a></li>
+                                            <li><a href="namespaces/mercadopago-config.html"><abbr title="\MercadoPago\Config">Config</abbr></a></li>
+                                            <li><a href="namespaces/mercadopago-advancedpayments.html"><abbr title="\MercadoPago\AdvancedPayments">AdvancedPayments</abbr></a></li>
+                                            <li><a href="namespaces/mercadopago-http.html"><abbr title="\MercadoPago\Http">Http</abbr></a></li>
+                                    </ul>
+                        </section>
 
-        
-            
-    <div class="row">
-
-        <div class="span4">
-            <div class="btn-group view pull-right" data-toggle="buttons-radio">
-                <button class="btn details" title="Show descriptions and method names">
-                    <i class="icon-list"></i></button><button class="btn simple" title="Show only method names">
-                    <i class="icon-align-justify"></i>
-                </button>
-            </div>
-            <ul class="side-nav nav nav-list">
-                <li class="nav-header">
-                    <i class="icon-map-marker"></i> Packages
-                </li>
-                <a href="../packages/Default.html" title="Default">
-                    <i class="icon-th"></i> Default
-                </a>
-                <ul class="nav nav-list nav-packages">
-                        
+        <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                    <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/Default.html"><abbr title="\Default">Default</abbr></a></h3>
+                                <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/MercadoPago.html"><abbr title="\MercadoPago">MercadoPago</abbr></a></h3>
+                        <ul class="phpdocumentor-list">
+                                    <li><a href="packages/MercadoPago-Config.html"><abbr title="\MercadoPago\Config">Config</abbr></a></li>
+                                    <li><a href="packages/MercadoPago-Http.html"><abbr title="\MercadoPago\Http">Http</abbr></a></li>
+                            </ul>
+                        </section>
     
-                </ul>
-            </ul>
-        </div>
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
 
-        <div class="span8 package-contents">
-                
-    <ul class="breadcrumb">
-        <li><a href="../index.html"><i class="icon-th"></i></a></li>
-            
-    
-    <li>
-        <span class="divider">\</span><a href="../packages/Default.html">Default</a>
-    </li>
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
 
+            <div class="phpdocumentor-column -eight phpdocumentor-content">
+                    <ul class="phpdocumentor-breadcrumbs">
     </ul>
 
-    
+    <article class="phpdocumentor-element -package">
+        <h2 class="phpdocumentor-content__title">Default</h2>
+
         
-        
-                    <div class="package-indent">
-                <h3><i class="icon-custom icon-class"></i> Classes, interfaces and traits</h3>
-                
-                
-                                        <div id="AdvancedPayment" class="element ajax clickable class">
-        <h1>AdvancedPayment<a href="../classes/MercadoPago.AdvancedPayments.AdvancedPayment.html">¶</a></h1>
-        <p class="short_description">Advanced Payment class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.AdvancedPayments.AdvancedPayment.html" class="more">« More »</a>
-    </div>
 
-                                        <div id="AuthorizedPayment" class="element ajax clickable class">
-        <h1>AuthorizedPayment<a href="../classes/MercadoPago.AuthorizedPayment.html">¶</a></h1>
-        <p class="short_description">Authorized Payments Class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.AuthorizedPayment.html" class="more">« More »</a>
-    </div>
+<h3 id="interfaces_class_traits">
+    Interfaces, Classes and Traits
+    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
 
-                                        <div id="Card" class="element ajax clickable class">
-        <h1>Card<a href="../classes/MercadoPago.Card.html">¶</a></h1>
-        <p class="short_description">Card class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Card.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="CardToken" class="element ajax clickable class">
-        <h1>CardToken<a href="../classes/MercadoPago.CardToken.html">¶</a></h1>
-        <p class="short_description">Card Token class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.CardToken.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Chargeback" class="element ajax clickable class">
-        <h1>Chargeback<a href="../classes/MercadoPago.Chargeback.html">¶</a></h1>
-        <p class="short_description">Chargeback class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Chargeback.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Customer" class="element ajax clickable class">
-        <h1>Customer<a href="../classes/MercadoPago.Customer.html">¶</a></h1>
-        <p class="short_description">Customer class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Customer.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="DisbursementRefund" class="element ajax clickable class">
-        <h1>DisbursementRefund<a href="../classes/MercadoPago.AdvancedPayments.DisbursementRefund.html">¶</a></h1>
-        <p class="short_description">Disbursement Refund class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.AdvancedPayments.DisbursementRefund.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="DiscountCampaign" class="element ajax clickable class">
-        <h1>DiscountCampaign<a href="../classes/MercadoPago.DiscountCampaign.html">¶</a></h1>
-        <p class="short_description">discount Campaign class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.DiscountCampaign.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Documentation" class="element ajax clickable class">
-        <h1>Documentation<a href="../classes/MercadoPago.Documentation.html">¶</a></h1>
-        <p class="short_description">Documentation class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Documentation.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="InstoreOrder" class="element ajax clickable class">
-        <h1>InstoreOrder<a href="../classes/MercadoPago.InstoreOrder.html">¶</a></h1>
-        <p class="short_description">Instore Order class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.InstoreOrder.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Invoice" class="element ajax clickable class">
-        <h1>Invoice<a href="../classes/MercadoPago.Invoice.html">¶</a></h1>
-        <p class="short_description">Invoice class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Invoice.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Item" class="element ajax clickable class">
-        <h1>Item<a href="../classes/MercadoPago.Item.html">¶</a></h1>
-        <p class="short_description">Item class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Item.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="MerchantOrder" class="element ajax clickable class">
-        <h1>MerchantOrder<a href="../classes/MercadoPago.MerchantOrder.html">¶</a></h1>
-        <p class="short_description">Merchant order class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.MerchantOrder.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="OAuth" class="element ajax clickable class">
-        <h1>OAuth<a href="../classes/MercadoPago.OAuth.html">¶</a></h1>
-        <p class="short_description">OAuth class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.OAuth.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Payer" class="element ajax clickable class">
-        <h1>Payer<a href="../classes/MercadoPago.Payer.html">¶</a></h1>
-        <p class="short_description">Payer Class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Payer.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Payment" class="element ajax clickable class">
-        <h1>Payment<a href="../classes/MercadoPago.Payment.html">¶</a></h1>
-        <p class="short_description">Payments class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Payment.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="PaymentMethod" class="element ajax clickable class">
-        <h1>PaymentMethod<a href="../classes/MercadoPago.PaymentMethod.html">¶</a></h1>
-        <p class="short_description">Payment Method class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.PaymentMethod.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Plan" class="element ajax clickable class">
-        <h1>Plan<a href="../classes/MercadoPago.Plan.html">¶</a></h1>
-        <p class="short_description">Plan class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Plan.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="POS" class="element ajax clickable class">
-        <h1>POS<a href="../classes/MercadoPago.POS.html">¶</a></h1>
-        <p class="short_description">POS class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.POS.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Preapproval" class="element ajax clickable class">
-        <h1>Preapproval<a href="../classes/MercadoPago.Preapproval.html">¶</a></h1>
-        <p class="short_description">preapproval class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Preapproval.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Preference" class="element ajax clickable class">
-        <h1>Preference<a href="../classes/MercadoPago.Preference.html">¶</a></h1>
-        <p class="short_description">Preference class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Preference.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Refund" class="element ajax clickable class">
-        <h1>Refund<a href="../classes/MercadoPago.AdvancedPayments.Refund.html">¶</a></h1>
-        <p class="short_description">Refund class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.AdvancedPayments.Refund.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Refund" class="element ajax clickable class">
-        <h1>Refund<a href="../classes/MercadoPago.Refund.html">¶</a></h1>
-        <p class="short_description">refund class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Refund.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Shipments" class="element ajax clickable class">
-        <h1>Shipments<a href="../classes/MercadoPago.Shipments.html">¶</a></h1>
-        <p class="short_description">Shipments class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Shipments.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Subscription" class="element ajax clickable class">
-        <h1>Subscription<a href="../classes/MercadoPago.Subscription.html">¶</a></h1>
-        <p class="short_description">Subscription class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Subscription.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Tax" class="element ajax clickable class">
-        <h1>Tax<a href="../classes/MercadoPago.Tax.html">¶</a></h1>
-        <p class="short_description">Tax class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Tax.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="Track" class="element ajax clickable class">
-        <h1>Track<a href="../classes/MercadoPago.Track.html">¶</a></h1>
-        <p class="short_description">Track class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.Track.html" class="more">« More »</a>
-    </div>
-
-                                        <div id="TrackValues" class="element ajax clickable class">
-        <h1>TrackValues<a href="../classes/MercadoPago.TrackValues.html">¶</a></h1>
-        <p class="short_description">Track Values class</p>
-        <div class="details collapse"></div>
-        <a href="../classes/MercadoPago.TrackValues.html" class="more">« More »</a>
-    </div>
-
-                            </div>
-            
+<dl class="phpdocumentor-table-of-contents">
     
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Annotation-Attribute.html"><abbr title="\MercadoPago\Annotation\Attribute">Attribute</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Annotation-DenyDynamicAttribute.html"><abbr title="\MercadoPago\Annotation\DenyDynamicAttribute">DenyDynamicAttribute</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Annotation-RequestParam.html"><abbr title="\MercadoPago\Annotation\RequestParam">RequestParam</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Annotation-RestMethod.html"><abbr title="\MercadoPago\Annotation\RestMethod">RestMethod</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-AdvancedPayments-AdvancedPayment.html"><abbr title="\MercadoPago\AdvancedPayments\AdvancedPayment">AdvancedPayment</abbr></a></dt>
+        <dd>Advanced Payment class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-AdvancedPayments-DisbursementRefund.html"><abbr title="\MercadoPago\AdvancedPayments\DisbursementRefund">DisbursementRefund</abbr></a></dt>
+        <dd>Disbursement Refund class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-AdvancedPayments-Refund.html"><abbr title="\MercadoPago\AdvancedPayments\Refund">Refund</abbr></a></dt>
+        <dd>Refund class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-AuthorizedPayment.html"><abbr title="\MercadoPago\AuthorizedPayment">AuthorizedPayment</abbr></a></dt>
+        <dd>Authorized Payments Class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Card.html"><abbr title="\MercadoPago\Card">Card</abbr></a></dt>
+        <dd>The cards class is the way to store card data of your customers safely to improve the shopping experience.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-CardToken.html"><abbr title="\MercadoPago\CardToken">CardToken</abbr></a></dt>
+        <dd>Card Token class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Chargeback.html"><abbr title="\MercadoPago\Chargeback">Chargeback</abbr></a></dt>
+        <dd>Chargeback class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Customer.html"><abbr title="\MercadoPago\Customer">Customer</abbr></a></dt>
+        <dd>Customer class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-DiscountCampaign.html"><abbr title="\MercadoPago\DiscountCampaign">DiscountCampaign</abbr></a></dt>
+        <dd>discount Campaign class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-InstoreOrder.html"><abbr title="\MercadoPago\InstoreOrder">InstoreOrder</abbr></a></dt>
+        <dd>Instore Order class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Invoice.html"><abbr title="\MercadoPago\Invoice">Invoice</abbr></a></dt>
+        <dd>Invoice class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-MerchantOrder.html"><abbr title="\MercadoPago\MerchantOrder">MerchantOrder</abbr></a></dt>
+        <dd>Merchant order class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-OAuth.html"><abbr title="\MercadoPago\OAuth">OAuth</abbr></a></dt>
+        <dd>OAuth class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Plan.html"><abbr title="\MercadoPago\Plan">Plan</abbr></a></dt>
+        <dd>Plan class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-POS.html"><abbr title="\MercadoPago\POS">POS</abbr></a></dt>
+        <dd>POS class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Preapproval.html"><abbr title="\MercadoPago\Preapproval">Preapproval</abbr></a></dt>
+        <dd>preapproval class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Preference.html"><abbr title="\MercadoPago\Preference">Preference</abbr></a></dt>
+        <dd>Preference class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Refund.html"><abbr title="\MercadoPago\Refund">Refund</abbr></a></dt>
+        <dd>refund class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Documentation.html"><abbr title="\MercadoPago\Documentation">Documentation</abbr></a></dt>
+        <dd>Documentation class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Item.html"><abbr title="\MercadoPago\Item">Item</abbr></a></dt>
+        <dd>Item class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Payer.html"><abbr title="\MercadoPago\Payer">Payer</abbr></a></dt>
+        <dd>Payer Class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Payment.html"><abbr title="\MercadoPago\Payment">Payment</abbr></a></dt>
+        <dd>Payments class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-PaymentMethod.html"><abbr title="\MercadoPago\PaymentMethod">PaymentMethod</abbr></a></dt>
+        <dd>Payment Method class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Tax.html"><abbr title="\MercadoPago\Tax">Tax</abbr></a></dt>
+        <dd>Tax class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Track.html"><abbr title="\MercadoPago\Track">Track</abbr></a></dt>
+        <dd>Track class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-TrackValues.html"><abbr title="\MercadoPago\TrackValues">TrackValues</abbr></a></dt>
+        <dd>Track Values class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Shipments.html"><abbr title="\MercadoPago\Shipments">Shipments</abbr></a></dt>
+        <dd>Shipments class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Subscription.html"><abbr title="\MercadoPago\Subscription">Subscription</abbr></a></dt>
+        <dd>Subscription class</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-ErrorCause.html"><abbr title="\MercadoPago\ErrorCause">ErrorCause</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-RecuperableError.html"><abbr title="\MercadoPago\RecuperableError">RecuperableError</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-SearchResultsArray.html"><abbr title="\MercadoPago\SearchResultsArray">SearchResultsArray</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-RestClient.html"><abbr title="\MercadoPago\RestClient">RestClient</abbr></a></dt>
+        <dd>MercadoPago cURL RestClient</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-Version.html"><abbr title="\MercadoPago\Version">Version</abbr></a></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-DummyEntity.html"><abbr title="\MercadoPago\DummyEntity">DummyEntity</abbr></a></dt>
+        <dd>Class Entity</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MercadoPago-FakeApiHub.html"><abbr title="\MercadoPago\FakeApiHub">FakeApiHub</abbr></a></dt>
+        <dd></dd>
+    
+    </dl>
+
+
+
+        
+
+        
+    </article>
+                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+            </div>
         </div>
-    </div>
-    </div>
+        <a href="packages/Default.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
-        <footer class="span12">
-            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
-            <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Thu, 25 Jun 2020 17:24:21 +0000.<br/>
-    </footer>
-    </body>
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+</body>
 </html>
