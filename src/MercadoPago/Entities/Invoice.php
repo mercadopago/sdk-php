@@ -7,7 +7,6 @@ use MercadoPago\Annotation\Attribute;
 
 /**
  * @RestMethod(resource="/v1/invoices/:id", method="read") 
- * @RequestParam(param="access_token")
  */
 
 class Invoice extends Entity

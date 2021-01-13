@@ -9,7 +9,6 @@ use MercadoPago\Annotation\Attribute;
 /**
  * @RestMethod(resource="/v1/payments/:payment_id/refunds", method="create")
  * @RestMethod(resource="/v1/payments/:payment_id/refunds/:id", method="read")
- * @RequestParam(param="access_token")
  */
 class Refund extends Entity {
 

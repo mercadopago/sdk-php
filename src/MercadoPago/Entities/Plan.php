@@ -9,7 +9,6 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/v1/plans/:id", method="read") 
  * @RestMethod(resource="/v1/plans/", method="create")
  * @RestMethod(resource="/v1/plans/:id", method="update") 
- * @RequestParam(param="access_token")
  */
 
 class Plan extends Entity

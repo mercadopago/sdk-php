@@ -9,7 +9,7 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/dummy/:id", method="update")
  * @RestMethod(resource="/v1/payments", method="create")
  * @RestMethod(resource="/v1/dummies/search", method="search")
- * @RequestParam(param="access_token")
+ * 
  */
 class DummyEntity extends Entity
 {
