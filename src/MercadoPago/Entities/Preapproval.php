@@ -10,7 +10,6 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/preapproval/search", method="search")
  * @RestMethod(resource="/preapproval/", method="create")
  * @RestMethod(resource="/preapproval/:id", method="update") 
- * @RequestParam(param="access_token")
  */
 
 class Preapproval extends Entity

@@ -8,7 +8,6 @@ use MercadoPago\Annotation\Attribute;
 
 /**
  * @RestMethod(resource="/v1/discount_campaigns", method="read")
- * @RequestParam(param="access_token")
  */
 
 
