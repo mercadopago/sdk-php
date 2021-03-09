@@ -1,18 +1,19 @@
 <?php
 
-namespace MercadoPago;
+namespace MercadoPago\Entities;
 
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 /**
  * @RestMethod(resource="/v1/payments/:payment_id/refunds", method="create")
  * @RestMethod(resource="/v1/payments/:payment_id/refunds/:id", method="read")
  * @RequestParam(param="access_token")
  */
-class Refund extends Entity {
-
+class Refund extends Entity
+{
     /**
      * @Attribute()
      */
@@ -37,8 +38,4 @@ class Refund extends Entity {
      * @Attribute(readOnly=true)
      */
     protected $date_created;
-
 }
-
-
-?>

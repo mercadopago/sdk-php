@@ -1,6 +1,7 @@
 <?php
 
 namespace MercadoPago\Annotation;
+
 use Doctrine\Common\Annotations\Annotation;
 
 /**

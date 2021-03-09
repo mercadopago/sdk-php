@@ -1,9 +1,11 @@
 <?php
-namespace MercadoPago;
+
+namespace MercadoPago\Entities;
+
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute; 
-
+use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 /**
  * @RestMethod(resource="/mpmobile/instore/qr/:user_id/:external_id", method="create")
@@ -35,8 +37,4 @@ class InstoreOrder extends Entity
      * @Attribute()
      */
     protected $items;
-
 }
-
-
-?>

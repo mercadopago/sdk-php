@@ -7,7 +7,7 @@ namespace MercadoPago;
  *
  * @package MercadoPago
  */
-class MercadopagoSdkTest extends \PHPUnit\Framework\TestCase
+class MercadoPagoSdkTest extends \PHPUnit\Framework\TestCase
 {
     /**
      *
@@ -41,6 +41,4 @@ class MercadopagoSdkTest extends \PHPUnit\Framework\TestCase
         $entity = new DummyEntity();
         $this->assertInstanceOf(DummyEntity::class, $entity);
     }
-
-
 }

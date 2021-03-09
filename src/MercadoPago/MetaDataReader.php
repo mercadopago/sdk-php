@@ -1,4 +1,5 @@
 <?php
+
 namespace MercadoPago;
 
 use Doctrine\Common\Annotations\Reader;
@@ -30,7 +31,7 @@ class MetaDataReader
         AnnotationRegistry::registerFile(__DIR__ . '/Annotation/DenyDynamicAttribute.php');
 
         $this->_reader = new AnnotationReader();
-        
+
         return $this;
 
     }
@@ -42,9 +43,9 @@ class MetaDataReader
      */
     public function getMetaData($entity)
     {
-        if (get_parent_class($entity)){
+        if (get_parent_class($entity)) {
             $result = $this->getMetaData(get_parent_class($entity));
-        }else {
+        } else {
             $result = new \stdClass;
         }
 

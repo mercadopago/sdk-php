@@ -1,4 +1,5 @@
 <?php
+
 namespace MercadoPago\Config;
 
 /**
@@ -39,10 +40,9 @@ abstract class AbstractConfig
     public function clean()
     {
         return $this->data = array(
-            'base_url'      => 'https://api.mercadopago.com',
+            'base_url' => 'https://api.mercadopago.com',
         );
     }
-
 
     /**
      * @param      $key
@@ -52,7 +52,7 @@ abstract class AbstractConfig
      */
     public function get($key, $default = null)
     {
-        
+
         if ($this->has($key)) {
             return $this->data[$key];
         }
@@ -90,11 +90,10 @@ abstract class AbstractConfig
     /**
      * @param array $data
      */
-    public function configure ($data = [])
+    public function configure($data = [])
     {
         foreach ($data as $key => $value) {
             $this->set($key, $value);
         }
     }
-
 }

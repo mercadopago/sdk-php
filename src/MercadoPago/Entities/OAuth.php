@@ -1,15 +1,17 @@
 <?php
-namespace MercadoPago;
+
+namespace MercadoPago\Entities;
+
 use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\Attribute; 
+use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 /**
  * @RestMethod(resource="/oauth/token", method="create")
  */
-
 class OAuth extends Entity
 {
-   /**
+    /**
      * @Attribute()
      */
     protected $client_secret;
@@ -59,24 +61,27 @@ class OAuth extends Entity
      */
     protected $scope;
 
-    public function getAuthorizationURL($app_id, $redirect_uri){
-      return "https://auth.mercadopago.com.br/authorization?client_id=${app_id}&response_type=code&platform_id=mp&redirect_uri=${redirect_uri}";
+    public function getAuthorizationURL($app_id, $redirect_uri)
+    {
+        return "https://auth.mercadopago.com.br/authorization?client_id=${app_id}&response_type=code&platform_id=mp&redirect_uri=${redirect_uri}";
     }
 
-    public function getOAuthCredentials($authorization_code, $redirect_uri){
-      $this->client_secret = SDK::getAccessToken();
-      $this->grant_type = 'authorization_code';
-      $this->code = $authorization_code;
-      $this->redirect_uri = $redirect_uri;
+    public function getOAuthCredentials($authorization_code, $redirect_uri)
+    {
+        $this->client_secret = SDK::getAccessToken();
+        $this->grant_type = 'authorization_code';
+        $this->code = $authorization_code;
+        $this->redirect_uri = $redirect_uri;
 
-      return $this->save();
+        return $this->save();
     }
 
-    public function refreshOAuthCredentials($refresh_token){
-      $this->client_secret = SDK::getAccessToken();
-      $this->grant_type = 'refresh_token';
-      $this->refresh_token = $refresh_token;
+    public function refreshOAuthCredentials($refresh_token)
+    {
+        $this->client_secret = SDK::getAccessToken();
+        $this->grant_type = 'refresh_token';
+        $this->refresh_token = $refresh_token;
 
-      return $this->save();
+        return $this->save();
     }
 }

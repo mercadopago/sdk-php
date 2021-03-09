@@ -1,15 +1,16 @@
 <?php
-namespace MercadoPago;
+
+namespace MercadoPago\Entities\Shared;
 
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 /**
  * @RestMethod(resource="/v1/payment_methods", method="list")
  * @RequestParam(param="access_token")
  */
-
 class PaymentMethod extends Entity
 {
     /**

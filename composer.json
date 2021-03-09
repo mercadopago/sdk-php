@@ -1,6 +1,7 @@
 {
   "name": "pablorsk/dx-php",
   "type": "library",
+  "description": "Fork of github.com/mercadopago/dx-php",
   "homepage": "https://github.com/mercadopago/dx-php",
   "license": "MIT",
   "config": {
@@ -38,10 +39,7 @@
     "psr-4": {
       "MercadoPago\\": [
         "src/MercadoPago/",
-        "tests/",
-        "src/MercadoPago/Generic/",
-        "src/MercadoPago/Entities/",
-        "src/MercadoPago/Entities/Shared/"
+        "tests/"
       ]
     }
   }

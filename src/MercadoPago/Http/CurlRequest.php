@@ -1,4 +1,5 @@
 <?php
+
 namespace MercadoPago\Http;
 
 use Exception;
@@ -8,8 +9,7 @@ use Exception;
  *
  * @package MercadoPago\Http
  */
-class CurlRequest
-    implements HttpRequest
+class CurlRequest implements HttpRequest
 {
     /**
      * @var null|resource
@@ -63,7 +63,7 @@ class CurlRequest
     }
 
     /**
-     *@codeCoverageIgnore
+     * @codeCoverageIgnore
      */
     public function close()
     {

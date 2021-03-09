@@ -1,8 +1,10 @@
 <?php
-namespace MercadoPago;
+
+namespace MercadoPago\Entities\Shared;
 
 use MercadoPago\Annotation\Attribute;
 use MercadoPago\Annotation\DenyDynamicAttribute;
+use MercadoPago\Entity;
 
 /**
  * Payer Class Doc Comment
@@ -29,7 +31,7 @@ class Payer extends Entity
     protected $name;
     /**
      * @Attribute(type = "string")
-     */  
+     */
     protected $surname;
     /**
      * @Attribute(type = "string")
@@ -59,5 +61,4 @@ class Payer extends Entity
      * @Attribute()
      */
     protected $address;
-
 }

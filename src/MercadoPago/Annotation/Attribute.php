@@ -1,6 +1,7 @@
 <?php
 
 namespace MercadoPago\Annotation;
+
 use Doctrine\Common\Annotations\Annotation;
 
 /**
@@ -17,7 +18,7 @@ class Attribute extends Annotation
      * @var
      */
     public $required = false;
-    public $serialize = true ;
+    public $serialize = true;
     public $readOnly;
     public $primaryKey;
     public $idempotency;

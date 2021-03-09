@@ -1,8 +1,11 @@
 <?php
-namespace MercadoPago;
+
+namespace MercadoPago\Entities\Shared;
+
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute; 
+use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 /**
  * @RestMethod(resource="/v1/payments", method="create")
@@ -255,7 +258,7 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $notification_url;
-    /** 
+    /**
      * @Attribute()
      */
     protected $issuer_id;
@@ -266,11 +269,11 @@ class Payment extends Entity
     /**
      * @Attribute()
      */
-    protected $merchant_account_id; 
+    protected $merchant_account_id;
     /**
      * @Attribute()
      */
-    protected $merchant_number; 
+    protected $merchant_number;
     /**
      * @Attribute()
      */
@@ -308,17 +311,18 @@ class Payment extends Entity
      */
     protected $platform_id;
 
-    public function refund($amount = 0){
+    public function refund($amount = 0)
+    {
         $refund = new Refund(["payment_id" => $this->id]);
-        if ($amount > 0){
+        if ($amount > 0) {
             $refund->amount = $amount;
         }
 
-        if ($refund->save()){
+        if ($refund->save()) {
             $payment = self::get($this->id);
             $this->_fillFromArray($this, $payment->toArray());
             return true;
-        }else{
+        } else {
             $this->error = $refund->error;
             return false;
         }
@@ -327,7 +331,7 @@ class Payment extends Entity
     public function capture($amount = 0)
     {
         $this->capture = true;
-        if ($amount > 0){
+        if ($amount > 0) {
             $this->transaction_amount = $amount;
         }
 

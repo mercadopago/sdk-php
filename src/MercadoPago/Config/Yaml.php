@@ -1,5 +1,7 @@
 <?php
+
 namespace MercadoPago\Config;
+
 use Exception;
 use Symfony\Component\Yaml\Yaml as YamlParser;
 

@@ -1,15 +1,17 @@
 <?php
-namespace MercadoPago;
+
+namespace MercadoPago\Entities;
 
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 /**
  * @RestMethod(resource="/checkout/preferences", method="create")
  * @RestMethod(resource="/checkout/preferences/:id", method="read")
  * @RestMethod(resource="/checkout/preferences/:id", method="update")
- * @RequestParam(param="access_token") 
+ * @RequestParam(param="access_token")
  */
 class Preference extends Entity
 {
@@ -125,5 +127,4 @@ class Preference extends Entity
      * @Attribute(type = "array")
      */
     protected $tracks;
-
 }
