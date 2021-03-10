@@ -1,5 +1,5 @@
 <?php
-    namespace MercadoPago;
+    namespace MercadoPago\Generic;
 
     use ArrayObject;
 
