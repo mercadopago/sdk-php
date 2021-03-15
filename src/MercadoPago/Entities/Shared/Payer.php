@@ -3,6 +3,7 @@ namespace MercadoPago\Entities\Shared;
 
 use MercadoPago\Annotation\Attribute;
 use MercadoPago\Annotation\DenyDynamicAttribute;
+use MercadoPago\Entity;
 
 /**
  * Payer Class Doc Comment

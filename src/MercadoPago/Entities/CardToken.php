@@ -4,6 +4,7 @@ namespace MercadoPago\Entities;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 /**
  * @RestMethod(resource="/v1/card_tokens?public_key=:public_key", method="create")
