@@ -1,10 +1,11 @@
 <?php
-namespace MercadoPago;
+namespace MercadoPago\Entities;
 
 use http\Params;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 /**
  * @RestMethod(resource="/v1/discount_campaigns", method="read")

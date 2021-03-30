@@ -1,7 +1,8 @@
 <?php
-namespace MercadoPago;
+namespace MercadoPago\Entities;
 use MercadoPago\Annotation\RestMethod;
-use MercadoPago\Annotation\Attribute; 
+use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 /**
  * @RestMethod(resource="/oauth/token", method="create")

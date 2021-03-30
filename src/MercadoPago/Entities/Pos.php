@@ -1,8 +1,9 @@
 <?php
-namespace MercadoPago;
+namespace MercadoPago\Entities;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute; 
+use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 
 /**
@@ -13,7 +14,7 @@ use MercadoPago\Annotation\Attribute;
  * @RestMethod(resource="/pos", method="search")
  * @RequestParam(param="access_token")
  */
-class POS extends Entity
+class Pos extends Entity
 {
     /**
      * @Attribute()
