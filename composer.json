@@ -39,10 +39,12 @@
   },
   "autoload": {
     "psr-4": {
-      "MercadoPago\\": [
-        "src/MercadoPago/",
-        "tests/"
-      ]
+      "MercadoPago\\": "src/MercadoPago/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MercadoPago\\": "tests/"
     }
   },
   "scripts": {
