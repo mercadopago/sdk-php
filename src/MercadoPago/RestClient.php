@@ -46,15 +46,22 @@ class RestClient
         $default_header = array(
             'Content-Type' => 'application/json',
             'User-Agent' => 'MercadoPago DX-PHP SDK/ v' . Version::$_VERSION,
-            'x-product-id' => 'BC32A7RU643001OI3940'
+            'x-product-id' => 'BC32A7RU643001OI3940',
+            'x-tracking-id' => 'platform:' . PHP_MAJOR_VERSION .'|' . PHP_VERSION . ',type:SDK' . Version::$_VERSION . ',so;'
         );
+
         if ($customHeaders) {
             $default_header = array_merge($default_header, $customHeaders);
+        }
+
+        if(!isset($default_header['Authorization'])){
+            $default_header['Authorization'] = 'Bearer '.SDK::getAccessToken();
         }
 
         foreach ($default_header as $key => $value) {
             $headers[] = $key . ': ' . $value;
         }
+
         $connect->setOption(CURLOPT_HTTPHEADER, $headers);
     }
 
