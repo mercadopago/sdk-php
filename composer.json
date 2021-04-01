@@ -1,12 +1,13 @@
 {
   "name": "pablorsk/dx-php",
+  "description": "Mercado Pago PHP SDK",
   "type": "library",
-  "description": "Fork of mercadopago/dx-php",
   "homepage": "https://github.com/mercadopago/dx-php",
   "license": "MIT",
+  "version": "2.2.1",
   "config": {
     "platform": {
-        "php": "5.6"
+        "php": "7.1"
     }
   },
   "authors": [
@@ -22,9 +23,9 @@
     }
   ],
   "require": {
-    "php": ">=5.5.0",
-    "doctrine/common": "~2.6",
-    "doctrine/annotations": "1.4"
+    "php": ">=7.1.0",
+    "doctrine/common": "^2.6",
+    "doctrine/annotations": "^1.8"
   },
   "require-dev": {
     "phpunit/phpunit": "^5",
@@ -33,7 +34,8 @@
     "squizlabs/php_codesniffer": "2.3.*",
     "sebastian/phpcpd": "*", 
     "doctrine/orm": "~2.3",
-    "vlucas/phpdotenv": "^2.5"
+    "vlucas/phpdotenv": "^2.5",
+    "phpdocumentor/phpdocumentor": "^2.0"
   },
   "autoload": {
     "psr-4": {
@@ -42,5 +44,16 @@
         "tests/"
       ]
     }
-  }
+  },
+  "scripts": {
+    "test": "./vendor/bin/phpunit tests",
+    "generate-doc": "php phpDocumentor.phar --visibility=\"public,protected\" --template=\"responsive-twig\" --title=\"SDK Mercado Pago\" -d ./src/MercadoPaGo/Entities -t ./docs"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.org"
+    },
+    { "packagist": false }
+  ]
 }

@@ -470,17 +470,19 @@ abstract class Entity
       if ($data) {
         
         foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $className = 'MercadoPago\\' . $this->_camelize($key);
-                if (class_exists($className, true)) {
-                    $entity->_setValue($key, new $className, false);
-                    $entity->_fillFromArray($this->{$key}, $value);
-                } else {
-                    $entity->_setValue($key, json_decode(json_encode($value)), false);
+            if (!is_null($value)){
+                if (is_array($value)) {
+                    $className = 'MercadoPago\\' . $this->_camelize($key);
+                    if (class_exists($className, true)) {
+                        $entity->_setValue($key, new $className, false);
+                        $entity->_fillFromArray($this->{$key}, $value);
+                    } else {
+                        $entity->_setValue($key, json_decode(json_encode($value)), false);
+                    }
+                    continue;
                 }
-                continue;
+                $entity->_setValue($key, $value, false);
             }
-            $entity->_setValue($key, $value, false);
         }
       }
     }

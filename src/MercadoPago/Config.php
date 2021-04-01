@@ -111,6 +111,7 @@ class Config
         if ($key == "ACCESS_TOKEN") { 
             $user = $this->getUserId($value);
             parent::set('USER_ID', $user['id']);
+            parent::set('COUNTRY_ID', $user['country_id']);
         }
         
         if (parent::get('CLIENT_ID') != "" && parent::get('CLIENT_SECRET') != "" && empty(parent::get('ACCESS_TOKEN'))) {
@@ -136,16 +137,13 @@ class Config
     /** 
      * @return mixed
      */
-    public function getUserId($access_token)
+    public function getUserId()
     {
         if (!$this->_restclient) {
             $this->_restclient = new RestClient();
             $this->_restclient->setHttpParam('address', $this->get('base_url'));
         }
-        $response = $this->_restclient->get("/users/me", array(
-                "url_query" => array("access_token" => $access_token)
-            )
-        );  
+        $response = $this->_restclient->get("/users/me");
 
         return $response["body"];
     }
@@ -189,5 +187,7 @@ class Config
         return $response['body'];
     }
 
-
+    public function getData(){
+        return $this->data;
+    }
 }

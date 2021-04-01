@@ -6,28 +6,29 @@ use MercadoPago\Annotation\DenyDynamicAttribute;
 use MercadoPago\Entity;
 
 /**
- * Payer Class Doc Comment
- *
- * @package MercadoPago
+ * Documentation class
  */
 class Documentation extends Entity
 {
     /**
-    * @Attribute()
+     * type
+     * @Attribute(type = "string", readOnly = true)
+     * @var string
     */
     protected $type;
+
     /**
-    * @Attribute(type = "string", readOnly = true)
+     * url
+     * @Attribute(type = "string", readOnly = true)
+     * @var string
     */
     protected $url;
+
     /**
+     * description
     * @Attribute(type = "string", readOnly = true)
+     * @var string
     */
     protected $description;
-    /**
-    * @Attribute(type = "string", readOnly = true)
-    */
 
 }
-
-?>
