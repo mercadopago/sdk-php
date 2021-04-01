@@ -4,7 +4,7 @@
   "type": "library",
   "homepage": "https://github.com/mercadopago/dx-php",
   "license": "MIT",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "config": {
     "platform": {
         "php": "7.1"
