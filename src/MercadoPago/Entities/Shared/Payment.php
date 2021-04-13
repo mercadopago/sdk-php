@@ -592,4 +592,92 @@ class Payment extends Entity
 
         return $this->update();
     }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status): self
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    public function getTransactionAmount(): string
+    {
+        return $this->transaction_amount;
+    }
+
+    public function setTransactionAmount($transactionAmount): self
+    {
+        $this->transaction_amount = $transactionAmount;
+        return $this;
+    }
+
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    public function setToken($token): self
+    {
+        $this->token = $token;
+        return $this;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function getInstallments(): int
+    {
+        return $this->installments;
+    }
+
+    public function setInstallments(int $installments): self
+    {
+        $this->installments = $installments;
+        return $this;
+    }
+
+    public function getPaymentMethodId(): string
+    {
+        return $this->payment_method_id;
+    }
+
+    public function setPaymentMethodId(string $paymentMethodId): self
+    {
+        $this->payment_method_id = $paymentMethodId;
+        return $this;
+    }
+
+    public function getIssuerId(): string
+    {
+        return $this->issuer_id;
+    }
+
+    public function setIssuerId(string $issuerId): self
+    {
+        $this->issuer_id = $issuerId;
+        return $this;
+    }
+
+    public function getPayer()
+    {
+        return $this->payer;
+    }
+
+    public function setPayer(array $payer): self
+    {
+        $this->payer = $payer;
+        return $this;
+    }
 }
