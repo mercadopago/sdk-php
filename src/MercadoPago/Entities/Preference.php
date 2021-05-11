@@ -61,6 +61,10 @@ class Preference extends Entity
      */
     protected $expiration_date_to;
     /**
+     * @Attribute(type = "date")
+     */
+    protected $date_of_expiration;
+    /**
      * @Attribute(type = "int", readOnly = true)
      */
     protected $collector_id;
