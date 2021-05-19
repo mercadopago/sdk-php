@@ -101,6 +101,14 @@ class Preference extends Entity
     protected $expiration_date_to;
 
     /**
+     * date_of_expiration
+     * @Attribute(type = "date")
+     * @var \DateTime
+     */
+    protected $date_of_expiration;
+
+
+    /**
      * collector_id
      * @Attribute(type = "int", readOnly = true)
      * @var int
