@@ -556,6 +556,13 @@ class Payment extends Entity
     protected $net_amount;
 
     /**
+     * payer
+     * @var object
+     * @Attribute()
+     */
+    protected $point_of_interaction;
+
+    /**
      * refund
      * @param int $amount
      * @return bool
