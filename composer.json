@@ -2,26 +2,14 @@
   "name": "mercadopago/dx-php",
   "description": "Mercado Pago PHP SDK",
   "type": "library",
-  "homepage": "https://github.com/mercadopago/dx-php",
+  "homepage": "https://github.com/mercadopago/sdk-php",
   "license": "MIT",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "config": {
     "platform": {
         "php": "7.1"
     }
   },
-  "authors": [
-    {
-      "name": "imasson",
-      "role": "Developer",
-      "homepage": "https://github.com/imasson"
-    },
-    {
-      "name": "joelibaceta",
-      "role": "Developer",
-      "homepage": "https://github.com/joelibaceta"
-    }
-  ],
   "require": {
     "php": ">=7.1.0",
     "doctrine/common": "^2.6",
