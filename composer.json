@@ -1,26 +1,14 @@
 {
   "name": "mercadopago/dx-php",
   "type": "library",
-  "homepage": "https://github.com/mercadopago/dx-php",
+  "homepage": "https://github.com/mercadopago/sdk-php",
   "license": "MIT",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "config": {
     "platform": {
         "php": "5.6"
     }
   },
-  "authors": [
-    {
-      "name": "imasson",
-      "role": "Developer",
-      "homepage": "https://github.com/imasson"
-    },
-    {
-      "name": "joelibaceta",
-      "role": "Developer",
-      "homepage": "https://github.com/joelibaceta"
-    }
-  ],
   "require": {
     "php": ">=5.5.0",
     "doctrine/common": "~2.6",
