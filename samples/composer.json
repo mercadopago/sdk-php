@@ -1,19 +1,12 @@
 {
     "repositories": [
       {
-          "url": "git@github.com:mercadopago/px-php.git",
+          "url": "git@github.com:mercadopago/sdk-php.git",
           "type": "git"
       }
     ], 
-    "name": "root/php-demo",
-    "authors": [
-        {
-            "name": "Joel Ibaceta",
-            "email": "mail@joelibaceta.com"
-        }
-    ],
+    "name": "mercadopago/sdk-php-sample",
     "require": {
-      "mercadopago/px-php": "dev-develop"
+        "mercadopago/dx-php": "dev-master"
     }
 }
-
