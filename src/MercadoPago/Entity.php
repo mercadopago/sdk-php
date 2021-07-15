@@ -173,19 +173,12 @@ abstract class Entity
 
         $response = self::$_manager->execute($entityToQuery, 'get');
         if ($response['code'] == "200" || $response['code'] == "201") {
-            $results = $response['body']['results'];
-            foreach ($results as $result) {
-                $entity = new $class();
-                $entity->_fillFromArray($entity, $result);
-                $searchResult->append($entity);
-            }
-            $searchResult->setPaginateParams($response['body']['paging']);
-            $searchResult->_filters = $filters;
+            $searchResult->fetch($filters, $response['body']);
         } elseif (intval($response['code']) >= 400 && intval($response['code']) < 500) {
             $searchResult->process_error_body($response['body']);
-            throw new Exception ($response['body']['message']);
+            throw new Exception($response['body']['message']);
         } else {
-            throw new Exception ("Internal API Error");
+            throw new Exception("Internal API Error");
         }
         return $searchResult;
     }
@@ -458,6 +451,17 @@ abstract class Entity
         }
         throw new \Exception('Wrong type ' . gettype($value) . '. It should be ' . $type . ' for property ' . $property);
     }
+
+    /**
+     * Fill entity from data with nested object creation
+     *
+     * @param $entity
+     * @param $data
+     */
+    public function fillFromArray($entity, $data) {
+        $this->_fillFromArray($entity, $data);
+    }
+
     /**
      * Fill entity from data with nested object creation
      *
