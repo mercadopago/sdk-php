@@ -24,25 +24,36 @@
         }
 
         public function next() {
-            
             $new_offset = $this->limit + $this->offset;
-            echo "\n new offset" . $new_offset ;
-
-            $this->_filters['offset'] = $new_offset; 
-            
+            $this->_filters['offset'] = $new_offset;
             $result = $this->_class::search($this->_filters);
-
-
-
-            echo "\nlimit" . $result->limit ;
-            echo "\nresult offset" . $result->offset ;
  
             $this->limit = $result->limit;
             $this->offset = $result->offset;
             $this->total = $result->total;
 
             $this->exchangeArray($result->getArrayCopy()); 
+        }
 
+        public function fetch($filters, $body) {
+            $this->_filters = $filters;
+
+            if ($body) {
+                $results = [];
+                if (array_key_exists("results", $body)) {
+                    $results = $body["results"];
+                } else if (array_key_exists("elements", $body)) {
+                    $results = $body["elements"];
+                }
+
+                foreach ($results as $result) {
+                    $entity = new $this->_class();
+                    $entity->fillFromArray($entity, $result);
+                    $this->append($entity);
+                }
+
+                $this->fetchPaging($filters, $body);
+            }
         }
 
         public function process_error_body($message){ 
@@ -64,6 +75,19 @@
             }
           
             $this->errors = $recuperable_error;
+        }
+
+        private function fetchPaging($filters, $body) {
+            if (array_key_exists("paging", $body)) {
+                $paging = $body["paging"];
+                $this->limit  = $paging["limit"];
+                $this->total  = $paging["total"];
+                $this->offset = $paging["offset"];
+            } else {
+                $this->offset = array_key_exists("offset", $filters) ? $filters["offset"] : 0;
+                $this->limit = array_key_exists("limit", $filters) ? $filters["limit"] : 20;
+                $this->total  = array_key_exists("total", $body) ? $body["total"] : 0;
+            }
         }
 
     }

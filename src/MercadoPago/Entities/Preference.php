@@ -12,6 +12,7 @@ use MercadoPago\Annotation\Attribute;
  * 
  * @RestMethod(resource="/checkout/preferences", method="create")
  * @RestMethod(resource="/checkout/preferences/:id", method="read")
+ * @RestMethod(resource="/checkout/preferences/search", method="search")
  * @RestMethod(resource="/checkout/preferences/:id", method="update")
  */
 class Preference extends Entity

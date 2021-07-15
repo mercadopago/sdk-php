@@ -30,8 +30,15 @@ class Card extends Entity
     protected $id;
 
     /**
+     * token
+     * @Attribute()
+     * @var string
+     */
+    protected $token;
+
+    /**
      * customer_id
-     * @Attribute(required = true)
+     * @Attribute(required = true, serialize = false)
      * @var string
      */
     protected $customer_id;
