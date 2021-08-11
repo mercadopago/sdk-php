@@ -307,6 +307,48 @@ class Payment extends Entity
      */
     protected $platform_id;
 
+    /**
+     * charges details
+     * @var object
+     * @Attribute()
+     */
+    protected $charges_details;
+
+    /**
+     * taxes
+     * @Attribute(type = "array")
+     * @var array
+     */
+    protected $taxes;
+
+    /**
+     * net_amount
+     * @var float
+     * @Attribute(type = "float")
+     */
+    protected $net_amount;
+
+    /**
+     * point_of_interaction
+     * @var object
+     * @Attribute()
+     */
+    protected $point_of_interaction;
+
+    /**
+     * payment_method_option_id
+     * @var string
+     * @Attribute()
+     */
+    protected $payment_method_option_id;
+
+    /**
+     * merchant_services
+     * @var object
+     * @Attribute()
+     */
+    protected $merchant_services;
+
     public function refund($amount = 0){
         $refund = new Refund(["payment_id" => $this->id]);
         if ($amount > 0){
