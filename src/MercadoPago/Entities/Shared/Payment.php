@@ -563,6 +563,20 @@ class Payment extends Entity
     protected $point_of_interaction;
 
     /**
+     * payment_method_option_id
+     * @var string
+     * @Attribute()
+     */
+    protected $payment_method_option_id;
+
+    /**
+     * merchant_services
+     * @var object
+     * @Attribute()
+     */
+    protected $merchant_services;
+
+    /**
      * refund
      * @param int $amount
      * @return bool
