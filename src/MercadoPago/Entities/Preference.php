@@ -40,42 +40,42 @@ class Preference extends Entity
 
     /**
      * notification_url
-     * @Attribute(type = "string", maxLength = 500)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $notification_url;
 
     /**
      * init_point
-     * @Attribute(type = "string", readOnly = true)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $init_point;
 
     /**
      * sandbox_init_point
-     * @Attribute(type = "string", readOnly = true)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $sandbox_init_point;
 
     /**
      * operation_type
-     * @Attribute(type = "string", readOnly = true)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $operation_type;
 
     /**
      * additional_info
-     * @Attribute(type = "string", maxLength = 600)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $additional_info;
 
     /**
      * external_reference
-     * @Attribute(type = "string", maxLength = 256)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $external_reference;
@@ -111,14 +111,14 @@ class Preference extends Entity
 
     /**
      * collector_id
-     * @Attribute(type = "int", readOnly = true)
+     * @Attribute(type = "int")
      * @var int
      */
     protected $collector_id;
 
     /**
      * client_id
-     * @Attribute(type = "int", readOnly = true)
+     * @Attribute(type = "int")
      * @var int
      */
     protected $client_id;
