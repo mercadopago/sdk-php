@@ -10,7 +10,7 @@ This library provides developers with a simple set of bindings to help you integ
 
 PHP 5.6, 7.1 or higher
 
-## 📲 Installation 
+## 💻 Installation 
 
 First time using Mercado Pago? Create your [Mercado Pago account](https://www.mercadopago.com), if you don’t have one already.
 
