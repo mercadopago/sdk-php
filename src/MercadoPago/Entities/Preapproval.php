@@ -91,12 +91,12 @@ class Preapproval extends Entity
    */
   protected $preapproval_plan_id;
 
-   /**
+  /**
    * @Attribute()
    */
   protected $payment_method_id;
 
-   /**
+  /**
    * @Attribute()
    */
   protected $card_id;
