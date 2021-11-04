@@ -4,7 +4,7 @@
   "description": "Fork from mercadopago/dx-php changing the dependencies versions.",
   "homepage": "https://github.com/liveecommerce/dx-php",
   "license": "MIT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "authors": [
     {
       "name": "imasson",
@@ -28,7 +28,7 @@
     "phpmd/phpmd": "@stable",
     "squizlabs/php_codesniffer": "2.3.*",
     "sebastian/phpcpd": "*", 
-    "doctrine/orm": "~2.3",
+    "doctrine/orm": "~2.10",
     "vlucas/phpdotenv": "^2.5"
   },
   "autoload": {
