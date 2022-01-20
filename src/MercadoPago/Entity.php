@@ -263,6 +263,10 @@ abstract class Entity
     }
 
     function process_error_body($message){
+        if( !isset($message['error']) ) $message['error'] = '';
+        if( !isset($message['message']) ) $message['message'] = '';
+        if( !isset($message['status']) ) $message['status'] = '';
+        
         $recuperable_error = new RecuperableError(
             $message['message'],
             $message['error'],
