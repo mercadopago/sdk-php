@@ -33,7 +33,7 @@ That's it! Mercado Pago SDK has been successfully installed.
 
     MercadoPago\SDK::setAccessToken("YOUR_ACCESS_TOKEN"); // Either Production or SandBox AccessToken
 
-    $payment = new MercadoPago\Payment();
+    $payment = new MercadoPago\Shared\Payment();
     
     $payment->transaction_amount = 141;
     $payment->token = "YOUR_CARD_TOKEN";

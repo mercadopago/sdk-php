@@ -2,6 +2,8 @@
 namespace MercadoPago;
 
 use Exception;
+use MercadoPago\Config\Json;
+use MercadoPago\Config\Yaml;
 
 /**
  * Config Class Doc Comment
@@ -16,8 +18,8 @@ class Config
      * @var array
      */
     private $_supportedFileParsers = [
-        'MercadoPago\\Config\\Json',
-        'MercadoPago\\Config\\Yaml',
+        Json::class,
+        Yaml::class,
     ];
 
     private $_restclient = null;

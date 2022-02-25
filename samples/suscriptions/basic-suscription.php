@@ -2,7 +2,7 @@
 
     require_once dirname(__FILE__) . '/../../index.php';
 
-    $preapproval_data = new MercadoPago\Preapproval();
+    $preapproval_data = new MercadoPago\Entities\Preapproval();
 
     $preapproval_data->payer_email = "your.payer@email.com";
     $preapproval_data->back_url = "http://www.my-site.com";

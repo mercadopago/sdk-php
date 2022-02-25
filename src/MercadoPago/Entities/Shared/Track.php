@@ -2,9 +2,10 @@
 /**
  * Track class file
  */
-namespace MercadoPago;
+namespace MercadoPago\Entities\Shared;
 
 use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 /**
  * Track class

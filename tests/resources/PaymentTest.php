@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use PHPUnit\Framework\TestCase;
 
@@ -31,7 +31,7 @@ class PaymentTest extends TestCase
     public function testCreateApprovedPayment()
     {
 
-        $payment = new MercadoPago\Payment();
+        $payment = new MercadoPago\Entities\Shared\Payment();
         $payment->transaction_amount = 141;
         $payment->token = $this->SingleUseCardToken('approved');
         $payment->description = "Ergonomic Silk Shirt";
@@ -53,17 +53,17 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreateApprovedPayment
      */
-    public function testRefundPayment(MercadoPago\Payment $payment_created_previously) {
+    public function testRefundPayment(MercadoPago\Entities\Shared\Payment $payment_created_previously) {
 
         $id = $payment_created_previously->id;
 
-        $refund = new MercadoPago\Refund();
+        $refund = new MercadoPago\Entities\Refund();
         $refund->payment_id = $id;
         $refund->save();
 
         sleep(10);
 
-        $payment = MercadoPago\Payment::find_by_id($id);
+        $payment = MercadoPago\Entities\Shared\Payment::find_by_id($id);
 
         $this->assertEquals("refunded", $payment->status);
 
@@ -73,7 +73,7 @@ class PaymentTest extends TestCase
     public function testCreateAnInvalidPayment()
     {
 
-        $payment = new MercadoPago\Payment();
+        $payment = new MercadoPago\Entities\Shared\Payment();
         $payment->transaction_amount = -200;
 
         $payment_status = $payment->save();
@@ -91,7 +91,7 @@ class PaymentTest extends TestCase
         );
 
         try {
-            $payments = MercadoPago\Payment::search($filters);  
+            $payments = MercadoPago\Entities\Shared\Payment::search($filters);
         } catch(Exception $e) {
             $this->assertEquals($e->getMessage(), "the attribute incorrect_param is not a possible param");
         }
@@ -101,7 +101,7 @@ class PaymentTest extends TestCase
     public function testCreatePendingPayment()
     {
 
-        $payment = new MercadoPago\Payment();
+        $payment = new MercadoPago\Entities\Shared\Payment();
         $payment->transaction_amount = 141;
         $payment->token = $this->SingleUseCardToken('in_process');
         $payment->description = "Ergonomic Silk Shirt";
@@ -122,29 +122,29 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreatePendingPayment
      */
-    public function testFindPaymentById(MercadoPago\Payment $payment_created_previously) {
-        $payment = MercadoPago\Payment::find_by_id($payment_created_previously->id); 
+    public function testFindPaymentById(MercadoPago\Entities\Shared\Payment $payment_created_previously) {
+        $payment = MercadoPago\Entities\Shared\Payment::find_by_id($payment_created_previously->id);
         $this->assertEquals($payment->id, $payment_created_previously->id);
     }
 
     /**
      * @depends testCreatePendingPayment
      */
-    public function testFindPaymentByNonExistentId(MercadoPago\Payment $payment_created_previously) {
-        $payment = MercadoPago\Payment::find_by_id("123456"); 
+    public function testFindPaymentByNonExistentId(MercadoPago\Entities\Shared\Payment $payment_created_previously) {
+        $payment = MercadoPago\Entities\Shared\Payment::find_by_id("123456");
         $this->assertEquals($payment, null);
     }
 
     /**
      * @depends testCreatePendingPayment
      */
-    public function testPaymentsSearch(MercadoPago\Payment $payment_created_previously) {
+    public function testPaymentsSearch(MercadoPago\Entities\Shared\Payment $payment_created_previously) {
  
         $filters = array(
             "external_reference" => $payment_created_previously->external_reference
         );
 
-        $payments = MercadoPago\Payment::search($filters);
+        $payments = MercadoPago\Entities\Shared\Payment::search($filters);
         $payments = $payments->getArrayCopy();
         $payment = end($payments);
  
@@ -155,19 +155,19 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreatePendingPayment 
      */
-    public function testCancelPayment(MercadoPago\Payment $payment_created_previously) {
+    public function testCancelPayment(MercadoPago\Entities\Shared\Payment $payment_created_previously) {
         $payment_created_previously->status = "cancelled";
         $payment_created_previously->update();
 
         sleep(10);
         
-        $payment = MercadoPago\Payment::find_by_id($payment_created_previously->id);
+        $payment = MercadoPago\Entities\Shared\Payment::find_by_id($payment_created_previously->id);
         $this->assertEquals("cancelled", $payment->status);
         
     }
 
     public function testPaymentWithCustomAccessToken() {
-        $payment = new MercadoPago\Payment();
+        $payment = new MercadoPago\Entities\Shared\Payment();
 
         $options = array(
             "custom_access_token" => "MLA"

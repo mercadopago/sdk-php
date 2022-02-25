@@ -4,11 +4,11 @@
 
     require_once dirname(__FILE__).'/../../index.php';
 
-    $preference = new MercadoPago\Preference();
+    $preference = new MercadoPago\Entities\Preference();
 
     # Building an item
 
-    $item = new MercadoPago\Item();
+    $item = new MercadoPago\Entities\Shared\Item();
     $item->id = "00001";
     $item->title = "item"; 
     $item->quantity = 1;

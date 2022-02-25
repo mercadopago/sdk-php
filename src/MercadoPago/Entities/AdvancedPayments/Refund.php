@@ -2,7 +2,7 @@
 /**
  * Refund class file
  */
-namespace MercadoPago\AdvancedPayments;
+namespace MercadoPago\Entities\AdvancedPayments;
 
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;

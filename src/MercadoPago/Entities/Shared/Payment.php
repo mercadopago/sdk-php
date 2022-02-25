@@ -2,10 +2,11 @@
 /**
  
  */
-namespace MercadoPago;
+namespace MercadoPago\Entities\Shared;
 use MercadoPago\Annotation\RestMethod;
 use MercadoPago\Annotation\RequestParam;
-use MercadoPago\Annotation\Attribute; 
+use MercadoPago\Annotation\Attribute;
+use MercadoPago\Entity;
 
 /**
  * This class provides the methods to access the API that will allow you to create your own payment experience on your website.
