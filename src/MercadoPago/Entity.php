@@ -264,9 +264,9 @@ abstract class Entity
 
     function process_error_body($message){
         $recuperable_error = new RecuperableError(
-            $message['message'],
-            $message['error'],
-            $message['status']
+            $message['message']??'',
+            $message['error']??'',
+            $message['status']??''
         );
 
         if(isset($message['cause']))
