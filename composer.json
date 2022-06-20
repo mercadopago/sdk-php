@@ -1,0 +1,23 @@
+{
+    "name": "mercadopago/dx-php",
+    "description": "[POC] Mercado Pago PHP SDK",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/mercadopago/sdk-php",
+    "version": "3.0.0",
+    "require": {
+        "php": ">=7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "MercadoPago\\": "src/MercadoPago"
+        }
+    },
+    "repositories": [
+        {
+          "type": "composer",
+          "url": "https://packagist.org"
+        },
+        { "packagist": false }
+      ]
+}
