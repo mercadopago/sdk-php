@@ -6,7 +6,7 @@ use MercadoPago\Client\Payment\PaymentClient;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 
-MercadoPagoConfig::setAccessToken("TEST-4031330423711666-081715-153845d7ae897f18b750f9c06a8de15a-186120548");
+MercadoPagoConfig::setAccessToken("");
 
 $client = new PaymentClient();
 
