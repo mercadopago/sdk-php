@@ -5,19 +5,19 @@ namespace MercadoPago\Net;
 /** MPResponse class. */
 class MPResponse
 {
-    private $statusCode;
+    private $status_code;
 
     private $content;
 
-    public function __construct(int $statusCode, $content)
+    public function __construct(int $status_code, $content)
     {
-        $this->statusCode = $statusCode;
+        $this->status_code = $status_code;
         $this->content = $content;
     }
 
     public function getStatusCode(): int
     {
-        return $this->statusCode;
+        return $this->status_code;
     }
 
     public function getContent()

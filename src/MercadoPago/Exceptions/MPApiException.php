@@ -8,9 +8,9 @@ use MercadoPago\Net\MPResponse;
 /** MPApiException class. */
 class MPApiException extends Exception
 {
-    private $statusCode;
+    private $status_code;
 
-    private $apiResponse;
+    private $api_response;
 
     /**
      * MPApiException constructor.
@@ -18,17 +18,17 @@ class MPApiException extends Exception
     public function __construct(string $message, MPResponse $response)
     {
         parent::__construct($message, 0);
-        $this->apiResponse = $response;
-        $this->statusCode = $response->getStatusCode();
+        $this->api_response = $response;
+        $this->status_code = $response->getStatusCode();
     }
 
     public function getApiResponse(): MPResponse
     {
-        return $this->apiResponse;
+        return $this->api_response;
     }
 
     public function getStatusCode(): int
     {
-        return $this->statusCode;
+        return $this->status_code;
     }
 }

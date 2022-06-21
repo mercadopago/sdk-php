@@ -11,79 +11,79 @@ use MercadoPago\Net\MPResponse;
 /** Mercado Pago client class. */
 class MercadoPagoClient
 {
-    protected $httpClient;
+    protected $http_client;
 
     /**
      * MercadoPagoClient constructor.
      */
-    public function __construct(MPHttpClient $httpClient)
+    public function __construct(MPHttpClient $http_client)
     {
-        $this->httpClient = $httpClient;
+        $this->http_client = $http_client;
     }
 
     /**
      * Method used directly or by other methods to make requests with request options.
      */
-    protected function send(string $uri, string $method, ?string $payload = null, ?MPRequestOptions $requestOptions = null): MPResponse
+    protected function send(string $uri, string $method, ?string $payload = null, ?MPRequestOptions $request_options = null): MPResponse
     {
-        return $this->httpClient->send($this->buildRequest($uri, $method, $payload, $requestOptions));
+        return $this->http_client->send($this->buildRequest($uri, $method, $payload, $request_options));
     }
 
     private function buildRequest(
         string $path,
         string $method,
         ?string $payload = null,
-        ?MPRequestOptions $requestOptions = null
+        ?MPRequestOptions $request_options = null
     ): MPRequest {
-        return new MPRequest($path, $method, $payload, $this->addHeaders($requestOptions), $this->addConnectionTimeout($requestOptions));
+        return new MPRequest($path, $method, $payload, $this->addHeaders($request_options), $this->addConnectionTimeout($request_options));
     }
 
-    private function addHeaders(?MPRequestOptions $requestOptions = null): array
+    private function addHeaders(?MPRequestOptions $request_options = null): array
     {
         $headers = array();
-        $headers = $this->addCustomHeaders($headers, $requestOptions);
-        $headers = $this->addDefaultHeaders($headers, $requestOptions);
+        $headers = $this->addCustomHeaders($headers, $request_options);
+        $headers = $this->addDefaultHeaders($headers, $request_options);
         return $headers;
     }
 
-    private function addCustomHeaders(array $headers, ?MPRequestOptions $requestOptions = null): array
+    private function addCustomHeaders(array $headers, ?MPRequestOptions $request_options = null): array
     {
-        if (!is_null($requestOptions) && !is_null($requestOptions->getCustomHeaders())) {
-            foreach ($requestOptions->getCustomHeaders() as $header) {
+        if (!is_null($request_options) && !is_null($request_options->getCustomHeaders())) {
+            foreach ($request_options->getCustomHeaders() as $header) {
                 array_push($headers, $header);
             }
         }
         return $headers;
     }
 
-    private function addDefaultHeaders(array $headers, ?MPRequestOptions $requestOptions = null): array
+    private function addDefaultHeaders(array $headers, ?MPRequestOptions $request_options = null): array
     {
-        $defaultHeaders = array(
+        $default_headers = array(
             'Accept: application/json',
             'Content-Type: application/json; charset=UTF-8',
-            'Authorization: Bearer ' . $this->getAccessToken($requestOptions),
+            'Authorization: Bearer ' . $this->getAccessToken($request_options),
             'X-Product-Id: ' . MercadoPagoConfig::$PRODUCT_ID,
             'User-Agent: MercadoPago DX-PHP SDK/' . MercadoPagoConfig::$CURRENT_VERSION,
             'X-Tracking-Id: platform:' . PHP_MAJOR_VERSION . '|' . PHP_VERSION . ',type:SDK' . MercadoPagoConfig::$CURRENT_VERSION . ',so;'
         );
 
-        foreach ($defaultHeaders as $header) {
+        foreach ($default_headers as $header) {
             array_push($headers, $header);
         }
         return $headers;
     }
 
-    private function getAccessToken(?MPRequestOptions $requestOptions = null): string
+    private function getAccessToken(?MPRequestOptions $request_options = null): string
     {
-        return (!is_null($requestOptions) && !is_null($requestOptions->getAccessToken()))
-            ? $requestOptions->getAccessToken()
+        return (!is_null($request_options) && !is_null($request_options->getAccessToken()))
+            ? $request_options->getAccessToken()
             : MercadoPagoConfig::getAccessToken();
     }
 
-    private function addConnectionTimeout(?MPRequestOptions $requestOptions = null): int
+    private function addConnectionTimeout(?MPRequestOptions $request_options = null): int
     {
-        return (!is_null($requestOptions) && !is_null($requestOptions->getConnectionTimeout() && $requestOptions->getConnectionTimeout() > 0))
-            ? $requestOptions->getConnectionTimeout()
+        return (!is_null($request_options) && !is_null($request_options->getConnectionTimeout() && $request_options->getConnectionTimeout() > 0))
+            ? $request_options->getConnectionTimeout()
             : MercadoPagoConfig::getConnectionTimeout();
     }
 }

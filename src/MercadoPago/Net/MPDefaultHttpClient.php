@@ -11,31 +11,31 @@ class MPDefaultHttpClient implements MPHttpClient
 {
     public function send(MPRequest $request): MPResponse
     {
-        $completeRequest = $this->createHttpRequest($request);
+        $complete_request = $this->createHttpRequest($request);
 
         $connect = curl_init();
-        curl_setopt_array($connect, $completeRequest);
-        $apiResult = curl_exec($connect);
-        $statusCode = curl_getinfo($connect, CURLINFO_HTTP_CODE);
-        $content = json_decode($apiResult, true);
-        $mpResponse = new MPResponse($statusCode, $content);
+        curl_setopt_array($connect, $complete_request);
+        $api_result = curl_exec($connect);
+        $status_code = curl_getinfo($connect, CURLINFO_HTTP_CODE);
+        $content = json_decode($api_result, true);
+        $mp_response = new MPResponse($status_code, $content);
 
-        if (curl_error($connect) || $apiResult === false) {
+        if (curl_error($connect) || $api_result === false) {
             throw new Exception(curl_error($connect));
         }
 
         curl_close($connect);
 
-        if ($statusCode != "200" && $statusCode != "201") {
-            throw new MPApiException("Api error. Check response for details", $mpResponse);
+        if ($status_code != "200" && $status_code != "201") {
+            throw new MPApiException("Api error. Check response for details", $mp_response);
         }
 
-        return $mpResponse;
+        return $mp_response;
     }
 
     private function createHttpRequest(MPRequest $request): array
     {
-        $connectionTimeout =
+        $connection_timeout =
             $request->getConnectionTimeout() != 0
             ? $request->getConnectionTimeout()
             : MercadoPagoConfig::getConnectionTimeout();
@@ -45,7 +45,7 @@ class MPDefaultHttpClient implements MPHttpClient
             CURLOPT_CUSTOMREQUEST => $request->getMethod(),
             CURLOPT_HTTPHEADER => $request->getHeaders(),
             CURLOPT_POSTFIELDS => $request->getPayload(),
-            CURLOPT_CONNECTTIMEOUT_MS => $connectionTimeout,
+            CURLOPT_CONNECTTIMEOUT_MS => $connection_timeout,
             CURLOPT_MAXCONNECTS => MercadoPagoConfig::getMaxConnections(),
             CURLOPT_RETURNTRANSFER => true
         );

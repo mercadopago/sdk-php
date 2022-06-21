@@ -21,9 +21,9 @@ class Serializer
         if ($data) {
             foreach ($data as $key => $value) {
                 if (!is_null($value) && is_array($value)) {
-                    $className = $entity . self::_camelize($key);
-                    if (class_exists($className, true)) {
-                        $object->$key = self::_deserializeFromJson($className, $value);
+                    $class_name = $entity . self::_camelize($key);
+                    if (class_exists($class_name, true)) {
+                        $object->$key = self::_deserializeFromJson($class_name, $value);
                     }
                 } else {
                     $object->{$key} = $value;

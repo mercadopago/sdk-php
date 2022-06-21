@@ -26,9 +26,9 @@ class PaymentClient extends MercadoPagoClient
     /**
      * Method responsible for creating payment.
      */
-    public function create(array $request, ?MPRequestOptions $requestOptions = null): Payment
+    public function create(array $request, ?MPRequestOptions $request_options = null): Payment
     {
-        $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), $requestOptions);
+        $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), $request_options);
         $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -37,9 +37,9 @@ class PaymentClient extends MercadoPagoClient
     /**
      * Method responsible for getting payment.
      */
-    public function get(int $id, ?MPRequestOptions $requestOptions = null): Payment
+    public function get(int $id, ?MPRequestOptions $request_options = null): Payment
     {
-        $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::GET, $requestOptions);
+        $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::GET, $request_options);
         $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -48,10 +48,10 @@ class PaymentClient extends MercadoPagoClient
     /**
      * Method responsible for cancel payment.
      */
-    public function cancel(int $id, ?MPRequestOptions $requestOptions = null): Payment
+    public function cancel(int $id, ?MPRequestOptions $request_options = null): Payment
     {
         $payload = new PaymentCancelRequest();
-        $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::PUT, json_encode($payload), $requestOptions);
+        $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::PUT, json_encode($payload), $request_options);
         $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
         $result->setResponse($response);
         return $result;

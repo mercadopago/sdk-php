@@ -15,88 +15,88 @@ class MercadoPagoConfig
 
     public static $PRODUCT_ID = "BC32A7RU643001OI3940";
 
-    private static $accessToken = "";
+    private static $access_token = "";
 
-    private static $platformId;
+    private static $platform_id;
 
-    private static $corporationId;
+    private static $corporation_id;
 
-    private static $integratorId;
+    private static $integrator_id;
 
-    private static $maxConnections = 10;
+    private static $max_connections = 10;
 
-    private static $connectionTimeout = 20000;
+    private static $connection_timeout = 20000;
 
-    private static $httpClient;
+    private static $http_client;
 
     public static function getHttpClient(): MPHttpClient
     {
-        self::$httpClient = new MPDefaultHttpClient();
-        return self::$httpClient;
+        self::$http_client = new MPDefaultHttpClient();
+        return self::$http_client;
     }
 
-    public static function setHttpClient(MPHttpClient $httpClient): void
+    public static function setHttpClient(MPHttpClient $http_client): void
     {
-        self::$httpClient = $httpClient;
+        self::$http_client = $http_client;
     }
 
     public static function getAccessToken(): string
     {
-        return self::$accessToken;
+        return self::$access_token;
     }
 
-    public static function setAccessToken(string $accessToken): void
+    public static function setAccessToken(string $access_token): void
     {
-        self::$accessToken = $accessToken;
+        self::$access_token = $access_token;
     }
 
     public static function getPlatformId(): string
     {
-        return self::$platformId;
+        return self::$platform_id;
     }
 
-    public static function setPlatformId(string $platformId): void
+    public static function setPlatformId(string $platform_id): void
     {
-        self::$platformId = $platformId;
+        self::$platform_id = $platform_id;
     }
 
     public static function getCorporationId(): string
     {
-        return self::$corporationId;
+        return self::$corporation_id;
     }
 
-    public static function setCorporationId(string $corporationId): void
+    public static function setCorporationId(string $corporation_id): void
     {
-        self::$corporationId = $corporationId;
+        self::$corporation_id = $corporation_id;
     }
 
     public static function getIntegratorId(): string
     {
-        return self::$integratorId;
+        return self::$integrator_id;
     }
 
-    public static function setIntegratorId(string $integratorId): void
+    public static function setIntegratorId(string $integrator_id): void
     {
-        self::$integratorId = $integratorId;
+        self::$integrator_id = $integrator_id;
     }
 
     public static function getMaxConnections(): int
     {
-        return self::$maxConnections;
+        return self::$max_connections;
     }
 
-    public static function setMaxConnections(int $maxConnections): void
+    public static function setMaxConnections(int $max_connections): void
     {
-        self::$maxConnections = $maxConnections;
+        self::$max_connections = $max_connections;
     }
 
     public static function getConnectionTimeout(): int
     {
-        return self::$connectionTimeout;
+        return self::$connection_timeout;
     }
 
-    public static function setConnectionTimeout(int $connectionTimeout): void
+    public static function setConnectionTimeout(int $connection_timeout): void
     {
-        self::$connectionTimeout = $connectionTimeout;
+        self::$connection_timeout = $connection_timeout;
     }
 }
