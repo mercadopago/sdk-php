@@ -25,7 +25,7 @@ class MPRequest
         $this->connection_timeout = $connection_timeout;
     }
 
-    public function getAccessToken()
+    public function getAccessToken(): string
     {
         return $this->access_token;
     }
@@ -40,7 +40,7 @@ class MPRequest
         return $this->uri;
     }
 
-    public function getHeaders(): array
+    public function getHeaders(): ?array
     {
         return $this->headers;
     }
@@ -50,7 +50,7 @@ class MPRequest
         return $this->payload;
     }
 
-    public function getConnectionTimeout()
+    public function getConnectionTimeout(): ?int
     {
         return $this->connection_timeout;
     }

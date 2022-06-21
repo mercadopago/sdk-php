@@ -33,7 +33,7 @@ class Serializer
         }
     }
 
-    private static function _camelize($input, $separator = '_')
+    private static function _camelize($input, $separator = '_'): string
     {
         return str_replace($separator, '', ucwords($input, $separator));
     }

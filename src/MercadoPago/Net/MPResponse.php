@@ -20,7 +20,7 @@ class MPResponse
         return $this->status_code;
     }
 
-    public function getContent()
+    public function getContent(): array
     {
         return $this->content;
     }

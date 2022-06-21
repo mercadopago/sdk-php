@@ -12,7 +12,7 @@ class MPResource
         $this->response = $response;
     }
 
-    function getResponse()
+    function getResponse(): MPResponse
     {
         return $this->response;
     }
