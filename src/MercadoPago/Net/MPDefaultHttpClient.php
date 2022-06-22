@@ -21,7 +21,9 @@ class MPDefaultHttpClient implements MPHttpClient
         $mp_response = new MPResponse($status_code, $content);
 
         if (curl_error($connect) || $api_result === false) {
-            throw new Exception(curl_error($connect));
+            $error_message = curl_error($connect);
+            curl_close($connect);
+            throw new Exception($error_message);
         }
 
         curl_close($connect);
