@@ -21,7 +21,7 @@ class PaymentTransactionDetails
   public $overpaid_amount;
 
   /** Identifies the resource in the payment processor. */
-  public $external_resourceUrl;
+  public $external_resource_url;
 
   /**
    * For credit card payments is the USN. For offline payment methods, is the reference to give to
