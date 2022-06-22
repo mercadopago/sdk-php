@@ -20,7 +20,7 @@ class MPDefaultHttpClient implements MPHttpClient
         $content = json_decode($api_result, true);
         $mp_response = new MPResponse($status_code, $content);
 
-        if (curl_error($connect) || $api_result === false) {
+        if (!empty(curl_error($connect)) || $api_result === false) {
             $error_message = curl_error($connect);
             curl_close($connect);
             throw new Exception($error_message);
