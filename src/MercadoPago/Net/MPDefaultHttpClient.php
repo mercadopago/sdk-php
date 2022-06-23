@@ -11,28 +11,29 @@ class MPDefaultHttpClient implements MPHttpClient
 {
     public function send(MPRequest $request): MPResponse
     {
-        $complete_request = $this->createHttpRequest($request);
-
         $connect = curl_init();
-        curl_setopt_array($connect, $complete_request);
-        $api_result = curl_exec($connect);
-        $status_code = curl_getinfo($connect, CURLINFO_HTTP_CODE);
-        $content = json_decode($api_result, true);
-        $mp_response = new MPResponse($status_code, $content);
 
-        if (!empty(curl_error($connect)) || $api_result === false) {
-            $error_message = curl_error($connect);
+        try {
+            $complete_request = $this->createHttpRequest($request);
+            curl_setopt_array($connect, $complete_request);
+            $api_result = curl_exec($connect);
+            $status_code = curl_getinfo($connect, CURLINFO_HTTP_CODE);
+            $content = json_decode($api_result, true);
+            $mp_response = new MPResponse($status_code, $content);
+
+            if (!empty(curl_error($connect)) || $api_result === false) {
+                $error_message = curl_error($connect);
+                throw new Exception($error_message);
+            }
+
+            if ($status_code != "200" && $status_code != "201") {
+                throw new MPApiException("Api error. Check response for details", $mp_response);
+            }
+
+            return $mp_response;
+        } finally {
             curl_close($connect);
-            throw new Exception($error_message);
         }
-
-        curl_close($connect);
-
-        if ($status_code != "200" && $status_code != "201") {
-            throw new MPApiException("Api error. Check response for details", $mp_response);
-        }
-
-        return $mp_response;
     }
 
     private function createHttpRequest(MPRequest $request): array
