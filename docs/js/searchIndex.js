@@ -501,6 +501,11 @@ Search.appendIndex(
             "summary": "id",
             "url": "classes/MercadoPago-Card.html#property_id"
         },                {
+            "fqsen": "\\MercadoPago\\Card\u003A\u003A\u0024token",
+            "name": "token",
+            "summary": "token",
+            "url": "classes/MercadoPago-Card.html#property_token"
+        },                {
             "fqsen": "\\MercadoPago\\Card\u003A\u003A\u0024customer_id",
             "name": "customer_id",
             "summary": "customer_id",
@@ -1346,6 +1351,16 @@ Search.appendIndex(
             "summary": "preapproval_plan_id",
             "url": "classes/MercadoPago-Preapproval.html#property_preapproval_plan_id"
         },                {
+            "fqsen": "\\MercadoPago\\Preapproval\u003A\u003A\u0024payment_method_id",
+            "name": "payment_method_id",
+            "summary": "payment_method_id",
+            "url": "classes/MercadoPago-Preapproval.html#property_payment_method_id"
+        },                {
+            "fqsen": "\\MercadoPago\\Preapproval\u003A\u003A\u0024card_id",
+            "name": "card_id",
+            "summary": "card_id",
+            "url": "classes/MercadoPago-Preapproval.html#property_card_id"
+        },                {
             "fqsen": "\\MercadoPago\\Preference",
             "name": "Preference",
             "summary": "This\u0020class\u0020will\u0020allow\u0020you\u0020to\u0020charge\u0020your\u0020customers\u0020through\u0020our\u0020web\u0020form\u0020from\u0020any\u0020device\u0020in\u0020a\u0020simple,\u0020fast\u0020and\u0020secure\u0020way.",
@@ -1410,6 +1425,11 @@ Search.appendIndex(
             "name": "expiration_date_to",
             "summary": "expiration_date_to",
             "url": "classes/MercadoPago-Preference.html#property_expiration_date_to"
+        },                {
+            "fqsen": "\\MercadoPago\\Preference\u003A\u003A\u0024date_of_expiration",
+            "name": "date_of_expiration",
+            "summary": "date_of_expiration",
+            "url": "classes/MercadoPago-Preference.html#property_date_of_expiration"
         },                {
             "fqsen": "\\MercadoPago\\Preference\u003A\u003A\u0024collector_id",
             "name": "collector_id",
@@ -2051,6 +2071,21 @@ Search.appendIndex(
             "summary": "net_amount",
             "url": "classes/MercadoPago-Payment.html#property_net_amount"
         },                {
+            "fqsen": "\\MercadoPago\\Payment\u003A\u003A\u0024point_of_interaction",
+            "name": "point_of_interaction",
+            "summary": "payer",
+            "url": "classes/MercadoPago-Payment.html#property_point_of_interaction"
+        },                {
+            "fqsen": "\\MercadoPago\\Payment\u003A\u003A\u0024payment_method_option_id",
+            "name": "payment_method_option_id",
+            "summary": "payment_method_option_id",
+            "url": "classes/MercadoPago-Payment.html#property_payment_method_option_id"
+        },                {
+            "fqsen": "\\MercadoPago\\Payment\u003A\u003A\u0024merchant_services",
+            "name": "merchant_services",
+            "summary": "merchant_services",
+            "url": "classes/MercadoPago-Payment.html#property_merchant_services"
+        },                {
             "fqsen": "\\MercadoPago\\PaymentMethod",
             "name": "PaymentMethod",
             "summary": "Payment\u0020Method\u0020class",
@@ -2461,6 +2496,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/MercadoPago-Entity.html#method_tryFormat"
         },                {
+            "fqsen": "\\MercadoPago\\Entity\u003A\u003AfillFromArray\u0028\u0029",
+            "name": "fillFromArray",
+            "summary": "Fill\u0020entity\u0020from\u0020data\u0020with\u0020nested\u0020object\u0020creation",
+            "url": "classes/MercadoPago-Entity.html#method_fillFromArray"
+        },                {
             "fqsen": "\\MercadoPago\\Entity\u003A\u003A_fillFromArray\u0028\u0029",
             "name": "_fillFromArray",
             "summary": "Fill\u0020entity\u0020from\u0020data\u0020with\u0020nested\u0020object\u0020creation",
@@ -2586,10 +2626,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/MercadoPago-SearchResultsArray.html#method_next"
         },                {
+            "fqsen": "\\MercadoPago\\SearchResultsArray\u003A\u003Afetch\u0028\u0029",
+            "name": "fetch",
+            "summary": "",
+            "url": "classes/MercadoPago-SearchResultsArray.html#method_fetch"
+        },                {
             "fqsen": "\\MercadoPago\\SearchResultsArray\u003A\u003Aprocess_error_body\u0028\u0029",
             "name": "process_error_body",
             "summary": "",
             "url": "classes/MercadoPago-SearchResultsArray.html#method_process_error_body"
+        },                {
+            "fqsen": "\\MercadoPago\\SearchResultsArray\u003A\u003AfetchPaging\u0028\u0029",
+            "name": "fetchPaging",
+            "summary": "",
+            "url": "classes/MercadoPago-SearchResultsArray.html#method_fetchPaging"
         },                {
             "fqsen": "\\MercadoPago\\SearchResultsArray\u003A\u003A\u0024_filters",
             "name": "_filters",
@@ -3181,86 +3231,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/MercadoPago-DummyEntity.html#property_maxLengthAttribute"
         },                {
-            "fqsen": "\\MercadoPago\\EntityTest",
-            "name": "EntityTest",
-            "summary": "EntityTest\u0020Class\u0020Doc\u0020Comment",
-            "url": "classes/MercadoPago-EntityTest.html"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AsetUp\u0028\u0029",
-            "name": "setUp",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_setUp"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AtestSetVariables\u0028\u0029",
-            "name": "testSetVariables",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_testSetVariables"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AtestGetVariables\u0028\u0029",
-            "name": "testGetVariables",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_testGetVariables"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AtestInvalidType\u0028\u0029",
-            "name": "testInvalidType",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_testInvalidType"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AtestAll\u0028\u0029",
-            "name": "testAll",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_testAll"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AtestSave\u0028\u0029",
-            "name": "testSave",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_testSave"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AtestRead\u0028\u0029",
-            "name": "testRead",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_testRead"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AtestObjectCreation\u0028\u0029",
-            "name": "testObjectCreation",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_testObjectCreation"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AtestDynamicAttributes\u0028\u0029",
-            "name": "testDynamicAttributes",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_testDynamicAttributes"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AtestReadOnlyAttributes\u0028\u0029",
-            "name": "testReadOnlyAttributes",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_testReadOnlyAttributes"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AtestMaxLengthAttributes\u0028\u0029",
-            "name": "testMaxLengthAttributes",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_testMaxLengthAttributes"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003AtestSearch\u0028\u0029",
-            "name": "testSearch",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method_testSearch"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003A_mockRequest\u0028\u0029",
-            "name": "_mockRequest",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#method__mockRequest"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003A\u0024config",
-            "name": "config",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#property_config"
-        },                {
-            "fqsen": "\\MercadoPago\\EntityTest\u003A\u003A\u0024_entity",
-            "name": "_entity",
-            "summary": "",
-            "url": "classes/MercadoPago-EntityTest.html#property__entity"
-        },                {
             "fqsen": "\\MercadoPago\\FakeApiHub",
             "name": "FakeApiHub",
             "summary": "",
@@ -3370,51 +3340,6 @@ Search.appendIndex(
             "name": "SingleUseCardToken",
             "summary": "",
             "url": "classes/PaymentTest.html#method_SingleUseCardToken"
-        },                {
-            "fqsen": "\\InstoreTest",
-            "name": "InstoreTest",
-            "summary": "EntityTest\u0020Class\u0020Doc\u0020Comment",
-            "url": "classes/InstoreTest.html"
-        },                {
-            "fqsen": "\\InstoreTest\u003A\u003AsetUpBeforeClass\u0028\u0029",
-            "name": "setUpBeforeClass",
-            "summary": "",
-            "url": "classes/InstoreTest.html#method_setUpBeforeClass"
-        },                {
-            "fqsen": "\\InstoreTest\u003A\u003AtestCreatePos\u0028\u0029",
-            "name": "testCreatePos",
-            "summary": "",
-            "url": "classes/InstoreTest.html#method_testCreatePos"
-        },                {
-            "fqsen": "\\InstoreTest\u003A\u003AtestUpdatePos\u0028\u0029",
-            "name": "testUpdatePos",
-            "summary": "",
-            "url": "classes/InstoreTest.html#method_testUpdatePos"
-        },                {
-            "fqsen": "\\InstoreTest\u003A\u003AtestSearchPos\u0028\u0029",
-            "name": "testSearchPos",
-            "summary": "",
-            "url": "classes/InstoreTest.html#method_testSearchPos"
-        },                {
-            "fqsen": "\\PreApprovalTest",
-            "name": "PreApprovalTest",
-            "summary": "EntityTest\u0020Class\u0020Doc\u0020Comment",
-            "url": "classes/PreApprovalTest.html"
-        },                {
-            "fqsen": "\\PreApprovalTest\u003A\u003AsetUpBeforeClass\u0028\u0029",
-            "name": "setUpBeforeClass",
-            "summary": "",
-            "url": "classes/PreApprovalTest.html#method_setUpBeforeClass"
-        },                {
-            "fqsen": "\\PreApprovalTest\u003A\u003AtestCreatePrefence\u0028\u0029",
-            "name": "testCreatePrefence",
-            "summary": "",
-            "url": "classes/PreApprovalTest.html#method_testCreatePrefence"
-        },                {
-            "fqsen": "\\PreApprovalTest\u003A\u003A\u0024last_preapproval",
-            "name": "last_preapproval",
-            "summary": "",
-            "url": "classes/PreApprovalTest.html#property_last_preapproval"
         },                {
             "fqsen": "\\PreferenceTest",
             "name": "PreferenceTest",

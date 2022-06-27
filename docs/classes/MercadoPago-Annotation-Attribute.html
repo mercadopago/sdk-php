@@ -2,18 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation</title>
+            <title>Documentation</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
-            <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js" integrity="sha256-0vuk8LXoyrmCjp1f0O300qo1M75ZQyhH9X3J6d+scmk=" crossorigin="anonymous"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -48,29 +53,53 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -four phpdocumentor-sidebar">
-    
-    <section class="phpdocumentor-sidebar__category">
-        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
-                                <h3 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/default.html"><abbr title="\">Global</abbr></a></h3>
-                                        <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/mercadopago.html"><abbr title="\MercadoPago">MercadoPago</abbr></a></h4>
-                <ul class="phpdocumentor-list">
-                                            <li><a href="namespaces/mercadopago-annotation.html"><abbr title="\MercadoPago\Annotation">Annotation</abbr></a></li>
-                                            <li><a href="namespaces/mercadopago-config.html"><abbr title="\MercadoPago\Config">Config</abbr></a></li>
-                                            <li><a href="namespaces/mercadopago-advancedpayments.html"><abbr title="\MercadoPago\AdvancedPayments">AdvancedPayments</abbr></a></li>
-                                            <li><a href="namespaces/mercadopago-http.html"><abbr title="\MercadoPago\Http">Http</abbr></a></li>
-                                    </ul>
-                        </section>
+                    <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/mercadopago.html" class="">MercadoPago</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/mercadopago-annotation.html" class="">Annotation</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/mercadopago-config.html" class="">Config</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/mercadopago-advancedpayments.html" class="">AdvancedPayments</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/mercadopago-http.html" class="">Http</a>
+                
+            </li>
+            </ul>
 
-        <section class="phpdocumentor-sidebar__category">
-        <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
-                    <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/Default.html"><abbr title="\Default">Default</abbr></a></h3>
-                                <h3 class="phpdocumentor-sidebar__root-package"><a href="packages/MercadoPago.html"><abbr title="\MercadoPago">MercadoPago</abbr></a></h3>
-                        <ul class="phpdocumentor-list">
-                                    <li><a href="packages/MercadoPago-Config.html"><abbr title="\MercadoPago\Config">Config</abbr></a></li>
-                                    <li><a href="packages/MercadoPago-Http.html"><abbr title="\MercadoPago\Http">Http</abbr></a></li>
-                            </ul>
                         </section>
-    
+                <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/MercadoPago.html" class="">MercadoPago</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/MercadoPago-Config.html" class="">Config</a>
+                
+            </li>
+                    <li>
+                <a href="packages/MercadoPago-Http.html" class="">Http</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+            
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
@@ -101,7 +130,7 @@
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Default.html">Default</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
                             </ul>
         </div>
     
@@ -112,10 +141,10 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/MercadoPago/Annotation/Attribute.php"><a href="files/src-mercadopago-annotation-attribute.html"><abbr title="src/MercadoPago/Annotation/Attribute.php">Attribute.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">9</span>
-</aside>
+
+    </aside>
 
         
-    <section class="phpdocumentor-description"></section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -128,8 +157,7 @@
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"></section>
-
+                                             
                                     </dd>
                         </dl>
 
@@ -144,59 +172,59 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                <dt class="phpdocumentor-table-of-contents__entry -property -public">
+                    <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MercadoPago-Annotation-Attribute.html#property_defaultValue">$defaultValue</a>
     <span>
-                &nbsp;: mixed            </span>
+                        &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MercadoPago-Annotation-Attribute.html#property_idempotency">$idempotency</a>
     <span>
-                &nbsp;: mixed            </span>
+                        &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MercadoPago-Annotation-Attribute.html#property_maxLength">$maxLength</a>
     <span>
-                &nbsp;: mixed            </span>
+                        &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MercadoPago-Annotation-Attribute.html#property_primaryKey">$primaryKey</a>
     <span>
-                &nbsp;: mixed            </span>
+                        &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MercadoPago-Annotation-Attribute.html#property_readOnly">$readOnly</a>
     <span>
-                &nbsp;: mixed            </span>
+                        &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MercadoPago-Annotation-Attribute.html#property_required">$required</a>
     <span>
-                &nbsp;: mixed            </span>
+                        &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MercadoPago-Annotation-Attribute.html#property_serialize">$serialize</a>
     <span>
-                &nbsp;: mixed            </span>
+                        &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MercadoPago-Annotation-Attribute.html#property_type">$type</a>
     <span>
-                &nbsp;: mixed            </span>
+                        &nbsp;: mixed            </span>
 </dt>
 <dd></dd>
 
@@ -229,7 +257,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/MercadoPago/Annotation/Attribute.php"><a href="files/src-mercadopago-annotation-attribute.html"><abbr title="src/MercadoPago/Annotation/Attribute.php">Attribute.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">24</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -238,7 +267,10 @@
     <span class="phpdocumentor-signature__name">$defaultValue</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -259,7 +291,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/MercadoPago/Annotation/Attribute.php"><a href="files/src-mercadopago-annotation-attribute.html"><abbr title="src/MercadoPago/Annotation/Attribute.php">Attribute.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">23</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -268,7 +301,10 @@
     <span class="phpdocumentor-signature__name">$idempotency</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -289,7 +325,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/MercadoPago/Annotation/Attribute.php"><a href="files/src-mercadopago-annotation-attribute.html"><abbr title="src/MercadoPago/Annotation/Attribute.php">Attribute.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">25</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -298,7 +335,10 @@
     <span class="phpdocumentor-signature__name">$maxLength</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -319,7 +359,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/MercadoPago/Annotation/Attribute.php"><a href="files/src-mercadopago-annotation-attribute.html"><abbr title="src/MercadoPago/Annotation/Attribute.php">Attribute.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">22</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -328,7 +369,10 @@
     <span class="phpdocumentor-signature__name">$primaryKey</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -349,7 +393,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/MercadoPago/Annotation/Attribute.php"><a href="files/src-mercadopago-annotation-attribute.html"><abbr title="src/MercadoPago/Annotation/Attribute.php">Attribute.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">21</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -358,7 +403,10 @@
     <span class="phpdocumentor-signature__name">$readOnly</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -379,7 +427,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/MercadoPago/Annotation/Attribute.php"><a href="files/src-mercadopago-annotation-attribute.html"><abbr title="src/MercadoPago/Annotation/Attribute.php">Attribute.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">19</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -388,8 +437,8 @@
     <span class="phpdocumentor-signature__name">$required</span>
      = <span class="phpdocumentor-signature__default-value">false</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -410,7 +459,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/MercadoPago/Annotation/Attribute.php"><a href="files/src-mercadopago-annotation-attribute.html"><abbr title="src/MercadoPago/Annotation/Attribute.php">Attribute.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">20</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -419,7 +469,10 @@
     <span class="phpdocumentor-signature__name">$serialize</span>
      = <span class="phpdocumentor-signature__default-value">true</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -440,7 +493,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="src/MercadoPago/Annotation/Attribute.php"><a href="files/src-mercadopago-annotation-attribute.html"><abbr title="src/MercadoPago/Annotation/Attribute.php">Attribute.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">14</span>
-</aside>
+
+    </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -449,14 +503,76 @@
     <span class="phpdocumentor-signature__name">$type</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
             </section>
 
         
+        
+    <script type="text/javascript">
+        function loadExternalCodeSnippets(line) {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                pre.setAttribute('data-line', line)
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        var modals = document.querySelectorAll("[data-modal]");
+
+        modals.forEach(function (trigger) {
+            trigger.addEventListener("click", function (event) {
+                //event.preventDefault();
+                const modal = document.getElementById(trigger.dataset.modal);
+                modal.classList.add("phpdocumentor-modal__open");
+                loadExternalCodeSnippets(trigger.dataset.line)
+                const exits = modal.querySelectorAll("[data-exit-button]");
+                exits.forEach(function (exit) {
+                    exit.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        modal.classList.remove("phpdocumentor-modal__open");
+                    });
+                });
+            });
+        });
+    </script>
+
     </article>
                 <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
@@ -478,5 +594,9 @@
     <script>
         cssVars({});
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
 </body>
 </html>
