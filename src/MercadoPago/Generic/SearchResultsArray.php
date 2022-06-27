@@ -63,8 +63,8 @@
                 $message['error'],
                 $message['status']
             );
-    
-            foreach ($message['causes'] as $causes) { 
+            
+            foreach ($message['cause'] as $causes) { 
                 if(is_array($causes)) {
                     foreach ($causes as $cause) {
                         $recuperable_error->add_cause($cause['code'], $cause['description']);
