@@ -7,6 +7,9 @@ use MercadoPago\Serialization\Mapper;
 
 class Payment extends MPResource
 {
+    /** Class mapper. */
+    use Mapper;
+
     /** Payment ID. */
     public $id;
 
@@ -243,9 +246,6 @@ class Payment extends MPResource
 
     /** Merchant services. */
     public $merchant_services;
-
-    /** Class mapper. */
-    use Mapper;
 
     private $map = [
         "payer" => "MercadoPago\Resources\Payment\Payer",

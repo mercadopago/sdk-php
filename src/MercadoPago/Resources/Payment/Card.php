@@ -7,6 +7,9 @@ use MercadoPago\Serialization\Mapper;
 /** Card class. */
 class Card
 {
+    /** Class mapper. */
+    use Mapper;
+
     /** Id of the card. */
     public $id;
 
@@ -30,9 +33,6 @@ class Card
 
     /** Card's owner data. */
     public $cardholder;
-
-    /** Class mapper. */
-    use Mapper;
 
     private $map = [
         "cardholder" => "MercadoPago\Resources\Payment\Cardholder"

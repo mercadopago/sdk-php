@@ -7,6 +7,9 @@ use MercadoPago\Serialization\Mapper;
 /** BankInfo class. */
 class BankInfo
 {
+    /** Class mapper. */
+    use Mapper;
+
     /** Payer info. */
     public $payer;
 
@@ -15,9 +18,6 @@ class BankInfo
 
     /** Is same bank account owner. */
     public $is_same_bank_account_owner;
-
-    /** Class mapper. */
-    use Mapper;
 
     private $map = [
         "payer" => "MercadoPago\Resources\Payment\BankInfoPayer",

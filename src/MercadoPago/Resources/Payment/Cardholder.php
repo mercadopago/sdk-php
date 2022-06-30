@@ -7,14 +7,14 @@ use MercadoPago\Serialization\Mapper;
 /** Cardholder class. */
 class Cardholder
 {
+    /** Class mapper. */
+    use Mapper;
+
     /** Cardholder Name. */
     public $name;
 
     /** Cardholder identification. */
     public $identification;
-
-    /** Class mapper. */
-    use Mapper;
 
     private $map = [
         "identification" => "MercadoPago\Resources\Payment\Identification"

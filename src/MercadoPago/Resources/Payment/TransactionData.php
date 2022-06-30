@@ -7,6 +7,9 @@ use MercadoPago\Serialization\Mapper;
 /** TransactionData class. */
 class TransactionData
 {
+    /** Class mapper. */
+    use Mapper;
+
     /** QR code. */
     public $qr_code;
 
@@ -27,9 +30,6 @@ class TransactionData
 
     /** Ticket Url. */
     public $ticket_url;
-
-    /** Class mapper. */
-    use Mapper;
 
     private $map = [
         "bank_info" => "MercadoPago\Resources\Payment\BankInfo",

@@ -7,6 +7,9 @@ use MercadoPago\Serialization\Mapper;
 /** AdditionalInfoPayer class. */
 class AdditionalInfoPayer
 {
+    /** Class mapper. */
+    use Mapper;
+
     /** Payer's first name. */
     public $first_name;
 
@@ -21,9 +24,6 @@ class AdditionalInfoPayer
 
     /** Date of registration of the payer on your site. */
     public $registration_date;
-
-    /** Class mapper. */
-    use Mapper;
 
     private $map = [
         "phone" => "MercadoPago\Resources\Payment\Phone",

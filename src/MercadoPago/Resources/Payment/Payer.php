@@ -7,6 +7,9 @@ use MercadoPago\Serialization\Mapper;
 /** Payer class. */
 class Payer
 {
+    /** Class mapper. */
+    use Mapper;
+
     /** Payer's identification type (mandatory if the payer is a Customer). */
     public $type;
 
@@ -27,9 +30,6 @@ class Payer
 
     /** Payer's entity type (only for bank transfers). */
     public $entity_type;
-
-    /** Class mapper. */
-    use Mapper;
 
     private $map = [
         "identification" => "MercadoPago\Resources\Payment\Identification",

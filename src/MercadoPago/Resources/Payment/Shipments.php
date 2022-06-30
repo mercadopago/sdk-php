@@ -7,11 +7,11 @@ use MercadoPago\Serialization\Mapper;
 /** Shipments class. */
 class Shipments
 {
-    /** Receiver Address. */
-    public $receiver_address;
-
     /** Class mapper. */
     use Mapper;
+
+    /** Receiver Address. */
+    public $receiver_address;
 
     private $map = [
         "receiver_address" => "MercadoPago\Resources\Payment\ReceiverAddress"

@@ -7,6 +7,9 @@ use MercadoPago\Serialization\Mapper;
 /** AdditionalInfo class. */
 class AdditionalInfo
 {
+  /** Class mapper. */
+  use Mapper;
+
   /** IP from where the request comes from (only for bank transfers). */
   public $ip_address;
 
@@ -18,9 +21,6 @@ class AdditionalInfo
 
   /** Shipping information. */
   public $shipments;
-
-  /** Class mapper. */
-  use Mapper;
 
   private $map = [
     "payer" => "MercadoPago\Resources\Payment\AdditionalInfoPayer",

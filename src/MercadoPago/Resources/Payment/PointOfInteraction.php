@@ -7,6 +7,9 @@ use MercadoPago\Serialization\Mapper;
 /** PointOfInteraction class. */
 class PointOfInteraction
 {
+    /** Class mapper. */
+    use Mapper;
+
     /** Type. */
     public $type;
 
@@ -18,9 +21,6 @@ class PointOfInteraction
 
     /** Transaction data. */
     public $transaction_data;
-
-    /** Class mapper. */
-    use Mapper;
 
     private $map = [
         "application_data" => "MercadoPago\Resources\Payment\ApplicationData",
