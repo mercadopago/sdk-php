@@ -2,6 +2,8 @@
 
 namespace MercadoPago\Resources\Payment;
 
+use MercadoPago\Serialization\Mapper;
+
 /** Card class. */
 class Card
 {
@@ -29,19 +31,18 @@ class Card
     /** Card's owner data. */
     public $cardholder;
 
-    /**
-     * Method responsible for mapping class attributes.
-     */
-    public static function map(string $field)
-    {
-        $map = [
-            "cardholder" => "MercadoPago\Resources\Payment\Cardholder"
-        ];
+    /** Class mapper. */
+    use Mapper;
 
-        foreach ($map as $key => $value) {
-            if ($key === $field) {
-                return $value;
-            }
-        }
+    private $map = [
+        "cardholder" => "MercadoPago\Resources\Payment\Cardholder"
+    ];
+
+    /**
+     * Method responsible for getting map of entities.
+     */
+    public function getMap()
+    {
+        return $this->map;
     }
 }

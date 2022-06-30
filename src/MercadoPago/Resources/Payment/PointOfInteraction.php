@@ -2,6 +2,8 @@
 
 namespace MercadoPago\Resources\Payment;
 
+use MercadoPago\Serialization\Mapper;
+
 /** PointOfInteraction class. */
 class PointOfInteraction
 {
@@ -17,20 +19,19 @@ class PointOfInteraction
     /** Transaction data. */
     public $transaction_data;
 
-    /**
-     * Method responsible for mapping class attributes.
-     */
-    public static function map(string $field)
-    {
-        $map = [
-            "application_data" => "MercadoPago\Resources\Payment\ApplicationData",
-            "transaction_data" => "MercadoPago\Resources\Payment\TransactionData",
-        ];
+    /** Class mapper. */
+    use Mapper;
 
-        foreach ($map as $key => $value) {
-            if ($key === $field) {
-                return $value;
-            }
-        }
+    private $map = [
+        "application_data" => "MercadoPago\Resources\Payment\ApplicationData",
+        "transaction_data" => "MercadoPago\Resources\Payment\TransactionData",
+    ];
+
+    /**
+     * Method responsible for getting map of entities.
+     */
+    public function getMap()
+    {
+        return $this->map;
     }
 }

@@ -3,6 +3,7 @@
 namespace MercadoPago\Resources;
 
 use MercadoPago\Net\MPResource;
+use MercadoPago\Serialization\Mapper;
 
 class Payment extends MPResource
 {
@@ -243,26 +244,25 @@ class Payment extends MPResource
     /** Merchant services. */
     public $merchant_services;
 
-    /**
-     * Method responsible for mapping class attributes.
-     */
-    public static function map(string $field)
-    {
-        $map = [
-            "payer" => "MercadoPago\Resources\Payment\Payer",
-            "fee_details" => "MercadoPago\Resources\Payment\FeeDetails",
-            "additional_info" => "MercadoPago\Resources\Payment\AdditionalInfo",
-            "order" => "MercadoPago\Resources\Payment\Order",
-            "transaction_details" => "MercadoPago\Resources\Payment\TransactionDetails",
-            "card" => "MercadoPago\Resources\Payment\PaymentCard",
-            "refunds" => "MercadoPago\Resources\Payment\Refunds",
-            "point_of_interaction" => "MercadoPago\Resources\Payment\PointOfInteraction"
-        ];
+    /** Class mapper. */
+    use Mapper;
 
-        foreach ($map as $key => $value) {
-            if ($key === $field) {
-                return $value;
-            }
-        }
+    private $map = [
+        "payer" => "MercadoPago\Resources\Payment\Payer",
+        "fee_details" => "MercadoPago\Resources\Payment\FeeDetails",
+        "additional_info" => "MercadoPago\Resources\Payment\AdditionalInfo",
+        "order" => "MercadoPago\Resources\Payment\Order",
+        "transaction_details" => "MercadoPago\Resources\Payment\TransactionDetails",
+        "card" => "MercadoPago\Resources\Payment\PaymentCard",
+        "refunds" => "MercadoPago\Resources\Payment\Refunds",
+        "point_of_interaction" => "MercadoPago\Resources\Payment\PointOfInteraction"
+    ];
+
+    /**
+     * Method responsible for getting map of entities.
+     */
+    public function getMap()
+    {
+        return $this->map;
     }
 }

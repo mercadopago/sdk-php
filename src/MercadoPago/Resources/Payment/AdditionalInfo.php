@@ -2,6 +2,8 @@
 
 namespace MercadoPago\Resources\Payment;
 
+use MercadoPago\Serialization\Mapper;
+
 /** AdditionalInfo class. */
 class AdditionalInfo
 {
@@ -17,20 +19,19 @@ class AdditionalInfo
   /** Shipping information. */
   public $shipments;
 
-  /**
-   * Method responsible for mapping class attributes.
-   */
-  public static function map(string $field)
-  {
-    $map = [
-      "payer" => "MercadoPago\Resources\Payment\AdditionalInfoPayer",
-      "shipments" => "MercadoPago\Resources\Payment\Shipments"
-    ];
+  /** Class mapper. */
+  use Mapper;
 
-    foreach ($map as $key => $value) {
-      if ($key === $field) {
-        return $value;
-      }
-    }
+  private $map = [
+    "payer" => "MercadoPago\Resources\Payment\AdditionalInfoPayer",
+    "shipments" => "MercadoPago\Resources\Payment\Shipments"
+  ];
+
+  /**
+   * Method responsible for getting map of entities.
+   */
+  public function getMap()
+  {
+    return $this->map;
   }
 }

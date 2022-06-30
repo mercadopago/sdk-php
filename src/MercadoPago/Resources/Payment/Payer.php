@@ -2,6 +2,8 @@
 
 namespace MercadoPago\Resources\Payment;
 
+use MercadoPago\Serialization\Mapper;
+
 /** Payer class. */
 class Payer
 {
@@ -26,20 +28,19 @@ class Payer
     /** Payer's entity type (only for bank transfers). */
     public $entity_type;
 
-    /**
-     * Method responsible for mapping class attributes.
-     */
-    public static function map(string $field)
-    {
-        $map = [
-            "identification" => "MercadoPago\Resources\Payment\Identification",
-            "phone" => "MercadoPago\Resources\Payment\Phone"
-        ];
+    /** Class mapper. */
+    use Mapper;
 
-        foreach ($map as $key => $value) {
-            if ($key === $field) {
-                return $value;
-            }
-        }
+    private $map = [
+        "identification" => "MercadoPago\Resources\Payment\Identification",
+        "phone" => "MercadoPago\Resources\Payment\Phone"
+    ];
+
+    /**
+     * Method responsible for getting map of entities.
+     */
+    public function getMap()
+    {
+        return $this->map;
     }
 }

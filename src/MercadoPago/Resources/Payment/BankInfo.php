@@ -2,6 +2,8 @@
 
 namespace MercadoPago\Resources\Payment;
 
+use MercadoPago\Serialization\Mapper;
+
 /** BankInfo class. */
 class BankInfo
 {
@@ -14,20 +16,19 @@ class BankInfo
     /** Is same bank account owner. */
     public $is_same_bank_account_owner;
 
-    /**
-     * Method responsible for mapping class attributes.
-     */
-    public static function map(string $field)
-    {
-        $map = [
-            "payer" => "MercadoPago\Resources\Payment\BankInfoPayer",
-            "collector" => "MercadoPago\Resources\Payment\BankInfoCollector",
-        ];
+    /** Class mapper. */
+    use Mapper;
 
-        foreach ($map as $key => $value) {
-            if ($key === $field) {
-                return $value;
-            }
-        }
+    private $map = [
+        "payer" => "MercadoPago\Resources\Payment\BankInfoPayer",
+        "collector" => "MercadoPago\Resources\Payment\BankInfoCollector",
+    ];
+
+    /**
+     * Method responsible for getting map of entities.
+     */
+    public function getMap()
+    {
+        return $this->map;
     }
 }

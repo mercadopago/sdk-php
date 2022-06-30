@@ -2,6 +2,8 @@
 
 namespace MercadoPago\Resources\Payment;
 
+use MercadoPago\Serialization\Mapper;
+
 /** AdditionalInfoPayer class. */
 class AdditionalInfoPayer
 {
@@ -20,20 +22,19 @@ class AdditionalInfoPayer
     /** Date of registration of the payer on your site. */
     public $registration_date;
 
-    /**
-     * Method responsible for mapping class attributes.
-     */
-    public static function map(string $field)
-    {
-        $map = [
-            "phone" => "MercadoPago\Resources\Payment\Phone",
-            "address" => "MercadoPago\Resources\Payment\Address"
-        ];
+    /** Class mapper. */
+    use Mapper;
 
-        foreach ($map as $key => $value) {
-            if ($key === $field) {
-                return $value;
-            }
-        }
+    private $map = [
+        "phone" => "MercadoPago\Resources\Payment\Phone",
+        "address" => "MercadoPago\Resources\Payment\Address"
+    ];
+
+    /**
+     * Method responsible for getting map of entities.
+     */
+    public function getMap()
+    {
+        return $this->map;
     }
 }
