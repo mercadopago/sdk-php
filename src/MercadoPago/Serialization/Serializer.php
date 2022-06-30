@@ -21,9 +21,11 @@ class Serializer
         if ($data) {
             foreach ($data as $key => $value) {
                 if (!is_null($value) && is_array($value)) {
-                    $class_name = $entity . self::_camelize($key);
-                    if (class_exists($class_name, true)) {
-                        $object->$key = self::_deserializeFromJson($class_name, $value);
+                    if (method_exists($object, "map")) {
+                        $class_name = $object::map($key);
+                        if (class_exists($class_name, true)) {
+                            $object->$key = self::_deserializeFromJson($class_name, $value);
+                        }
                     }
                 } else {
                     $object->{$key} = $value;
@@ -31,10 +33,5 @@ class Serializer
             }
             return $object;
         }
-    }
-
-    private static function _camelize($input, $separator = '_'): string
-    {
-        return str_replace($separator, '', ucwords($input, $separator));
     }
 }

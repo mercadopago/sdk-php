@@ -6,7 +6,7 @@ use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
-use MercadoPago\Resources\Payment\Payment;
+use MercadoPago\Resources\Payment;
 use MercadoPago\Serialization\Serializer;
 
 /** Client responsible for performing payment actions. */
