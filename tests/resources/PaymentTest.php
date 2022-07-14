@@ -30,14 +30,13 @@ class PaymentTest extends TestCase
 
     public function testCreateApprovedPayment()
     {
-      var_dump('#########' + getenv('USER_EMAIL'));
-      var_dump(getenv('ACCESS_TOKEN'));
+
         $payment = new MercadoPago\Payment();
         $payment->transaction_amount = 141;
         $payment->token = $this->SingleUseCardToken('approved');
         $payment->description = "Ergonomic Silk Shirt";
         $payment->installments = 1;
-        $payment->payment_method_id = "visa";
+        $payment->payment_method_id = "master";
         $payment->payer = array(
             "email" => getenv('USER_EMAIL')
         );
@@ -208,7 +207,7 @@ class PaymentTest extends TestCase
 
         $payload = array(
             "json_data" => array(
-                "card_number" => "4508336715544174",
+                "card_number" => "5031433215406351",
                 "security_code" => (string)$security_code,
                 "expiration_month" => str_pad($expiration_month, 2, '0', STR_PAD_LEFT),
                 "expiration_year" => str_pad($expiration_year, 4, '0', STR_PAD_LEFT),
