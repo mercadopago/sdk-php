@@ -19,6 +19,8 @@ class PaymentTest extends TestCase
             $dotenv->load();
         }
         
+        print_r(getenv('USER_EMAIL'));
+        print_r(getenv('ACCESS_TOKEN'));
         MercadoPago\SDK::setAccessToken(getenv('ACCESS_TOKEN'));
         MercadoPago\SDK::setMultipleCredentials(
             array(
