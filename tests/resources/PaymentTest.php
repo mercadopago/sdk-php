@@ -52,22 +52,22 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreateApprovedPayment
      */
-    // public function testRefundPayment(MercadoPago\Payment $payment_created_previously) 
-    // {
+    public function testRefundPayment(MercadoPago\Payment $payment_created_previously) 
+    {
 
-    //     $id = $payment_created_previously->id;
+        $id = $payment_created_previously->id;
 
-    //     $refund = new MercadoPago\Refund();
-    //     $refund->payment_id = $id;
-    //     $refund->save();
+        $refund = new MercadoPago\Refund();
+        $refund->payment_id = $id;
+        $refund->save();
 
-    //     sleep(20);
+        sleep(20);
 
-    //     $payment = MercadoPago\Payment::find_by_id($id);
+        $payment = MercadoPago\Payment::find_by_id($id);
 
-    //     $this->assertEquals("refunded", $payment->status);
+        $this->assertEquals("refunded", $payment->status);
 
-    // }
+    }
 
 
     public function testCreateAnInvalidPayment()
