@@ -61,7 +61,7 @@ class PaymentTest extends TestCase
         $refund->payment_id = $id;
         $refund->save();
 
-        sleep(10);
+        sleep(20);
 
         $payment = MercadoPago\Payment::find_by_id($id);
 
