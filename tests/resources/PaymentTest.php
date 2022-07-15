@@ -106,7 +106,7 @@ class PaymentTest extends TestCase
         $payment->token = $this->SingleUseCardToken('in_process');
         $payment->description = "Ergonomic Silk Shirt";
         $payment->installments = 1;
-        $payment->payment_method_id = "visa";
+        $payment->payment_method_id = "master";
         $payment->payer = array(
             "email" => getenv('USER_EMAIL')
         );
