@@ -45,7 +45,6 @@ class PaymentTest extends TestCase
 
         $this->assertEquals($payment->status, 'approved');
         
- 
         return $payment;
 
     }
@@ -53,7 +52,8 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreateApprovedPayment
      */
-    public function testRefundPayment(MercadoPago\Payment $payment_created_previously) {
+    public function testRefundPayment(MercadoPago\Payment $payment_created_previously) 
+    {
 
         $id = $payment_created_previously->id;
 
