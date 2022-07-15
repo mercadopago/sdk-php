@@ -10,15 +10,18 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['7.1', '7.2', '7.3', '7.3']
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Setup PHP
+    - name: Setup PHP ${{ matrix.php-version }}
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '7.4'
+        php-version: ${{ matrix.php-version }}
         extensions: mbstring, intl
         ini-values: post_max_size=256M, short_open_tag=On
         coverage: xdebug    
