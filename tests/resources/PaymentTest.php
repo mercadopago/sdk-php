@@ -61,7 +61,7 @@ class PaymentTest extends TestCase
         $refund->payment_id = $id;
         $refund->save();
 
-        sleep(20);
+        sleep(10);
 
         $payment = MercadoPago\Payment::find_by_id($id);
 
@@ -72,7 +72,7 @@ class PaymentTest extends TestCase
 
     public function testCreateAnInvalidPayment()
     {
-
+         
         $payment = new MercadoPago\Payment();
         $payment->transaction_amount = -200;
 
