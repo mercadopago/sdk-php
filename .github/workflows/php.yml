@@ -10,15 +10,18 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['7.1', '7.2', '7.3', '7.4', '8.0']
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Setup PHP
+    - name: Setup PHP ${{ matrix.php-version }}
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '7.3'
+        php-version: ${{ matrix.php-version }}
         extensions: mbstring, intl
         ini-values: post_max_size=256M, short_open_tag=On
         coverage: xdebug    
@@ -37,8 +40,8 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: composer install --prefer-dist --no-progress --no-suggest
+      if: steps.composer-cache.outputs.cache-hit != 'false'
+      run: composer install --prefer-dist --no-progress
 
     - name: Run test suite
       run: composer run-script test
