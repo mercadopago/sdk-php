@@ -11,11 +11,6 @@ class MPRequestOptions
 
     public $custom_headers;
 
-    /** MPRequestOptions constructor. */
-    public function __construct()
-    {
-    }
-
     public function getAccessToken(): string
     {
         return $this->access_token;

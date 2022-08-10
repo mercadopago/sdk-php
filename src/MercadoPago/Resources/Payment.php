@@ -31,9 +31,6 @@ class Payment extends MPResource
     /** Order ID. */
     public $order_id;
 
-    /** Order. */
-    public $order;
-
     /** Binary mode. */
     public $binary_mode;
 
@@ -163,9 +160,6 @@ class Payment extends MPResource
     /** Statement descriptor. */
     public $statement_descriptor;
 
-    /** Refunds. */
-    public $refunds;
-
     /** Shipping amount. */
     public $shipping_amount;
 
@@ -251,10 +245,8 @@ class Payment extends MPResource
         "payer" => "MercadoPago\Resources\Payment\Payer",
         "fee_details" => "MercadoPago\Resources\Payment\FeeDetails",
         "additional_info" => "MercadoPago\Resources\Payment\AdditionalInfo",
-        "order" => "MercadoPago\Resources\Payment\Order",
         "transaction_details" => "MercadoPago\Resources\Payment\TransactionDetails",
         "card" => "MercadoPago\Resources\Payment\PaymentCard",
-        "refunds" => "MercadoPago\Resources\Payment\Refunds",
         "point_of_interaction" => "MercadoPago\Resources\Payment\PointOfInteraction"
     ];
 

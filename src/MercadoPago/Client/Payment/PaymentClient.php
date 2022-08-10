@@ -16,7 +16,6 @@ class PaymentClient extends MercadoPagoClient
 
     private static $URL_WITH_ID = "/v1/payments/%s";
 
-
     /** Default constructor. Uses the default http client used by the SDK. */
     public function __construct()
     {
