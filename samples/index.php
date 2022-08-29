@@ -1,10 +1,7 @@
 <?php
 
-  require_once 'vendor/autoload.php';
-   
-  
-  MercadoPago\MercadoPagoSdk::initialize(); 
-  $config = MercadoPago\MercadoPagoSdk::config(); 
-   
-  
+    require_once 'vendor/autoload.php';
+
+    MercadoPago\SDK::setAccessToken("ACCESS_TOKEN");
+
 ?>

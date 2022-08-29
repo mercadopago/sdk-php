@@ -54,14 +54,14 @@ class Config
     /**
      * Config constructor.
      *
-     * @param null $path
+     * @param string|null $path
      * @param null $restClient
      */
     public function __construct($path = null, $restClient = null)
     {
         $this->data = [];
         $this->_restclient = $restClient;
-        if (is_file($path)) {
+        if (is_file($path ?? '')) {
             $info = pathinfo($path);
             $parts = explode('.', $info['basename']);
             $extension = array_pop($parts);

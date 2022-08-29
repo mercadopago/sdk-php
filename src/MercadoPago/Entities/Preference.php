@@ -1,7 +1,4 @@
 <?php
-/**
- * Preference class file
- */
 namespace MercadoPago;
 
 use MercadoPago\Annotation\RestMethod;
@@ -9,9 +6,13 @@ use MercadoPago\Annotation\RequestParam;
 use MercadoPago\Annotation\Attribute;
 
 /**
- * Preference class
+ * This class will allow you to charge your customers through our web form from any device in a simple, fast and secure way.
+ *  
+ * @link https://www.mercadopago.com/developers/en/guides/online-payments/checkout-pro/introduction Click here for more infos
+ * 
  * @RestMethod(resource="/checkout/preferences", method="create")
  * @RestMethod(resource="/checkout/preferences/:id", method="read")
+ * @RestMethod(resource="/checkout/preferences/search", method="search")
  * @RestMethod(resource="/checkout/preferences/:id", method="update")
  */
 class Preference extends Entity
@@ -39,42 +40,42 @@ class Preference extends Entity
 
     /**
      * notification_url
-     * @Attribute(type = "string", maxLength = 500)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $notification_url;
 
     /**
      * init_point
-     * @Attribute(type = "string", readOnly = true)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $init_point;
 
     /**
      * sandbox_init_point
-     * @Attribute(type = "string", readOnly = true)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $sandbox_init_point;
 
     /**
      * operation_type
-     * @Attribute(type = "string", readOnly = true)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $operation_type;
 
     /**
      * additional_info
-     * @Attribute(type = "string", maxLength = 600)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $additional_info;
 
     /**
      * external_reference
-     * @Attribute(type = "string", maxLength = 256)
+     * @Attribute(type = "string")
      * @var string
      */
     protected $external_reference;
@@ -101,15 +102,23 @@ class Preference extends Entity
     protected $expiration_date_to;
 
     /**
+     * date_of_expiration
+     * @Attribute(type = "date")
+     * @var \DateTime
+     */
+    protected $date_of_expiration;
+
+
+    /**
      * collector_id
-     * @Attribute(type = "int", readOnly = true)
+     * @Attribute(type = "int")
      * @var int
      */
     protected $collector_id;
 
     /**
      * client_id
-     * @Attribute(type = "int", readOnly = true)
+     * @Attribute(type = "int")
      * @var int
      */
     protected $client_id;

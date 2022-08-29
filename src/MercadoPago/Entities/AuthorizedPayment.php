@@ -11,10 +11,8 @@ use MercadoPago\Annotation\Attribute;
 /**
  * Authorized Payments Class
  *
- * @RestMethod(resource="/authorized_payment", method="create")
- * @RestMethod(resource="/authorized_payment/:id", method="read")
- * @RestMethod(resource="/authorized_payment/search", method="search")
- * @RestMethod(resource="/authorized_payment/:id", method="update")
+ * @RestMethod(resource="/authorized_payments/:id", method="read")
+ * @RestMethod(resource="/authorized_payments/search", method="search")
  */
 
 class AuthorizedPayment extends Entity

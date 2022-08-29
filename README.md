@@ -10,14 +10,14 @@ This library provides developers with a simple set of bindings to help you integ
 
 PHP 5.6, 7.1 or higher
 
-## 📲 Installation 
+## 💻 Installation 
 
 First time using Mercado Pago? Create your [Mercado Pago account](https://www.mercadopago.com), if you don’t have one already.
 
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md) if not already installed
 
 2. On your project directory run on the command line
-`composer require "mercadopago/dx-php:2.2.1"` for PHP7 or `composer require "mercadopago/dx-php:1.8.1"` for PHP5.6.
+`composer require "mercadopago/dx-php:2.4.9"` for PHP7 or `composer require "mercadopago/dx-php:1.12.5"` for PHP5.6.
 
 3. Copy the access_token in the [credentials](https://www.mercadopago.com/mlb/account/credentials) section of the page and replace YOUR_ACCESS_TOKEN with it.
 
@@ -57,7 +57,7 @@ Visit our Dev Site for further information regarding:
  - Mercado Pago checkout: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/web-payment-checkout/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/web-payment-checkout/introduction/)
  - Web Tokenize checkout: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/web-tokenize-checkout/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/web-tokenize-checkout/introduction/)
 
-Check [our official code reference](https://mercadopago.github.io/dx-php/) to explore all available functionalities.
+Check [our official code reference](https://www.mercadopago.com.br/developers/pt/docs/sdks-library/server-side) to explore all available functionalities.
 
 ## ❤️ Support 
 
