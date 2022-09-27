@@ -137,4 +137,14 @@ class Preapproval extends Entity
    * @var string
    */
   protected $card_id;
+
+      /**
+   * @Attribute()
+   */
+  protected $next_payment_date;
+
+  /**
+   * @Attribute()
+   */
+  protected $summarized;
 }
