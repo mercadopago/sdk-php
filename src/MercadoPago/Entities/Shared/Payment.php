@@ -176,7 +176,14 @@ class Payment extends Entity
      * @Attribute()
      */
     protected $date_approved;
-
+ 
+    /**
+     * money_release_status
+     * @var string
+     * @Attribute()
+     */
+    protected $money_release_status;
+ 
     /**
      * money_release_date
      * @var \DateTime
