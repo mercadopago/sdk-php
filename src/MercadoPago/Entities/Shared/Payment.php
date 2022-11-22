@@ -584,6 +584,13 @@ class Payment extends Entity
     protected $build_version;
 
     /**
+     * payment_method
+     * @var object
+     * @Attribute()
+     */
+    protected $payment_method;
+
+    /**
      * refund
      * @param int $amount
      * @return bool
