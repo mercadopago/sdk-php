@@ -4,7 +4,7 @@
   "type": "library",
   "homepage": "https://github.com/mercadopago/sdk-php",
   "license": "MIT",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "config": {
     "platform": {
         "php": "7.1"
