@@ -7,7 +7,7 @@ use Exception;
  *
  * @package MercadoPago
  */
-#[AllowDynamicProperties]
+#[\AllowDynamicProperties]
 abstract class Entity
 {
     /**
