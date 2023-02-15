@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ['7.1', '7.2', '7.3', '7.4', '8.0']
+        php-version: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
 
     steps:
     - name: Checkout
@@ -24,12 +24,11 @@ jobs:
         php-version: ${{ matrix.php-version }}
         extensions: mbstring, intl
         ini-values: post_max_size=256M, short_open_tag=On
-        coverage: xdebug    
+        coverage: xdebug
         tools: php-cs-fixer, phpunit
 
     - name: Validate composer.json and composer.lock
       run: composer validate
-      
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v2
