@@ -31,11 +31,26 @@ class Payment extends MPResource
     /** Order ID. */
     public $order_id;
 
+    /** Order. */
+    public $order;
+
+    /** Brand ID. */
+    public $brand_id;
+
+    /** Build version. */
+    public $build_version;
+
     /** Binary mode. */
     public $binary_mode;
 
     /** External reference. */
     public $external_reference;
+
+    /** Financing group. */
+    public $financing_group;
+
+    /** Extension. */
+    public $extension;
 
     /** Status. */
     public $status;
@@ -78,6 +93,9 @@ class Payment extends MPResource
 
     /** Money release schema. */
     public $money_release_schema;
+
+    /** Money release status. */
+    public $money_release_status;
 
     /** Currency ID. */
     public $currency_id;
@@ -123,6 +141,9 @@ class Payment extends MPResource
 
     /** Payment method ID. */
     public $payment_method_id;
+
+    /** Payment method. */
+    public $payment_method;
 
     /** Payment type ID. */
     public $payment_type_id;
@@ -240,6 +261,15 @@ class Payment extends MPResource
 
     /** Merchant services. */
     public $merchant_services;
+    
+    /** Accounts info. */
+    public $accounts_info;
+
+    /** Tags. */
+    public $tags;
+
+    /** Refunds. */
+    public $refunds;
 
     private $map = [
         "payer" => "MercadoPago\Resources\Payment\Payer",
@@ -247,13 +277,14 @@ class Payment extends MPResource
         "additional_info" => "MercadoPago\Resources\Payment\AdditionalInfo",
         "transaction_details" => "MercadoPago\Resources\Payment\TransactionDetails",
         "card" => "MercadoPago\Resources\Payment\PaymentCard",
-        "point_of_interaction" => "MercadoPago\Resources\Payment\PointOfInteraction"
+        "point_of_interaction" => "MercadoPago\Resources\Payment\PointOfInteraction",
+        "payment_method" => "MercadoPago\Resources\Payment\PaymentMethod"
     ];
 
     /**
      * Method responsible for getting map of entities.
      */
-    public function getMap()
+    public function getMap(): array
     {
         return $this->map;
     }

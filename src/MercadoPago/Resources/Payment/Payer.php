@@ -31,6 +31,9 @@ class Payer
     /** Payer's entity type (only for bank transfers). */
     public $entity_type;
 
+    /** Phone. */
+    public $phone;
+
     private $map = [
         "identification" => "MercadoPago\Resources\Payment\Identification",
         "phone" => "MercadoPago\Resources\Payment\Phone"
@@ -39,7 +42,7 @@ class Payer
     /**
      * Method responsible for getting map of entities.
      */
-    public function getMap()
+    public function getMap(): array
     {
         return $this->map;
     }

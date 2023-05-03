@@ -31,14 +31,21 @@ class TransactionData
     /** Ticket Url. */
     public $ticket_url;
 
+    /** E2E ID. */
+    public $e2e_id;
+
+    /** Infringement notification. */
+    public $infringement_notification;
+
     private $map = [
         "bank_info" => "MercadoPago\Resources\Payment\BankInfo",
+        "infringement_notification" => "MercadoPago\Resources\Payment\InfringementNotification",
     ];
 
     /**
      * Method responsible for getting map of entities.
      */
-    public function getMap()
+    public function getMap(): array
     {
         return $this->map;
     }

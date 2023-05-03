@@ -22,6 +22,15 @@ class AdditionalInfo
   /** Shipping information. */
   public $shipments;
 
+  /** Available Balance. */
+  public $available_balance;
+
+  /** NSU Processadora. */
+  public $nsu_processadora;
+
+  /** Authentication Code. */
+  public $authentication_code;
+
   private $map = [
     "payer" => "MercadoPago\Resources\Payment\AdditionalInfoPayer",
     "shipments" => "MercadoPago\Resources\Payment\Shipments"
@@ -30,7 +39,7 @@ class AdditionalInfo
   /**
    * Method responsible for getting map of entities.
    */
-  public function getMap()
+  public function getMap(): array
   {
     return $this->map;
   }

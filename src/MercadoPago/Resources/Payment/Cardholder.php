@@ -23,7 +23,7 @@ class Cardholder
     /**
      * Method responsible for getting map of entities.
      */
-    public function getMap()
+    public function getMap(): array
     {
         return $this->map;
     }

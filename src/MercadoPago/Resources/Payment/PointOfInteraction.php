@@ -22,15 +22,23 @@ class PointOfInteraction
     /** Transaction data. */
     public $transaction_data;
 
+    /** Business info. */
+    public $business_info;
+
+    /** Location. */
+    public $location;
+
     private $map = [
         "application_data" => "MercadoPago\Resources\Payment\ApplicationData",
         "transaction_data" => "MercadoPago\Resources\Payment\TransactionData",
+        "business_info" => "MercadoPago\Resources\Payment\BusinessInfo",
+        "location" => "MercadoPago\Resources\Payment\Location",
     ];
 
     /**
      * Method responsible for getting map of entities.
      */
-    public function getMap()
+    public function getMap(): array
     {
         return $this->map;
     }

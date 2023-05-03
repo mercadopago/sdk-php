@@ -10,4 +10,7 @@ class Phone
 
   /** Phone number. */
   public $number;
+
+  /** Extension. */
+  public $extension;
 }

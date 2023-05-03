@@ -31,4 +31,13 @@ class TransactionDetails
 
   /** Acquirer Reference. */
   public $acquirer_reference;
+
+  /** Payable deferral period. */
+  public $payable_deferral_period;
+
+  /** Bank transfer ID. */
+  public $bank_transfer_id;
+
+  /** Transaction ID. */
+  public $transaction_id;
 }

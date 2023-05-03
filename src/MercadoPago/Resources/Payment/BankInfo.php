@@ -19,6 +19,12 @@ class BankInfo
     /** Is same bank account owner. */
     public $is_same_bank_account_owner;
 
+    /** Origin bank ID. */
+    public $origin_bank_id;
+
+    /** Origin wallet ID. */
+    public $origin_wallet_id;
+
     private $map = [
         "payer" => "MercadoPago\Resources\Payment\BankInfoPayer",
         "collector" => "MercadoPago\Resources\Payment\BankInfoCollector",
@@ -27,7 +33,7 @@ class BankInfo
     /**
      * Method responsible for getting map of entities.
      */
-    public function getMap()
+    public function getMap(): array
     {
         return $this->map;
     }
