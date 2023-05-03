@@ -10,7 +10,10 @@
     },
     "autoload": {
         "psr-4": {
-            "MercadoPago\\": "src/MercadoPago"
+            "MercadoPago\\": [
+                "src/MercadoPago", 
+                "tests/MercadoPago"
+            ]
         }
     },
     "repositories": [
