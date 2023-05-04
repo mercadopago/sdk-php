@@ -19,7 +19,7 @@ final class PaymentClientTest extends TestCase
     {
         $client = new PaymentClient();
         $payment = $client->create($this->createRequest());
-        assertNotNull($payment->id);
+        $this->assertNotNull($payment->id);
     }
 
     public function testGetSuccess(): void
@@ -27,7 +27,7 @@ final class PaymentClientTest extends TestCase
         $client = new PaymentClient();
         $created_payment = $client->create($this->createRequest());
         $payment = $client->get($created_payment->id);
-        assertNotNull($payment->id);
+        $this->assertNotNull($payment->id);
     }
 
     public function testCancelPayment(): void
@@ -35,8 +35,8 @@ final class PaymentClientTest extends TestCase
         $client = new PaymentClient();
         $created_payment = $client->create($this->createRequest());
         $payment = $client->cancel($created_payment->id);
-        assertNotNull($payment->id);
-        assertEquals("cancelled", $payment->status);
+        $this->assertNotNull($payment->id);
+        $this->assertEquals("cancelled", $payment->status);
     }
 
     private function createRequest(): array
