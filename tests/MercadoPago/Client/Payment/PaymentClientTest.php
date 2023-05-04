@@ -5,9 +5,6 @@ namespace MercadoPago\Client\Payment;
 use MercadoPago\MercadoPagoConfig;
 use PHPUnit\Framework\TestCase;
 
-use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\assertNotNull;
-
 final class PaymentClientTest extends TestCase
 {
     public static function setUpBeforeClass(): void
