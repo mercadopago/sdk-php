@@ -152,7 +152,7 @@ class Manager
             } elseif (!empty($entity->$key)) {
                 $url = str_replace($match, $entity->$key, $url);
             } else {
-                $url = str_replace($match, $entity->{$key}, $url);
+                $url = str_replace($match, $entity->{$key} ?? '', $url);
             }
         }
         $this->_entityConfiguration[$className]->url = $url;
