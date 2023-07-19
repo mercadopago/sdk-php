@@ -106,7 +106,7 @@ class OAuth extends Entity
      */
     public function getAuthorizationURL($app_id, $redirect_uri){
         $county_id = strtolower(SDK::getCountryId());
-        return "https://auth.mercadopago.com.${county_id}/authorization?client_id=${app_id}&response_type=code&platform_id=mp&redirect_uri=${redirect_uri}";
+        return "https://auth.mercadopago.com.{$county_id}/authorization?client_id={$app_id}&response_type=code&platform_id=mp&redirect_uri={$redirect_uri}";
     }
 
 
