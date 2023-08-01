@@ -1,48 +1,36 @@
 {
-  "name": "mercadopago/dx-php",
-  "description": "Mercado Pago PHP SDK",
-  "type": "library",
-  "homepage": "https://github.com/mercadopago/sdk-php",
-  "license": "MIT",
-  "version": "2.5.5",
-  "config": {
-    "platform": {
-        "php": "7.1"
-    }
-  },
-  "require": {
-    "php": ">=7.1.0",
-    "doctrine/common": "^2.6 || ^3.0",
-    "doctrine/annotations": "^1.8"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^7",
-    "symfony/yaml": "~2.5",
-    "phpmd/phpmd": "@stable",
-    "squizlabs/php_codesniffer": "2.8.1",
-    "sebastian/phpcpd": "*",
-    "doctrine/orm": "^2.3",
-    "vlucas/phpdotenv": "^2.5"
-  },
-  "autoload": {
-    "psr-4": {
-      "MercadoPago\\": [
-        "src/MercadoPago/",
-        "tests/",
-        "src/MercadoPago/Generic/",
-        "src/MercadoPago/Entities/",
-        "src/MercadoPago/Entities/Shared/"
-      ]
-    }
-  },
-  "scripts": {
-    "test": "./vendor/bin/phpunit --testdox --colors=auto tests"
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packagist.org"
+    "name": "mercadopago/dx-php",
+    "description": "Mercado Pago PHP SDK",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/mercadopago/sdk-php",
+    "version": "3.0.0",
+    "config": {
+        "platform": {
+            "php": "8.2"
+        }
     },
-    { "packagist": false }
-  ]
+    "autoload": {
+        "psr-4": {
+            "Mercadopago\\": [
+                "src/MercadoPago",
+                "tests/MercadoPago"
+            ]
+        }
+    },
+    "require": {
+        "php": ">=8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.2"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packagist.org"
+        },
+        {
+            "packagist": false
+        }
+    ]
 }
