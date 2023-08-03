@@ -132,9 +132,8 @@ abstract class Entity
     /**
      * @return mixed
      */
-    public static function all($options = [])
+    public static function all($params = [], $options = [])
     {
-        $params = [];
         $class = get_called_class();
         $entity = new $class();
         $entities =  array();
