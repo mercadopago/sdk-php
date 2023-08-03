@@ -2,8 +2,9 @@ name: CI Develop V3
 
 on:
   push:
-    branches:
-      - develop-v3
+    branches: [ "develop-v3" ]
+  pull_request:
+    branches: [ "develop-v3" ]
 
 jobs:
   build:
