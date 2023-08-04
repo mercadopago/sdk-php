@@ -11,15 +11,12 @@ use MercadoPago\Net\MPResponse;
 /** Mercado Pago client class. */
 class MercadoPagoClient
 {
-    protected $http_client;
-
     /**
      * MercadoPagoClient constructor.
      * @param \MercadoPago\Net\MPHttpClient $http_client http client to be used.
      */
-    public function __construct(MPHttpClient $http_client)
+    public function __construct(protected MPHttpClient $http_client)
     {
-        $this->http_client = $http_client;
     }
 
     /**
