@@ -9,9 +9,9 @@ class MPRequest
      * MPRequest constructor.
      * @param string $uri path to be requested.
      * @param string $method method to be used.
-     * @param mixed $payload payload to be sent.
-     * @param mixed $headers headers to be sent.
-     * @param mixed $connection_timeout connection timeout to be sent.
+     * @param string $payload payload to be sent.
+     * @param array $headers headers to be sent.
+     * @param int $connection_timeout connection timeout to be sent.
      */
     public function __construct(
         private string $uri,
