@@ -277,7 +277,7 @@ class Payment extends MPResource
         "fee_details" => "MercadoPago\Resources\Payment\FeeDetails",
         "additional_info" => "MercadoPago\Resources\Payment\AdditionalInfo",
         "transaction_details" => "MercadoPago\Resources\Payment\TransactionDetails",
-        "card" => "MercadoPago\Resources\Payment\PaymentCard",
+        "card" => "MercadoPago\Resources\Payment\Card",
         "point_of_interaction" => "MercadoPago\Resources\Payment\PointOfInteraction",
         "payment_method" => "MercadoPago\Resources\Payment\PaymentMethod",
         "metadata" => "MercadoPago\Resources\Payment\Metadata",

@@ -4,8 +4,6 @@ namespace MercadoPago\Serialization;
 
 use MercadoPago\Net\MPResource;
 
-use function PHPUnit\Framework\isNull;
-
 /** Serializer class, responsible for objects serialization and deserialization. */
 class Serializer
 {
@@ -29,10 +27,18 @@ class Serializer
         $object = new $entity();
 
         foreach ($data as $key => $value) {
-            if (!is_null($value) && is_array($value) && !empty($value) && method_exists($object, "map")) {
+            if (!is_null($value) && !empty($value) && is_array($value) && method_exists($object, "map")) {
                 $class_name = $object->map($key);
-                if (!IsNull($class_name) && class_exists($class_name, true)) {
-                    $object->$key = self::_deserializeFromJson($class_name, $value);
+                if (!is_null($class_name) && class_exists($class_name, true)) {
+                    if (is_array($value) && is_numeric(key($value))) {
+                        $deserialized_values = [];
+                        foreach ($value as $item) {
+                            $deserialized_values[] = self::_deserializeFromJson($class_name, $item);
+                        }
+                        $object->$key = $deserialized_values;
+                    } else {
+                        $object->$key = self::_deserializeFromJson($class_name, $value);
+                    }
                 }
             } else {
                 $object->{$key} = $value;
