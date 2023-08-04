@@ -72,9 +72,7 @@ class MercadoPagoClient
     private function addCustomHeaders(array $headers, ?MPRequestOptions $request_options = null): array
     {
         if (!is_null($request_options) && !is_null($request_options->getCustomHeaders())) {
-            foreach ($request_options->getCustomHeaders() as $header) {
-                array_push($headers, $header);
-            }
+            return array_merge($headers, $request_options->getCustomHeaders());
         }
         return $headers;
     }
@@ -90,22 +88,17 @@ class MercadoPagoClient
             'X-Tracking-Id: platform:' . PHP_MAJOR_VERSION . '|' . PHP_VERSION . ',type:SDK' . MercadoPagoConfig::$CURRENT_VERSION . ',so;'
         );
 
-        foreach ($default_headers as $header) {
-            array_push($headers, $header);
-        }
-        return $headers;
+        return array_merge($headers, $default_headers);
     }
 
     private function getAccessToken(?MPRequestOptions $request_options = null): string
     {
-        return (!is_null($request_options) && !is_null($request_options->getAccessToken()))
-            ? $request_options->getAccessToken()
-            : MercadoPagoConfig::getAccessToken();
+        return $request_options?->getAccessToken() ?? MercadoPagoConfig::getAccessToken();
     }
 
     private function addConnectionTimeout(?MPRequestOptions $request_options = null): int
     {
-        return (!is_null($request_options) && !is_null($request_options->getConnectionTimeout() && $request_options->getConnectionTimeout() > 0))
+        return ($request_options?->getConnectionTimeout() ?? 0) > 0
             ? $request_options->getConnectionTimeout()
             : MercadoPagoConfig::getConnectionTimeout();
     }
