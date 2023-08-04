@@ -8,7 +8,7 @@ namespace MercadoPago\Serialization;
 trait Mapper
 {
     /**
-     * Method responsible for return mapped class for entity filed.
+     * Method responsible for return mapped class for entity filled.
      * @param string $field field to be mapped.
      * @return mixed mapped class.
      */
