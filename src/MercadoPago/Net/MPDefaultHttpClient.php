@@ -30,8 +30,8 @@ class MPDefaultHttpClient implements MPHttpClient
     public function send(MPRequest $request): MPResponse
     {
 
-        $complete_request = $this->createHttpRequest($request);
-        $this->httpRequest->setOptionArray($complete_request);
+        $request_options = $this->createHttpRequestOptions($request);
+        $this->httpRequest->setOptionArray($request_options);
         $api_result = $this->httpRequest->execute();
         $status_code = $this->httpRequest->getInfo(CURLINFO_HTTP_CODE);
         $content = json_decode($api_result, true);
@@ -52,7 +52,7 @@ class MPDefaultHttpClient implements MPHttpClient
         return $mp_response;
     }
 
-    private function createHttpRequest(MPRequest $request): array
+    private function createHttpRequestOptions(MPRequest $request): array
     {
         $connection_timeout =
             $request->getConnectionTimeout() != 0
