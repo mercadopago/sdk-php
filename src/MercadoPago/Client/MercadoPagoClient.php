@@ -24,35 +24,35 @@ class MercadoPagoClient
      * @param string $uri path to be requested.
      * @param string $method method to be used.
      * @param mixed $payload payload to be sent.
-     * @param mixed $queryParams query params to be sent.
+     * @param mixed $query_params query params to be sent.
      * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Net\MPResponse response from the request.
      */
-    protected function send(string $uri, string $method, ?string $payload = null, ?array $queryParams = [], ?MPRequestOptions $request_options = null): MPResponse
+    protected function send(string $uri, string $method, ?string $payload = null, ?array $query_params = [], ?MPRequestOptions $request_options = null): MPResponse
     {
-        return $this->http_client->send($this->buildRequest($uri, $method, $payload, $queryParams, $request_options));
+        return $this->http_client->send($this->buildRequest($uri, $method, $payload, $query_params, $request_options));
     }
 
     private function buildRequest(
         string $path,
         string $method,
         ?string $payload = null,
-        ?array $queryParams = [],
+        ?array $query_params = [],
         ?MPRequestOptions $request_options = null
     ): MPRequest {
-        $path = $this->formatUrlWithQueryParams($path, $queryParams);
+        $path = $this->formatUrlWithQueryParams($path, $query_params);
         return new MPRequest($path, $method, $payload, $this->addHeaders($request_options), $this->addConnectionTimeout($request_options));
     }
 
-    private function formatUrlWithQueryParams(string $url, ?array $queryParams): string
+    private function formatUrlWithQueryParams(string $url, ?array $query_params): string
     {
-        if (!empty($queryParams)) {
-            $queryString = http_build_query($queryParams);
+        if (!empty($query_params)) {
+            $query_string = http_build_query($query_params);
 
             if (strpos($url, '?') !== false) {
-                $url .= '&' . $queryString;
+                $url .= '&' . $query_string;
             } else {
-                $url .= '?' . $queryString;
+                $url .= '?' . $query_string;
             }
         }
         return $url;
