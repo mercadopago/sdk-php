@@ -54,10 +54,7 @@ class MPDefaultHttpClient implements MPHttpClient
 
     private function createHttpRequest(MPRequest $request): array
     {
-        $connection_timeout =
-            $request->getConnectionTimeout() != 0
-            ? $request->getConnectionTimeout()
-            : MercadoPagoConfig::getConnectionTimeout();
+        $connection_timeout = $request->getConnectionTimeout() ?: MercadoPagoConfig::getConnectionTimeout();
 
         return array(
             CURLOPT_URL => MercadoPagoConfig::$BASE_URL . $request->getUri(),
