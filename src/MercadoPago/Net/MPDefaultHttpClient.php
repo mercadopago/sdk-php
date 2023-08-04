@@ -43,7 +43,7 @@ class MPDefaultHttpClient implements MPHttpClient
             throw new Exception($error_message);
         }
 
-        if ($status_code < "200" && $status_code >= "300") {
+        if ($status_code < 200 || $status_code >= 300) {
             $this->httpRequest->close();
             throw new MPApiException("Api error. Check response for details", $mp_response);
         }
