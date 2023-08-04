@@ -40,9 +40,7 @@ class PaymentClient extends MercadoPagoClient
             $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
             $result->setResponse($response);
             return $result;
-        } catch (MPApiException $e) {
-            throw $e;
-        } catch (\Exception $e) {
+        } catch (MPApiException | \Exception $e) {
             throw $e;
         }
     }
@@ -60,9 +58,7 @@ class PaymentClient extends MercadoPagoClient
             $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
             $result->setResponse($response);
             return $result;
-        } catch (MPApiException $e) {
-            throw $e;
-        } catch (\Exception $e) {
+        } catch (MPApiException | \Exception $e) {
             throw $e;
         }
     }
@@ -81,9 +77,7 @@ class PaymentClient extends MercadoPagoClient
             $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
             $result->setResponse($response);
             return $result;
-        } catch (MPApiException $e) {
-            throw $e;
-        } catch (\Exception $e) {
+        } catch (MPApiException | \Exception $e) {
             throw $e;
         }
     }
@@ -104,9 +98,7 @@ class PaymentClient extends MercadoPagoClient
             $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
             $result->setResponse($response);
             return $result;
-        } catch (MPApiException $e) {
-            throw $e;
-        } catch (\Exception $e) {
+        } catch (MPApiException | \Exception $e) {
             throw $e;
         }
     }
@@ -125,9 +117,7 @@ class PaymentClient extends MercadoPagoClient
             $result = Serializer::deserializeFromJson(PaymentSearch::class, $response->getContent());
             $result->setResponse($response);
             return $result;
-        } catch (MPApiException $e) {
-            throw $e;
-        } catch (\Exception $e) {
+        } catch (MPApiException | \Exception $e) {
             throw $e;
         }
     }
