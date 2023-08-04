@@ -36,7 +36,7 @@ class PaymentClient extends MercadoPagoClient
     public function create(array $request, ?MPRequestOptions $request_options = null): Payment
     {
         try {
-            $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), $request_options);
+            $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), null, $request_options);
             $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
             $result->setResponse($response);
             return $result;
@@ -54,7 +54,7 @@ class PaymentClient extends MercadoPagoClient
     public function get(int $id, ?MPRequestOptions $request_options = null): Payment
     {
         try {
-            $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::GET, $request_options);
+            $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::GET, null, null, $request_options);
             $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
             $result->setResponse($response);
             return $result;
@@ -73,7 +73,7 @@ class PaymentClient extends MercadoPagoClient
     {
         try {
             $payload = new PaymentCancelRequest();
-            $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::PUT, json_encode($payload), $request_options);
+            $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::PUT, json_encode($payload), null, $request_options);
             $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
             $result->setResponse($response);
             return $result;
@@ -94,7 +94,7 @@ class PaymentClient extends MercadoPagoClient
         try {
             $payload = new PaymentCaptureRequest();
             $payload->transaction_amount = $amount;
-            $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::PUT, json_encode($payload), $request_options);
+            $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::PUT, json_encode($payload), null, $request_options);
             $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
             $result->setResponse($response);
             return $result;
