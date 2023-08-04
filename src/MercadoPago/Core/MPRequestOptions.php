@@ -5,26 +5,17 @@ namespace MercadoPago\Core;
 /** MPRequestOptions class. */
 class MPRequestOptions
 {
-    /** @var string|null */
-    public ?string $access_token;
-
-    /** @var int|null */
-    public ?int $connection_timeout;
-
-    /** @var array|null */
-    public ?array $custom_headers;
-
     /**
      * MPRequestOptions constructor.
      * @param string|null $access_token access token to be used.
      * @param int|null $connection_timeout connection timeout to be used.
      * @param array|null $custom_headers custom headers to be used.
      */
-    public function __construct(?string $access_token = null, ?int $connection_timeout = null, ?array $custom_headers = null)
-    {
-        $this->access_token = $access_token;
-        $this->connection_timeout = $connection_timeout;
-        $this->custom_headers = $custom_headers;
+    public function __construct(
+        private ?string $access_token = null,
+        private  ?int $connection_timeout = null,
+        private  ?array $custom_headers = null
+    ) {
     }
 
     /**
