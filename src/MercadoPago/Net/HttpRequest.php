@@ -9,10 +9,10 @@ interface HttpRequest
 {
     /**
      * Set request options.
-     * @param mixed $value options to be set.
+     * @param array $value options to be set.
      * @return void
      */
-    public function setOptionArray(mixed $value): void;
+    public function setOptionArray(array $value): void;
 
     /**
      * Execute the request.

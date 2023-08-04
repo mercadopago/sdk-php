@@ -12,9 +12,9 @@ class MPSearchRequest
 
     /**
      * MPSearchRequest constructor.
-     * @param mixed $limit limit of the search.
-     * @param mixed $offset offset of the search.
-     * @param mixed $filters filters of the search.
+     * @param int $limit limit of the search.
+     * @param int $offset offset of the search.
+     * @param array $filters filters of the search.
      */
     public function __construct(
         private ?int $limit,

@@ -10,8 +10,10 @@ class MPResponse
      * @param int $status_code status code of the response.
      * @param array $content content of the response.
      */
-    public function __construct(private int $status_code, private array $content)
-    {
+    public function __construct(
+        private int $status_code,
+        private array $content
+    ) {
     }
 
     /**
