@@ -3,7 +3,7 @@
 namespace MercadoPago\Net;
 
 /**
- * Default implementation of MPHttpClient.
+ * Default implementation of HttpRequest.
  */
 class CurlRequest implements HttpRequest
 {
