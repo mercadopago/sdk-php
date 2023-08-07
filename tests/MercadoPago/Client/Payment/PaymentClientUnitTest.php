@@ -23,6 +23,10 @@ final class PaymentClientUnitTest extends TestCase
         $payment = $client->create($this->createRequest());
         $this->assertEquals(201, $payment->getResponse()->getStatusCode());
         $this->assertEquals(17014025134, $payment->id);
+        $this->assertEquals("2022-01-10T10:10:10.000-00:00", $payment->date_created);
+        $this->assertEquals("approved", $payment->status);
+        $this->assertEquals("128185910", $payment->payer->id);
+        $this->assertEquals("mercadopago_fee", $payment->fee_details[0]->type);
     }
 
     public function testGetSuccess(): void
@@ -81,7 +85,7 @@ final class PaymentClientUnitTest extends TestCase
         MercadoPagoConfig::setHttpClient($httpClient);
 
         $client = new PaymentClient();
-        $search_request = new \MercadoPago\Net\MPSearchRequest(5, 0, null);
+        $search_request = new \MercadoPago\Net\MPSearchRequest(5, 0, []);
         $search_result = $client->search($search_request);
         $this->assertEquals(200, $search_result->getResponse()->getStatusCode());
         $this->assertEquals(5, $search_result->paging["limit"]);

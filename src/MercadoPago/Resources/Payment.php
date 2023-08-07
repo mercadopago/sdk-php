@@ -269,6 +269,9 @@ class Payment extends MPResource
     /** Refunds. */
     public $refunds;
 
+    /** 3DS info. */
+    public $three_ds_info;
+
     private $map = [
         "payer" => "MercadoPago\Resources\Payment\Payer",
         "fee_details" => "MercadoPago\Resources\Payment\FeeDetails",
@@ -278,6 +281,7 @@ class Payment extends MPResource
         "point_of_interaction" => "MercadoPago\Resources\Payment\PointOfInteraction",
         "payment_method" => "MercadoPago\Resources\Payment\PaymentMethod",
         "metadata" => "MercadoPago\Resources\Payment\Metadata",
+        "three_ds_info" => "MercadoPago\Resources\Payment\ThreeDSInfo",
     ];
 
     /**
