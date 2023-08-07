@@ -71,9 +71,6 @@ class Payment extends MPResource
     /** Date created. */
     public $date_created;
 
-    /** Last modified. */
-    public $last_modified;
-
     /** Live Mode. */
     public $live_mode;
 
