@@ -4,11 +4,6 @@
     "type": "library",
     "license": "MIT",
     "homepage": "https://github.com/mercadopago/sdk-php",
-    "config": {
-        "platform": {
-            "php": "8.2"
-        }
-    },
     "autoload": {
         "psr-4": {
             "MercadoPago\\": [
