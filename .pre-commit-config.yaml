@@ -11,4 +11,8 @@ repos:
   hooks:
   - id: php-lint
   - id: php-lint-all
-  - id: php-unit
+  - id: php-cs
+    files: \.(php)$
+    args: [--standard=PSR1 -p]
+  - id: php-cs-fixer
+    files: \.(php)$
