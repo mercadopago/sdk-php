@@ -2,7 +2,7 @@
 
 namespace MercadoPago\Net;
 
-/** Mercado Pago SDK HttpMethods class. */
+/** Mercado Pago SDK HttpMethod class. */
 class HttpMethod
 {
     public const GET = "GET";
