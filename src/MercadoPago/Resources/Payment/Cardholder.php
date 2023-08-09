@@ -14,7 +14,7 @@ class Cardholder
     public ?string $name;
 
     /** Cardholder identification. */
-    public ?object $identification;
+    public object|array|null $identification;
 
     private $map = [
         "identification" => "MercadoPago\Resources\Payment\Identification"

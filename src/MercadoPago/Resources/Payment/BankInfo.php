@@ -11,10 +11,10 @@ class BankInfo
     use Mapper;
 
     /** Payer info. */
-    public ?object $payer;
+    public object|array|null $payer;
 
     /** Collector info. */
-    public ?object $collector;
+    public object|array|null $collector;
 
     /** Is same bank account owner. */
     public ?string $is_same_bank_account_owner;

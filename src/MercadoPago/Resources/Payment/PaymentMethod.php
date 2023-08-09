@@ -11,7 +11,7 @@ class PaymentMethod
     use Mapper;
 
     /** Payment data. */
-    public ?object $data;
+    public object|array|null $data;
 
     /** ID. */
     public ?string $id;

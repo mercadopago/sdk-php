@@ -14,10 +14,10 @@ class PaymentMethodRules
     public ?array $discounts;
 
     /** Payment fine. */
-    public ?object $fine;
+    public object|array|null $fine;
 
     /** Payment interest. */
-    public ?object $interest;
+    public object|array|null $interest;
 
     private $map = [
         "discounts" => "MercadoPago\Resources\Payment\PaymentDiscounts",

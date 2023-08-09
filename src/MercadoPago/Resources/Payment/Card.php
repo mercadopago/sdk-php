@@ -32,7 +32,7 @@ class Card
     public ?string $date_last_updated;
 
     /** Card's owner data. */
-    public ?object $cardholder;
+    public object|array|null $cardholder;
 
     private $map = [
         "cardholder" => "MercadoPago\Resources\Payment\Cardholder"

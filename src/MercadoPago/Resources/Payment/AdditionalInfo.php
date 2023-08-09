@@ -17,10 +17,10 @@ class AdditionalInfo
     public ?array $items;
 
     /** Payer's information. */
-    public ?object $payer;
+    public object|array|null $payer;
 
     /** Shipping information. */
-    public ?object $shipments;
+    public object|array|null $shipments;
 
     /** Available Balance. */
     public ?float $available_balance;
