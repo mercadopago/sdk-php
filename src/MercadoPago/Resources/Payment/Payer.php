@@ -11,31 +11,31 @@ class Payer
     use Mapper;
 
     /** Payer's identification type (mandatory if the payer is a Customer). */
-    public $type;
+    public ?string $type;
 
     /** Payer's ID. */
-    public $id;
+    public ?string $id;
 
     /** Email of the payer. */
-    public $email;
+    public ?string $email;
 
     /** Payer's personal identification. */
-    public $identification;
+    public ?object $identification;
 
     /** Payer's first name. */
-    public $first_name;
+    public ?string $first_name;
 
     /** Payer's last name. */
-    public $last_name;
+    public ?string $last_name;
 
     /** Payer's entity type (only for bank transfers). */
-    public $entity_type;
+    public ?string $entity_type;
 
     /** Phone. */
-    public $phone;
+    public ?object $phone;
 
     /** Operator ID */
-    public $operator_id;
+    public ?string $operator_id;
 
     private $map = [
         "identification" => "MercadoPago\Resources\Payment\Identification",

@@ -6,8 +6,8 @@ namespace MercadoPago\Resources\Payment;
 class ThreeDSInfo
 {
     /** External resource url. */
-    public $external_resource_url;
+    public ?string $external_resource_url;
 
     /** Creq. */
-    public $creq;
+    public ?string $creq;
 }

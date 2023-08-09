@@ -11,19 +11,19 @@ class AdditionalInfoPayer
     use Mapper;
 
     /** Payer's first name. */
-    public $first_name;
+    public ?string $first_name;
 
     /** Payer's last name. */
-    public $last_name;
+    public ?string $last_name;
 
     /** Payer's phone. */
-    public $phone;
+    public ?object $phone;
 
     /** Payer's address. */
-    public $address;
+    public ?object $address;
 
     /** Date of registration of the payer on your site. */
-    public $registration_date;
+    public ?string $registration_date;
 
     private $map = [
         "phone" => "MercadoPago\Resources\Payment\Phone",

@@ -6,8 +6,8 @@ namespace MercadoPago\Resources\Payment;
 class Identification
 {
     /** Type of identification. */
-    public $type;
+    public ?string $type;
 
     /** Unique number of that identification. */
-    public $number;
+    public ?string $number;
 }

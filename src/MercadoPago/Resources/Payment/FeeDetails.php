@@ -6,11 +6,11 @@ namespace MercadoPago\Resources\Payment;
 class FeeDetails
 {
     /** Fee type. */
-    public $type;
+    public ?string $type;
 
     /** Who absorbs the cost. */
-    public $fee_payer;
+    public ?string $fee_payer;
 
     /** Fee amount. */
-    public $amount;
+    public ?float $amount;
 }

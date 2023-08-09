@@ -11,19 +11,19 @@ class BankInfo
     use Mapper;
 
     /** Payer info. */
-    public $payer;
+    public ?object $payer;
 
     /** Collector info. */
-    public $collector;
+    public ?object $collector;
 
     /** Is same bank account owner. */
-    public $is_same_bank_account_owner;
+    public ?string $is_same_bank_account_owner;
 
     /** Origin bank ID. */
-    public $origin_bank_id;
+    public ?string $origin_bank_id;
 
     /** Origin wallet ID. */
-    public $origin_wallet_id;
+    public ?string $origin_wallet_id;
 
     private $map = [
         "payer" => "MercadoPago\Resources\Payment\BankInfoPayer",

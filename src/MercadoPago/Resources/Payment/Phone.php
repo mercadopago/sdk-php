@@ -6,11 +6,11 @@ namespace MercadoPago\Resources\Payment;
 class Phone
 {
     /** Area code. */
-    public $area_code;
+    public ?string $area_code;
 
     /** Phone number. */
-    public $number;
+    public ?string $number;
 
     /** Extension. */
-    public $extension;
+    public ?string $extension;
 }

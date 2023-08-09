@@ -6,8 +6,8 @@ namespace MercadoPago\Resources\Payment;
 class ApplicationData
 {
     /** Name. */
-    public $name;
+    public ?string $name;
 
     /** Version. */
-    public $version;
+    public ?string $version;
 }

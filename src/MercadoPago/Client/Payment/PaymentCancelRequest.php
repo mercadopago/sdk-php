@@ -6,5 +6,5 @@ namespace MercadoPago\Client\Payment;
 class PaymentCancelRequest
 {
     /** Status cancelled. */
-    public $status = "cancelled";
+    public string $status = "cancelled";
 }

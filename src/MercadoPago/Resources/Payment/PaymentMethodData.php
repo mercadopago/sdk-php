@@ -5,25 +5,16 @@ namespace MercadoPago\Resources\Payment;
 use MercadoPago\Serialization\Mapper;
 
 /** PaymentMethod class. */
-class PaymentMethod
+class PaymentMethodData
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Payment data. */
-    public ?object $data;
-
-    /** ID. */
-    public ?string $id;
-
-    /** Type. */
-    public ?string $type;
-
-    /** Issuer ID. */
-    public ?string $issuer_id;
+    /** Payment rules. */
+    public ?object $rules;
 
     private $map = [
-        "data" => "MercadoPago\Resources\Payment\PaymentMethodData",
+        "rules" => "MercadoPago\Resources\Payment\PaymentMethodRules",
     ];
 
     /**

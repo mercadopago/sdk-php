@@ -5,15 +5,18 @@ namespace MercadoPago\Resources\Payment;
 /** ReceiverAddress class. */
 class ReceiverAddress extends Address
 {
-    /** State. */
-    public $state_name;
+    /** Street name. */
+    public ?string $street_name;
+
+    // /** Street number. */
+    // public ?int $street_number;
+
+    // /** Zip code. */
+    // public ?string $zip_code;
 
     /** City. */
-    public $city_name;
+    public ?string $city_name;
 
-    /** Floor. */
-    public $floor;
-
-    /** Apartment. */
-    public $apartment;
+    // /** State name. */
+    // public ?string $state_name;
 }

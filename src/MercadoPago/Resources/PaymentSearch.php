@@ -3,10 +3,13 @@
 namespace MercadoPago\Resources;
 
 use MercadoPago\Net\MPResource;
-use MercadoPago\Serialization\Mapper;
 
+/** PaymentSearch class. */
 class PaymentSearch extends MPResource
 {
-    public $paging;
-    public $results;
+    /** Search paging. */
+    public array $paging;
+
+    /** Search results. */
+    public array $results;
 }

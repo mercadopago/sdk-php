@@ -6,5 +6,5 @@ namespace MercadoPago\Resources\Payment;
 class Metadata
 {
     /** Order number. */
-    public $order_number;
+    public ?string $order_number;
 }

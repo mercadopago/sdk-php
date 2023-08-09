@@ -26,6 +26,8 @@ final class PaymentClientUnitTest extends TestCase
         $this->assertEquals("2022-01-10T10:10:10.000-00:00", $payment->date_created);
         $this->assertEquals("approved", $payment->status);
         $this->assertEquals("128185910", $payment->payer->id);
+        $this->assertEquals("19119119100", $payment->payer->identification->number);
+        $this->assertEquals("order_1631894348", $payment->metadata->order_number);
         $this->assertEquals("mercadopago_fee", $payment->fee_details[0]->type);
     }
 

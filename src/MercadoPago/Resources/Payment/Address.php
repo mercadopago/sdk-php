@@ -6,11 +6,11 @@ namespace MercadoPago\Resources\Payment;
 class Address
 {
     /** Zip code. */
-    public $zip_code;
+    public ?string $zip_code;
 
     /** Street name. */
-    public $street_name;
+    public ?string $street_name;
 
     /** Street number. */
-    public $street_number;
+    public ?string $street_number;
 }
