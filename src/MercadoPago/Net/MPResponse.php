@@ -8,17 +8,17 @@ class MPResponse
     /**
      * MPResponse constructor.
      * @param int $status_code status code of the response.
-     * @param mixed $content content of the response.
+     * @param array $content content of the response.
      */
     public function __construct(
         private int $status_code,
-        private mixed $content
+        private array $content
     ) {
     }
 
     /**
-     * Get status code.
-     * @return int status code.
+     * Get the status code of the response.
+     * @return int status code of the response.
      */
     public function getStatusCode(): int
     {
@@ -26,8 +26,8 @@ class MPResponse
     }
 
     /**
-     * Get content.
-     * @return array content.
+     * Get the content of the response.
+     * @return array content of the response.
      */
     public function getContent(): array
     {
