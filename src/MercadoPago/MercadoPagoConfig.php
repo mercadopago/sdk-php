@@ -8,25 +8,26 @@ use MercadoPago\Net\MPHttpClient;
 /** Mercado Pago configuration class. */
 class MercadoPagoConfig
 {
-    public static $CURRENT_VERSION = "3.0.0.";
+    /** @var string Mercado Pago SDK version. */
+    public static string $CURRENT_VERSION = "3.0.0";
 
-    public static $BASE_URL = "https://api.mercadopago.com";
+    /** @var string Mercado Pago Base URL */
+    public static string $BASE_URL = "https://api.mercadopago.com";
 
-    public static $PRODUCT_ID = "BC32A7RU643001OI3940";
+    /** @var string Mercado Pago SDK PHP product version */
+    public static string $PRODUCT_ID = "BC32A7RU643001OI3940";
 
-    private static $access_token = "";
+    /** @var string access token */
+    private static string $access_token = "";
 
-    private static $platform_id;
+    /** @var int max connections */
+    private static int $max_connections = 10;
 
-    private static $corporation_id;
+    /** @var int connection timeout */
+    private static int $connection_timeout = 20000;
 
-    private static $integrator_id;
-
-    private static $max_connections = 10;
-
-    private static $connection_timeout = 20000;
-
-    private static $http_client;
+    /** @var MPHttpClient http client */
+    private static ?MPHttpClient $http_client = null;
 
     /**
      * Verifies which http client use.
@@ -40,66 +41,67 @@ class MercadoPagoConfig
         return self::$http_client;
     }
 
+    /**
+     * Sets http client.
+     * @param \MercadoPago\Net\MPHttpClient $http_client http client
+     */
     public static function setHttpClient(MPHttpClient $http_client): void
     {
         self::$http_client = $http_client;
     }
 
+    /**
+     * Gets access token.
+     * @return string access token
+     */
     public static function getAccessToken(): string
     {
         return self::$access_token;
     }
 
+    /**
+     * Sets access token.
+     * @param string $access_token access token
+     * @return void access token
+     */
     public static function setAccessToken(string $access_token): void
     {
         self::$access_token = $access_token;
     }
 
-    public static function getPlatformId(): string
-    {
-        return self::$platform_id;
-    }
-
-    public static function setPlatformId(string $platform_id): void
-    {
-        self::$platform_id = $platform_id;
-    }
-
-    public static function getCorporationId(): string
-    {
-        return self::$corporation_id;
-    }
-
-    public static function setCorporationId(string $corporation_id): void
-    {
-        self::$corporation_id = $corporation_id;
-    }
-
-    public static function getIntegratorId(): string
-    {
-        return self::$integrator_id;
-    }
-
-    public static function setIntegratorId(string $integrator_id): void
-    {
-        self::$integrator_id = $integrator_id;
-    }
-
+    /**
+     * Gets max connections.
+     * @return int max connections
+     */
     public static function getMaxConnections(): int
     {
         return self::$max_connections;
     }
 
+    /**
+     * Sets max connections.
+     * @param int $max_connections max connections
+     * @return void max connections
+     */
     public static function setMaxConnections(int $max_connections): void
     {
         self::$max_connections = $max_connections;
     }
 
+    /**
+     * Gets connection timeout.
+     * @return int connection timeout
+     */
     public static function getConnectionTimeout(): int
     {
         return self::$connection_timeout;
     }
 
+    /**
+     * Sets connection timeout.
+     * @param int $connection_timeout connection timeout
+     * @return void connection timeout
+     */
     public static function setConnectionTimeout(int $connection_timeout): void
     {
         self::$connection_timeout = $connection_timeout;
