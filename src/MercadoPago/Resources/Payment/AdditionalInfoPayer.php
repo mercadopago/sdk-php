@@ -26,8 +26,8 @@ class AdditionalInfoPayer
     public ?string $registration_date;
 
     private $map = [
-        "phone" => "MercadoPago\Resources\Payment\Phone",
-        "address" => "MercadoPago\Resources\Payment\Address"
+        "phone" => "MercadoPago\Resources\Common\Phone",
+        "address" => "MercadoPago\Resources\Common\Address"
     ];
 
     /**

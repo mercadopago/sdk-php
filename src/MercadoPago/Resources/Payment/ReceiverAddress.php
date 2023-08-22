@@ -2,6 +2,8 @@
 
 namespace MercadoPago\Resources\Payment;
 
+use MercadoPago\Resources\Common\Address;
+
 /** ReceiverAddress class. */
 class ReceiverAddress extends Address
 {
