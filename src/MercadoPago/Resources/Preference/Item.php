@@ -24,7 +24,7 @@ class Item
     public ?int $quantity;
 
     /** Unit price. */
-    public ?float $unitPrice;
+    public ?float $unit_price;
 
     /** Currency ID. ISO_4217 code. */
     public ?string $currency_id;

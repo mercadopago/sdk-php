@@ -85,14 +85,14 @@ class PreferenceClient extends MercadoPagoClient
     /**
      *  Method responsible for search preferences.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $requestOptions request options to be sent.
+     * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\PreferenceSearch search results.
      */
-    public function search(MPSearchRequest $request, ?MPRequestOptions $requestOptions = null): PreferenceSearch
+    public function search(MPSearchRequest $request, ?MPRequestOptions $request_options = null): PreferenceSearch
     {
         try {
-            $queryParams = isset($request) ? $request->getParameters() : null;
-            $response = parent::send(self::$URL_SEARCH, HttpMethod::GET, null, $queryParams, $requestOptions);
+            $query_params = isset($request) ? $request->getParameters() : null;
+            $response = parent::send(self::$URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
             $result = Serializer::deserializeFromJson(PreferenceSearch::class, $response->getContent());
             $result->setResponse($response);
             return $result;

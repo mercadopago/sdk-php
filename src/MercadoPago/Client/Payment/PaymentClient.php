@@ -106,14 +106,14 @@ class PaymentClient extends MercadoPagoClient
     /**
      *  Method responsible for search payments.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $requestOptions request options to be sent.
+     * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\PaymentSearch search results.
      */
-    public function search(MPSearchRequest $request, ?MPRequestOptions $requestOptions = null): PaymentSearch
+    public function search(MPSearchRequest $request, ?MPRequestOptions $request_options = null): PaymentSearch
     {
         try {
-            $queryParams = isset($request) ? $request->getParameters() : null;
-            $response = parent::send(self::$URL_SEARCH, HttpMethod::GET, null, $queryParams, $requestOptions);
+            $query_params = isset($request) ? $request->getParameters() : null;
+            $response = parent::send(self::$URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
             $result = Serializer::deserializeFromJson(PaymentSearch::class, $response->getContent());
             $result->setResponse($response);
             return $result;
