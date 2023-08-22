@@ -6,7 +6,7 @@ use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
-use MercadoPago\Resources\Payment\Card;
+use MercadoPago\Resources\CardToken;
 use MercadoPago\Serialization\Serializer;
 
 /** Client responsible for performing cardtoken actions. */
@@ -25,13 +25,13 @@ class CardTokenClient extends MercadoPagoClient
     /**
      * Method responsible for creating card token.
      * @param array $request card token data.
-     * @return \MercadoPago\Resources\Payment\Card card token created.
+     * @return \MercadoPago\Resources\CardToken card token created.
      */
-    public function create(array $request): Card
+    public function create(array $request): CardToken
     {
         try {
             $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request));
-            $result = Serializer::deserializeFromJson(Card::class, $response->getContent());
+            $result = Serializer::deserializeFromJson(CardToken::class, $response->getContent());
             $result->setResponse($response);
             return $result;
         } catch (MPApiException | \Exception $e) {
@@ -42,13 +42,13 @@ class CardTokenClient extends MercadoPagoClient
     /**
      * Method responsible for getting card token by id.
      * @param string $id card token id.
-     * @return \MercadoPago\Resources\Payment\Card card token found.
+     * @return \MercadoPago\Resources\CardToken card token found.
      */
-    public function get(string $id): Card
+    public function get(string $id): CardToken
     {
         try {
             $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::GET);
-            $result = Serializer::deserializeFromJson(Card::class, $response->getContent());
+            $result = Serializer::deserializeFromJson(CardToken::class, $response->getContent());
             $result->setResponse($response);
             return $result;
         } catch (MPApiException | \Exception $e) {

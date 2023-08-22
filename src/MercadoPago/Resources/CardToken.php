@@ -1,11 +1,12 @@
 <?php
 
-namespace MercadoPago\Resources\Payment;
+namespace MercadoPago\Resources;
 
+use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
 /** Card class. */
-class Card
+class CardToken extends MPResource
 {
     /** Class mapper. */
     use Mapper;
@@ -33,6 +34,31 @@ class Card
 
     /** Card's owner data. */
     public object|array|null $cardholder;
+
+    /** Card id. */
+    public ?int $card_id;
+
+    /** Current status of card. E.g. active. */
+    public string $status;
+
+    /** Date token expires. */
+    public ?string $date_due;
+
+    /** Flag indicating if Luhn validation is used. */
+    public bool $luhn_validation;
+
+    /** Flag indicating if this is a production card token. */
+    public bool $live_mode;
+
+    /** Require esc. */
+    public bool $require_esc;
+
+    /** Security code of the card. */
+    public int $card_number_length;
+
+    /** Security code of the card. */
+    public int $security_code_length;
+
 
     private $map = [
         "cardholder" => "MercadoPago\Resources\Payment\Cardholder"
