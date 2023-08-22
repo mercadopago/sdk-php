@@ -7,6 +7,7 @@
     <testsuite name="Unit Tests">
       <directory>./tests/MercadoPago</directory>
       <exclude>./tests/MercadoPago/Client/Payment/PaymentClientITTest.php</exclude>
+      <exclude>./tests/MercadoPago/Client/Cardtoken/CardTokenClientITTest.php</exclude>
     </testsuite>
   </testsuites>
 </phpunit>
