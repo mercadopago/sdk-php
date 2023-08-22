@@ -29,7 +29,6 @@ class MPDefaultHttpClient implements MPHttpClient
      */
     public function send(MPRequest $request): MPResponse
     {
-
         $request_options = $this->createHttpRequestOptions($request);
         $this->httpRequest->setOptionArray($request_options);
         $api_result = $this->httpRequest->execute();
@@ -42,7 +41,6 @@ class MPDefaultHttpClient implements MPHttpClient
             $this->httpRequest->close();
             throw new Exception($error_message);
         }
-
         if ($status_code < 200 || $status_code >= 300) {
             $this->httpRequest->close();
             throw new MPApiException("Api error. Check response for details", $mp_response);
