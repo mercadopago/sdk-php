@@ -38,8 +38,8 @@ class Payer
     public ?string $operator_id;
 
     private $map = [
-        "identification" => "MercadoPago\Resources\Payment\Identification",
-        "phone" => "MercadoPago\Resources\Payment\Phone"
+        "identification" => "MercadoPago\Resources\Common\Identification",
+        "phone" => "MercadoPago\Resources\Common\Phone"
     ];
 
     /**
