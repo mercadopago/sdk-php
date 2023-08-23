@@ -8,6 +8,7 @@
       <directory>./tests/MercadoPago</directory>
       <exclude>./tests/MercadoPago/Client/Payment/PaymentClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/Cardtoken/CardTokenClientITTest.php</exclude>
+      <exclude>./tests/MercadoPago/Client/Paymentmethod/PaymentMethodClientITTest.php</exclude>
     </testsuite>
   </testsuites>
 </phpunit>

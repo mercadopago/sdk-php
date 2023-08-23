@@ -2,6 +2,7 @@
 
 namespace MercadoPago\Client\Cardtoken;
 
+use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use PHPUnit\Framework\TestCase;
@@ -11,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class CardTokenClientITTest extends TestCase
 {
-    protected function setUp(): void
+    public static function setUpBeforeClass(): void
     {
         MercadoPagoConfig::setAccessToken(getenv("ACCESS_TOKEN"));
     }
@@ -23,13 +24,14 @@ final class CardTokenClientITTest extends TestCase
         $this->assertNotNull($card_token->id);
     }
 
-    public function testCreateWithAccessTokenFailure(): void
+    public function testCreateWithInvalidAccessTokenFailure(): void
     {
         $this->expectException(MPApiException::class);
         $client = new CardTokenClient();
         $request = $this->createRequest();
-        MercadoPagoConfig::setAccessToken("invalid_access_token");
-        $client->create($request);
+        $request_options = new MPRequestOptions();
+        $request_options->setAccessToken("invalid_access_token");
+        $client->create($request, $request_options);
     }
 
     public function testGetSuccess(): void
@@ -39,12 +41,13 @@ final class CardTokenClientITTest extends TestCase
         $this->assertNotNull($card_token->id);
     }
 
-    public function testGetWithAccessTokenFailure(): void
+    public function testGetWithInvalidAccessTokenFailure(): void
     {
         $this->expectException(MPApiException::class);
         $client = new CardTokenClient();
-        MercadoPagoConfig::setAccessToken("invalid_access_token");
-        $client->get("123");
+        $request_options = new MPRequestOptions();
+        $request_options->setAccessToken("invalid_access_token");
+        $client->get("123", $request_options);
     }
 
     private function createRequest(): array
