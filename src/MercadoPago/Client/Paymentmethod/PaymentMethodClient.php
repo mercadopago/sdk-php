@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\Client\Paymentmethod;
+namespace MercadoPago\Client\PaymentMethod;
 
 use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\Core\MPRequestOptions;
@@ -28,7 +28,7 @@ class PaymentMethodClient extends MercadoPagoClient
     public function get(?MPRequestOptions $request_options = null): PaymentMethodResult
     {
         try {
-            $response = parent::send(sprintf(self::$URL), HttpMethod::GET, null, null, $request_options);
+            $response = parent::send(self::$URL, HttpMethod::GET, null, null, $request_options);
 
             $result = new PaymentMethodResult();
             $result-> data = $response -> getContent();

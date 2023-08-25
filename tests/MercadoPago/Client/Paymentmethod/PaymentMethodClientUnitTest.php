@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\Client\Paymentmethod;
+namespace MercadoPago\Client\PaymentMethod;
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
@@ -13,7 +13,7 @@ final class PaymentMethodClientUnitTest extends TestCase
 {
     public function testGetSuccess(): void
     {
-        $file_path = '../../../Resources/Mocks/Response/Paymentmethod/payment_method_get.json';
+        $file_path = '../../../Resources/Mocks/Response/PaymentMethod/payment_method_get.json';
         $mock_http_request = $this->mockHttpRequest($file_path, 200);
 
         $http_client = new MPDefaultHttpClient($mock_http_request);

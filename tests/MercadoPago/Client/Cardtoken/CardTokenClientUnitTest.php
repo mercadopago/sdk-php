@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\Client\Cardtoken;
+namespace MercadoPago\Client\CardToken;
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
@@ -13,7 +13,7 @@ final class CardTokenClientUnitTest extends TestCase
 {
     public function testCreateSuccess(): void
     {
-        $file_path = '../../../Resources/Mocks/Response/Cardtoken/card_token_get.json';
+        $file_path = '../../../Resources/Mocks/Response/CardToken/card_token_get.json';
         $mock_http_request = $this->mockHttpRequest($file_path, 200);
 
         $http_client = new MPDefaultHttpClient($mock_http_request);
