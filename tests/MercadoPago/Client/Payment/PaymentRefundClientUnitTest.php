@@ -14,10 +14,10 @@ final class PaymentRefundClientUnitTest extends BaseClient
     public function testCreateRefundSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_refund.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentRefundClient();
         $payment_id = 18552260055;
@@ -35,10 +35,10 @@ final class PaymentRefundClientUnitTest extends BaseClient
     public function testCreateRefundTotalSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_refund.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentRefundClient();
         $payment_id = 18552260055;
@@ -55,10 +55,10 @@ final class PaymentRefundClientUnitTest extends BaseClient
     public function testGetRefundSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_refund.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentRefundClient();
         $payment_id = 18552260055;
@@ -76,10 +76,10 @@ final class PaymentRefundClientUnitTest extends BaseClient
     public function testListRefundSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_refund_list.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentRefundClient();
         $payment_id = 18552260055;

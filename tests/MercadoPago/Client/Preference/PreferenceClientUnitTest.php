@@ -14,10 +14,10 @@ final class PreferenceClientUnitTest extends BaseClient
     public function testCreateSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Preference/preference_base.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 201);
+        $mock_http_request = $this->mockHttpRequest($filepath, 201);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PreferenceClient();
         $preference = $client->create($this->createRequest());
@@ -37,10 +37,10 @@ final class PreferenceClientUnitTest extends BaseClient
     public function testGetSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Preference/preference_base.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PreferenceClient();
         $preference_id = "111111111-31b00b3b-3572-4fbb-a090-12c1dedc4dd7";
@@ -61,10 +61,10 @@ final class PreferenceClientUnitTest extends BaseClient
     public function testUpdateSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Preference/preference_update.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PreferenceClient();
         $preference_id = "111111111-31b00b3b-3572-4fbb-a090-12c1dedc4dd7";
@@ -78,10 +78,10 @@ final class PreferenceClientUnitTest extends BaseClient
     public function testSearchSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Preference/preference_search.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PreferenceClient();
         $search_request = new \MercadoPago\Net\MPSearchRequest(5, 0, ["external_reference" => "998476493"]);

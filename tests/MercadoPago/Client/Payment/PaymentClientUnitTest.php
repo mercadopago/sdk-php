@@ -14,10 +14,10 @@ final class PaymentClientUnitTest extends BaseClient
     public function testCreateSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_base.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 201);
+        $mock_http_request = $this->mockHttpRequest($filepath, 201);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentClient();
         $payment = $client->create($this->createRequest());
@@ -34,10 +34,10 @@ final class PaymentClientUnitTest extends BaseClient
     public function testGetSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_base.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentClient();
         $payment_id = 17014025134;
@@ -49,10 +49,10 @@ final class PaymentClientUnitTest extends BaseClient
     public function testCancelSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_cancelled.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentClient();
         $payment_id = 17014025134;
@@ -65,10 +65,10 @@ final class PaymentClientUnitTest extends BaseClient
     public function testCaptureSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_captured.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentClient();
         $payment_id = 17014025134;
@@ -81,10 +81,10 @@ final class PaymentClientUnitTest extends BaseClient
     public function testSearchSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_search.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentClient();
         $search_request = new \MercadoPago\Net\MPSearchRequest(5, 0, []);

@@ -2,7 +2,7 @@
 
 namespace MercadoPago\Client\Payment;
 
-/** PaymentCaptureRequest class. */
+/** PaymentRefundCreateRequest class. */
 class PaymentRefundCreateRequest
 {
     /** Amount to be refunded. */

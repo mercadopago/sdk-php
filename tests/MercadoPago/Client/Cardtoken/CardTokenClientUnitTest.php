@@ -14,10 +14,10 @@ final class CardTokenClientUnitTest extends TestCase
     public function testCreateSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Cardtoken/card_token_get.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new CardTokenClient();
         $cardToken = $client->create($this->createRequest());
@@ -33,10 +33,10 @@ final class CardTokenClientUnitTest extends TestCase
     public function testGetSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Cardtoken/card_token_get.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new CardTokenClient();
         $id = "60aca73f30e817f";
@@ -47,13 +47,13 @@ final class CardTokenClientUnitTest extends TestCase
 
     private function mockHttpRequest(string $filepath, int $status_code): \PHPUnit\Framework\MockObject\MockObject|\MercadoPago\Net\HttpRequest
     {
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\MercadoPago\Net\HttpRequest $mockHttpRequest */
-        $mockHttpRequest = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)->getMock();
+        /** @var \PHPUnit\Framework\MockObject\MockObject|\MercadoPago\Net\HttpRequest $mock_http_request */
+        $mock_http_request = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)->getMock();
 
         $responseJson = file_get_contents(__DIR__ . $filepath);
-        $mockHttpRequest->method('execute')->willReturn($responseJson);
-        $mockHttpRequest->method('getInfo')->willReturn($status_code);
-        return $mockHttpRequest;
+        $mock_http_request->method('execute')->willReturn($responseJson);
+        $mock_http_request->method('getInfo')->willReturn($status_code);
+        return $mock_http_request;
     }
     private function createRequest(): array
     {
