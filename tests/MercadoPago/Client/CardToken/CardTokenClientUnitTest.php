@@ -1,10 +1,9 @@
 <?php
 
-namespace MercadoPago\Client\CardTokenn;
+namespace MercadoPago\Client\CardToken;
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
-use MercadoPago\Client\CardToken\CardTokenClient;
 use PHPUnit\Framework\TestCase;
 
 /**
