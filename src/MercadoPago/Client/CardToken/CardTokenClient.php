@@ -3,6 +3,7 @@
 namespace MercadoPago\Client\CardToken;
 
 use MercadoPago\Client\MercadoPagoClient;
+use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
@@ -25,12 +26,13 @@ class CardTokenClient extends MercadoPagoClient
     /**
      * Method responsible for creating card token.
      * @param array $request card token data.
+     * @param \MercadoPago\Core\MPRequestOptions request options to be sent.
      * @return \MercadoPago\Resources\CardToken card token created.
      */
-    public function create(array $request): CardToken
+    public function create(array $request, ?MPRequestOptions $request_options = null): CardToken
     {
         try {
-            $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request));
+            $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), null, $request_options);
             $result = Serializer::deserializeFromJson(CardToken::class, $response->getContent());
             $result->setResponse($response);
             return $result;
@@ -42,12 +44,13 @@ class CardTokenClient extends MercadoPagoClient
     /**
      * Method responsible for getting card token by id.
      * @param string $id card token id.
+     * @param \MercadoPago\Core\MPRequestOptions request options to be sent.
      * @return \MercadoPago\Resources\CardToken card token found.
      */
-    public function get(string $id): CardToken
+    public function get(string $id, ?MPRequestOptions $request_options = null): CardToken
     {
         try {
-            $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::GET);
+            $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
             $result = Serializer::deserializeFromJson(CardToken::class, $response->getContent());
             $result->setResponse($response);
             return $result;
