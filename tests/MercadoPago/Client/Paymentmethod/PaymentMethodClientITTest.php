@@ -14,8 +14,7 @@ final class PaymentMethodClientITTest extends TestCase
 {
     public static function setUpBeforeClass(): void
     {
-        //MercadoPagoConfig::setAccessToken(getenv("ACCESS_TOKEN"));
-        MercadoPagoConfig::setAccessToken("APP_USR-4849723703374061-053108-80867bffcb4a85cda0cd797f6c40cf28-1340175910");
+        MercadoPagoConfig::setAccessToken(getenv("ACCESS_TOKEN"));
     }
 
     public function testGetSuccess(): void
