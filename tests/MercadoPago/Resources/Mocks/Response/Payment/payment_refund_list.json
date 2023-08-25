@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1009042015,
+    "payment_id": 18552260055,
+    "amount": 5,
+    "metadata": {
+      "status_detail": null
+    },
+    "source": {
+      "id": "831921084",
+      "name": "Test Test",
+      "type": "collector"
+    },
+    "date_created": "2023-08-24T15:35:15.783-04:00",
+    "expiration_date": null,
+    "unique_sequence_number": null,
+    "refund_mode": "standard",
+    "adjustment_amount": 0,
+    "status": "approved",
+    "reason": null,
+    "labels": [],
+    "amount_refunded_to_payer": 5,
+    "additional_data": null,
+    "partition_details": []
+  },
+  {
+    "id": 1009042016,
+    "payment_id": 18552260055,
+    "amount": 5,
+    "metadata": {
+      "status_detail": null
+    },
+    "source": {
+      "id": "831921084",
+      "name": "Test Test",
+      "type": "collector"
+    },
+    "date_created": "2023-08-24T15:35:15.783-04:00",
+    "expiration_date": null,
+    "unique_sequence_number": null,
+    "refund_mode": "standard",
+    "adjustment_amount": 0,
+    "status": "approved",
+    "reason": null,
+    "labels": [],
+    "amount_refunded_to_payer": 5,
+    "additional_data": null,
+    "partition_details": []
+  }
+]

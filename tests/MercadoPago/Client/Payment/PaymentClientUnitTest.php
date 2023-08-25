@@ -4,20 +4,20 @@ namespace MercadoPago\Client\Payment;
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
-use PHPUnit\Framework\TestCase;
+use MercadoPago\Client\Base\BaseClient;
 
 /**
- * PaymentClient unit tests.
+ * Payment Client unit tests.
  */
-final class PaymentClientUnitTest extends TestCase
+final class PaymentClientUnitTest extends BaseClient
 {
     public function testCreateSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_base.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 201);
+        $mock_http_request = $this->mockHttpRequest($filepath, 201);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentClient();
         $payment = $client->create($this->createRequest());
@@ -34,10 +34,10 @@ final class PaymentClientUnitTest extends TestCase
     public function testGetSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_base.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentClient();
         $payment_id = 17014025134;
@@ -49,10 +49,10 @@ final class PaymentClientUnitTest extends TestCase
     public function testCancelSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_cancelled.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentClient();
         $payment_id = 17014025134;
@@ -65,10 +65,10 @@ final class PaymentClientUnitTest extends TestCase
     public function testCaptureSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_captured.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentClient();
         $payment_id = 17014025134;
@@ -81,18 +81,18 @@ final class PaymentClientUnitTest extends TestCase
     public function testSearchSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Payment/payment_search.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 200);
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentClient();
         $search_request = new \MercadoPago\Net\MPSearchRequest(5, 0, []);
         $search_result = $client->search($search_request);
         $this->assertEquals(200, $search_result->getResponse()->getStatusCode());
         $this->assertEquals(5, $search_result->paging["limit"]);
-        $this->assertNotNull(0, $search_result->paging["offset"]);
-        $this->assertNotNull(102, $search_result->paging["total"]);
+        $this->assertEquals(0, $search_result->paging["offset"]);
+        $this->assertEquals(102, $search_result->paging["total"]);
         $this->assertEquals(5, count($search_result->results));
         $this->assertEquals(1241012238, $search_result->results[0]["id"]);
     }
@@ -108,16 +108,5 @@ final class PaymentClientUnitTest extends TestCase
             ]
         ];
         return $request;
-    }
-
-    private function mockHttpRequest(string $filepath, int $status_code): \PHPUnit\Framework\MockObject\MockObject|\MercadoPago\Net\HttpRequest
-    {
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\MercadoPago\Net\HttpRequest $mockHttpRequest */
-        $mockHttpRequest = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)->getMock();
-
-        $responseJson = file_get_contents(__DIR__ . $filepath);
-        $mockHttpRequest->method('execute')->willReturn($responseJson);
-        $mockHttpRequest->method('getInfo')->willReturn($status_code);
-        return $mockHttpRequest;
     }
 }
