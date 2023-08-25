@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\Resources\Payment;
+namespace MercadoPago\Resources\Common;
 
 /** Phone class. */
 class Phone

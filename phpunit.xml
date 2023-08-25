@@ -9,6 +9,7 @@
       <exclude>./tests/MercadoPago/Client/Payment/PaymentClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/CardToken/CardTokenClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/PaymentMethod/PaymentMethodClientITTest.php</exclude>
+      <exclude>./tests/MercadoPago/Client/Preference/PreferenceClientITTest.php</exclude>
     </testsuite>
   </testsuites>
 </phpunit>
