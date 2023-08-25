@@ -4,12 +4,12 @@ namespace MercadoPago\Client\Preference;
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
-use PHPUnit\Framework\TestCase;
+use MercadoPago\Client\Base\BaseClient;
 
 /**
- * PreferenceClient unit tests.
+ * Preference Client unit tests.
  */
-final class PreferenceClientUnitTest extends TestCase
+final class PreferenceClientUnitTest extends BaseClient
 {
     public function testCreateSuccess(): void
     {
@@ -130,16 +130,5 @@ final class PreferenceClientUnitTest extends TestCase
           "notification_url" => "https://www.test.com"
         ];
         return $request;
-    }
-
-    private function mockHttpRequest(string $filepath, int $status_code): \PHPUnit\Framework\MockObject\MockObject|\MercadoPago\Net\HttpRequest
-    {
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\MercadoPago\Net\HttpRequest $mockHttpRequest */
-        $mockHttpRequest = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)->getMock();
-
-        $responseJson = file_get_contents(__DIR__ . $filepath);
-        $mockHttpRequest->method('execute')->willReturn($responseJson);
-        $mockHttpRequest->method('getInfo')->willReturn($status_code);
-        return $mockHttpRequest;
     }
 }
