@@ -5,7 +5,7 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** Card class. */
+/** Card Token class. */
 class CardToken extends MPResource
 {
     /** Class mapper. */
