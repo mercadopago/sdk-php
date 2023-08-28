@@ -14,10 +14,10 @@ final class CustomerCardClientUnitTest extends BaseClient
     public function testCreateSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Customer/customer_card_base.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 201);
+        $mock_http_request = $this->mockHttpRequest($filepath, 201);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new CustomerCardClient();
         $customer_id = "98765432-nfd98efh6u";
@@ -33,10 +33,10 @@ final class CustomerCardClientUnitTest extends BaseClient
     public function testGetSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Customer/customer_card_base.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 201);
+        $mock_http_request = $this->mockHttpRequest($filepath, 201);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new CustomerCardClient();
         $customer_id = "98765432-nfd98efh6u";
@@ -53,10 +53,10 @@ final class CustomerCardClientUnitTest extends BaseClient
     public function testUpdateSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Customer/customer_card_base.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 201);
+        $mock_http_request = $this->mockHttpRequest($filepath, 201);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new CustomerCardClient();
         $customer_id = "98765432-nfd98efh6u";
@@ -73,10 +73,10 @@ final class CustomerCardClientUnitTest extends BaseClient
     public function testDeleteSuccess(): void
     {
         $filepath = '../../../Resources/Mocks/Response/Customer/customer_card_base.json';
-        $mockHttpRequest = $this->mockHttpRequest($filepath, 201);
+        $mock_http_request = $this->mockHttpRequest($filepath, 201);
 
-        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
-        MercadoPagoConfig::setHttpClient($httpClient);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new CustomerCardClient();
         $customer_id = "98765432-nfd98efh6u";
