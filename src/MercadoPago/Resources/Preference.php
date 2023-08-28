@@ -29,6 +29,9 @@ class Preference extends MPResource
     /** URLs to return to the sellers website. */
     public array|object|null $back_urls;
 
+    /** URLs to redirect to the sellers website. */
+    public array|object|null $redirect_urls;
+
     /** Shipments information. */
     public array|object|null $shipments;
 
@@ -106,11 +109,27 @@ class Preference extends MPResource
     /** Date of creation. */
     public ?string $date_created;
 
+    /** Coupon code. */
+    public ?string $coupon_code;
+
+    /** Coupon labels. */
+    public ?array $coupon_labels;
+
+    /** internal metadata. */
+    public ?array $internal_metadata;
+
+    /** Site ID. */
+    public ?string $site_id;
+
+    /** Product ID. */
+    public ?string $product_id;
+
     public $map = [
         "items" => "MercadoPago\Resources\Preference\Item",
         "payer" => "MercadoPago\Resources\Preference\Payer",
         "payment_methods" => "MercadoPago\Resources\Preference\PaymentMethods",
         "back_urls" => "MercadoPago\Resources\Preference\BackUrls",
+        "redirect_urls" => "MercadoPago\Resources\Preference\RedirectUrls",
         "shipments" => "MercadoPago\Resources\Preference\Shipments",
         "differential_pricing" => "MercadoPago\Resources\Preference\DifferentialPricing",
         "taxes" => "MercadoPago\Resources\Preference\Tax",

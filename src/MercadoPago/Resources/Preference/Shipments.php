@@ -20,7 +20,7 @@ class Shipments
     public ?string $dimensions;
 
     /** Select default shipping method in checkout (mode:me2 only). */
-    public ?string $default_shipping_method;
+    public ?int $default_shipping_method;
 
     /** Offer a shipping method as free shipping (mode:me2 only). */
     public ?array $free_methods;

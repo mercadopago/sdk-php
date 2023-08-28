@@ -14,10 +14,10 @@ class PaymentMethods
     public ?string $default_payment_method_id;
 
     /** URL to return when the payment is pending. */
-    public ?string $installments;
+    public ?int $installments;
 
     /** URL to return when the payment fail. */
-    public ?string $default_installments;
+    public ?int $default_installments;
 
     /** Payment methods not allowed in payment process (except account_money). */
     public ?array $excluded_payment_methods;
