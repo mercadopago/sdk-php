@@ -11,6 +11,8 @@
       <exclude>./tests/MercadoPago/Client/CardToken/CardTokenClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/PaymentMethod/PaymentMethodClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/Preference/PreferenceClientITTest.php</exclude>
+      <exclude>./tests/MercadoPago/Client/Customer/CustomerClientITTest.php</exclude>
+      <exclude>./tests/MercadoPago/Client/Customer/CustomerCardClientITTest.php</exclude>
     </testsuite>
   </testsuites>
 </phpunit>
