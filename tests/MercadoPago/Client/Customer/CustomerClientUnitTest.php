@@ -45,8 +45,6 @@ final class CustomerClientUnitTest extends BaseClient
         $this->assertEquals("02675031", $customer->address->zip_code);
         $this->assertEquals("Av. das Nações Unidas", $customer->address->street_name);
         $this->assertEquals(3000, $customer->address->street_number);
-
-        //$this->assertCount(1, $customer->addresses);
     }
 
     public function testCreateByEmailSuccess(): void
