@@ -35,12 +35,20 @@ final class PreApprovalClientUnitTest extends BaseClient
         $this->assertEquals("2022-01-10T10:10:10.000-00:00", $preapproval->date_created);
         $this->assertEquals("2022-01-10T10:10:10.000-00:00", $preapproval->last_modified);
         $this->assertEquals("https://www.mercadopago.com.br/subscriptions/checkout?preapproval_id=2c9380847e9b451c017ea1bd70ba0219", $preapproval->init_point);
+        $this->assertEquals("2c9380848a630a69018a66713a68020c", $preapproval->preapproval_plan_id);
         $this->assertEquals(1, $preapproval->auto_recurring->frequency);
         $this->assertEquals("months", $preapproval->auto_recurring->frequency_type);
         $this->assertEquals(10, $preapproval->auto_recurring->transaction_amount);
         $this->assertEquals("BRL", $preapproval->auto_recurring->currency_id);
         $this->assertEquals("2022-01-10T10:10:10.000-00:00", $preapproval->auto_recurring->start_date);
         $this->assertEquals("2023-01-10T10:10:10.000-00:00", $preapproval->auto_recurring->end_date);
+        $this->assertFalse($preapproval->auto_recurring->billing_day_proportional);
+        $this->assertFalse($preapproval->auto_recurring->has_billing_day);
+        $this->assertEquals(11, $preapproval->summarized->quotas);
+        $this->assertEquals(11, $preapproval->summarized->pending_charge_quantity);
+        $this->assertEquals(1357.95, $preapproval->summarized->pending_charge_amount);
+        $this->assertEquals("9008789976", $preapproval->card_id);
+
     }
 
     public function testGetSuccess(): void

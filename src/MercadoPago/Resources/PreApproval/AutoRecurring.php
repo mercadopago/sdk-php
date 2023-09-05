@@ -23,6 +23,12 @@ class AutoRecurring
     /** Recurring end date. */
     public ?string $end_date;
 
+    /** Indicates whether billing is proportional. */
+    public ?bool $billing_day_proportional;
+
+    /** Indicates whether there is a specific billing day. */
+    public ?bool $has_billing_day;
+
     /** Free trial. */
     public $free_trial;
 }
