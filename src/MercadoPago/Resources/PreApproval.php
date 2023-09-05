@@ -32,14 +32,11 @@ class PreApproval extends MPResource
     /** Preapproval status. */
     public ?string $status;
 
-    /** Preapproval title. */
+    /** Reason for the subscription. */
     public ?string $reason;
 
     /** Preapproval reference value. */
     public ?string $external_reference;
-
-    /** Date of the next payment debit. */
-    public ?string $next_payment_date;
 
     /** Creation date. */
     public ?string $date_created;
@@ -47,26 +44,33 @@ class PreApproval extends MPResource
     /** Last modified date. */
     public ?string $last_modified;
 
-    /** Preapproval checkout link. */
+    /** The subscription's starting point. */
     public ?string $init_point;
 
-    /** Preapproval sandbox checkout link. */
-    public ?string $sandbox_init_point;
+    /** The pre-approval plan ID. */
+    public ?string $preapproval_plan_id;
 
-    /** Payment method ID. */
-    public ?string $payment_method_id;
-
-    /** Recurring data. */
+    /** The details of auto-recurring. */
     public array|object|null $auto_recurring;
 
-    /** Version. */
-    public ?int $version;
+    /** The summarized subscription details. */
+    public array|object|null $summarized;
+
+    /** The next payment date. */
+    public ?string $next_payment_date;
+
+    /** The payment method ID. */
+    public ?string $payment_method_id;
+
+    /** The credit card ID. */
+    public ?string $card_id;
 
     /** First invoice offset. */
     public $first_invoice_offset;
 
     public $map = [
         "auto_recurring" => "MercadoPago\Resources\PreApproval\AutoRecurring",
+        "summarized" => "MercadoPago\Resources\PreApproval\Summarized",
     ];
 
     /**
