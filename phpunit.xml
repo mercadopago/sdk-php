@@ -13,6 +13,7 @@
       <exclude>./tests/MercadoPago/Client/Preference/PreferenceClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/Customer/CustomerClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/Customer/CustomerCardClientITTest.php</exclude>
+      <exclude>./tests/MercadoPago/Client/IdentificationType/IdentificationTypeClientITTest.php</exclude>
     </testsuite>
   </testsuites>
 </phpunit>

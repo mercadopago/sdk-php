@@ -15,7 +15,7 @@ final class IdentificationTypeClientITTest extends TestCase
 {
     public static function setUpBeforeClass(): void
     {
-        MercadoPagoConfig::setAccessToken("APP_USR-3031066189562927-052411-539061621325973b58006736e8ec7489-831921084");
+        MercadoPagoConfig::setAccessToken(getenv("ACCESS_TOKEN"));
     }
 
     public function testListSuccess(): void
