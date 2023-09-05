@@ -49,10 +49,10 @@ final class PreApprovalClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new PreApprovalClient();
-        $created_preapproval = $client->create($this->createRequest());
+        $preapproval_id = "2c9380847e9b451c017ea1bd70ba0219";
         $request_options = new MPRequestOptions();
         $request_options->setAccessToken("invalid_access_token");
-        $client->get($created_preapproval->id, $request_options);
+        $client->get($preapproval_id, $request_options);
     }
 
     public function testUpdateSuccess(): void
@@ -67,10 +67,10 @@ final class PreApprovalClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new PreApprovalClient();
-        $created_preapproval = $client->create($this->createRequest());
+        $preapproval_id = "2c9380847e9b451c017ea1bd70ba0219";
         $request_options = new MPRequestOptions();
         $request_options->setAccessToken("invalid_access_token");
-        $client->update($created_preapproval->id, $this->updateRequest(), $request_options);
+        $client->update($preapproval_id, $this->updateRequest(), $request_options);
     }
 
     public function testSearchSuccess(): void
@@ -92,8 +92,8 @@ final class PreApprovalClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new PreApprovalClient();
-        $created_preapproval = $client->create($this->createRequest());
-        $search_request = new MPSearchRequest(1, 0, ["id" => $created_preapproval->id]);
+        $preapproval_id = "2c9380847e9b451c017ea1bd70ba0219";
+        $search_request = new MPSearchRequest(1, 0, ["id" => $preapproval_id]);
         $request_options = new MPRequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->search($search_request, $request_options);
