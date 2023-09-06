@@ -30,7 +30,7 @@ guidelines will be disregarded and told to make the required modifications to do
 ## Request For Change / Feature Request
 
 Generally speaking an RFC is needed when you want to add a new feature or change an existing one in an incompatible way
-that might result in a major version bump to the toolkit.
+that might result in a major version bump to the SDK.
 
 Though it seems a little bureaucratic, the process is in place in order to avoid frustration of a potential contributor
 by making the discussions take place before any code is written. Once the design and direction is fully agreed then the
@@ -68,13 +68,12 @@ push changes to their personal fork and create pull requests to bring those chan
 
 Your basic steps to get going:
 
-* Fork the corresponding toolkit repository and create a branch from master for the issue you are working on.
+* Fork the corresponding SDK repository and create a branch from master for the issue you are working on.
 * Commit as you go following our git conventions.
-* Include tests that cover all non-trivial code. The existing tests should provide a template on how to test the toolkit
-  correctly.
+* Include tests that cover all non-trivial code. The existing tests should provide a template on how to test the SDK correctly.
 * Make sure all test passes.
 * All code changes are expected to comply with the formatting style.
-* Push your commits to GitHub and create a pull request against the corresponding toolkit component master branch.
+* Push your commits to GitHub and create a pull request against the corresponding SDK component master branch.
 
 If taking too much time to deliver code, **always** [rebase](https://git-scm.com/docs/git-rebase) towards `master` before
 asking for a review, and avoid reverse merge commits.

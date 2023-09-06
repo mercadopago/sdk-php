@@ -64,8 +64,7 @@ In particular, you should always comment any decision that:
 * Takes a significant amount of time to produce. A good rule of thumb here is that if you spent more than 1 hour
   thinking on how to produce a fragment of code that took 2 minutes of wrist time to write you should document your
   thinking to aid reader and allow for validation.
-* Need to preserve properties of the implementation. This is the case of performance sensitive portions of the codebase,
-  goroutines synchronization, implementations of security primitives, congestion control algorithms, etc.
+* Need to preserve properties of the implementation. This is the case of performance sensitive portions of the codebase, implementations of security primitives, congestion control algorithms, etc.
 
 As a general rule of what not to comment you should avoid:
 
