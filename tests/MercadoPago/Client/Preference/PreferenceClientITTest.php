@@ -106,7 +106,7 @@ final class PreferenceClientITTest extends TestCase
     {
         $request = [
           "external_reference" => "",
-          "items"=> array(
+          "items" => array(
             array(
               "id" => "4567",
               "title" => "Test",

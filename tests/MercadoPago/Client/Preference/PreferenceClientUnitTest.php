@@ -98,7 +98,7 @@ final class PreferenceClientUnitTest extends BaseClient
     {
         $request = [
           "external_reference" => "",
-          "items"=> array(
+          "items" => array(
             array(
               "id" => "4567",
               "title" => "Test",
