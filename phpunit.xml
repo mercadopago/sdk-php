@@ -12,6 +12,7 @@
       <exclude>./tests/MercadoPago/Client/PaymentMethod/PaymentMethodClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/Preference/PreferenceClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/PreApproval/PreApprovalClientITTest.php</exclude>
+      <exclude>./tests/MercadoPago/Client/PreApprovalPlan/PreApprovalPlanClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/Customer/CustomerClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/Customer/CustomerCardClientITTest.php</exclude>
     </testsuite>
