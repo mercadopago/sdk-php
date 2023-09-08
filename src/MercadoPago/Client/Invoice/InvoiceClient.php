@@ -13,11 +13,11 @@ use MercadoPago\Resources\InvoiceSearch;
 use MercadoPago\Serialization\Serializer;
 
 /** Client responsible for performing invoice actions. */
-class InvoiceClient extends MercadoPagoClient
+final class InvoiceClient extends MercadoPagoClient
 {
-    private static $URL_WITH_ID = "/authorized_payments/%s";
+    private const URL_WITH_ID = "/authorized_payments/%s";
 
-    private static $URL_SEARCH = "/authorized_payments/search";
+    private const URL_SEARCH = "/authorized_payments/search";
 
     /** Default constructor. Uses the default http client used by the SDK. */
     public function __construct()
@@ -34,7 +34,7 @@ class InvoiceClient extends MercadoPagoClient
     public function get(int $id, ?MPRequestOptions $request_options = null): Invoice
     {
         try {
-            $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
+            $response = parent::send(sprintf(self::URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
             $result = Serializer::deserializeFromJson(Invoice::class, $response->getContent());
             $result->setResponse($response);
             return $result;
@@ -53,7 +53,7 @@ class InvoiceClient extends MercadoPagoClient
     {
         try {
             $query_params = isset($request) ? $request->getParameters() : null;
-            $response = parent::send(self::$URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
+            $response = parent::send(self::URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
             $result = Serializer::deserializeFromJson(InvoiceSearch::class, $response->getContent());
             $result->setResponse($response);
             return $result;
