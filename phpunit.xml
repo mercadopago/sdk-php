@@ -15,6 +15,7 @@
       <exclude>./tests/MercadoPago/Client/PreApprovalPlan/PreApprovalPlanClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/Customer/CustomerClientITTest.php</exclude>
       <exclude>./tests/MercadoPago/Client/Customer/CustomerCardClientITTest.php</exclude>
+      <exclude>./tests/MercadoPago/Client/User/UserClientITTest.php</exclude>
     </testsuite>
   </testsuites>
 </phpunit>
