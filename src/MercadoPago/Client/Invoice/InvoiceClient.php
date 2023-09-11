@@ -4,7 +4,6 @@ namespace MercadoPago\Client\Invoice;
 
 use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\Core\MPRequestOptions;
-use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPSearchRequest;
