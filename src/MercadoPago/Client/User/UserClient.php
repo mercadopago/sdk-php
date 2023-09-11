@@ -25,16 +25,14 @@ final class UserClient extends MercadoPagoClient
      * Method responsible for getting user information.
      * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\User user information.
+     * @throws \MercadoPago\Exceptions\MPApiException if the API responds with an error.
+     * @throws \Exception if the request fails.
      */
     public function get(?MPRequestOptions $request_options = null): User
     {
-        try {
-            $response = parent::send(sprintf(self::URL), HttpMethod::GET, null, null, $request_options);
-            $result = Serializer::deserializeFromJson(User::class, $response->getContent());
-            $result->setResponse($response);
-            return $result;
-        } catch (MPApiException | \Exception $e) {
-            throw $e;
-        }
+        $response = parent::send(sprintf(self::URL), HttpMethod::GET, null, null, $request_options);
+        $result = Serializer::deserializeFromJson(User::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
     }
 }
