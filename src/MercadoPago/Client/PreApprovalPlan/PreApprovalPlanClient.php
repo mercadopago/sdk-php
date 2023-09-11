@@ -4,7 +4,6 @@ namespace MercadoPago\Client\PreApprovalPlan;
 
 use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\Core\MPRequestOptions;
-use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPSearchRequest;
@@ -13,7 +12,7 @@ use MercadoPago\Resources\PreApprovalPlanSearch;
 use MercadoPago\Serialization\Serializer;
 
 /** Client responsible for performing subscription plan. */
-class PreApprovalPlanClient extends MercadoPagoClient
+final class PreApprovalPlanClient extends MercadoPagoClient
 {
     private static $URL = "/preapproval_plan";
 
@@ -32,17 +31,15 @@ class PreApprovalPlanClient extends MercadoPagoClient
      * @param array $request subscription plan data.
      * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\PreApprovalPlan subscription plan created.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
      */
     public function create(array $request, ?MPRequestOptions $request_options = null): PreApprovalPlan
     {
-        try {
-            $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), null, $request_options);
-            $result = Serializer::deserializeFromJson(PreApprovalPlan::class, $response->getContent());
-            $result->setResponse($response);
-            return $result;
-        } catch (MPApiException | \Exception $e) {
-            throw $e;
-        }
+        $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), null, $request_options);
+        $result = Serializer::deserializeFromJson(PreApprovalPlan::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
     }
 
     /**
@@ -50,17 +47,15 @@ class PreApprovalPlanClient extends MercadoPagoClient
      * @param string $id pre approval plan id.
      * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\PreApprovalPlan pre approval plan found.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
      */
     public function get(string $id, ?MPRequestOptions $request_options = null): PreApprovalPlan
     {
-        try {
-            $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
-            $result = Serializer::deserializeFromJson(PreApprovalPlan::class, $response->getContent());
-            $result->setResponse($response);
-            return $result;
-        } catch (MPApiException | \Exception $e) {
-            throw $e;
-        }
+        $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
+        $result = Serializer::deserializeFromJson(PreApprovalPlan::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
     }
 
     /**
@@ -69,17 +64,15 @@ class PreApprovalPlanClient extends MercadoPagoClient
      * @param array $request pre approval plan data.
      * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\PreApprovalPlan pre approval plan canceled.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
      */
     public function update(string $id, array $request, ?MPRequestOptions $request_options = null): PreApprovalPlan
     {
-        try {
-            $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::PUT, json_encode($request), null, $request_options);
-            $result = Serializer::deserializeFromJson(PreApprovalPlan::class, $response->getContent());
-            $result->setResponse($response);
-            return $result;
-        } catch (MPApiException | \Exception $e) {
-            throw $e;
-        }
+        $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::PUT, json_encode($request), null, $request_options);
+        $result = Serializer::deserializeFromJson(PreApprovalPlan::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
     }
 
     /**
@@ -87,17 +80,15 @@ class PreApprovalPlanClient extends MercadoPagoClient
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
      * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\PreApprovalPlanSearch search results.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
      */
     public function search(MPSearchRequest $request, ?MPRequestOptions $request_options = null): PreApprovalPlanSearch
     {
-        try {
-            $query_params = isset($request) ? $request->getParameters() : null;
-            $response = parent::send(self::$URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
-            $result = Serializer::deserializeFromJson(PreApprovalPlanSearch::class, $response->getContent());
-            $result->setResponse($response);
-            return $result;
-        } catch (MPApiException | \Exception $e) {
-            throw $e;
-        }
+        $query_params = isset($request) ? $request->getParameters() : null;
+        $response = parent::send(self::$URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
+        $result = Serializer::deserializeFromJson(PreApprovalPlanSearch::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
     }
 }
