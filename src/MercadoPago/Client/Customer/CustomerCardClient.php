@@ -4,7 +4,6 @@ namespace MercadoPago\Client\Customer;
 
 use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\Core\MPRequestOptions;
-use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Resources\CustomerCard;
@@ -12,7 +11,7 @@ use MercadoPago\Resources\CustomerCardResult;
 use MercadoPago\Serialization\Serializer;
 
 /** Client responsible for performing customer card actions. */
-class CustomerCardClient extends MercadoPagoClient
+final class CustomerCardClient extends MercadoPagoClient
 {
     private static $URL_CUSTOMER_ID = "/v1/customers/%s/cards";
 
@@ -30,17 +29,15 @@ class CustomerCardClient extends MercadoPagoClient
      * @param array $request customer card data.
      * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\CustomerCard save.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
      */
     public function create(string $customer_id, array $request, ?MPRequestOptions $request_options = null): CustomerCard
     {
-        try {
-            $response = parent::send(sprintf(self::$URL_CUSTOMER_ID, $customer_id), HttpMethod::POST, json_encode($request), null, $request_options);
-            $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
-            $result->setResponse($response);
-            return $result;
-        } catch (MPApiException | \Exception $e) {
-            throw $e;
-        }
+        $response = parent::send(sprintf(self::$URL_CUSTOMER_ID, $customer_id), HttpMethod::POST, json_encode($request), null, $request_options);
+        $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
     }
 
     /**
@@ -49,19 +46,16 @@ class CustomerCardClient extends MercadoPagoClient
      * @param string $card_id customer card id.
      * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\CustomerCard found.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
      */
     public function get(string $customer_id, string $card_id, ?MPRequestOptions $request_options = null): CustomerCard
     {
-        try {
-            $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::GET, null, null, $request_options);
-            $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
-            $result->setResponse($response);
-            return $result;
-        } catch (MPApiException | \Exception $e) {
-            throw $e;
-        }
+        $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::GET, null, null, $request_options);
+        $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
     }
-
     /**
      * Method responsible for update Customer Card.
      * @param string $customer_id customer id.
@@ -69,54 +63,46 @@ class CustomerCardClient extends MercadoPagoClient
      * @param array $request customer card data.
      * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\CustomerCard update.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
      */
     public function update(string $customer_id, string $card_id, array $request, ?MPRequestOptions $request_options = null): CustomerCard
     {
-        try {
-            $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::PUT, json_encode($request), null, $request_options);
-            $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
-            $result->setResponse($response);
-            return $result;
-        } catch (MPApiException | \Exception $e) {
-            throw $e;
-        }
+        $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::PUT, json_encode($request), null, $request_options);
+        $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
     }
 
-    /**
-     * Method responsible for Customer Card deletion.
+    /**     * Method responsible for Customer Card deletion.
      * @param string $customer_id customer id.
      * @param string $card_id card id.
      * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\CustomerCard found.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
      */
     public function delete(string $customer_id, string $card_id, ?MPRequestOptions $request_options = null): CustomerCard
     {
-        try {
-            $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::DELETE, null, null, $request_options);
-            $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
-            $result->setResponse($response);
-            return $result;
-        } catch (MPApiException | \Exception $e) {
-            throw $e;
-        }
+        $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::DELETE, null, null, $request_options);
+        $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
     }
 
     /**
      * Method responsible for getting list Customer Card.
-     * @param string $customer_id customer id.
-     * @param mixed $request_options request options to be sent.
+     * @param string $customer_id customer id.     * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\CustomerCardResult found.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
      */
     public function list(string $customer_id, ?MPRequestOptions $request_options = null): CustomerCardResult
     {
-        try {
-            $response = parent::send(sprintf(self::$URL_CUSTOMER_ID, $customer_id), HttpMethod::GET, null, null, $request_options);
-            $result = new CustomerCardResult();
-            $result-> data = $response -> getContent();
-            $result->setResponse($response);
-            return $result;
-        } catch (MPApiException | \Exception $e) {
-            throw $e;
-        }
+        $response = parent::send(sprintf(self::$URL_CUSTOMER_ID, $customer_id), HttpMethod::GET, null, null, $request_options);
+        $result = new CustomerCardResult();
+        $result->data = $response->getContent();
+        $result->setResponse($response);
+        return $result;
     }
 }
