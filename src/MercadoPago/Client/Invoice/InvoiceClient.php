@@ -41,7 +41,7 @@ final class InvoiceClient extends MercadoPagoClient
     }
 
     /**
-     *  Method responsible for search invoices.
+     * Method responsible for search invoices.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
      * @param mixed $request_options request options to be sent.
      * @return \MercadoPago\Resources\InvoiceSearch search results.
