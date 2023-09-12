@@ -1,10 +1,11 @@
 <?php
 
-namespace MercadoPago\Client\PreApproval;
+namespace MercadoPago\Tests\Client\PreApproval;
 
+use MercadoPago\Client\PreApproval\PreApprovalClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
-use MercadoPago\Client\Base\BaseClient;
+use MercadoPago\Tests\Client\Base\BaseClient;
 
 /**
  * PreApproval Client unit tests.

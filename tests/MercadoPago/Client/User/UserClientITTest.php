@@ -1,7 +1,8 @@
 <?php
 
-namespace MercadoPago\Client\User;
+namespace MercadoPago\Tests\Client\User;
 
+use MercadoPago\Client\User\UserClient;
 use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;

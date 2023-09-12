@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\Client\PreApproval;
+namespace MercadoPago\Tests\Client\PreApproval;
 
 use MercadoPago\Client\PreApproval\PreApprovalClient;
 use MercadoPago\Core\MPRequestOptions;

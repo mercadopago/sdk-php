@@ -1,10 +1,11 @@
 <?php
 
-namespace MercadoPago\Client\Preference;
+namespace MercadoPago\Tests\Client\Preference;
 
+use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
-use MercadoPago\Client\Base\BaseClient;
+use MercadoPago\Tests\Client\Base\BaseClient;
 
 /**
  * Preference Client unit tests.

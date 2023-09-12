@@ -1,7 +1,8 @@
 <?php
 
-namespace MercadoPago\Client\PaymentMethod;
+namespace MercadoPago\Tests\Client\PaymentMethod;
 
+use MercadoPago\Client\PaymentMethod\PaymentMethodClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
 use PHPUnit\Framework\TestCase;

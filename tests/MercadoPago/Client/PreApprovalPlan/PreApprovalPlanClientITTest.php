@@ -1,7 +1,8 @@
 <?php
 
-namespace MercadoPago\Client\PreApprovalPlan;
+namespace MercadoPago\Tests\Client\PreApprovalPlan;
 
+use MercadoPago\Client\PreApprovalPlan\PreApprovalPlanClient;
 use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;

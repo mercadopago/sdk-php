@@ -1,10 +1,11 @@
 <?php
 
-namespace MercadoPago\Client\User;
+namespace MercadoPago\Tests\Client\User;
 
+use MercadoPago\Client\User\UserClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
-use MercadoPago\Client\Base\BaseClient;
+use MercadoPago\Tests\Client\Base\BaseClient;
 
 /**
  * UserClientUnitTest Client unit tests.

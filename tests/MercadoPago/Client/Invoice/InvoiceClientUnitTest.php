@@ -1,10 +1,11 @@
 <?php
 
-namespace MercadoPago\Client\Invoice;
+namespace MercadoPago\Tests\Client\Invoice;
 
+use MercadoPago\Client\Invoice\InvoiceClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
-use MercadoPago\Client\Base\BaseClient;
+use MercadoPago\Tests\Client\Base\BaseClient;
 
 /**
  * InvoiceClient unit tests.

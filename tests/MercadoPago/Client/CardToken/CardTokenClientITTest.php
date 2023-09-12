@@ -1,7 +1,8 @@
 <?php
 
-namespace MercadoPago\Client\CardToken;
+namespace MercadoPago\Tests\Client\CardToken;
 
+use MercadoPago\Client\CardToken\CardTokenClient;
 use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;

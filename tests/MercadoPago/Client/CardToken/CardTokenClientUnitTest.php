@@ -1,15 +1,16 @@
 <?php
 
-namespace MercadoPago\Client\CardToken;
+namespace MercadoPago\Tests\Client\CardToken;
 
+use MercadoPago\Client\CardToken\CardTokenClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
-use PHPUnit\Framework\TestCase;
+use MercadoPago\Tests\Client\Base\BaseClient;
 
 /**
  * CardTokenClient unit tests.
  */
-final class CardTokenClientUnitTest extends TestCase
+final class CardTokenClientUnitTest extends BaseClient
 {
     public function testCreateSuccess(): void
     {
@@ -45,16 +46,6 @@ final class CardTokenClientUnitTest extends TestCase
         $this->assertEquals($id, $card_token->id);
     }
 
-    private function mockHttpRequest(string $file_path, int $status_code): \PHPUnit\Framework\MockObject\MockObject|\MercadoPago\Net\HttpRequest
-    {
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\MercadoPago\Net\HttpRequest $mock_http_request */
-        $mock_http_request = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)->getMock();
-
-        $response_json = file_get_contents(__DIR__ . $file_path);
-        $mock_http_request->method('execute')->willReturn($response_json);
-        $mock_http_request->method('getInfo')->willReturn($status_code);
-        return $mock_http_request;
-    }
     private function createRequest(): array
     {
         $request = [

@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\Client\Preference;
+namespace MercadoPago\Tests\Client\Preference;
 
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\Core\MPRequestOptions;
