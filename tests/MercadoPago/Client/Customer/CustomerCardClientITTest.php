@@ -1,12 +1,13 @@
 <?php
 
-namespace MercadoPago\Client\Customer;
+namespace MercadoPago\Tests\Client\Customer;
 
 use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
-use MercadoPago\Net\MPSearchRequest;
 use MercadoPago\Client\CardToken\CardTokenClient;
+use MercadoPago\Client\Customer\CustomerCardClient;
+use MercadoPago\Client\Customer\CustomerClient;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -177,14 +178,6 @@ final class CustomerCardClientITTest extends TestCase
     {
         $request = [
             "email" => $email
-        ];
-        return $request;
-    }
-
-    private function updateRequest(string $description_customer): array
-    {
-        $request = [
-            "description" => $description_customer
         ];
         return $request;
     }

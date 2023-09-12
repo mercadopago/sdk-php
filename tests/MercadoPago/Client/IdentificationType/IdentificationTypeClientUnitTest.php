@@ -1,10 +1,11 @@
 <?php
 
-namespace MercadoPago\Client\IdentificationType;
+namespace MercadoPago\Tests\Client\IdentificationType;
 
+use MercadoPago\Client\IdentificationType\IdentificationTypeClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
-use MercadoPago\Client\Base\BaseClient;
+use MercadoPago\Tests\Client\Base\BaseClient;
 
 /**
  * Identification Type Client unit tests.

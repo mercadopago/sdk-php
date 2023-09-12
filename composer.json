@@ -6,10 +6,12 @@
     "homepage": "https://github.com/mercadopago/sdk-php",
     "autoload": {
         "psr-4": {
-            "MercadoPago\\": [
-                "src/MercadoPago",
-                "tests/MercadoPago"
-            ]
+            "MercadoPago\\": "src/MercadoPago"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MercadoPago\\Tests\\": "tests/MercadoPago/"
         }
     },
     "require": {

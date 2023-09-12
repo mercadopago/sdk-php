@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\Client\Base;
+namespace MercadoPago\Tests\Client\Base;
 
 use PHPUnit\Framework\TestCase;
 

@@ -1,10 +1,11 @@
 <?php
 
-namespace MercadoPago\Client\Payment;
+namespace MercadoPago\Tests\Client\Payment;
 
+use MercadoPago\Client\Payment\PaymentRefundClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
-use MercadoPago\Client\Base\BaseClient;
+use MercadoPago\Tests\Client\Base\BaseClient;
 
 /**
  * Payment Refund Client unit tests.
