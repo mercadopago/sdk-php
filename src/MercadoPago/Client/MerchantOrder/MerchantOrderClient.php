@@ -14,11 +14,11 @@ use MercadoPago\Serialization\Serializer;
 /** Client responsible for performing merchant order actions. */
 final class MerchantOrderClient extends MercadoPagoClient
 {
-    private static $URL = "/merchant_orders";
+    private const URL = "/merchant_orders";
 
-    private static $URL_WITH_ID = "/merchant_orders/%s";
+    private const URL_WITH_ID = "/merchant_orders/%s";
 
-    private static $URL_SEARCH = "/merchant_orders/search";
+    private const URL_SEARCH = "/merchant_orders/search";
 
     /** Default constructor. Uses the default http client used by the SDK. */
     public function __construct()
@@ -36,7 +36,7 @@ final class MerchantOrderClient extends MercadoPagoClient
      */
     public function create(array $request, ?MPRequestOptions $request_options = null): MerchantOrder
     {
-        $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), null, $request_options);
+        $response = parent::send(self::URL, HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(MerchantOrder::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -52,7 +52,7 @@ final class MerchantOrderClient extends MercadoPagoClient
      */
     public function get(int $id, ?MPRequestOptions $request_options = null): MerchantOrder
     {
-        $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_ID, strval($id)), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(MerchantOrder::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -69,7 +69,7 @@ final class MerchantOrderClient extends MercadoPagoClient
      */
     public function update(int $id, array $request, ?MPRequestOptions $request_options = null): MerchantOrder
     {
-        $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::PUT, json_encode($request), null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_ID, strval($id)), HttpMethod::PUT, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(MerchantOrder::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -86,7 +86,7 @@ final class MerchantOrderClient extends MercadoPagoClient
     public function search(MPSearchRequest $request, ?MPRequestOptions $request_options = null): MerchantOrderSearch
     {
         $query_params = isset($request) ? $request->getParameters() : null;
-        $response = parent::send(self::$URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
+        $response = parent::send(self::URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
         $result = Serializer::deserializeFromJson(MerchantOrderSearch::class, $response->getContent());
         $result->setResponse($response);
         return $result;
