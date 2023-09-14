@@ -1,0 +1,16 @@
+{
+    "devices": [
+        {
+            "id": "GERTEC_MP35P__8701012051267123",
+            "pos_id": 48094361,
+            "store_id": "47685573",
+            "external_pos_id": "",
+            "operating_mode": "PDV"
+        }
+    ],
+    "paging": {
+        "total": 1,
+        "limit": 50,
+        "offset": 0
+    }
+}
