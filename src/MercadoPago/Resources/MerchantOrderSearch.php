@@ -4,7 +4,7 @@ namespace MercadoPago\Resources;
 
 use MercadoPago\Resources\Common\Search;
 
-/** PreferenceSearch class. */
-class PreferenceSearch extends Search
+/** Merchant Order Search class. */
+class MerchantOrderSearch extends Search
 {
 }
