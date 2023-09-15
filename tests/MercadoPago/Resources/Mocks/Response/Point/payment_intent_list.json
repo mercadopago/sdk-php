@@ -1,0 +1,24 @@
+{
+    "events": [
+        {
+            "payment_intent_id": "3be5a9a0-570b-4650-9ec8-ceb699259111",
+            "status": "CANCELED",
+            "created_on": "2023-09-13T18:22:30Z"
+        },
+        {
+            "payment_intent_id": "02150f68-01c5-46cd-906c-195960a17664",
+            "status": "ABANDONED",
+            "created_on": "2023-09-13T15:45:13Z"
+        },
+        {
+            "payment_intent_id": "08bebbe6-dfbf-48a7-be06-45c56343ec19",
+            "status": "CANCELED",
+            "created_on": "2023-09-12T20:53:49Z"
+        },
+        {
+            "payment_intent_id": "a8f71a94-37da-439c-afe8-ff1c7f7af2be",
+            "status": "CANCELED",
+            "created_on": "2023-09-12T20:39:33Z"
+        }
+    ]
+}
