@@ -4,6 +4,7 @@ namespace MercadoPago\Client;
 
 use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPHttpClient;
 use MercadoPago\Net\MPRequest;
 use MercadoPago\Net\MPResponse;
@@ -41,7 +42,7 @@ class MercadoPagoClient
         ?MPRequestOptions $request_options = null
     ): MPRequest {
         $path = $this->formatUrlWithQueryParams($path, $query_params);
-        return new MPRequest($path, $method, $payload, $this->addHeaders($request_options), $this->addConnectionTimeout($request_options));
+        return new MPRequest($path, $method, $payload, $this->addHeaders($method, $request_options), $this->addConnectionTimeout($request_options));
     }
 
     private function formatUrlWithQueryParams(string $url, ?array $query_params): string
@@ -58,11 +59,12 @@ class MercadoPagoClient
         return $url;
     }
 
-    private function addHeaders(?MPRequestOptions $request_options = null): array
+    private function addHeaders(string $method, ?MPRequestOptions $request_options = null): array
     {
         $headers = array();
         $headers = $this->addCustomHeaders($headers, $request_options);
-        $headers = $this->addDefaultHeaders($headers, $request_options);
+        $headers = $this->addDefaultHeaders($method, $headers, $request_options);
+        var_dump($headers);
         return $headers;
     }
 
@@ -74,7 +76,7 @@ class MercadoPagoClient
         return $headers;
     }
 
-    private function addDefaultHeaders(array $headers, ?MPRequestOptions $request_options = null): array
+    private function addDefaultHeaders(string $method, array $headers, ?MPRequestOptions $request_options = null): array
     {
         $default_headers = array(
             'Accept: application/json',
@@ -85,6 +87,10 @@ class MercadoPagoClient
             'X-Tracking-Id: platform:' . PHP_MAJOR_VERSION . '|' . PHP_VERSION . ',type:SDK' . MercadoPagoConfig::$CURRENT_VERSION . ',so;'
         );
 
+        if ($this->shouldAddIdempotencyKey($method)) {
+            array_push($default_headers, 'X-Idempotency-Key: ' . $this->getIdempotencyKey($request_options));
+        }
+
         return array_merge($headers, $default_headers);
     }
 
@@ -93,10 +99,55 @@ class MercadoPagoClient
         return $request_options?->getAccessToken() ?? MercadoPagoConfig::getAccessToken();
     }
 
+    private function shouldAddIdempotencyKey(string $method): bool
+    {
+        return $method === HttpMethod::POST || $method === HttpMethod::PUT || $method === HttpMethod::PATCH;
+    }
+
+    private function getIdempotencyKey(?MPRequestOptions $request_options = null): string
+    {
+        $key = "x-idempotency-key";
+        if (!is_null($request_options) && !is_null($request_options->getCustomHeaders())) {
+            $headers = $request_options->getCustomHeaders();
+            if (array_key_exists(strtolower($key), array_change_key_case($headers))) {
+                return $headers[strtolower($key)];
+            }
+        }
+        return $this->generateUUID();
+    }
+
     private function addConnectionTimeout(?MPRequestOptions $request_options = null): int
     {
         return ($request_options?->getConnectionTimeout() ?? 0) > 0
             ? $request_options->getConnectionTimeout()
             : MercadoPagoConfig::getConnectionTimeout();
+    }
+
+
+    private function generateUUID()
+    {
+        return sprintf(
+            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            // 32 bits for "time_low"
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+
+            // 16 bits for "time_mid"
+            mt_rand(0, 0xffff),
+
+            // 16 bits for "time_hi_and_version",
+            // four most significant bits holds version number 4
+            mt_rand(0, 0x0fff) | 0x4000,
+
+            // 16 bits, 8 bits for "clk_seq_hi_res",
+            // 8 bits for "clk_seq_low",
+            // two most significant bits holds zero and one for variant DCE1.1
+            mt_rand(0, 0x3fff) | 0x8000,
+
+            // 48 bits for "node"
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff)
+        );
     }
 }
