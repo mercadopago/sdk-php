@@ -64,7 +64,6 @@ class MercadoPagoClient
         $headers = array();
         $headers = $this->addCustomHeaders($headers, $request_options);
         $headers = $this->addDefaultHeaders($method, $headers, $request_options);
-        var_dump($headers);
         return $headers;
     }
 
