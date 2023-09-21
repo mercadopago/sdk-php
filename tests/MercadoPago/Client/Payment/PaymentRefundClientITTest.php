@@ -2,12 +2,12 @@
 
 namespace MercadoPago\Tests\Client\Payment;
 
-use MercadoPago\Core\MPRequestOptions;
-use MercadoPago\Exceptions\MPApiException;
-use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\CardToken\CardTokenClient;
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\Payment\PaymentClient;
 use MercadoPago\Client\Payment\PaymentRefundClient;
+use MercadoPago\Exceptions\MPApiException;
+use MercadoPago\MercadoPagoConfig;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -49,7 +49,7 @@ final class PaymentRefundClientITTest extends TestCase
         $payment = $payment_client->create($this->createPaymentRequest($card_token->id));
         $this->assertNotNull($payment->id);
 
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $refund_client = new PaymentRefundClient();
         $refund_client->refund($payment->id, 50, $request_options);
@@ -84,7 +84,7 @@ final class PaymentRefundClientITTest extends TestCase
         $payment = $payment_client->create($this->createPaymentRequest($card_token->id));
         $this->assertNotNull($payment->id);
 
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $refund_client = new PaymentRefundClient();
         $refund_client->refundTotal($payment->id, $request_options);
@@ -125,7 +125,7 @@ final class PaymentRefundClientITTest extends TestCase
         $refund = $refund_client->refundTotal($payment->id);
         $this->assertNotNull($refund->id);
 
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $refund_client->get($payment->id, $refund->id, $request_options);
     }
@@ -173,7 +173,7 @@ final class PaymentRefundClientITTest extends TestCase
         $refund_one = $refund_client->refund($payment->id, 20);
         $this->assertNotNull($refund_one->id);
 
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $refund_client->list($payment->id, $request_options);
     }
@@ -188,7 +188,7 @@ final class PaymentRefundClientITTest extends TestCase
             "payment_method_id" => "master",
             "token" => $token,
             "payer" => [
-              "email" => "test_user_24634097@testuser.com",
+                "email" => "test_user_24634097@testuser.com",
             ]
         ];
         return $request;
@@ -202,11 +202,11 @@ final class PaymentRefundClientITTest extends TestCase
             "expiration_month" => "12",
             "security_code" => "123",
             "cardholder" => [
-              "name" => "APRO",
-              "identification" => [
-                "type" => "CPF",
-                "number" => "19119119100",
-              ],
+                "name" => "APRO",
+                "identification" => [
+                    "type" => "CPF",
+                    "number" => "19119119100",
+                ],
             ]
         ];
         return $request;

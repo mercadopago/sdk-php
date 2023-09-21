@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Tests\Client\Customer;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\Customer\CustomerClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPSearchRequest;
@@ -44,7 +44,7 @@ final class CustomerClientITTest extends TestCase
         $id = rand(100000, 200000);
         $email = sprintf("test_user_sdk_%s@testuser.com", $id);
         $request = $this->createRequest($email);
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->create($request, $request_options);
     }
@@ -64,7 +64,7 @@ final class CustomerClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new CustomerClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->get("1469979538-52qKdADBYeloaX", $request_options);
     }
@@ -86,7 +86,7 @@ final class CustomerClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new CustomerClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->update("1469979538-52qKdADBYeloaX", $this->updateRequest(""), $request_options);
     }
@@ -112,7 +112,7 @@ final class CustomerClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new CustomerClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->search(null, $request_options);
     }

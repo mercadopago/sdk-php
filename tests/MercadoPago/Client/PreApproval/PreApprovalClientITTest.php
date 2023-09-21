@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Tests\Client\PreApproval;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\PreApproval\PreApprovalClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPSearchRequest;
@@ -31,7 +31,7 @@ final class PreApprovalClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new PreApprovalClient();
         $request = $this->createRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->create($request, $request_options);
     }
@@ -50,7 +50,7 @@ final class PreApprovalClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new PreApprovalClient();
         $preapproval_id = "2c9380847e9b451c017ea1bd70ba0219";
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->get($preapproval_id, $request_options);
     }
@@ -68,7 +68,7 @@ final class PreApprovalClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new PreApprovalClient();
         $preapproval_id = "2c9380847e9b451c017ea1bd70ba0219";
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->update($preapproval_id, $this->updateRequest(), $request_options);
     }
@@ -94,7 +94,7 @@ final class PreApprovalClientITTest extends TestCase
         $client = new PreApprovalClient();
         $preapproval_id = "2c9380847e9b451c017ea1bd70ba0219";
         $search_request = new MPSearchRequest(1, 0, ["id" => $preapproval_id]);
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->search($search_request, $request_options);
     }
@@ -102,16 +102,16 @@ final class PreApprovalClientITTest extends TestCase
     private function createRequest(): array
     {
         $request = [
-          "back_url" => "https://www.mercadopago.com.br",
-          "external_reference" => "23546246234",
-          "reason" => "Monthly subscription to premium package",
-          "auto_recurring" => array(
-            "frequency" => 1,
-            "frequency_type" => "months",
-            "transaction_amount" => 10,
-            "currency_id" => "BRL",
-          ),
-          "payer_email" => "test_user_28355466@testuser.com",
+            "back_url" => "https://www.mercadopago.com.br",
+            "external_reference" => "23546246234",
+            "reason" => "Monthly subscription to premium package",
+            "auto_recurring" => array(
+                "frequency" => 1,
+                "frequency_type" => "months",
+                "transaction_amount" => 10,
+                "currency_id" => "BRL",
+            ),
+            "payer_email" => "test_user_28355466@testuser.com",
         ];
         return $request;
     }
@@ -119,7 +119,7 @@ final class PreApprovalClientITTest extends TestCase
     private function updateRequest(): array
     {
         $request = [
-          "reason" => "Yoga classes.",
+            "reason" => "Yoga classes.",
         ];
         return $request;
     }

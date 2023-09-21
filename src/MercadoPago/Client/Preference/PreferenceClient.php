@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Client\Preference;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPSearchRequest;
@@ -34,7 +34,7 @@ final class PreferenceClient extends MercadoPagoClient
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function create(array $request, ?MPRequestOptions $request_options = null): Preference
+    public function create(array $request, ?RequestOptions $request_options = null): Preference
     {
         $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(Preference::class, $response->getContent());
@@ -50,7 +50,7 @@ final class PreferenceClient extends MercadoPagoClient
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function get(string $id, ?MPRequestOptions $request_options = null): Preference
+    public function get(string $id, ?RequestOptions $request_options = null): Preference
     {
         $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(Preference::class, $response->getContent());
@@ -67,7 +67,7 @@ final class PreferenceClient extends MercadoPagoClient
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function update(string $id, array $request, ?MPRequestOptions $request_options = null): Preference
+    public function update(string $id, array $request, ?RequestOptions $request_options = null): Preference
     {
         $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::PUT, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(Preference::class, $response->getContent());
@@ -83,7 +83,7 @@ final class PreferenceClient extends MercadoPagoClient
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function search(MPSearchRequest $request, ?MPRequestOptions $request_options = null): PreferenceSearch
+    public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): PreferenceSearch
     {
         $query_params = isset($request) ? $request->getParameters() : null;
         $response = parent::send(self::$URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);

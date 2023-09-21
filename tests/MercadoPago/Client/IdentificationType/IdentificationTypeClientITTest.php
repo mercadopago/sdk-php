@@ -2,10 +2,10 @@
 
 namespace MercadoPago\Tests\Client\Customer;
 
-use MercadoPago\Core\MPRequestOptions;
+use MercadoPago\Client\Common\RequestOptions;
+use MercadoPago\Client\IdentificationType\IdentificationTypeClient;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
-use MercadoPago\Client\IdentificationType\IdentificationTypeClient;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -35,7 +35,7 @@ final class IdentificationTypeClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new IdentificationTypeClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->list($request_options);
     }

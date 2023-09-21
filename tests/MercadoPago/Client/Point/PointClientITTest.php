@@ -2,10 +2,10 @@
 
 namespace MercadoPago\Tests\Client\Point;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\Point\PointClient;
 use MercadoPago\Client\Point\PointDeviceOperatingModeRequest;
 use MercadoPago\Client\Point\PointPaymentIntentListRequest;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPSearchRequest;
@@ -29,7 +29,7 @@ final class PointClientITTest extends TestCase
     {
         $client = new PointClient();
         $request = $this->createRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setCustomHeaders(["x-test-scope: sandbox"]);
         try {
             $payment_intent = $client->createPaymentIntent(PointClientITTest::DEVICE_ID, $request, $request_options);
@@ -46,7 +46,7 @@ final class PointClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new PointClient();
         $request = $this->createRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->createPaymentIntent(PointClientITTest::DEVICE_ID, $request, $request_options);
     }
@@ -55,7 +55,7 @@ final class PointClientITTest extends TestCase
     {
         $client = new PointClient();
         $request = $this->createRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setCustomHeaders(["x-test-scope: sandbox"]);
         try {
             $payment_intent = $client->createPaymentIntent(PointClientITTest::DEVICE_ID, $request, $request_options);
@@ -72,7 +72,7 @@ final class PointClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new PointClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->searchPaymentIntent("123", $request_options);
     }
@@ -81,7 +81,7 @@ final class PointClientITTest extends TestCase
     {
         $client = new PointClient();
         $request = $this->createRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setCustomHeaders(["x-test-scope: sandbox"]);
         try {
             $payment_intent = $client->createPaymentIntent(PointClientITTest::DEVICE_ID, $request, $request_options);
@@ -97,7 +97,7 @@ final class PointClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new PointClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->cancelPaymentIntent(PointClientITTest::DEVICE_ID, "123", $request_options);
     }
@@ -107,7 +107,7 @@ final class PointClientITTest extends TestCase
         $client = new PointClient();
         $request = $this->createRequest();
         $list_request = $this->createPointPaymentIntentListRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setCustomHeaders(["x-test-scope: sandbox"]);
         try {
             $payment_intent = $client->createPaymentIntent(PointClientITTest::DEVICE_ID, $request, $request_options);
@@ -126,7 +126,7 @@ final class PointClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new PointClient();
         $list_request = $this->createPointPaymentIntentListRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->getPaymentIntentList($list_request, $request_options);
     }
@@ -135,7 +135,7 @@ final class PointClientITTest extends TestCase
     {
         $client = new PointClient();
         $request = $this->createRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setCustomHeaders(["x-test-scope: sandbox"]);
         try {
             $payment_intent = $client->createPaymentIntent(PointClientITTest::DEVICE_ID, $request, $request_options);
@@ -154,7 +154,7 @@ final class PointClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new PointClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->getPaymentIntentStatus("123", $request_options);
     }
@@ -173,7 +173,7 @@ final class PointClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new PointClient();
         $request = $this->createGetDevicesRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->getDevices($request, $request_options);
     }
@@ -195,7 +195,7 @@ final class PointClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new PointClient();
         $request = $this->createOperatingModeRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->changeDeviceOperatingMode("123", $request, $request_options);
     }

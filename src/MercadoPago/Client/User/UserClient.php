@@ -2,9 +2,8 @@
 
 namespace MercadoPago\Client\User;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
-use MercadoPago\Core\MPRequestOptions;
-use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Resources\User;
@@ -28,7 +27,7 @@ final class UserClient extends MercadoPagoClient
      * @throws \MercadoPago\Exceptions\MPApiException if the API responds with an error.
      * @throws \Exception if the request fails.
      */
-    public function get(?MPRequestOptions $request_options = null): User
+    public function get(?RequestOptions $request_options = null): User
     {
         $response = parent::send(sprintf(self::URL), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(User::class, $response->getContent());

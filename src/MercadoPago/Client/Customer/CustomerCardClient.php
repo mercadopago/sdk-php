@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Client\Customer;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Resources\CustomerCard;
@@ -32,7 +32,7 @@ final class CustomerCardClient extends MercadoPagoClient
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function create(string $customer_id, array $request, ?MPRequestOptions $request_options = null): CustomerCard
+    public function create(string $customer_id, array $request, ?RequestOptions $request_options = null): CustomerCard
     {
         $response = parent::send(sprintf(self::$URL_CUSTOMER_ID, $customer_id), HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
@@ -49,7 +49,7 @@ final class CustomerCardClient extends MercadoPagoClient
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function get(string $customer_id, string $card_id, ?MPRequestOptions $request_options = null): CustomerCard
+    public function get(string $customer_id, string $card_id, ?RequestOptions $request_options = null): CustomerCard
     {
         $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
@@ -66,7 +66,7 @@ final class CustomerCardClient extends MercadoPagoClient
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function update(string $customer_id, string $card_id, array $request, ?MPRequestOptions $request_options = null): CustomerCard
+    public function update(string $customer_id, string $card_id, array $request, ?RequestOptions $request_options = null): CustomerCard
     {
         $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::PUT, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
@@ -82,7 +82,7 @@ final class CustomerCardClient extends MercadoPagoClient
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function delete(string $customer_id, string $card_id, ?MPRequestOptions $request_options = null): CustomerCard
+    public function delete(string $customer_id, string $card_id, ?RequestOptions $request_options = null): CustomerCard
     {
         $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::DELETE, null, null, $request_options);
         $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
@@ -97,7 +97,7 @@ final class CustomerCardClient extends MercadoPagoClient
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function list(string $customer_id, ?MPRequestOptions $request_options = null): CustomerCardResult
+    public function list(string $customer_id, ?RequestOptions $request_options = null): CustomerCardResult
     {
         $response = parent::send(sprintf(self::$URL_CUSTOMER_ID, $customer_id), HttpMethod::GET, null, null, $request_options);
         $result = new CustomerCardResult();

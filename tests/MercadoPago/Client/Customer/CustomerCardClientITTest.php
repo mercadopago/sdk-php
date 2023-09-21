@@ -2,12 +2,12 @@
 
 namespace MercadoPago\Tests\Client\Customer;
 
-use MercadoPago\Core\MPRequestOptions;
-use MercadoPago\Exceptions\MPApiException;
-use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\CardToken\CardTokenClient;
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\Customer\CustomerCardClient;
 use MercadoPago\Client\Customer\CustomerClient;
+use MercadoPago\Exceptions\MPApiException;
+use MercadoPago\MercadoPagoConfig;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -43,7 +43,7 @@ final class CustomerCardClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new CustomerCardClient();
         $request = ["token" => "abcd1234"];
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->create("1469979538-52qKdADBYeloaX", $request, $request_options);
     }
@@ -73,7 +73,7 @@ final class CustomerCardClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new CustomerCardClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->get("1469979538-52qKdADBYeloaX", "abcd1234", $request_options);
     }
@@ -105,7 +105,7 @@ final class CustomerCardClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new CustomerCardClient();
         $request_update = ["expiration_year" => 2026];
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->update("1469979538-52qKdADBYeloaX", "1234abcd", $request_update, $request_options);
     }
@@ -135,7 +135,7 @@ final class CustomerCardClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new CustomerCardClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->delete("1469979538-52qKdADBYeloaX", "1234abcd", $request_options);
     }
@@ -169,7 +169,7 @@ final class CustomerCardClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new CustomerCardClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->list("1469979538-52qKdADBYeloaX", $request_options);
     }
@@ -190,11 +190,11 @@ final class CustomerCardClientITTest extends TestCase
             "expiration_month" => "12",
             "security_code" => "123",
             "cardholder" => [
-              "name" => "APRO",
-              "identification" => [
-                "type" => "CPF",
-                "number" => "19119119100",
-              ],
+                "name" => "APRO",
+                "identification" => [
+                    "type" => "CPF",
+                    "number" => "19119119100",
+                ],
             ]
         ];
         return $request;

@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Tests\Client\PreApprovalPlan;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\PreApprovalPlan\PreApprovalPlanClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPSearchRequest;
@@ -31,7 +31,7 @@ final class PreApprovalPlanClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new PreApprovalPlanClient();
         $request = $this->createRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->create($request, $request_options);
     }
@@ -50,7 +50,7 @@ final class PreApprovalPlanClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new PreApprovalPlanClient();
         $created_plan = $client->create($this->createRequest());
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->get($created_plan->id, $request_options);
     }
@@ -68,7 +68,7 @@ final class PreApprovalPlanClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new PreApprovalPlanClient();
         $created_plan = $client->create($this->createRequest());
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->update($created_plan->id, $this->updateRequest(), $request_options);
     }
@@ -94,7 +94,7 @@ final class PreApprovalPlanClientITTest extends TestCase
         $client = new PreApprovalPlanClient();
         $created_preapproval = $client->create($this->createRequest());
         $search_request = new MPSearchRequest(1, 0, ["id" => $created_preapproval->id]);
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->search($search_request, $request_options);
     }

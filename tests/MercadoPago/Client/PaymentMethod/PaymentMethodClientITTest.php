@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Tests\Client\PaymentMethod;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\PaymentMethod\PaymentMethodClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use PHPUnit\Framework\TestCase;
@@ -30,7 +30,7 @@ final class PaymentMethodClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new PaymentMethodClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->get($request_options);
     }

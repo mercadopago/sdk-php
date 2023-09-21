@@ -3,7 +3,7 @@
 namespace MercadoPago\Tests\Client\CardToken;
 
 use MercadoPago\Client\CardToken\CardTokenClient;
-use MercadoPago\Core\MPRequestOptions;
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use PHPUnit\Framework\TestCase;
@@ -30,7 +30,7 @@ final class CardTokenClientITTest extends TestCase
         $this->expectException(MPApiException::class);
         $client = new CardTokenClient();
         $request = $this->createRequest();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->create($request, $request_options);
     }
@@ -46,7 +46,7 @@ final class CardTokenClientITTest extends TestCase
     {
         $this->expectException(MPApiException::class);
         $client = new CardTokenClient();
-        $request_options = new MPRequestOptions();
+        $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
         $client->get("123", $request_options);
     }

@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Client\Payment;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Resources\PaymentRefund;
@@ -33,7 +33,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      * @throws \Exception if the request fails.
      * @see https://www.mercadopago.com.br/developers/en/reference/chargebacks/_payments_id_refunds/post
      */
-    public function refund(int $payment_id, float $amount, ?MPRequestOptions $request_options = null): PaymentRefund
+    public function refund(int $payment_id, float $amount, ?RequestOptions $request_options = null): PaymentRefund
     {
         $payload = new PaymentRefundCreateRequest();
         $payload->amount = $amount;
@@ -53,7 +53,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      * @throws \Exception if the request fails.
      * @see https://www.mercadopago.com.br/developers/en/reference/chargebacks/_payments_id_refunds/post
      */
-    public function refundTotal(int $payment_id, ?MPRequestOptions $request_options = null): PaymentRefund
+    public function refundTotal(int $payment_id, ?RequestOptions $request_options = null): PaymentRefund
     {
         $response = parent::send(sprintf(self::$URL_WITH_PAYMENT_ID, strval($payment_id)), HttpMethod::POST, null, null, $request_options);
         $result = Serializer::deserializeFromJson(PaymentRefund::class, $response->getContent());
@@ -71,7 +71,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      * @see https://www.mercadopago.com.br/developers/en/reference/chargebacks/_payments_id_refunds_refund_id/get
      */
 
-    public function get(int $payment_id, int $refund_id, ?MPRequestOptions $request_options = null): PaymentRefund
+    public function get(int $payment_id, int $refund_id, ?RequestOptions $request_options = null): PaymentRefund
     {
         $response = parent::send(sprintf(self::$URL_WITH_REFUND_ID, strval($payment_id), strval($refund_id)), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(PaymentRefund::class, $response->getContent());
@@ -87,7 +87,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      * @throws \Exception if the request fails.
      * @see https://www.mercadopago.com.br/developers/en/reference/chargebacks/_payments_id_refunds/get
      */
-    public function list(int $payment_id, ?MPRequestOptions $request_options = null): PaymentRefundResult
+    public function list(int $payment_id, ?RequestOptions $request_options = null): PaymentRefundResult
     {
         $response = parent::send(sprintf(self::$URL_WITH_PAYMENT_ID, strval($payment_id)), HttpMethod::GET, null, null, $request_options);
         $result = new PaymentRefundResult();
