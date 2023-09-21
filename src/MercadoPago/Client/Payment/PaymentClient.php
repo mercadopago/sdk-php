@@ -29,7 +29,7 @@ final class PaymentClient extends MercadoPagoClient
     /**
      * Method responsible for creating payment.
      * @param array $request payment data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Payment payment created.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -45,7 +45,7 @@ final class PaymentClient extends MercadoPagoClient
     /**
      * Method responsible for getting payment.
      * @param int $id payment id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Payment payment found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -60,7 +60,7 @@ final class PaymentClient extends MercadoPagoClient
     /**
      * Method responsible for cancel payment.
      * @param int $id payment id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Payment payment canceled.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -78,7 +78,7 @@ final class PaymentClient extends MercadoPagoClient
      * Method responsible for capture payment.
      * @param int $id payment id.
      * @param mixed $amount amount to be captured.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Payment payment captured.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -96,7 +96,7 @@ final class PaymentClient extends MercadoPagoClient
     /**
      * Method responsible for search payments.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentSearch search results.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.

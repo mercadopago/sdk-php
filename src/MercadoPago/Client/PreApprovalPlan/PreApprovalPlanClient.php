@@ -29,7 +29,7 @@ final class PreApprovalPlanClient extends MercadoPagoClient
     /**
      * Method responsible for creating a subscription plan.
      * @param array $request subscription plan data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApprovalPlan subscription plan created.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -45,7 +45,7 @@ final class PreApprovalPlanClient extends MercadoPagoClient
     /**
      * Method responsible for getting pre approval plan.
      * @param string $id pre approval plan id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApprovalPlan pre approval plan found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -62,7 +62,7 @@ final class PreApprovalPlanClient extends MercadoPagoClient
      * Method responsible for update pre approval plan.
      * @param string $id pre approval plan id.
      * @param array $request pre approval plan data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApprovalPlan pre approval plan canceled.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -78,7 +78,7 @@ final class PreApprovalPlanClient extends MercadoPagoClient
     /**
      *  Method responsible for search pre approval plan.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApprovalPlanSearch search results.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.

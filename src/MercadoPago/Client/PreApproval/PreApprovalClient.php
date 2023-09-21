@@ -29,7 +29,7 @@ final class PreApprovalClient extends MercadoPagoClient
     /**
      * Method responsible for creating a pre approval.
      * @param array $request pre approval data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApproval pre approval created.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -45,7 +45,7 @@ final class PreApprovalClient extends MercadoPagoClient
     /**
      * Method responsible for getting pre approval.
      * @param string $id pre approval id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApproval pre approval found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -61,7 +61,7 @@ final class PreApprovalClient extends MercadoPagoClient
      * Method responsible for update pre approval.
      * @param string $id pre approval id.
      * @param array $request pre approval data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApproval pre approval canceled.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -76,7 +76,7 @@ final class PreApprovalClient extends MercadoPagoClient
 
     /**     *  Method responsible for search pre approvals.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApprovalSearch search results.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.

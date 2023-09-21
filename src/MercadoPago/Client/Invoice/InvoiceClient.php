@@ -27,7 +27,7 @@ final class InvoiceClient extends MercadoPagoClient
     /**
      * Method responsible for getting an invoice.
      * @param int $id invoice id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Invoice invoice found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -43,7 +43,7 @@ final class InvoiceClient extends MercadoPagoClient
     /**
      * Method responsible for search invoices.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\InvoiceSearch search results.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.

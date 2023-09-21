@@ -29,7 +29,7 @@ final class CustomerClient extends MercadoPagoClient
     /**
      * Method responsible for save Customer.
      * @param array $request customer data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Customer save.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -45,7 +45,7 @@ final class CustomerClient extends MercadoPagoClient
     /**
      * Method responsible for save Customer.
      * @param string $email customer email.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Customer save.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -63,7 +63,7 @@ final class CustomerClient extends MercadoPagoClient
     /**
      * Method responsible for getting Customer.
      * @param string $id customer id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Customer found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -80,7 +80,7 @@ final class CustomerClient extends MercadoPagoClient
      * Method responsible for update Customer.
      * @param string $id customer id.
      * @param array $request customer data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Customer update.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -96,7 +96,7 @@ final class CustomerClient extends MercadoPagoClient
     /**
      *  Method responsible for search customers.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\CustomerSearch search results.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.

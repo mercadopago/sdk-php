@@ -44,7 +44,7 @@ final class OAuthClient extends MercadoPagoClient
     /**
      * Method responsible for creating the necessary token to operate your application in the name of a seller.
      * @param OAuthCreateRequest $request request parameters.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\OAuth oauth information.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -60,7 +60,7 @@ final class OAuthClient extends MercadoPagoClient
     /**
      * Method responsible for refreshing the necessary token to operate your application in the name of a seller.
      * @param OAuthRefreshRequest $request request parameters.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\OAuth oauth information.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.

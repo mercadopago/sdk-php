@@ -29,7 +29,7 @@ final class MerchantOrderClient extends MercadoPagoClient
     /**
      * Method responsible for creating merchant order.
      * @param array $request merchant order data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\MerchantOrder merchant order created.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -45,7 +45,7 @@ final class MerchantOrderClient extends MercadoPagoClient
     /**
      * Method responsible for getting merchant order.
      * @param int $id merchant order id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\MerchantOrder merchant order found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -62,7 +62,7 @@ final class MerchantOrderClient extends MercadoPagoClient
      * Method responsible for update merchant order.
      * @param int $id merchant order id.
      * @param array $request merchant order data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\MerchantOrder merchant order updated.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -78,7 +78,7 @@ final class MerchantOrderClient extends MercadoPagoClient
     /**
      * Method responsible for search merchant orders.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\MerchantOrderSearch search results.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.

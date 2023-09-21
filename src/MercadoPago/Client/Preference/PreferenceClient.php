@@ -29,7 +29,7 @@ final class PreferenceClient extends MercadoPagoClient
     /**
      * Method responsible for creating preference.
      * @param array $request preference data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Preference preference created.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -45,7 +45,7 @@ final class PreferenceClient extends MercadoPagoClient
     /**
      * Method responsible for getting preference.
      * @param string $id preference id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Preference preference found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -62,7 +62,7 @@ final class PreferenceClient extends MercadoPagoClient
      * Method responsible for update preference.
      * @param string $id preference id.
      * @param array $request preference data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Preference preference canceled.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -78,7 +78,7 @@ final class PreferenceClient extends MercadoPagoClient
     /**
      * Method responsible for search preferences.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreferenceSearch search results.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.

@@ -26,7 +26,7 @@ class MercadoPagoClient
      * @param string $method method to be used.
      * @param mixed $payload payload to be sent.
      * @param mixed $query_params query params to be sent.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Net\MPResponse response from the request.
      */
     protected function send(string $uri, string $method, ?string $payload = null, ?array $query_params = [], ?RequestOptions $request_options = null): MPResponse

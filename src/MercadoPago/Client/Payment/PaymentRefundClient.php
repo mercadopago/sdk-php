@@ -27,7 +27,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      * Method responsible for refunding a payment.
      * @param int $payment_id payment id.
      * @param float $amount refund amount.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentRefund payment refunded.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -47,7 +47,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      * Method responsible for refunding a payment.
      * @param int $payment_id payment id.
      * @param float $amount refund amount.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentRefund payment refunded.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -64,7 +64,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      * Method responsible for getting payment.
      * @param int $payment_id payment id.
      * @param int $refund_id refund id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentRefund refund found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -81,7 +81,7 @@ final class PaymentRefundClient extends MercadoPagoClient
 
     /** Method responsible for getting payment.
      * @param int $payment_id payment id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentRefundResult refund found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.

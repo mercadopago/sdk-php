@@ -42,7 +42,7 @@ final class PointClient extends MercadoPagoClient
      * Method responsible for creating a payment intent.
      * @param string $device_id device id.
      * @param array $request payment intent data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentIntent payment intent created.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -58,7 +58,7 @@ final class PointClient extends MercadoPagoClient
     /**
      * Method responsible for searching a payment intent.
      * @param string $payment_intent_id payment intent id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentIntent payment intent found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -75,7 +75,7 @@ final class PointClient extends MercadoPagoClient
      * Method responsible for canceling a payment intent.
      * @param string $device_id device id.
      * @param string $payment_intent_id payment intent id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentIntentCancel payment intent canceled.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -91,7 +91,7 @@ final class PointClient extends MercadoPagoClient
     /**
      * Method responsible for getting payment intent list.
      * @param \MercadoPago\Client\Point\PointPaymentIntentListRequest $request payment intent list request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentIntentList payment intent list.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -107,7 +107,7 @@ final class PointClient extends MercadoPagoClient
     /**
      * Method responsible for getting payment intent status.
      * @param string $payment_intent_id payment intent id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentIntentStatus payment intent status.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -123,7 +123,7 @@ final class PointClient extends MercadoPagoClient
     /**
      * Method responsible for getting devices.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PointDevices devices found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -140,7 +140,7 @@ final class PointClient extends MercadoPagoClient
     /**
      * Method responsible for changing the device operating mode.
      * @param string $device_id device id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PointDeviceOperatingMode device operating mode.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
