@@ -5,7 +5,6 @@ namespace MercadoPago\Tests\Client\OAuth;
 use MercadoPago\Client\OAuth\OAuthClient;
 use MercadoPago\Client\OAuth\OAuthCreateRequest;
 use MercadoPago\Client\OAuth\OAuthRefreshRequest;
-use MercadoPago\Client\Payment\PaymentClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
 use MercadoPago\Tests\Client\Base\BaseClient;
@@ -34,7 +33,6 @@ final class OAuthClientUnitTest extends BaseClient
         $this->assertSame("TG-6500883a5f70750001bc46d2-1160535239", $oauth->refresh_token);
         $this->assertSame("APP_USR-2dfd505a-4b30-4403-878b-f8fb618e58b3", $oauth->public_key);
         $this->assertTrue($oauth->live_mode);
-
     }
 
     public function testRefreshSuccess(): void
@@ -56,7 +54,6 @@ final class OAuthClientUnitTest extends BaseClient
         $this->assertSame("TG-6500883a5f70750001bc46d2-1160535239", $oauth->refresh_token);
         $this->assertSame("APP_USR-2dfd505a-4b30-4403-878b-f8fb618e58b3", $oauth->public_key);
         $this->assertTrue($oauth->live_mode);
-
     }
 
     private function createRequest(): OAuthCreateRequest

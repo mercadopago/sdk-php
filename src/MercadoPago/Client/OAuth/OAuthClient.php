@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Client\OAuth;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Resources\OAuth;
@@ -44,12 +44,12 @@ final class OAuthClient extends MercadoPagoClient
     /**
      * Method responsible for creating the necessary token to operate your application in the name of a seller.
      * @param OAuthCreateRequest $request request parameters.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\OAuth oauth information.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function create(OAuthCreateRequest $request, ?MPRequestOptions $request_options = null): OAuth
+    public function create(OAuthCreateRequest $request, ?RequestOptions $request_options = null): OAuth
     {
         $response = parent::send(self::URL, HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(OAuth::class, $response->getContent());
@@ -60,12 +60,12 @@ final class OAuthClient extends MercadoPagoClient
     /**
      * Method responsible for refreshing the necessary token to operate your application in the name of a seller.
      * @param OAuthRefreshRequest $request request parameters.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\OAuth oauth information.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function refresh(OAuthRefreshRequest $request, ?MPRequestOptions $request_options = null): OAuth
+    public function refresh(OAuthRefreshRequest $request, ?RequestOptions $request_options = null): OAuth
     {
         $response = parent::send(self::URL, HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(OAuth::class, $response->getContent());

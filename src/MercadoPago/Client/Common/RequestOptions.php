@@ -1,12 +1,12 @@
 <?php
 
-namespace MercadoPago\Core;
+namespace MercadoPago\Client\Common;
 
-/** MPRequestOptions class. */
-class MPRequestOptions
+/** RequestOptions class. */
+class RequestOptions
 {
     /**
-     * MPRequestOptions constructor.
+     * RequestOptions constructor.
      * @param string|null $access_token access token to be used.
      * @param int|null $connection_timeout connection timeout to be used.
      * @param array|null $custom_headers custom headers to be used.

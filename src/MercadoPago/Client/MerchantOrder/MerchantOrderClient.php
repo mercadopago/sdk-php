@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Client\MerchantOrder;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPSearchRequest;
@@ -29,12 +29,12 @@ final class MerchantOrderClient extends MercadoPagoClient
     /**
      * Method responsible for creating merchant order.
      * @param array $request merchant order data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\MerchantOrder merchant order created.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function create(array $request, ?MPRequestOptions $request_options = null): MerchantOrder
+    public function create(array $request, ?RequestOptions $request_options = null): MerchantOrder
     {
         $response = parent::send(self::URL, HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(MerchantOrder::class, $response->getContent());
@@ -45,12 +45,12 @@ final class MerchantOrderClient extends MercadoPagoClient
     /**
      * Method responsible for getting merchant order.
      * @param int $id merchant order id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\MerchantOrder merchant order found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function get(int $id, ?MPRequestOptions $request_options = null): MerchantOrder
+    public function get(int $id, ?RequestOptions $request_options = null): MerchantOrder
     {
         $response = parent::send(sprintf(self::URL_WITH_ID, strval($id)), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(MerchantOrder::class, $response->getContent());
@@ -62,12 +62,12 @@ final class MerchantOrderClient extends MercadoPagoClient
      * Method responsible for update merchant order.
      * @param int $id merchant order id.
      * @param array $request merchant order data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\MerchantOrder merchant order updated.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function update(int $id, array $request, ?MPRequestOptions $request_options = null): MerchantOrder
+    public function update(int $id, array $request, ?RequestOptions $request_options = null): MerchantOrder
     {
         $response = parent::send(sprintf(self::URL_WITH_ID, strval($id)), HttpMethod::PUT, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(MerchantOrder::class, $response->getContent());
@@ -78,12 +78,12 @@ final class MerchantOrderClient extends MercadoPagoClient
     /**
      * Method responsible for search merchant orders.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\MerchantOrderSearch search results.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function search(MPSearchRequest $request, ?MPRequestOptions $request_options = null): MerchantOrderSearch
+    public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): MerchantOrderSearch
     {
         $query_params = isset($request) ? $request->getParameters() : null;
         $response = parent::send(self::URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);

@@ -2,7 +2,7 @@
 
 namespace MercadoPago\Client;
 
-use MercadoPago\Core\MPRequestOptions;
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPHttpClient;
@@ -26,10 +26,10 @@ class MercadoPagoClient
      * @param string $method method to be used.
      * @param mixed $payload payload to be sent.
      * @param mixed $query_params query params to be sent.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Net\MPResponse response from the request.
      */
-    protected function send(string $uri, string $method, ?string $payload = null, ?array $query_params = [], ?MPRequestOptions $request_options = null): MPResponse
+    protected function send(string $uri, string $method, ?string $payload = null, ?array $query_params = [], ?RequestOptions $request_options = null): MPResponse
     {
         return $this->http_client->send($this->buildRequest($uri, $method, $payload, $query_params, $request_options));
     }
@@ -39,7 +39,7 @@ class MercadoPagoClient
         string $method,
         ?string $payload = null,
         ?array $query_params = [],
-        ?MPRequestOptions $request_options = null
+        ?RequestOptions $request_options = null
     ): MPRequest {
         $path = $this->formatUrlWithQueryParams($path, $query_params);
         return new MPRequest($path, $method, $payload, $this->addHeaders($method, $request_options), $this->addConnectionTimeout($request_options));
@@ -59,7 +59,7 @@ class MercadoPagoClient
         return $url;
     }
 
-    private function addHeaders(string $method, ?MPRequestOptions $request_options = null): array
+    private function addHeaders(string $method, ?RequestOptions $request_options = null): array
     {
         $headers = array();
         $headers = $this->addCustomHeaders($headers, $request_options);
@@ -67,7 +67,7 @@ class MercadoPagoClient
         return $headers;
     }
 
-    private function addCustomHeaders(array $headers, ?MPRequestOptions $request_options = null): array
+    private function addCustomHeaders(array $headers, ?RequestOptions $request_options = null): array
     {
         if (!is_null($request_options) && !is_null($request_options->getCustomHeaders())) {
             return array_merge($headers, $request_options->getCustomHeaders());
@@ -75,7 +75,7 @@ class MercadoPagoClient
         return $headers;
     }
 
-    private function addDefaultHeaders(string $method, array $headers, ?MPRequestOptions $request_options = null): array
+    private function addDefaultHeaders(string $method, array $headers, ?RequestOptions $request_options = null): array
     {
         $default_headers = array(
             'Accept: application/json',
@@ -93,7 +93,7 @@ class MercadoPagoClient
         return array_merge($headers, $default_headers);
     }
 
-    private function getAccessToken(?MPRequestOptions $request_options = null): string
+    private function getAccessToken(?RequestOptions $request_options = null): string
     {
         return $request_options?->getAccessToken() ?? MercadoPagoConfig::getAccessToken();
     }
@@ -103,7 +103,7 @@ class MercadoPagoClient
         return $method === HttpMethod::POST || $method === HttpMethod::PUT || $method === HttpMethod::PATCH;
     }
 
-    private function getIdempotencyKey(?MPRequestOptions $request_options = null): string
+    private function getIdempotencyKey(?RequestOptions $request_options = null): string
     {
         $key = "x-idempotency-key";
         if (!is_null($request_options) && !is_null($request_options->getCustomHeaders())) {
@@ -115,7 +115,7 @@ class MercadoPagoClient
         return $this->generateUUID();
     }
 
-    private function addConnectionTimeout(?MPRequestOptions $request_options = null): int
+    private function addConnectionTimeout(?RequestOptions $request_options = null): int
     {
         return ($request_options?->getConnectionTimeout() ?? 0) > 0
             ? $request_options->getConnectionTimeout()

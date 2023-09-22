@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Client\PaymentMethod;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Resources\PaymentMethodResult;
@@ -21,12 +21,12 @@ final class PaymentMethodClient extends MercadoPagoClient
 
     /**
      * Method responsible for getting array from payment methods.
-     * @param \MercadoPago\Core\MPRequestOptions request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentMethodResult result from payment method found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function get(?MPRequestOptions $request_options = null): PaymentMethodResult
+    public function get(?RequestOptions $request_options = null): PaymentMethodResult
     {
         $response = parent::send(self::$URL, HttpMethod::GET, null, null, $request_options);
         $result = new PaymentMethodResult();

@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Client\Payment;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPSearchRequest;
@@ -29,12 +29,12 @@ final class PaymentClient extends MercadoPagoClient
     /**
      * Method responsible for creating payment.
      * @param array $request payment data.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Payment payment created.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function create(array $request, ?MPRequestOptions $request_options = null): Payment
+    public function create(array $request, ?RequestOptions $request_options = null): Payment
     {
         $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
@@ -45,12 +45,12 @@ final class PaymentClient extends MercadoPagoClient
     /**
      * Method responsible for getting payment.
      * @param int $id payment id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Payment payment found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function get(int $id, ?MPRequestOptions $request_options = null): Payment
+    public function get(int $id, ?RequestOptions $request_options = null): Payment
     {
         $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
@@ -60,12 +60,12 @@ final class PaymentClient extends MercadoPagoClient
     /**
      * Method responsible for cancel payment.
      * @param int $id payment id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Payment payment canceled.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function cancel(int $id, ?MPRequestOptions $request_options = null): Payment
+    public function cancel(int $id, ?RequestOptions $request_options = null): Payment
     {
         $payload = new PaymentCancelRequest();
         $response = parent::send(sprintf(self::$URL_WITH_ID, strval($id)), HttpMethod::PUT, json_encode($payload), null, $request_options);
@@ -78,12 +78,12 @@ final class PaymentClient extends MercadoPagoClient
      * Method responsible for capture payment.
      * @param int $id payment id.
      * @param mixed $amount amount to be captured.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Payment payment captured.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function capture(int $id, ?float $amount, ?MPRequestOptions $request_options = null): Payment
+    public function capture(int $id, ?float $amount, ?RequestOptions $request_options = null): Payment
     {
         $payload = new PaymentCaptureRequest();
         $payload->transaction_amount = $amount;
@@ -96,12 +96,12 @@ final class PaymentClient extends MercadoPagoClient
     /**
      * Method responsible for search payments.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentSearch search results.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function search(MPSearchRequest $request, ?MPRequestOptions $request_options = null): PaymentSearch
+    public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): PaymentSearch
     {
         $query_params = isset($request) ? $request->getParameters() : null;
         $response = parent::send(self::$URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);

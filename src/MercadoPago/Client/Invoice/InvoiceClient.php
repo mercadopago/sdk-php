@@ -2,8 +2,8 @@
 
 namespace MercadoPago\Client\Invoice;
 
+use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
-use MercadoPago\Core\MPRequestOptions;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPSearchRequest;
@@ -27,12 +27,12 @@ final class InvoiceClient extends MercadoPagoClient
     /**
      * Method responsible for getting an invoice.
      * @param int $id invoice id.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Invoice invoice found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function get(int $id, ?MPRequestOptions $request_options = null): Invoice
+    public function get(int $id, ?RequestOptions $request_options = null): Invoice
     {
         $response = parent::send(sprintf(self::URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(Invoice::class, $response->getContent());
@@ -43,12 +43,12 @@ final class InvoiceClient extends MercadoPagoClient
     /**
      * Method responsible for search invoices.
      * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param mixed $request_options request options to be sent.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\InvoiceSearch search results.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function search(MPSearchRequest $request, ?MPRequestOptions $request_options = null): InvoiceSearch
+    public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): InvoiceSearch
     {
         $query_params = isset($request) ? $request->getParameters() : null;
         $response = parent::send(self::URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
