@@ -4,5 +4,5 @@ namespace MercadoPago;
 class Version
 {
     public static
-        $_VERSION = '2.6.0';
+        $_VERSION = '2.6.1';
 }
