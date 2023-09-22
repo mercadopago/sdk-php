@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd" bootstrap="vendor/autoload.php" colors="true" cacheDirectory=".phpunit.cache">
   <testsuites>
-    <testsuite name="All Tests">
-      <directory>./tests/MercadoPago</directory>
+    <testsuite name="Integration Tests">
+      <directory>./tests/MercadoPago/Client/Integration</directory>
     </testsuite>
     <testsuite name="Unit Tests">
-      <directory>./tests/MercadoPago</directory>
-      <exclude>./tests/MercadoPago/Client/Payment/PaymentClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/Payment/PaymentRefundClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/CardToken/CardTokenClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/PaymentMethod/PaymentMethodClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/Preference/PreferenceClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/PreApproval/PreApprovalClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/PreApprovalPlan/PreApprovalPlanClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/Customer/CustomerClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/Customer/CustomerCardClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/User/UserClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/IdentificationType/IdentificationTypeClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/Point/PointClientITTest.php</exclude>
-      <exclude>./tests/MercadoPago/Client/MerchantOrder/MerchantOrderClientITTest.php</exclude>
+      <directory>./tests/MercadoPago/Client/Unit</directory>
     </testsuite>
   </testsuites>
 </phpunit>
