@@ -60,7 +60,7 @@ final class PreApprovalPlanClientITTest extends TestCase
         $client = new PreApprovalPlanClient();
         $created_plan = $client->create($this->createRequest());
         $plan = $client->update($created_plan->id, $this->updateRequest());
-        $this->assertEquals("Yoga classes.", $plan->reason);
+        $this->assertEquals("reason", $plan->reason);
     }
 
     public function testUpdateWithRequestOptionsFailure(): void

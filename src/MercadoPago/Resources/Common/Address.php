@@ -5,6 +5,9 @@ namespace MercadoPago\Resources\Common;
 /** Address class. */
 class Address
 {
+    /** Addess ID. */
+    public ?string $id;
+
     /** Zip code. */
     public ?string $zip_code;
 

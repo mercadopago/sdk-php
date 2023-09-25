@@ -79,12 +79,18 @@ class MerchantOrder extends MPResource
     /** Current merchant order status given the payments status. */
     public ?string $order_status;
 
+    /** If is test. */
+    public ?bool $is_test;
+
+    /** Payouts. */
+    public array|object|null $payouts;
+
     private $map = [
-      "payer" => "MercadoPago\Resources\MerchantOrder\Payer",
-      "collector" => "MercadoPago\Resources\MerchantOrder\Collector",
-      "payments" => "MercadoPago\Resources\MerchantOrder\Payment",
-      "items" => "MercadoPago\Resources\MerchantOrder\Item",
-      "shipments" => "MercadoPago\Resources\MerchantOrder\Shipment",
+        "payer" => "MercadoPago\Resources\MerchantOrder\Payer",
+        "collector" => "MercadoPago\Resources\MerchantOrder\Collector",
+        "payments" => "MercadoPago\Resources\MerchantOrder\Payment",
+        "items" => "MercadoPago\Resources\MerchantOrder\Item",
+        "shipments" => "MercadoPago\Resources\MerchantOrder\Shipment",
     ];
 
     /**
