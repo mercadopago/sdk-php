@@ -11,6 +11,8 @@ class MPDefaultHttpClient implements MPHttpClient
 {
     private HttpRequest $httpRequest;
 
+    private static int $retries = 0;
+
     /**
      * Default constructor.
      * @param \MercadoPago\Net\HttpRequest|null $httpRequest http request to be used.
@@ -37,6 +39,11 @@ class MPDefaultHttpClient implements MPHttpClient
         $mp_response = new MPResponse($status_code, $content);
 
         if ($api_result === false) {
+            if (self::$retries < MercadoPagoConfig::getMaxRetries()) {
+                self::$retries++;
+                $this->httpRequest->close();
+                return $this->send($request);
+            }
             $error_message = $this->httpRequest->error();
             $this->httpRequest->close();
             throw new Exception($error_message);

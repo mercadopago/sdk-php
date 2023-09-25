@@ -20,6 +20,9 @@ class MercadoPagoConfig
     /** @var string access token */
     private static string $access_token = "";
 
+    /** @var int max retries */
+    private static int $max_retries = 3;
+
     /** @var int max connections */
     private static int $max_connections = 10;
 
@@ -67,6 +70,25 @@ class MercadoPagoConfig
     public static function setAccessToken(string $access_token): void
     {
         self::$access_token = $access_token;
+    }
+
+    /**
+     * Gets max retries.
+     * @return int max retries
+     */
+    public static function getMaxRetries(): int
+    {
+        return self::$max_retries;
+    }
+
+    /**
+     * Sets max retries.
+     * @param int $max_retries max retries
+     * @return void max retries
+     */
+    public static function setMaxRetries(int $max_retries): void
+    {
+        self::$max_retries = $max_retries;
     }
 
     /**
