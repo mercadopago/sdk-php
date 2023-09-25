@@ -44,6 +44,7 @@ class MPDefaultHttpClient implements MPHttpClient
                 $this->httpRequest->close();
                 return $this->send($request);
             }
+            $this->resetRetries();
             $error_message = $this->httpRequest->error();
             $this->httpRequest->close();
             throw new Exception($error_message);
@@ -54,10 +55,12 @@ class MPDefaultHttpClient implements MPHttpClient
                 $this->httpRequest->close();
                 return $this->send($request);
             }
+            $this->resetRetries();
             $this->httpRequest->close();
             throw new MPApiException("Api error. Check response for details", $mp_response);
         }
 
+        $this->resetRetries();
         $this->httpRequest->close();
         return $mp_response;
     }
@@ -90,5 +93,10 @@ class MPDefaultHttpClient implements MPHttpClient
     private function isApiError(int $status_code): bool
     {
         return $status_code < 200 || $status_code >= 300;
+    }
+
+    private function resetRetries(): void
+    {
+        self::$retries = 0;
     }
 }
