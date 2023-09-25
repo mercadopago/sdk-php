@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\Tests\Client\Integration\Customer;
+namespace MercadoPago\Tests\Client\Integration\IdentificationType;
 
 use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\IdentificationType\IdentificationTypeClient;
