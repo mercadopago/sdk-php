@@ -39,7 +39,7 @@ class MPDefaultHttpClient implements MPHttpClient
         $mp_response = new MPResponse($status_code, $content);
 
         if ($api_result === false) {
-            if (self::$retries < MercadoPagoConfig::getMaxRetries()) {
+            if ($this->shouldRetry()) {
                 self::$retries++;
                 $this->httpRequest->close();
                 return $this->send($request);
@@ -48,7 +48,12 @@ class MPDefaultHttpClient implements MPHttpClient
             $this->httpRequest->close();
             throw new Exception($error_message);
         }
-        if ($status_code < 200 || $status_code >= 300) {
+        if ($this->isApiError($status_code)) {
+            if ($this->isServerError($status_code) && $this->shouldRetry()) {
+                self::$retries++;
+                $this->httpRequest->close();
+                return $this->send($request);
+            }
             $this->httpRequest->close();
             throw new MPApiException("Api error. Check response for details", $mp_response);
         }
@@ -70,5 +75,20 @@ class MPDefaultHttpClient implements MPHttpClient
             CURLOPT_MAXCONNECTS => MercadoPagoConfig::getMaxConnections(),
             CURLOPT_RETURNTRANSFER => true
         );
+    }
+
+    private function shouldRetry(): bool
+    {
+        return self::$retries < MercadoPagoConfig::getMaxRetries();
+    }
+
+    private function isServerError(int $status_code): bool
+    {
+        return $status_code >= 500;
+    }
+
+    private function isApiError(int $status_code): bool
+    {
+        return $status_code < 200 || $status_code >= 300;
     }
 }
