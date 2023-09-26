@@ -23,6 +23,9 @@ class MercadoPagoConfig
     /** @var int max retries */
     private static int $max_retries = 3;
 
+    /** @var int retry delay (in seconds) */
+    private static int $retry_delay = 1;
+
     /** @var int max connections */
     private static int $max_connections = 10;
 
@@ -89,6 +92,25 @@ class MercadoPagoConfig
     public static function setMaxRetries(int $max_retries): void
     {
         self::$max_retries = $max_retries;
+    }
+
+    /**
+     * Gets retry delay.
+     * @return int retry delay
+     */
+    public static function getRetryDelay(): int
+    {
+        return self::$retry_delay;
+    }
+
+    /**
+     * Sets retry delay.
+     * @param int $retry_delay retry delay
+     * @return void retry delay
+     */
+    public static function setRetryDelay(int $retry_delay): void
+    {
+        self::$retry_delay = $retry_delay;
     }
 
     /**

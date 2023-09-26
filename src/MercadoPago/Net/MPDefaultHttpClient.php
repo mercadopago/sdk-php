@@ -11,8 +11,6 @@ class MPDefaultHttpClient implements MPHttpClient
 {
     private HttpRequest $httpRequest;
 
-    private static int $retries = 0;
-
     /**
      * Default constructor.
      * @param \MercadoPago\Net\HttpRequest|null $httpRequest http request to be used.
@@ -31,6 +29,32 @@ class MPDefaultHttpClient implements MPHttpClient
      */
     public function send(MPRequest $request): MPResponse
     {
+        $max_retries = MercadoPagoConfig::getMaxRetries();
+
+        for ($retry_count = 0; $retry_count < $max_retries; $retry_count++) {
+            try {
+                return $this->makeRequest($request);
+            } catch (MPApiException $e) {
+                $status_code = $e->getApiResponse()->getStatusCode();
+                if ($this->isServerError($status_code) && !$this->isLastRetry($retry_count)) {
+                    sleep(MercadoPagoConfig::getRetryDelay());
+                } else {
+                    throw $e;
+                }
+            } catch (Exception $e) {
+                if (!$this->isLastRetry($retry_count)) {
+                    sleep(MercadoPagoConfig::getRetryDelay());
+                } else {
+                    throw $e;
+                }
+            }
+        }
+
+        throw new Exception("Error processing request. Please try again.");
+    }
+
+    private function makeRequest(MPRequest $request): MPResponse
+    {
         $request_options = $this->createHttpRequestOptions($request);
         $this->httpRequest->setOptionArray($request_options);
         $api_result = $this->httpRequest->execute();
@@ -39,28 +63,15 @@ class MPDefaultHttpClient implements MPHttpClient
         $mp_response = new MPResponse($status_code, $content);
 
         if ($api_result === false) {
-            if ($this->shouldRetry()) {
-                self::$retries++;
-                $this->httpRequest->close();
-                return $this->send($request);
-            }
-            $this->resetRetries();
             $error_message = $this->httpRequest->error();
             $this->httpRequest->close();
             throw new Exception($error_message);
         }
         if ($this->isApiError($status_code)) {
-            if ($this->isServerError($status_code) && $this->shouldRetry()) {
-                self::$retries++;
-                $this->httpRequest->close();
-                return $this->send($request);
-            }
-            $this->resetRetries();
             $this->httpRequest->close();
             throw new MPApiException("Api error. Check response for details", $mp_response);
         }
 
-        $this->resetRetries();
         $this->httpRequest->close();
         return $mp_response;
     }
@@ -80,11 +91,6 @@ class MPDefaultHttpClient implements MPHttpClient
         );
     }
 
-    private function shouldRetry(): bool
-    {
-        return self::$retries < MercadoPagoConfig::getMaxRetries();
-    }
-
     private function isServerError(int $status_code): bool
     {
         return $status_code >= 500;
@@ -95,8 +101,8 @@ class MPDefaultHttpClient implements MPHttpClient
         return $status_code < 200 || $status_code >= 300;
     }
 
-    private function resetRetries(): void
+    private function isLastRetry(int $retry_count): bool
     {
-        self::$retries = 0;
+        return $retry_count >= MercadoPagoConfig::getMaxRetries();
     }
 }
