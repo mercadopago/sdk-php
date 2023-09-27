@@ -9,6 +9,8 @@ use MercadoPago\MercadoPagoConfig;
 /** Mercado Pago default Http Client class. */
 class MPDefaultHttpClient implements MPHttpClient
 {
+    private const ONE_MILLISECOND = 1000;
+
     private HttpRequest $httpRequest;
 
     /**
@@ -29,6 +31,32 @@ class MPDefaultHttpClient implements MPHttpClient
      */
     public function send(MPRequest $request): MPResponse
     {
+        $max_retries = MercadoPagoConfig::getMaxRetries();
+
+        for ($retry_count = 0; $retry_count <= $max_retries; $retry_count++) {
+            try {
+                return $this->makeRequest($request);
+            } catch (MPApiException $e) {
+                $status_code = $e->getApiResponse()->getStatusCode();
+                if ($this->isServerError($status_code) && !$this->isLastRetry($retry_count)) {
+                    $this->doExponentialBackoff($retry_count);
+                } else {
+                    throw $e;
+                }
+            } catch (Exception $e) {
+                if (!$this->isLastRetry($retry_count)) {
+                    $this->doExponentialBackoff($retry_count);
+                } else {
+                    throw $e;
+                }
+            }
+        }
+
+        throw new Exception("Error processing request. Please try again.");
+    }
+
+    private function makeRequest(MPRequest $request): MPResponse
+    {
         $request_options = $this->createHttpRequestOptions($request);
         $this->httpRequest->setOptionArray($request_options);
         $api_result = $this->httpRequest->execute();
@@ -41,13 +69,20 @@ class MPDefaultHttpClient implements MPHttpClient
             $this->httpRequest->close();
             throw new Exception($error_message);
         }
-        if ($status_code < 200 || $status_code >= 300) {
+        if ($this->isApiError($status_code)) {
             $this->httpRequest->close();
             throw new MPApiException("Api error. Check response for details", $mp_response);
         }
 
         $this->httpRequest->close();
         return $mp_response;
+    }
+
+    private function doExponentialBackoff(int $retry_count): void
+    {
+        $exponential_backoff_time = pow(2, $retry_count);
+        $retry_delay_microseconds = $exponential_backoff_time * self::ONE_MILLISECOND * MercadoPagoConfig::getRetryDelay();
+        usleep($retry_delay_microseconds);
     }
 
     private function createHttpRequestOptions(MPRequest $request): array
@@ -63,5 +98,20 @@ class MPDefaultHttpClient implements MPHttpClient
             CURLOPT_MAXCONNECTS => MercadoPagoConfig::getMaxConnections(),
             CURLOPT_RETURNTRANSFER => true
         );
+    }
+
+    private function isServerError(int $status_code): bool
+    {
+        return $status_code >= 500;
+    }
+
+    private function isApiError(int $status_code): bool
+    {
+        return $status_code < 200 || $status_code >= 300;
+    }
+
+    private function isLastRetry(int $retry_count): bool
+    {
+        return $retry_count >= MercadoPagoConfig::getMaxRetries();
     }
 }
