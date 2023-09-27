@@ -41,6 +41,21 @@ class PaymentRefund extends MPResource
     /** Source of the refund. */
     public object|array|null $source;
 
+    /** Amount refunded to the payer. */
+    public ?int $amount_refunded_to_payer;
+
+    /** Partition details. */
+    public object|array|null $partition_details;
+
+    /** Labels. */
+    public object|array|null $labels;
+
+    /** Additional data. */
+    public object|array|null $additional_data;
+
+    /** Expiration date. */
+    public ?string $expiration_date;
+
     public $map = [
         "source" => "MercadoPago\Resources\Common\Source"
     ];

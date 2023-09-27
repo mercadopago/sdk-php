@@ -53,6 +53,9 @@ class CustomerCard extends MPResource
     /** Flag indicating if this is a record from production or test environment. */
     public ?bool $live_mode;
 
+    /** Card number is. */
+    public ?string $card_number_id;
+
     private $map = [
         "payment_method" => "MercadoPago\Resources\Customer\PaymentMethod",
         "security_code" => "MercadoPago\Resources\Customer\SecurityCode",

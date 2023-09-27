@@ -25,14 +25,17 @@ class PaymentMethods
     /** Payment types not allowed in payment process. */
     public ?array $excluded_payment_types;
 
+    /** Default card ID. */
+    public ?string $default_card_id;
+
     private $map = [
-      "excluded_payment_methods" => "MercadoPago\Resources\Preference\PaymentMethod",
-      "excluded_payment_types" => "MercadoPago\Resources\Preference\PaymentType",
+        "excluded_payment_methods" => "MercadoPago\Resources\Preference\PaymentMethod",
+        "excluded_payment_types" => "MercadoPago\Resources\Preference\PaymentType",
     ];
 
     /**
      * Method responsible for getting map of entities.
-    */
+     */
     public function getMap(): array
     {
         return $this->map;

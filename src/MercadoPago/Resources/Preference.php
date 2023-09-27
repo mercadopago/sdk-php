@@ -124,6 +124,27 @@ class Preference extends MPResource
     /** Product ID. */
     public ?string $product_id;
 
+    /** Live mode. */
+    public ?bool $live_mode;
+
+    /** Last modified. */
+    public ?string $last_updated;
+    
+    /** Purpose. */
+    public ?string $purpose;
+    
+    /** Total amount. */
+    public array|object|null $total_amount;
+
+    /** Headers. */
+    public $headers;
+
+    /** Created source. */
+    public $created_source;
+
+    /** Created by app. */
+    public $created_by_app;
+
     public $map = [
         "items" => "MercadoPago\Resources\Preference\Item",
         "payer" => "MercadoPago\Resources\Preference\Payer",
