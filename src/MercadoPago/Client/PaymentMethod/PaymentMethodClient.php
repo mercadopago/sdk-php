@@ -12,7 +12,7 @@ use MercadoPago\Serialization\Serializer;
 /** Client responsible for performing payment methods actions. */
 final class PaymentMethodClient extends MercadoPagoClient
 {
-    private static $URL = "/v1/payment_methods";
+    private const URL = "/v1/payment_methods";
 
     /** Default constructor. Uses the default http client used by the SDK. */
     public function __construct()
@@ -29,7 +29,7 @@ final class PaymentMethodClient extends MercadoPagoClient
      */
     public function get(?RequestOptions $request_options = null): PaymentMethodResult
     {
-        $response = parent::send(self::$URL, HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(self::URL, HttpMethod::GET, null, null, $request_options);
         $result_data = array("data" => $response->getContent());
         $result = Serializer::deserializeFromJson(PaymentMethodResult::class, $result_data);
         $result->setResponse($response);

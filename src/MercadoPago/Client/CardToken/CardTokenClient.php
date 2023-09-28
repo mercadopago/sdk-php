@@ -12,9 +12,9 @@ use MercadoPago\Serialization\Serializer;
 /** Client responsible for performing cardtoken actions. */
 final class CardTokenClient extends MercadoPagoClient
 {
-    private static $URL = "/v1/card_tokens";
+    private const URL = "/v1/card_tokens";
 
-    private static $URL_WITH_ID = "/v1/card_tokens/%s";
+    private const URL_WITH_ID = "/v1/card_tokens/%s";
 
     /** Default constructor. Uses the default http client used by the SDK. */
     public function __construct()
@@ -32,7 +32,7 @@ final class CardTokenClient extends MercadoPagoClient
      */
     public function create(array $request, ?RequestOptions $request_options = null): CardToken
     {
-        $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), null, $request_options);
+        $response = parent::send(self::URL, HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(CardToken::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -48,7 +48,7 @@ final class CardTokenClient extends MercadoPagoClient
      */
     public function get(string $id, ?RequestOptions $request_options = null): CardToken
     {
-        $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(CardToken::class, $response->getContent());
         $result->setResponse($response);
         return $result;

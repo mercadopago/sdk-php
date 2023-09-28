@@ -13,9 +13,9 @@ use MercadoPago\Serialization\Serializer;
 /** Client responsible for performing customer card actions. */
 final class CustomerCardClient extends MercadoPagoClient
 {
-    private static $URL_CUSTOMER_ID = "/v1/customers/%s/cards";
+    private const URL_CUSTOMER_ID = "/v1/customers/%s/cards";
 
-    private static $URL_CUSTOMER_ID_AND_CARD_ID = "/v1/customers/%s/cards/%s";
+    private const URL_CUSTOMER_ID_AND_CARD_ID = "/v1/customers/%s/cards/%s";
 
     /** Default constructor. Uses the default http client used by the SDK. */
     public function __construct()
@@ -34,7 +34,7 @@ final class CustomerCardClient extends MercadoPagoClient
      */
     public function create(string $customer_id, array $request, ?RequestOptions $request_options = null): CustomerCard
     {
-        $response = parent::send(sprintf(self::$URL_CUSTOMER_ID, $customer_id), HttpMethod::POST, json_encode($request), null, $request_options);
+        $response = parent::send(sprintf(self::URL_CUSTOMER_ID, $customer_id), HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -51,7 +51,7 @@ final class CustomerCardClient extends MercadoPagoClient
      */
     public function get(string $customer_id, string $card_id, ?RequestOptions $request_options = null): CustomerCard
     {
-        $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -68,7 +68,7 @@ final class CustomerCardClient extends MercadoPagoClient
      */
     public function update(string $customer_id, string $card_id, array $request, ?RequestOptions $request_options = null): CustomerCard
     {
-        $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::PUT, json_encode($request), null, $request_options);
+        $response = parent::send(sprintf(self::URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::PUT, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -84,7 +84,7 @@ final class CustomerCardClient extends MercadoPagoClient
      */
     public function delete(string $customer_id, string $card_id, ?RequestOptions $request_options = null): CustomerCard
     {
-        $response = parent::send(sprintf(self::$URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::DELETE, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_CUSTOMER_ID_AND_CARD_ID, $customer_id, $card_id), HttpMethod::DELETE, null, null, $request_options);
         $result = Serializer::deserializeFromJson(CustomerCard::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -100,7 +100,7 @@ final class CustomerCardClient extends MercadoPagoClient
      */
     public function list(string $customer_id, ?RequestOptions $request_options = null): CustomerCardResult
     {
-        $response = parent::send(sprintf(self::$URL_CUSTOMER_ID, $customer_id), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_CUSTOMER_ID, $customer_id), HttpMethod::GET, null, null, $request_options);
         $result_data = array("data" => $response->getContent());
         $result = Serializer::deserializeFromJson(CustomerCardResult::class, $result_data);
         $result->setResponse($response);

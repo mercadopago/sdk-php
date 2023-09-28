@@ -13,9 +13,9 @@ use MercadoPago\Serialization\Serializer;
 /** Client responsible for performing payment refunds actions. */
 final class PaymentRefundClient extends MercadoPagoClient
 {
-    private static $URL_WITH_PAYMENT_ID = "/v1/payments/%s/refunds";
+    private const URL_WITH_PAYMENT_ID = "/v1/payments/%s/refunds";
 
-    private static $URL_WITH_REFUND_ID = "/v1/payments/%s/refunds/%s";
+    private const URL_WITH_REFUND_ID = "/v1/payments/%s/refunds/%s";
 
     /** Default constructor. Uses the default http client used by the SDK. */
     public function __construct()
@@ -37,7 +37,7 @@ final class PaymentRefundClient extends MercadoPagoClient
     {
         $payload = new PaymentRefundCreateRequest();
         $payload->amount = $amount;
-        $response = parent::send(sprintf(self::$URL_WITH_PAYMENT_ID, strval($payment_id)), HttpMethod::POST, json_encode($payload), null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_PAYMENT_ID, strval($payment_id)), HttpMethod::POST, json_encode($payload), null, $request_options);
         $result = Serializer::deserializeFromJson(PaymentRefund::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -55,7 +55,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      */
     public function refundTotal(int $payment_id, ?RequestOptions $request_options = null): PaymentRefund
     {
-        $response = parent::send(sprintf(self::$URL_WITH_PAYMENT_ID, strval($payment_id)), HttpMethod::POST, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_PAYMENT_ID, strval($payment_id)), HttpMethod::POST, null, null, $request_options);
         $result = Serializer::deserializeFromJson(PaymentRefund::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -73,7 +73,7 @@ final class PaymentRefundClient extends MercadoPagoClient
 
     public function get(int $payment_id, int $refund_id, ?RequestOptions $request_options = null): PaymentRefund
     {
-        $response = parent::send(sprintf(self::$URL_WITH_REFUND_ID, strval($payment_id), strval($refund_id)), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_REFUND_ID, strval($payment_id), strval($refund_id)), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(PaymentRefund::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -89,7 +89,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      */
     public function list(int $payment_id, ?RequestOptions $request_options = null): PaymentRefundResult
     {
-        $response = parent::send(sprintf(self::$URL_WITH_PAYMENT_ID, strval($payment_id)), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_PAYMENT_ID, strval($payment_id)), HttpMethod::GET, null, null, $request_options);
         $result_data = array("data" => $response->getContent());
         $result = Serializer::deserializeFromJson(PaymentRefundResult::class, $result_data);
         $result->setResponse($response);
