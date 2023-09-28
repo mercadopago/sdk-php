@@ -39,19 +39,19 @@ class PaymentRefund extends MPResource
     public ?string $unique_sequence_number;
 
     /** Source of the refund. */
-    public object|array|null $source;
+    public array|object|null $source;
 
     /** Amount refunded to the payer. */
     public ?int $amount_refunded_to_payer;
 
     /** Partition details. */
-    public object|array|null $partition_details;
+    public array|object|null $partition_details;
 
     /** Labels. */
-    public object|array|null $labels;
+    public array|object|null $labels;
 
     /** Additional data. */
-    public object|array|null $additional_data;
+    public array|object|null $additional_data;
 
     /** Expiration date. */
     public ?string $expiration_date;

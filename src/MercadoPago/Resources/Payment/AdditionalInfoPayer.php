@@ -17,10 +17,10 @@ class AdditionalInfoPayer
     public ?string $last_name;
 
     /** Payer's phone. */
-    public object|array|null $phone;
+    public array|object|null $phone;
 
     /** Payer's address. */
-    public object|array|null $address;
+    public array|object|null $address;
 
     /** Date of registration of the payer on your site. */
     public ?string $registration_date;

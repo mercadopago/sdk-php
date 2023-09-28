@@ -26,7 +26,7 @@ class TransactionData
     public ?int $financial_institution;
 
     /** Bank info. */
-    public object|array|null $bank_info;
+    public array|object|null $bank_info;
 
     /** Ticket Url. */
     public ?string $ticket_url;

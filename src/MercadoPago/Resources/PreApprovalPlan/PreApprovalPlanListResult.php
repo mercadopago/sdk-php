@@ -5,7 +5,7 @@ namespace MercadoPago\Resources\PreApprovalPlan;
 use MercadoPago\Serialization\Mapper;
 
 /** PreApprovalPlanListResult class. */
-class PreApprovalPlanListResult 
+class PreApprovalPlanListResult
 {
     /** Class mapper. */
     use Mapper;

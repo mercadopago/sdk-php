@@ -12,10 +12,10 @@ class PaymentSearch extends MPResource
     use Mapper;
 
     /** Search paging. */
-    public object|array|null $paging;
+    public array|object|null $paging;
 
     /** Search results. */
-    public object|array|null $results;
+    public array|object|null $results;
 
     private $map = [
         "paging" => "MercadoPago\Resources\Common\Paging",

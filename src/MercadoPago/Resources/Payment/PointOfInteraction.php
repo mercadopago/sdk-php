@@ -17,10 +17,10 @@ class PointOfInteraction
     public ?string $sub_type;
 
     /** Application data. */
-    public object|array|null $application_data;
+    public array|object|null $application_data;
 
     /** Transaction data. */
-    public object|array|null $transaction_data;
+    public array|object|null $transaction_data;
 
     private $map = [
         "application_data" => "MercadoPago\Resources\Payment\ApplicationData",
