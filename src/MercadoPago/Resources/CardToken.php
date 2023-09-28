@@ -35,7 +35,7 @@ class CardToken extends MPResource
     /** Card's owner data. */
     public array|object|null $cardholder;
 
-    /** Card id. */
+    /** Card ID. */
     public ?int $card_id;
 
     /** Current status of card. E.g. active. */

@@ -24,7 +24,7 @@ final class OAuthClient extends MercadoPagoClient
 
     /**
      * Function responsible for generating the authorization URL.
-     * @param string $app_id application id.
+     * @param string $app_id application ID.
      * @param string $redirect_uri redirect uri.
      * @return string authorization url.
      */

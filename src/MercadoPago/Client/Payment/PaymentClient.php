@@ -44,7 +44,7 @@ final class PaymentClient extends MercadoPagoClient
 
     /**
      * Method responsible for getting payment.
-     * @param int $id payment id.
+     * @param int $id payment ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Payment payment found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
@@ -59,7 +59,7 @@ final class PaymentClient extends MercadoPagoClient
     }
     /**
      * Method responsible for cancel payment.
-     * @param int $id payment id.
+     * @param int $id payment ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Payment payment canceled.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
@@ -76,7 +76,7 @@ final class PaymentClient extends MercadoPagoClient
 
     /**
      * Method responsible for capture payment.
-     * @param int $id payment id.
+     * @param int $id payment ID.
      * @param mixed $amount amount to be captured.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Payment payment captured.

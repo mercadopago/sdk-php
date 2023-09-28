@@ -39,8 +39,8 @@ final class CardTokenClient extends MercadoPagoClient
     }
 
     /**
-     * Method responsible for getting card token by id.
-     * @param string $id card token id.
+     * Method responsible for getting card token by ID.
+     * @param string $id card token ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\CardToken card token found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.

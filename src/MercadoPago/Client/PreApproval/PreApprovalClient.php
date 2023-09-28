@@ -44,7 +44,7 @@ final class PreApprovalClient extends MercadoPagoClient
 
     /**
      * Method responsible for getting pre approval.
-     * @param string $id pre approval id.
+     * @param string $id pre approval ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApproval pre approval found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
@@ -59,7 +59,7 @@ final class PreApprovalClient extends MercadoPagoClient
     }
     /**
      * Method responsible for update pre approval.
-     * @param string $id pre approval id.
+     * @param string $id pre approval ID.
      * @param array $request pre approval data.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApproval pre approval canceled.

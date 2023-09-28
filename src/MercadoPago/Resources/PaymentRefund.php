@@ -11,7 +11,7 @@ class PaymentRefund extends MPResource
     /** Class mapper. */
     use Mapper;
 
-    /** Refund id. */
+    /** Refund ID. */
     public ?int $id;
 
     /** ID of the refunded payment. */

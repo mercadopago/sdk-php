@@ -25,7 +25,7 @@ final class PaymentRefundClient extends MercadoPagoClient
 
     /**
      * Method responsible for refunding a payment.
-     * @param int $payment_id payment id.
+     * @param int $payment_id payment ID.
      * @param float $amount refund amount.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentRefund payment refunded.
@@ -45,7 +45,7 @@ final class PaymentRefundClient extends MercadoPagoClient
 
     /**
      * Method responsible for refunding a payment.
-     * @param int $payment_id payment id.
+     * @param int $payment_id payment ID.
      * @param float $amount refund amount.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentRefund payment refunded.
@@ -62,8 +62,8 @@ final class PaymentRefundClient extends MercadoPagoClient
     }
     /**
      * Method responsible for getting payment.
-     * @param int $payment_id payment id.
-     * @param int $refund_id refund id.
+     * @param int $payment_id payment ID.
+     * @param int $refund_id refund ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentRefund refund found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
@@ -80,7 +80,7 @@ final class PaymentRefundClient extends MercadoPagoClient
     }
 
     /** Method responsible for getting payment.
-     * @param int $payment_id payment id.
+     * @param int $payment_id payment ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentRefundResult refund found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.

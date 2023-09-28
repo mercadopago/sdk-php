@@ -44,7 +44,7 @@ final class PreferenceClient extends MercadoPagoClient
 
     /**
      * Method responsible for getting preference.
-     * @param string $id preference id.
+     * @param string $id preference ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Preference preference found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
@@ -60,7 +60,7 @@ final class PreferenceClient extends MercadoPagoClient
 
     /**
      * Method responsible for update preference.
-     * @param string $id preference id.
+     * @param string $id preference ID.
      * @param array $request preference data.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Preference preference canceled.

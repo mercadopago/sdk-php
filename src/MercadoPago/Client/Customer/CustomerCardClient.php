@@ -25,7 +25,7 @@ final class CustomerCardClient extends MercadoPagoClient
 
     /**
      * Method responsible for save Customer Card.
-     * @param string $customer_id customer id.
+     * @param string $customer_id customer ID.
      * @param array $request customer card data.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\CustomerCard save.
@@ -42,8 +42,8 @@ final class CustomerCardClient extends MercadoPagoClient
 
     /**
      * Method responsible for getting Customer Card.
-     * @param string $customer_id customer id.
-     * @param string $card_id customer card id.
+     * @param string $customer_id customer ID.
+     * @param string $card_id customer card ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\CustomerCard found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
@@ -58,8 +58,8 @@ final class CustomerCardClient extends MercadoPagoClient
     }
     /**
      * Method responsible for update Customer Card.
-     * @param string $customer_id customer id.
-     * @param string $card_id card id.
+     * @param string $customer_id customer ID.
+     * @param string $card_id card ID.
      * @param array $request customer card data.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\CustomerCard update.
@@ -75,8 +75,8 @@ final class CustomerCardClient extends MercadoPagoClient
     }
 
     /**     * Method responsible for Customer Card deletion.
-     * @param string $customer_id customer id.
-     * @param string $card_id card id.
+     * @param string $customer_id customer ID.
+     * @param string $card_id card ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\CustomerCard found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
@@ -92,7 +92,7 @@ final class CustomerCardClient extends MercadoPagoClient
 
     /**
      * Method responsible for getting list Customer Card.
-     * @param string $customer_id customer id.
+     * @param string $customer_id customer ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\CustomerCardResult found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.

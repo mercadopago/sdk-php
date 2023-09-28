@@ -19,7 +19,7 @@ class OAuth extends MPResource
     /** Scope. */
     public ?string $scope;
 
-    /** User id. */
+    /** User ID. */
     public ?int $user_id;
 
     /** Refresh token. */
