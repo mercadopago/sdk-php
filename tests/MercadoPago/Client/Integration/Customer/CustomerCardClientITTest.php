@@ -162,7 +162,7 @@ final class CustomerCardClientITTest extends TestCase
         $this->assertEquals(200, $get_customer_card->getResponse()->getStatusCode());
         $this->assertCount(1, $get_customer_card->getResponse()->getContent());
         $this->assertCount(1, $get_customer_card->data);
-        $this->assertNotNull($get_customer_card->data[0]["id"]);
+        $this->assertNotNull($get_customer_card->data[0]->id);
     }
 
     public function testListWithRequestOptionsFailure(): void

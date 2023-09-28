@@ -24,6 +24,7 @@ final class PaymentMethodClientITTest extends TestCase
         $payment_method = $client->get();
         $this->assertNotNull($payment_method);
         $this->assertEquals(200, $payment_method->getResponse()->getStatusCode());
+        $this->assertNotNull($payment_method->data[0]->id);
     }
 
     public function testGetWithInvalidAccessTokenFailure(): void

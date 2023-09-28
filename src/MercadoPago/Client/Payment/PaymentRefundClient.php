@@ -90,8 +90,8 @@ final class PaymentRefundClient extends MercadoPagoClient
     public function list(int $payment_id, ?RequestOptions $request_options = null): PaymentRefundResult
     {
         $response = parent::send(sprintf(self::$URL_WITH_PAYMENT_ID, strval($payment_id)), HttpMethod::GET, null, null, $request_options);
-        $result = new PaymentRefundResult();
-        $result->data = $response->getContent();
+        $result_data = array("data" => $response->getContent());
+        $result = Serializer::deserializeFromJson(PaymentRefundResult::class, $result_data);
         $result->setResponse($response);
         return $result;
     }

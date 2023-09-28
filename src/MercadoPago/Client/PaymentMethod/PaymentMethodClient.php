@@ -7,6 +7,7 @@ use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Resources\PaymentMethodResult;
+use MercadoPago\Serialization\Serializer;
 
 /** Client responsible for performing payment methods actions. */
 final class PaymentMethodClient extends MercadoPagoClient
@@ -29,8 +30,8 @@ final class PaymentMethodClient extends MercadoPagoClient
     public function get(?RequestOptions $request_options = null): PaymentMethodResult
     {
         $response = parent::send(self::$URL, HttpMethod::GET, null, null, $request_options);
-        $result = new PaymentMethodResult();
-        $result->data = $response->getContent();
+        $result_data = array("data" => $response->getContent());
+        $result = Serializer::deserializeFromJson(PaymentMethodResult::class, $result_data);
         $result->setResponse($response);
         return $result;
     }

@@ -107,7 +107,7 @@ final class MerchantOrderClientITTest extends TestCase
         $this->assertEquals(1, $search_result->next_offset);
         $this->assertEquals(1, $search_result->total);
         $this->assertEquals(1, count($search_result->elements));
-        $this->assertEquals($merchant_order_created->id, $search_result->elements[0]["id"]);
+        $this->assertEquals($merchant_order_created->id, $search_result->elements[0]->id);
     }
 
     public function testSearchWithRequestOptionsFailure(): void

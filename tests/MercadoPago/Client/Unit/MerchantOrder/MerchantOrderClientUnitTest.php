@@ -23,16 +23,16 @@ final class MerchantOrderClientUnitTest extends BaseClient
         $client = new MerchantOrderClient();
         $merchant_order = $client->create($this->createRequest());
 
-        $this->assertEquals(201, $merchant_order ->getResponse()->getStatusCode());
-        $this->assertEquals(11223344550, $merchant_order -> id);
-        $this->assertEquals("opened", $merchant_order -> status);
-        $this->assertEquals("123456789-ceb44a1c-6d7c-4996-99c6-24060542ed9f", $merchant_order -> preference_id);
-        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order -> date_created);
-        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order -> last_updated);
-        $this->assertEquals("MP-MKT-5887075667929427", $merchant_order -> marketplace);
-        $this->assertEquals("test_reference", $merchant_order -> external_reference);
-        $this->assertEquals(123456789, $merchant_order ->collector->id);
-        $this->assertEquals("MLB_SELLER", $merchant_order ->collector->nickname);
+        $this->assertEquals(201, $merchant_order->getResponse()->getStatusCode());
+        $this->assertEquals(11223344550, $merchant_order->id);
+        $this->assertEquals("opened", $merchant_order->status);
+        $this->assertEquals("123456789-ceb44a1c-6d7c-4996-99c6-24060542ed9f", $merchant_order->preference_id);
+        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order->date_created);
+        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order->last_updated);
+        $this->assertEquals("MP-MKT-5887075667929427", $merchant_order->marketplace);
+        $this->assertEquals("test_reference", $merchant_order->external_reference);
+        $this->assertEquals(123456789, $merchant_order->collector->id);
+        $this->assertEquals("MLB_SELLER", $merchant_order->collector->nickname);
     }
 
     public function testGetSuccess(): void
@@ -47,16 +47,16 @@ final class MerchantOrderClientUnitTest extends BaseClient
         $merchant_order_id = 11223344550;
         $merchant_order = $client->get($merchant_order_id);
 
-        $this->assertEquals(200, $merchant_order ->getResponse()->getStatusCode());
-        $this->assertEquals(11223344550, $merchant_order -> id);
-        $this->assertEquals("opened", $merchant_order -> status);
-        $this->assertEquals("123456789-ceb44a1c-6d7c-4996-99c6-24060542ed9f", $merchant_order -> preference_id);
-        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order -> date_created);
-        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order -> last_updated);
-        $this->assertEquals("MP-MKT-5887075667929427", $merchant_order -> marketplace);
-        $this->assertEquals("test_reference", $merchant_order -> external_reference);
-        $this->assertEquals(123456789, $merchant_order ->collector->id);
-        $this->assertEquals("MLB_SELLER", $merchant_order ->collector->nickname);
+        $this->assertEquals(200, $merchant_order->getResponse()->getStatusCode());
+        $this->assertEquals(11223344550, $merchant_order->id);
+        $this->assertEquals("opened", $merchant_order->status);
+        $this->assertEquals("123456789-ceb44a1c-6d7c-4996-99c6-24060542ed9f", $merchant_order->preference_id);
+        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order->date_created);
+        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order->last_updated);
+        $this->assertEquals("MP-MKT-5887075667929427", $merchant_order->marketplace);
+        $this->assertEquals("test_reference", $merchant_order->external_reference);
+        $this->assertEquals(123456789, $merchant_order->collector->id);
+        $this->assertEquals("MLB_SELLER", $merchant_order->collector->nickname);
     }
 
     public function testUpdateSuccess(): void
@@ -71,16 +71,16 @@ final class MerchantOrderClientUnitTest extends BaseClient
         $merchant_order_id = 11223344550;
         $merchant_order = $client->update($merchant_order_id, $this->updateRequest());
 
-        $this->assertEquals(200, $merchant_order ->getResponse()->getStatusCode());
-        $this->assertEquals(11223344550, $merchant_order -> id);
-        $this->assertEquals("opened", $merchant_order -> status);
-        $this->assertEquals("123456789-ceb44a1c-6d7c-4996-99c6-24060542ed9f", $merchant_order -> preference_id);
-        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order -> date_created);
-        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order -> last_updated);
-        $this->assertEquals("MP-MKT-5887075667929427", $merchant_order -> marketplace);
-        $this->assertEquals("test_reference", $merchant_order -> external_reference);
-        $this->assertEquals(123456789, $merchant_order ->collector->id);
-        $this->assertEquals("MLB_SELLER", $merchant_order ->collector->nickname);
+        $this->assertEquals(200, $merchant_order->getResponse()->getStatusCode());
+        $this->assertEquals(11223344550, $merchant_order->id);
+        $this->assertEquals("opened", $merchant_order->status);
+        $this->assertEquals("123456789-ceb44a1c-6d7c-4996-99c6-24060542ed9f", $merchant_order->preference_id);
+        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order->date_created);
+        $this->assertEquals("2023-09-12T13:55:01.933-04:00", $merchant_order->last_updated);
+        $this->assertEquals("MP-MKT-5887075667929427", $merchant_order->marketplace);
+        $this->assertEquals("test_reference", $merchant_order->external_reference);
+        $this->assertEquals(123456789, $merchant_order->collector->id);
+        $this->assertEquals("MLB_SELLER", $merchant_order->collector->nickname);
     }
 
     public function testSearchSuccess(): void
@@ -98,7 +98,7 @@ final class MerchantOrderClientUnitTest extends BaseClient
 
         $this->assertEquals(200, $search_result->getResponse()->getStatusCode());
         $this->assertEquals(1, count($search_result->elements));
-        $this->assertEquals("123456789-ceb44a1c-6d7c-4996-99c6-24060542ed9f", $search_result -> elements[0]["preference_id"]);
+        $this->assertEquals("123456789-ceb44a1c-6d7c-4996-99c6-24060542ed9f", $search_result->elements[0]->preference_id);
         $this->assertEquals(1, $search_result->next_offset);
         $this->assertEquals(1, $search_result->total);
     }
@@ -106,8 +106,8 @@ final class MerchantOrderClientUnitTest extends BaseClient
     private function createRequest(): array
     {
         $request = [
-          "external_reference" => "test_reference",
-          "preference_id" => "123456789-ceb44a1c-6d7c-4996-99c6-24060542ed9f",
+            "external_reference" => "test_reference",
+            "preference_id" => "123456789-ceb44a1c-6d7c-4996-99c6-24060542ed9f",
         ];
         return $request;
     }
@@ -115,7 +115,7 @@ final class MerchantOrderClientUnitTest extends BaseClient
     private function updateRequest(): array
     {
         $request = [
-          "notification_url" => "https://www.test.com"
+            "notification_url" => "https://www.test.com"
         ];
         return $request;
     }

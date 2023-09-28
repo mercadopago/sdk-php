@@ -111,11 +111,11 @@ final class PreApprovalPlanClientUnitTest extends BaseClient
         $search_result = $client->search($search_request);
 
         $this->assertEquals(200, $search_result->getResponse()->getStatusCode());
-        $this->assertEquals(10, $search_result->paging["limit"]);
-        $this->assertEquals(0, $search_result->paging["offset"]);
-        $this->assertEquals(1, $search_result->paging["total"]);
+        $this->assertEquals(10, $search_result->paging->limit);
+        $this->assertEquals(0, $search_result->paging->offset);
+        $this->assertEquals(1, $search_result->paging->total);
         $this->assertEquals(1, count($search_result->results));
-        $this->assertEquals("2c9380848a610f84018a6543a3010320", $search_result->results[0]["id"]);
+        $this->assertEquals("2c9380848a610f84018a6543a3010320", $search_result->results[0]->id);
 
     }
 

@@ -26,9 +26,9 @@ final class IdentificationTypeClientITTest extends TestCase
         $this->assertEquals(200, $identification_type->getResponse()->getStatusCode());
         $this->assertCount(2, $identification_type->getResponse()->getContent());
         $this->assertCount(2, $identification_type->data);
-        $this->assertNotNull($identification_type->data[0]["id"]);
-        $this->assertEquals("CPF", $identification_type->data[0]["id"]);
-        $this->assertEquals("CNPJ", $identification_type->data[1]["id"]);
+        $this->assertNotNull($identification_type->data[0]->id);
+        $this->assertEquals("CPF", $identification_type->data[0]->id);
+        $this->assertEquals("CNPJ", $identification_type->data[1]->id);
     }
 
     public function testListWithRequestOptionsFailure(): void

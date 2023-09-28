@@ -26,9 +26,9 @@ final class PaymentMethodClientUnitTest extends BaseClient
         $this->assertEquals(200, $payment_method_result->getResponse()->getStatusCode());
         $this->assertCount(2, $payment_method_result->getResponse()->getContent());
         $this->assertCount(2, $payment_method_result->data);
-        $this->assertCount(1, $payment_method_result->data[0]["settings"]);
-        $this->assertCount(1, $payment_method_result->data[1]["settings"]);
-        $this->assertCount(0, $payment_method_result->data[0]["financial_institutions"]);
-        $this->assertCount(0, $payment_method_result->data[1]["financial_institutions"]);
+        $this->assertCount(1, $payment_method_result->data[0]->settings);
+        $this->assertCount(1, $payment_method_result->data[1]->settings);
+        $this->assertCount(0, $payment_method_result->data[0]->financial_institutions);
+        $this->assertCount(0, $payment_method_result->data[1]->financial_institutions);
     }
 }

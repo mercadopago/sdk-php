@@ -83,9 +83,9 @@ final class PreApprovalClientITTest extends TestCase
         sleep(3);
         $search_request = new MPSearchRequest(1, 0, ["payer_email" => "test_user_28355466@testuser.com"]);
         $search_result = $client->search($search_request);
-        $this->assertEquals(1, $search_result->paging["limit"]);
+        $this->assertEquals(1, $search_result->paging->limit);
         $this->assertEquals(1, count($search_result->results));
-        $this->assertNotNull($search_result->results[0]["id"]);
+        $this->assertNotNull($search_result->results[0]->id);
     }
 
     public function testSearchWithRequestOptionsFailure(): void

@@ -115,12 +115,12 @@ final class PreApprovalClientUnitTest extends BaseClient
         $search_result = $client->search($search_request);
 
         $this->assertEquals(200, $search_result->getResponse()->getStatusCode());
-        $this->assertEquals(2, $search_result->paging["limit"]);
-        $this->assertEquals(0, $search_result->paging["offset"]);
-        $this->assertEquals(7, $search_result->paging["total"]);
+        $this->assertEquals(2, $search_result->paging->limit);
+        $this->assertEquals(0, $search_result->paging->offset);
+        $this->assertEquals(7, $search_result->paging->total);
         $this->assertEquals(2, count($search_result->results));
-        $this->assertEquals("2c9380847e9b1dd5017ea15e30fa01ee", $search_result->results[0]["id"]);
-        $this->assertEquals("2c9380847e9b1dd5017ea15f234701f0", $search_result->results[1]["id"]);
+        $this->assertEquals("2c9380847e9b1dd5017ea15e30fa01ee", $search_result->results[0]->id);
+        $this->assertEquals("2c9380847e9b1dd5017ea15f234701f0", $search_result->results[1]->id);
     }
 
     private function createRequest(): array

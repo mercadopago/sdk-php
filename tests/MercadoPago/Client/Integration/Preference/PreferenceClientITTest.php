@@ -88,7 +88,8 @@ final class PreferenceClientITTest extends TestCase
         $this->assertEquals(1, $search_result->next_offset);
         $this->assertEquals(1, $search_result->total);
         $this->assertEquals(1, count($search_result->elements));
-        $this->assertEquals($created_preference->external_reference, $search_result->elements[0]["external_reference"]);
+        $this->assertNotNull($search_result->elements[0]->id);
+        $this->assertEquals($created_preference->external_reference, $search_result->elements[0]->external_reference);
     }
 
     public function testSearchWithRequestOptionsFailure(): void

@@ -107,15 +107,15 @@ final class CustomerCardClientUnitTest extends BaseClient
         $this->assertCount(2, $customer_card_result->getResponse()->getContent());
         $this->assertCount(2, $customer_card_result->data);
 
-        $this->assertEquals(1562188766851, $customer_card_result->data[0]["id"]);
-        $this->assertEquals(2023, $customer_card_result->data[0]["expiration_year"]);
-        $this->assertEquals("master", $customer_card_result->data[0]["payment_method"]["id"]);
-        $this->assertEquals("2019-07-03T21:15:35.000Z", $customer_card_result->data[0]["date_created"]);
+        $this->assertEquals(1562188766851, $customer_card_result->data[0]->id);
+        $this->assertEquals(2023, $customer_card_result->data[0]->expiration_year);
+        $this->assertEquals("master", $customer_card_result->data[0]->payment_method->id);
+        $this->assertEquals("2019-07-03T21:15:35.000Z", $customer_card_result->data[0]->date_created);
 
-        $this->assertEquals(1562188766852, $customer_card_result->data[1]["id"]);
-        $this->assertEquals(2024, $customer_card_result->data[1]["expiration_year"]);
-        $this->assertEquals("visa", $customer_card_result->data[1]["payment_method"]["id"]);
-        $this->assertEquals("2019-07-03T21:15:35.000Z", $customer_card_result->data[1]["date_created"]);
+        $this->assertEquals(1562188766852, $customer_card_result->data[1]->id);
+        $this->assertEquals(2024, $customer_card_result->data[1]->expiration_year);
+        $this->assertEquals("visa", $customer_card_result->data[1]->payment_method->id);
+        $this->assertEquals("2019-07-03T21:15:35.000Z", $customer_card_result->data[1]->date_created);
     }
 
     private function createRequest(): array

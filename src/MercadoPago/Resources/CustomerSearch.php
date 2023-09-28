@@ -3,13 +3,30 @@
 namespace MercadoPago\Resources;
 
 use MercadoPago\Net\MPResource;
+use MercadoPago\Serialization\Mapper;
 
 /** Customer Search class. */
 class CustomerSearch extends MPResource
 {
+    /** Class mapper. */
+    use Mapper;
+
     /** Search paging. */
-    public array $paging;
+    public array|object|null $paging;
 
     /** Search results. */
-    public array $results;
+    public array|object|null $results;
+
+    private $map = [
+        "paging" => "MercadoPago\Resources\Common\Paging",
+        "results" => "MercadoPago\Resources\Customer\CustomerSearchResult",
+    ];
+
+    /**
+     * Method responsible for getting map of entities.
+     */
+    public function getMap(): array
+    {
+        return $this->map;
+    }
 }

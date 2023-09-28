@@ -16,4 +16,7 @@ class Address
 
     /** Street number. */
     public ?string $street_number;
+
+    /** City. */
+    public ?string $city;
 }
