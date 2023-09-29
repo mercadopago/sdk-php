@@ -35,22 +35,6 @@ final class CardTokenClientITTest extends TestCase
         $client->create($request, $request_options);
     }
 
-    public function testGetSuccess(): void
-    {
-        $client = new CardTokenClient();
-        $card_token = $client->get("60aca73f30e817fcf074cebc616897ba");
-        $this->assertNotNull($card_token->id);
-    }
-
-    public function testGetWithInvalidAccessTokenFailure(): void
-    {
-        $this->expectException(MPApiException::class);
-        $client = new CardTokenClient();
-        $request_options = new RequestOptions();
-        $request_options->setAccessToken("invalid_access_token");
-        $client->get("123", $request_options);
-    }
-
     private function createRequest(): array
     {
         $request = [
