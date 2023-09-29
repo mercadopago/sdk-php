@@ -16,7 +16,7 @@ First time using Mercado Pago? Create your [Mercado Pago account](https://www.me
 
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md) if not already installed.
 
-2. Install NodeJS SDK for MercadoPago running in command line:
+2. Install PHP SDK for MercadoPago running in command line:
 
 ```
 composer require "mercadopago/dx-php:3.0.0
