@@ -1,3 +1,4 @@
+![image](https://github.com/mercadopago/sdk-php/assets/86324641/46001c9c-b28a-44cb-9fc3-211712be5022)
 
 # Mercado Pago SDK for PHP
 
