@@ -63,6 +63,7 @@ class MercadoPagoClient
     {
         $headers = array();
         $headers = $this->addCustomHeaders($headers, $request_options);
+        $headers = $this->addTrackingHeaders($headers);
         $headers = $this->addDefaultHeaders($method, $headers, $request_options);
         return $headers;
     }
@@ -86,11 +87,39 @@ class MercadoPagoClient
             'X-Tracking-Id: platform:' . PHP_MAJOR_VERSION . '|' . PHP_VERSION . ',type:SDK' . MercadoPagoConfig::$CURRENT_VERSION . ',so;'
         );
 
-        if ($this->shouldAddIdempotencyKey($method)) {
+        if ($this->shouldAddIdempotencyKey($method) && !$this->headerExists($headers, 'X-Idempotency-Key')) {
             array_push($default_headers, 'X-Idempotency-Key: ' . $this->getIdempotencyKey($request_options));
         }
 
         return array_merge($headers, $default_headers);
+    }
+
+    private function addTrackingHeaders(array $headers): array
+    {
+        $tracking_headers = array();
+        if (!$this->headerExists($headers, 'X-Platform-Id') && !empty(MercadoPagoConfig::getPlatformId())) {
+            array_push($tracking_headers, 'X-Platform-Id: ' . MercadoPagoConfig::getPlatformId());
+        }
+
+        if (!$this->headerExists($headers, 'X-Integrator-Id') && !empty(MercadoPagoConfig::getIntegratorId())) {
+            array_push($tracking_headers, 'X-Integrator-Id: ' . MercadoPagoConfig::getIntegratorId());
+        }
+
+        if (!$this->headerExists($headers, 'X-Corporation-Id') && !empty(MercadoPagoConfig::getCorporationId())) {
+            array_push($tracking_headers, 'X-Corporation-Id: ' . MercadoPagoConfig::getCorporationId());
+        }
+
+        return array_merge($headers, $tracking_headers);
+    }
+
+    private function headerExists(array $headers, string $header): bool
+    {
+        foreach($headers as $h) {
+            if (strtolower($h) == strtolower($header)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private function getAccessToken(?RequestOptions $request_options = null): string

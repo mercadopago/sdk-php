@@ -20,6 +20,15 @@ class MercadoPagoConfig
     /** @var string access token */
     private static string $access_token = "";
 
+    /** @var string integrator id */
+    private static string $integrator_id = "";
+
+    /** @var string corporation id */
+    private static string $corporation_id = "";
+
+    /** @var string platform id */
+    private static string $platform_id = "";
+
     /** @var int max retries */
     private static int $max_retries = 3;
 
@@ -73,6 +82,63 @@ class MercadoPagoConfig
     public static function setAccessToken(string $access_token): void
     {
         self::$access_token = $access_token;
+    }
+
+    /**
+     * Gets integrator id.
+     * @return string integrator id
+     */
+    public static function getIntegratorId(): string
+    {
+        return self::$integrator_id;
+    }
+
+    /**
+     * Sets integrator id.
+     * @param string $integrator_id integrator id
+     * @return void integrator id
+     */
+    public static function setIntegratorId(string $integrator_id): void
+    {
+        self::$integrator_id = $integrator_id;
+    }
+
+    /**
+     * Gets corporation id.
+     * @return string corporation id
+     */
+    public static function getCorporationId(): string
+    {
+        return self::$corporation_id;
+    }
+
+    /**
+     * Sets corporation id.
+     * @param string $corporation_id corporation id
+     * @return void corporation id
+     */
+    public static function setCorporationId(string $corporation_id): void
+    {
+        self::$corporation_id = $corporation_id;
+    }
+
+    /**
+     * Gets platform id.
+     * @return string platform id
+     */
+    public static function getPlatformId(): string
+    {
+        return self::$platform_id;
+    }
+
+    /**
+     * Sets platform id.
+     * @param string $platform_id platform id
+     * @return void platform id
+     */
+    public static function setPlatformId(string $platform_id): void
+    {
+        self::$platform_id = $platform_id;
     }
 
     /**
