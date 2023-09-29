@@ -128,17 +128,20 @@ $payment = $client->create($request);
 
 ## 📚 Documentation
 
-Visit our Dev Site for further information regarding:
- - Payments APIs: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/api/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/api/introduction/)
- - Mercado Pago checkout: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/web-payment-checkout/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/web-payment-checkout/introduction/)
- - Web Tokenize checkout: [Spanish](https://www.mercadopago.com.ar/developers/es/guides/payments/web-tokenize-checkout/introduction/) / [Portuguese](https://www.mercadopago.com.br/developers/pt/guides/payments/web-tokenize-checkout/introduction/)
+See our documentation for more details.
 
-Check [our official code reference](https://www.mercadopago.com.br/developers/pt/docs/sdks-library/server-side) to explore all available functionalities.
+- Mercado Pago reference API. [Portuguese](https://www.mercadopago.com/developers/pt/reference) / [English](https://www.mercadopago.com/developers/en/reference) / [Spanish](https://www.mercadopago.com/developers/es/reference)
+
+## 🤝 Contributing
+
+All contributions are welcome, ranging from people wanting to triage issues, others wanting to write documentation, to people wanting to contribute code.
+
+Please read and follow our [contribution guidelines](CONTRIBUTING.md). Contributions not following these guidelines will
+be disregarded. The guidelines are in place to make all of our lives easier and make contribution a consistent process for everyone.
 
 ## ❤️ Support
 
-If you require technical support, please contact our support team at our developers
-site: [English](https://www.mercadopago.com/developers/en/support/center/contact) / [Portuguese](https://www.mercadopago.com/developers/pt/support/center/contact) / [Spanish](https://www.mercadopago.com/developers/es/support/center/contact)
+If you require technical support, please contact our support team at our developers site: [English](https://www.mercadopago.com/developers/en/support/center/contact) / [Portuguese](https://www.mercadopago.com/developers/pt/support/center/contact) / [Spanish](https://www.mercadopago.com/developers/es/support/center/contact)
 
 ## 🏻 License
 
