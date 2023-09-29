@@ -92,7 +92,8 @@ final class CustomerCardClient extends MercadoPagoClient
 
     /**
      * Method responsible for getting list Customer Card.
-     * @param string $customer_id customer id.     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
+     * @param string $customer_id customer id.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\CustomerCardResult found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
@@ -100,8 +101,8 @@ final class CustomerCardClient extends MercadoPagoClient
     public function list(string $customer_id, ?RequestOptions $request_options = null): CustomerCardResult
     {
         $response = parent::send(sprintf(self::$URL_CUSTOMER_ID, $customer_id), HttpMethod::GET, null, null, $request_options);
-        $result = new CustomerCardResult();
-        $result->data = $response->getContent();
+        $result_data = array("data" => $response->getContent());
+        $result = Serializer::deserializeFromJson(CustomerCardResult::class, $result_data);
         $result->setResponse($response);
         return $result;
     }

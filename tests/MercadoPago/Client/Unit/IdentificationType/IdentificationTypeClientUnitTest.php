@@ -27,16 +27,16 @@ final class IdentificationTypeClientUnitTest extends BaseClient
         $this->assertCount(2, $identification_type_result->getResponse()->getContent());
         $this->assertCount(2, $identification_type_result->data);
 
-        $this->assertEquals("CPF", $identification_type_result->data[0]["id"]);
-        $this->assertEquals("CPF", $identification_type_result->data[0]["name"]);
-        $this->assertEquals("number", $identification_type_result->data[0]["type"]);
-        $this->assertEquals(11, $identification_type_result->data[0]["min_length"]);
-        $this->assertEquals(11, $identification_type_result->data[0]["max_length"]);
+        $this->assertEquals("CPF", $identification_type_result->data[0]->id);
+        $this->assertEquals("CPF", $identification_type_result->data[0]->name);
+        $this->assertEquals("number", $identification_type_result->data[0]->type);
+        $this->assertEquals(11, $identification_type_result->data[0]->min_length);
+        $this->assertEquals(11, $identification_type_result->data[0]->max_length);
 
-        $this->assertEquals("CNPJ", $identification_type_result->data[1]["id"]);
-        $this->assertEquals("CNPJ", $identification_type_result->data[1]["name"]);
-        $this->assertEquals("number", $identification_type_result->data[1]["type"]);
-        $this->assertEquals(14, $identification_type_result->data[1]["min_length"]);
-        $this->assertEquals(14, $identification_type_result->data[1]["max_length"]);
+        $this->assertEquals("CNPJ", $identification_type_result->data[1]->id);
+        $this->assertEquals("CNPJ", $identification_type_result->data[1]->name);
+        $this->assertEquals("number", $identification_type_result->data[1]->type);
+        $this->assertEquals(14, $identification_type_result->data[1]->min_length);
+        $this->assertEquals(14, $identification_type_result->data[1]->max_length);
     }
 }

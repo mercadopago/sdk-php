@@ -89,18 +89,18 @@ final class PaymentRefundClientUnitTest extends BaseClient
         $this->assertEquals(200, $refund_result->getResponse()->getStatusCode());
         $this->assertEquals(2, count($refund_result->data));
 
-        $this->assertEquals($payment_id, $refund_result->data[0]["payment_id"]);
-        $this->assertEquals(1009042015, $refund_result->data[0]["id"]);
-        $this->assertEquals(5, $refund_result->data[0]["amount"]);
-        $this->assertEquals("2023-08-24T15:35:15.783-04:00", $refund_result->data[0]["date_created"]);
-        $this->assertEquals("approved", $refund_result->data[0]["status"]);
-        $this->assertEquals("Test Test", $refund_result->data[0]["source"]["name"]);
+        $this->assertEquals($payment_id, $refund_result->data[0]->payment_id);
+        $this->assertEquals(1009042015, $refund_result->data[0]->id);
+        $this->assertEquals(5, $refund_result->data[0]->amount);
+        $this->assertEquals("2023-08-24T15:35:15.783-04:00", $refund_result->data[0]->date_created);
+        $this->assertEquals("approved", $refund_result->data[0]->status);
+        $this->assertEquals("Test Test", $refund_result->data[0]->source->name);
 
-        $this->assertEquals($payment_id, $refund_result->data[1]["payment_id"]);
-        $this->assertEquals(1009042016, $refund_result->data[1]["id"]);
-        $this->assertEquals(5, $refund_result->data[1]["amount"]);
-        $this->assertEquals("2023-08-24T15:35:15.783-04:00", $refund_result->data[1]["date_created"]);
-        $this->assertEquals("approved", $refund_result->data[1]["status"]);
-        $this->assertEquals("Test Test", $refund_result->data[1]["source"]["name"]);
+        $this->assertEquals($payment_id, $refund_result->data[1]->payment_id);
+        $this->assertEquals(1009042016, $refund_result->data[1]->id);
+        $this->assertEquals(5, $refund_result->data[1]->amount);
+        $this->assertEquals("2023-08-24T15:35:15.783-04:00", $refund_result->data[1]->date_created);
+        $this->assertEquals("approved", $refund_result->data[1]->status);
+        $this->assertEquals("Test Test", $refund_result->data[1]->source->name);
     }
 }

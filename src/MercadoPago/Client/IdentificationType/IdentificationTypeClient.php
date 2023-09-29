@@ -7,6 +7,7 @@ use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Resources\IdentificationTypeResult;
+use MercadoPago\Serialization\Serializer;
 
 /** Client responsible for performing identification type actions. */
 final class IdentificationTypeClient extends MercadoPagoClient
@@ -29,8 +30,8 @@ final class IdentificationTypeClient extends MercadoPagoClient
     public function list(?RequestOptions $request_options = null): IdentificationTypeResult
     {
         $response = parent::send(self::$URL, HttpMethod::GET, null, null, $request_options);
-        $result = new IdentificationTypeResult();
-        $result->data = $response->getContent();
+        $result_data = array("data" => $response->getContent());
+        $result = Serializer::deserializeFromJson(IdentificationTypeResult::class, $result_data);
         $result->setResponse($response);
         return $result;
     }

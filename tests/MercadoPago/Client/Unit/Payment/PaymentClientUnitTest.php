@@ -91,11 +91,11 @@ final class PaymentClientUnitTest extends BaseClient
         $search_request = new \MercadoPago\Net\MPSearchRequest(5, 0, []);
         $search_result = $client->search($search_request);
         $this->assertEquals(200, $search_result->getResponse()->getStatusCode());
-        $this->assertEquals(5, $search_result->paging["limit"]);
-        $this->assertEquals(0, $search_result->paging["offset"]);
-        $this->assertEquals(102, $search_result->paging["total"]);
+        $this->assertEquals(5, $search_result->paging->limit);
+        $this->assertEquals(0, $search_result->paging->offset);
+        $this->assertEquals(102, $search_result->paging->total);
         $this->assertEquals(5, count($search_result->results));
-        $this->assertEquals(1241012238, $search_result->results[0]["id"]);
+        $this->assertEquals(1241012238, $search_result->results[0]->id);
     }
 
     private function createRequest(): array

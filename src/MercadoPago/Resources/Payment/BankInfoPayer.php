@@ -12,7 +12,7 @@ class BankInfoPayer
     public ?string $email;
 
     /** Account ID. */
-    public ?int $account_id;
+    public ?string $account_id;
 
     /** Account long name. */
     public ?string $long_name;

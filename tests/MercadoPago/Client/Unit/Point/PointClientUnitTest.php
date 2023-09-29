@@ -99,18 +99,18 @@ final class PointClientUnitTest extends BaseClient
         $payment_intent = $client->getPaymentIntentList($list_request);
 
         $this->assertSame(200, $payment_intent->getResponse()->getStatusCode());
-        $this->assertSame("3be5a9a0-570b-4650-9ec8-ceb699259111", $payment_intent->events[0]["payment_intent_id"]);
-        $this->assertSame("CANCELED", $payment_intent->events[0]["status"]);
-        $this->assertSame("2023-09-13T18:22:30Z", $payment_intent->events[0]["created_on"]);
-        $this->assertSame("02150f68-01c5-46cd-906c-195960a17664", $payment_intent->events[1]["payment_intent_id"]);
-        $this->assertSame("ABANDONED", $payment_intent->events[1]["status"]);
-        $this->assertSame("2023-09-13T15:45:13Z", $payment_intent->events[1]["created_on"]);
-        $this->assertSame("08bebbe6-dfbf-48a7-be06-45c56343ec19", $payment_intent->events[2]["payment_intent_id"]);
-        $this->assertSame("CANCELED", $payment_intent->events[2]["status"]);
-        $this->assertSame("2023-09-12T20:53:49Z", $payment_intent->events[2]["created_on"]);
-        $this->assertSame("a8f71a94-37da-439c-afe8-ff1c7f7af2be", $payment_intent->events[3]["payment_intent_id"]);
-        $this->assertSame("CANCELED", $payment_intent->events[3]["status"]);
-        $this->assertSame("2023-09-12T20:39:33Z", $payment_intent->events[3]["created_on"]);
+        $this->assertSame("3be5a9a0-570b-4650-9ec8-ceb699259111", $payment_intent->events[0]->payment_intent_id);
+        $this->assertSame("CANCELED", $payment_intent->events[0]->status);
+        $this->assertSame("2023-09-13T18:22:30Z", $payment_intent->events[0]->created_on);
+        $this->assertSame("02150f68-01c5-46cd-906c-195960a17664", $payment_intent->events[1]->payment_intent_id);
+        $this->assertSame("ABANDONED", $payment_intent->events[1]->status);
+        $this->assertSame("2023-09-13T15:45:13Z", $payment_intent->events[1]->created_on);
+        $this->assertSame("08bebbe6-dfbf-48a7-be06-45c56343ec19", $payment_intent->events[2]->payment_intent_id);
+        $this->assertSame("CANCELED", $payment_intent->events[2]->status);
+        $this->assertSame("2023-09-12T20:53:49Z", $payment_intent->events[2]->created_on);
+        $this->assertSame("a8f71a94-37da-439c-afe8-ff1c7f7af2be", $payment_intent->events[3]->payment_intent_id);
+        $this->assertSame("CANCELED", $payment_intent->events[3]->status);
+        $this->assertSame("2023-09-12T20:39:33Z", $payment_intent->events[3]->created_on);
     }
 
     public function testGetPaymentIntentStatusSuccess(): void
@@ -143,14 +143,14 @@ final class PointClientUnitTest extends BaseClient
         $devices = $client->getDevices($request);
 
         $this->assertSame(200, $devices->getResponse()->getStatusCode());
-        $this->assertSame("GERTEC_MP35P__8701012051267123", $devices->devices[0]["id"]);
-        $this->assertSame(48094361, $devices->devices[0]["pos_id"]);
-        $this->assertSame("47685573", $devices->devices[0]["store_id"]);
-        $this->assertSame("", $devices->devices[0]["external_pos_id"]);
-        $this->assertSame("PDV", $devices->devices[0]["operating_mode"]);
-        $this->assertSame(1, $devices->paging["total"]);
-        $this->assertSame(50, $devices->paging["limit"]);
-        $this->assertSame(0, $devices->paging["offset"]);
+        $this->assertSame("GERTEC_MP35P__8701012051267123", $devices->devices[0]->id);
+        $this->assertSame(48094361, $devices->devices[0]->pos_id);
+        $this->assertSame(47685573, $devices->devices[0]->store_id);
+        $this->assertSame("", $devices->devices[0]->external_pos_id);
+        $this->assertSame("PDV", $devices->devices[0]->operating_mode);
+        $this->assertSame(1, $devices->paging->total);
+        $this->assertSame(50, $devices->paging->limit);
+        $this->assertSame(0, $devices->paging->offset);
     }
 
     public function testChangeDeviceOperationgModeSuccess(): void

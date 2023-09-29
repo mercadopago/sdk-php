@@ -113,7 +113,7 @@ final class PointClientITTest extends TestCase
             $payment_intent = $client->createPaymentIntent(PointClientITTest::DEVICE_ID, $request, $request_options);
             sleep(3);
             $payment_intent_list = $client->getPaymentIntentList($list_request, $request_options);
-            $this->assertNotNull($payment_intent_list->events[0]["payment_intent_id"]);
+            $this->assertNotNull($payment_intent_list->events[0]->payment_intent_id);
         } catch (MPApiException | \Exception $e) {
             $this->fail($e->getMessage());
         } finally {
@@ -165,7 +165,7 @@ final class PointClientITTest extends TestCase
         $request = $this->createRequest();
         $request = $this->createGetDevicesRequest();
         $devices = $client->getDevices($request);
-        $this->assertNotNull($devices->devices[0]['id']);
+        $this->assertNotNull($devices->devices[0]->id);
     }
 
     public function testGetDevicesWithRequestOptionsFailure(): void
@@ -184,7 +184,7 @@ final class PointClientITTest extends TestCase
         $request = $this->createRequest();
         $request = $this->createGetDevicesRequest();
         $devices = $client->getDevices($request);
-        $device_id = $devices->devices[0]['id'];
+        $device_id = $devices->devices[0]->id;
         $request = $this->createOperatingModeRequest();
         $device_updated = $client->changeDeviceOperatingMode($device_id, $request);
         $this->assertSame("PDV", $device_updated->operating_mode);

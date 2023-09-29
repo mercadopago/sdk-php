@@ -150,11 +150,11 @@ final class PaymentRefundClientITTest extends TestCase
         $list_refund = $refund_client->list($payment->id);
         $this->assertEquals(2, count($list_refund->data));
 
-        $this->assertEquals(20, $list_refund->data[0]["amount"]);
-        $this->assertEquals("approved", $list_refund->data[0]["status"]);
+        $this->assertEquals(20, $list_refund->data[0]->amount);
+        $this->assertEquals("approved", $list_refund->data[0]->status);
 
-        $this->assertEquals(30, $list_refund->data[1]["amount"]);
-        $this->assertEquals("approved", $list_refund->data[1]["status"]);
+        $this->assertEquals(30, $list_refund->data[1]->amount);
+        $this->assertEquals("approved", $list_refund->data[1]->status);
     }
 
     public function testListRefundWithRequestOptionsFailure(): void

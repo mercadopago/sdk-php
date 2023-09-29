@@ -90,7 +90,7 @@ final class PreferenceClientUnitTest extends BaseClient
 
         $this->assertEquals(200, $search_result->getResponse()->getStatusCode());
         $this->assertEquals(1, count($search_result->elements));
-        $this->assertEquals("11111111-fd23cead-c53a-43d1-946c-4afef6f806f6", $search_result -> elements[0]["id"]);
+        $this->assertEquals("11111111-fd23cead-c53a-43d1-946c-4afef6f806f6", $search_result -> elements[0]->id);
         $this->assertEquals(1, $search_result->next_offset);
         $this->assertEquals(1, $search_result->total);
     }

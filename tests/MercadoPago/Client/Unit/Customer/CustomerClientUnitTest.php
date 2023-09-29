@@ -156,36 +156,36 @@ final class CustomerClientUnitTest extends BaseClient
         $client = new CustomerClient();
         $customers = $client->search();
         $this->assertEquals(200, $customers->getResponse()->getStatusCode());
-        $this->assertEquals(10, $customers->paging["limit"]);
-        $this->assertEquals(0, $customers->paging["offset"]);
-        $this->assertEquals(2, $customers->paging["total"]);
+        $this->assertEquals(10, $customers->paging->limit);
+        $this->assertEquals(0, $customers->paging->offset);
+        $this->assertEquals(2, $customers->paging->total);
         $this->assertEquals(2, count($customers->results));
 
-        $this->assertEquals("1469979538-52qKdADBYeloaX", $customers->results[0]["id"]);
-        $this->assertEquals("test_cust_1693832456@testuser.com", $customers->results[0]["email"]);
-        $this->assertEquals("Test", $customers->results[0]["first_name"]);
-        $this->assertEquals("Customer", $customers->results[0]["last_name"]);
-        $this->assertEquals("Customer description", $customers->results[0]["description"]);
-        $this->assertEquals("2023-09-04T09:00:57.374-04:00", $customers->results[0]["date_created"]);
-        $this->assertEquals("2023-09-04T09:00:57.374-04:00", $customers->results[0]["date_last_updated"]);
-        $this->assertEquals("1322811505", $customers->results[0]["default_address"]);
-        $this->assertEquals(1469979538, $customers->results[0]["user_id"]);
-        $this->assertEquals(471763966, $customers->results[0]["merchant_id"]);
-        $this->assertEquals(558881221729581, $customers->results[0]["client_id"]);
-        $this->assertEquals("active", $customers->results[0]["status"]);
+        $this->assertEquals("1469979538-52qKdADBYeloaX", $customers->results[0]->id);
+        $this->assertEquals("test_cust_1693832456@testuser.com", $customers->results[0]->email);
+        $this->assertEquals("Test", $customers->results[0]->first_name);
+        $this->assertEquals("Customer", $customers->results[0]->last_name);
+        $this->assertEquals("Customer description", $customers->results[0]->description);
+        $this->assertEquals("2023-09-04T09:00:57.374-04:00", $customers->results[0]->date_created);
+        $this->assertEquals("2023-09-04T09:00:57.374-04:00", $customers->results[0]->date_last_updated);
+        $this->assertEquals("1322811505", $customers->results[0]->default_address);
+        $this->assertEquals(1469979538, $customers->results[0]->user_id);
+        $this->assertEquals(471763966, $customers->results[0]->merchant_id);
+        $this->assertEquals(558881221729581, $customers->results[0]->client_id);
+        $this->assertEquals("active", $customers->results[0]->status);
 
-        $this->assertEquals("1439324851-zk2BeFiet6otYD", $customers->results[1]["id"]);
-        $this->assertEquals("test_user_1684943300@testuser.com", $customers->results[1]["email"]);
-        $this->assertEquals("Test", $customers->results[1]["first_name"]);
-        $this->assertEquals("Customer", $customers->results[1]["last_name"]);
-        $this->assertEquals("Customer description", $customers->results[1]["description"]);
-        $this->assertEquals("2023-09-04T09:00:57.374-04:00", $customers->results[1]["date_created"]);
-        $this->assertEquals("2023-09-04T09:00:57.374-04:00", $customers->results[1]["date_last_updated"]);
-        $this->assertEquals("1322811505", $customers->results[1]["default_address"]);
-        $this->assertEquals(1469979538, $customers->results[1]["user_id"]);
-        $this->assertEquals(471763966, $customers->results[1]["merchant_id"]);
-        $this->assertEquals(558881221729581, $customers->results[1]["client_id"]);
-        $this->assertEquals("active", $customers->results[1]["status"]);
+        $this->assertEquals("1439324851-zk2BeFiet6otYD", $customers->results[1]->id);
+        $this->assertEquals("test_user_1684943300@testuser.com", $customers->results[1]->email);
+        $this->assertEquals("Test", $customers->results[1]->first_name);
+        $this->assertEquals("Customer", $customers->results[1]->last_name);
+        $this->assertEquals("Customer description", $customers->results[1]->description);
+        $this->assertEquals("2023-09-04T09:00:57.374-04:00", $customers->results[1]->date_created);
+        $this->assertEquals("2023-09-04T09:00:57.374-04:00", $customers->results[1]->date_last_updated);
+        $this->assertEquals("1322811505", $customers->results[1]->default_address);
+        $this->assertEquals(1469979538, $customers->results[1]->user_id);
+        $this->assertEquals(471763966, $customers->results[1]->merchant_id);
+        $this->assertEquals(558881221729581, $customers->results[1]->client_id);
+        $this->assertEquals("active", $customers->results[1]->status);
     }
 
     private function createRequest(): array

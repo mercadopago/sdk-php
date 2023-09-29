@@ -103,9 +103,11 @@ final class CustomerClientITTest extends TestCase
         sleep(3);
         $search_result = $client->search($search_request);
         $this->assertNotNull($search_result->paging);
+        $this->assertEquals(1, $search_result->paging->total);
+        $this->assertEquals(0, $search_result->paging->offset);
         $this->assertNotNull($search_result->results);
         $this->assertEquals(1, count($search_result->results));
-        $this->assertEquals($created_customer->id, $search_result->results[0]["id"]);
+        $this->assertEquals($created_customer->id, $search_result->results[0]->id);
     }
 
     public function testSearchWithRequestOptionsFailure(): void

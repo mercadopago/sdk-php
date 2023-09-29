@@ -83,9 +83,9 @@ final class PreApprovalPlanClientITTest extends TestCase
         sleep(3);
         $search_request = new MPSearchRequest(1, 0, ["back_url" => "https://www.yoursite.com"]);
         $search_result = $client->search($search_request);
-        $this->assertEquals(1, $search_result->paging["limit"]);
+        $this->assertEquals(1, $search_result->paging->limit);
         $this->assertEquals(1, count($search_result->results));
-        $this->assertNotNull($search_result->results[0]["id"]);
+        $this->assertNotNull($search_result->results[0]->id);
     }
 
     public function testSearchWithRequestOptionsFailure(): void

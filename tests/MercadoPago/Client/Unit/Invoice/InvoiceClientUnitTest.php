@@ -56,10 +56,10 @@ final class InvoiceClientUnitTest extends BaseClient
         $search_result = $client->search($search_request);
 
         $this->assertSame(200, $search_result->getResponse()->getStatusCode());
-        $this->assertSame(20, $search_result->paging["limit"]);
-        $this->assertSame(0, $search_result->paging["offset"]);
-        $this->assertSame(1, $search_result->paging["total"]);
+        $this->assertSame(20, $search_result->paging->limit);
+        $this->assertSame(0, $search_result->paging->offset);
+        $this->assertSame(1, $search_result->paging->total);
         $this->assertSame(1, count($search_result->results));
-        $this->assertSame(6114264375, $search_result->results[0]["id"]);
+        $this->assertSame(6114264375, $search_result->results[0]->id);
     }
 }
