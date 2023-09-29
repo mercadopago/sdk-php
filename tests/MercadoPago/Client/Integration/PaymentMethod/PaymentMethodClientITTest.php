@@ -23,7 +23,7 @@ final class PaymentMethodClientITTest extends TestCase
         $client = new PaymentMethodClient();
         $payment_method = $client->get();
         $this->assertNotNull($payment_method);
-        $this->assertEquals(200, $payment_method->getResponse()->getStatusCode());
+        $this->assertSame(200, $payment_method->getResponse()->getStatusCode());
         $this->assertNotNull($payment_method->data[0]->id);
     }
 

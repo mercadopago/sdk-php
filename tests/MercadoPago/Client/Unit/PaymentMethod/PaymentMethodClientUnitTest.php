@@ -23,7 +23,7 @@ final class PaymentMethodClientUnitTest extends BaseClient
         $client = new PaymentMethodClient();
         $payment_method_result = $client->get();
         $this->assertNotNull($payment_method_result->data);
-        $this->assertEquals(200, $payment_method_result->getResponse()->getStatusCode());
+        $this->assertSame(200, $payment_method_result->getResponse()->getStatusCode());
         $this->assertCount(2, $payment_method_result->getResponse()->getContent());
         $this->assertCount(2, $payment_method_result->data);
         $this->assertCount(1, $payment_method_result->data[0]->settings);

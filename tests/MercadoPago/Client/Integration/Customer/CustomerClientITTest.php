@@ -79,7 +79,7 @@ final class CustomerClientITTest extends TestCase
 
         $description_customer = "Test update";
         $update_customer = $client->update($customer->id, $this->updateRequest($description_customer));
-        $this->assertEquals("Test update", $update_customer->description);
+        $this->assertSame("Test update", $update_customer->description);
     }
 
     public function testUpdateWithRequestOptionsFailure(): void
@@ -103,11 +103,11 @@ final class CustomerClientITTest extends TestCase
         sleep(3);
         $search_result = $client->search($search_request);
         $this->assertNotNull($search_result->paging);
-        $this->assertEquals(1, $search_result->paging->total);
-        $this->assertEquals(0, $search_result->paging->offset);
+        $this->assertSame(1, $search_result->paging->total);
+        $this->assertSame(0, $search_result->paging->offset);
         $this->assertNotNull($search_result->results);
-        $this->assertEquals(1, count($search_result->results));
-        $this->assertEquals($created_customer->id, $search_result->results[0]->id);
+        $this->assertSame(1, count($search_result->results));
+        $this->assertSame($created_customer->id, $search_result->results[0]->id);
     }
 
     public function testSearchWithRequestOptionsFailure(): void

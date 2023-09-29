@@ -33,8 +33,8 @@ final class PaymentRefundClientITTest extends TestCase
         $refund_client = new PaymentRefundClient();
         $refund = $refund_client->refund($payment->id, 50);
         $this->assertNotNull($refund->id);
-        $this->assertEquals(50, $refund->amount);
-        $this->assertEquals("approved", $refund->status);
+        $this->assertSame(50, $refund->amount);
+        $this->assertSame("approved", $refund->status);
     }
 
     public function testRefundPartialWithRequestOptionsFailure(): void
@@ -68,8 +68,8 @@ final class PaymentRefundClientITTest extends TestCase
         $refund_client = new PaymentRefundClient();
         $refund = $refund_client->refundTotal($payment->id);
         $this->assertNotNull($refund->id);
-        $this->assertEquals(100, $refund->amount);
-        $this->assertEquals("approved", $refund->status);
+        $this->assertSame(100, $refund->amount);
+        $this->assertSame("approved", $refund->status);
     }
 
     public function testRefundTotalWithRequestOptionsFailure(): void
@@ -105,8 +105,8 @@ final class PaymentRefundClientITTest extends TestCase
         $this->assertNotNull($refund->id);
 
         $get_refund = $refund_client->get($payment->id, $refund->id);
-        $this->assertEquals(100, $get_refund->amount);
-        $this->assertEquals("approved", $get_refund->status);
+        $this->assertSame(100, $get_refund->amount);
+        $this->assertSame("approved", $get_refund->status);
     }
 
     public function testGetRefundWithRequestOptionsFailure(): void
@@ -148,13 +148,13 @@ final class PaymentRefundClientITTest extends TestCase
         $this->assertNotNull($refund_two->id);
 
         $list_refund = $refund_client->list($payment->id);
-        $this->assertEquals(2, count($list_refund->data));
+        $this->assertSame(2, count($list_refund->data));
 
-        $this->assertEquals(20, $list_refund->data[0]->amount);
-        $this->assertEquals("approved", $list_refund->data[0]->status);
+        $this->assertSame(20, $list_refund->data[0]->amount);
+        $this->assertSame("approved", $list_refund->data[0]->status);
 
-        $this->assertEquals(30, $list_refund->data[1]->amount);
-        $this->assertEquals("approved", $list_refund->data[1]->status);
+        $this->assertSame(30, $list_refund->data[1]->amount);
+        $this->assertSame("approved", $list_refund->data[1]->status);
     }
 
     public function testListRefundWithRequestOptionsFailure(): void

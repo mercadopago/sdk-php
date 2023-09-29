@@ -60,7 +60,7 @@ final class PreApprovalClientITTest extends TestCase
         $client = new PreApprovalClient();
         $created_preapproval = $client->create($this->createRequest());
         $preapproval = $client->update($created_preapproval->id, $this->updateRequest());
-        $this->assertEquals("Yoga classes.", $preapproval->reason);
+        $this->assertSame("Yoga classes.", $preapproval->reason);
     }
 
     public function testUpdateWithRequestOptionsFailure(): void
@@ -83,8 +83,8 @@ final class PreApprovalClientITTest extends TestCase
         sleep(3);
         $search_request = new MPSearchRequest(1, 0, ["payer_email" => "test_user_28355466@testuser.com"]);
         $search_result = $client->search($search_request);
-        $this->assertEquals(1, $search_result->paging->limit);
-        $this->assertEquals(1, count($search_result->results));
+        $this->assertSame(1, $search_result->paging->limit);
+        $this->assertSame(1, count($search_result->results));
         $this->assertNotNull($search_result->results[0]->id);
     }
 

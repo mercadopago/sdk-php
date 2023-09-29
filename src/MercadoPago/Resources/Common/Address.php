@@ -15,7 +15,7 @@ class Address
     public ?string $street_name;
 
     /** Street number. */
-    public ?string $street_number;
+    public ?int $street_number;
 
     /** City. */
     public ?string $city;

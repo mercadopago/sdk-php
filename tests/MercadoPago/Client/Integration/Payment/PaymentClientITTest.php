@@ -60,7 +60,7 @@ final class PaymentClientITTest extends TestCase
         $created_payment = $client->create($this->createRequest());
         $payment = $client->cancel($created_payment->id);
         $this->assertNotNull($payment->id);
-        $this->assertEquals("cancelled", $payment->status);
+        $this->assertSame("cancelled", $payment->status);
     }
 
     public function testCancelWithRequestOptionsFailure(): void
@@ -80,11 +80,11 @@ final class PaymentClientITTest extends TestCase
         $search_request = new MPSearchRequest(1, 0, ["id" => $created_payment->id]);
         $search_result = $client->search($search_request);
         $this->assertNotNull($search_result->paging);
-        $this->assertEquals(1, $search_result->paging->total);
-        $this->assertEquals(0, $search_result->paging->offset);
+        $this->assertSame(1, $search_result->paging->total);
+        $this->assertSame(0, $search_result->paging->offset);
         $this->assertNotNull($search_result->results);
-        $this->assertEquals(1, count($search_result->results));
-        $this->assertEquals($created_payment->id, $search_result->results[0]->id);
+        $this->assertSame(1, count($search_result->results));
+        $this->assertSame($created_payment->id, $search_result->results[0]->id);
     }
 
     public function testSearchWithRequestOptionsFailure(): void

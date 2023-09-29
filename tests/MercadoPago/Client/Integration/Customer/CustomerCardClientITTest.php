@@ -97,7 +97,7 @@ final class CustomerCardClientITTest extends TestCase
 
         $request_update = ["expiration_year" => 2026];
         $update_customer = $client->update($customer->id, $customer_card->id, $request_update);
-        $this->assertEquals(2026, $update_customer->expiration_year);
+        $this->assertSame(2026, $update_customer->expiration_year);
     }
 
     public function testUpdateWithRequestOptionsFailure(): void
@@ -159,7 +159,7 @@ final class CustomerCardClientITTest extends TestCase
 
         $get_customer_card = $client->list($customer->id);
         $this->assertNotNull($get_customer_card->data);
-        $this->assertEquals(200, $get_customer_card->getResponse()->getStatusCode());
+        $this->assertSame(200, $get_customer_card->getResponse()->getStatusCode());
         $this->assertCount(1, $get_customer_card->getResponse()->getContent());
         $this->assertCount(1, $get_customer_card->data);
         $this->assertNotNull($get_customer_card->data[0]->id);

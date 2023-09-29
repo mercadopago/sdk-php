@@ -60,7 +60,7 @@ final class PreApprovalPlanClientITTest extends TestCase
         $client = new PreApprovalPlanClient();
         $created_plan = $client->create($this->createRequest());
         $plan = $client->update($created_plan->id, $this->updateRequest());
-        $this->assertEquals("reason", $plan->reason);
+        $this->assertSame("reason", $plan->reason);
     }
 
     public function testUpdateWithRequestOptionsFailure(): void
@@ -83,8 +83,8 @@ final class PreApprovalPlanClientITTest extends TestCase
         sleep(3);
         $search_request = new MPSearchRequest(1, 0, ["back_url" => "https://www.yoursite.com"]);
         $search_result = $client->search($search_request);
-        $this->assertEquals(1, $search_result->paging->limit);
-        $this->assertEquals(1, count($search_result->results));
+        $this->assertSame(1, $search_result->paging->limit);
+        $this->assertSame(1, count($search_result->results));
         $this->assertNotNull($search_result->results[0]->id);
     }
 
