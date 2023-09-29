@@ -8,7 +8,7 @@ use MercadoPago\Serialization\Mapper;
 class CustomerCardListResult
 {
     /** Class mapper. */
-    use mapper;
+    use Mapper;
 
     /** Id of the card. */
     public ?string $id;
