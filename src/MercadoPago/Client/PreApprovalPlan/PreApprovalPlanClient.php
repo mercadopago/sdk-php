@@ -14,11 +14,11 @@ use MercadoPago\Serialization\Serializer;
 /** Client responsible for performing subscription plan. */
 final class PreApprovalPlanClient extends MercadoPagoClient
 {
-    private static $URL = "/preapproval_plan";
+    private const URL = "/preapproval_plan";
 
-    private static $URL_WITH_ID = "/preapproval_plan/%s";
+    private const URL_WITH_ID = "/preapproval_plan/%s";
 
-    private static $URL_SEARCH = "/preapproval_plan/search";
+    private const URL_SEARCH = "/preapproval_plan/search";
 
     /** Default constructor. Uses the default http client used by the SDK. */
     public function __construct()
@@ -36,7 +36,7 @@ final class PreApprovalPlanClient extends MercadoPagoClient
      */
     public function create(array $request, ?RequestOptions $request_options = null): PreApprovalPlan
     {
-        $response = parent::send(self::$URL, HttpMethod::POST, json_encode($request), null, $request_options);
+        $response = parent::send(self::URL, HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(PreApprovalPlan::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -44,7 +44,7 @@ final class PreApprovalPlanClient extends MercadoPagoClient
 
     /**
      * Method responsible for getting pre approval plan.
-     * @param string $id pre approval plan id.
+     * @param string $id pre approval plan ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApprovalPlan pre approval plan found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
@@ -52,7 +52,7 @@ final class PreApprovalPlanClient extends MercadoPagoClient
      */
     public function get(string $id, ?RequestOptions $request_options = null): PreApprovalPlan
     {
-        $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(PreApprovalPlan::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -60,7 +60,7 @@ final class PreApprovalPlanClient extends MercadoPagoClient
 
     /**
      * Method responsible for update pre approval plan.
-     * @param string $id pre approval plan id.
+     * @param string $id pre approval plan ID.
      * @param array $request pre approval plan data.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PreApprovalPlan pre approval plan canceled.
@@ -69,7 +69,7 @@ final class PreApprovalPlanClient extends MercadoPagoClient
      */
     public function update(string $id, array $request, ?RequestOptions $request_options = null): PreApprovalPlan
     {
-        $response = parent::send(sprintf(self::$URL_WITH_ID, $id), HttpMethod::PUT, json_encode($request), null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_ID, $id), HttpMethod::PUT, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(PreApprovalPlan::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -86,7 +86,7 @@ final class PreApprovalPlanClient extends MercadoPagoClient
     public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): PreApprovalPlanSearch
     {
         $query_params = isset($request) ? $request->getParameters() : null;
-        $response = parent::send(self::$URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
+        $response = parent::send(self::URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
         $result = Serializer::deserializeFromJson(PreApprovalPlanSearch::class, $response->getContent());
         $result->setResponse($response);
         return $result;

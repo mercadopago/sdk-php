@@ -26,7 +26,7 @@ final class InvoiceClient extends MercadoPagoClient
 
     /**
      * Method responsible for getting an invoice.
-     * @param int $id invoice id.
+     * @param int $id invoice ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\Invoice invoice found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.

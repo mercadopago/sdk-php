@@ -129,10 +129,10 @@ class Preference extends MPResource
 
     /** Last modified. */
     public ?string $last_updated;
-    
+
     /** Purpose. */
     public ?string $purpose;
-    
+
     /** Total amount. */
     public array|object|null $total_amount;
 

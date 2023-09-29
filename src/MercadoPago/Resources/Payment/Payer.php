@@ -20,7 +20,7 @@ class Payer
     public ?string $email;
 
     /** Payer's personal identification. */
-    public object|array|null $identification;
+    public array|object|null $identification;
 
     /** Payer's first name. */
     public ?string $first_name;
@@ -32,7 +32,7 @@ class Payer
     public ?string $entity_type;
 
     /** Phone. */
-    public object|array|null $phone;
+    public array|object|null $phone;
 
     /** Operator ID */
     public ?string $operator_id;

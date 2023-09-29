@@ -11,7 +11,7 @@ class Shipments
     use Mapper;
 
     /** Receiver Address. */
-    public object|array|null $receiver_address;
+    public array|object|null $receiver_address;
 
     private $map = [
         "receiver_address" => "MercadoPago\Resources\Payment\ReceiverAddress"

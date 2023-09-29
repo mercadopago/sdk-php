@@ -5,7 +5,7 @@ namespace MercadoPago\Resources\Common;
 /** Source class. */
 class Source
 {
-    /** Source id. */
+    /** Source ID. */
     public ?string $id;
 
     /** Source name. */

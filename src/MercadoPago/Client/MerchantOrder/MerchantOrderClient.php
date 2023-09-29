@@ -44,7 +44,7 @@ final class MerchantOrderClient extends MercadoPagoClient
 
     /**
      * Method responsible for getting merchant order.
-     * @param int $id merchant order id.
+     * @param int $id merchant order ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\MerchantOrder merchant order found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
@@ -60,7 +60,7 @@ final class MerchantOrderClient extends MercadoPagoClient
 
     /**
      * Method responsible for update merchant order.
-     * @param int $id merchant order id.
+     * @param int $id merchant order ID.
      * @param array $request merchant order data.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\MerchantOrder merchant order updated.

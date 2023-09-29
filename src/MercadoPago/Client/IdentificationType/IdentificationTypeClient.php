@@ -12,7 +12,7 @@ use MercadoPago\Serialization\Serializer;
 /** Client responsible for performing identification type actions. */
 final class IdentificationTypeClient extends MercadoPagoClient
 {
-    private static $URL = "/v1/identification_types";
+    private const URL = "/v1/identification_types";
 
     /** Default constructor. Uses the default http client used by the SDK. */
     public function __construct()
@@ -29,7 +29,7 @@ final class IdentificationTypeClient extends MercadoPagoClient
      */
     public function list(?RequestOptions $request_options = null): IdentificationTypeResult
     {
-        $response = parent::send(self::$URL, HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(self::URL, HttpMethod::GET, null, null, $request_options);
         $result_data = array("data" => $response->getContent());
         $result = Serializer::deserializeFromJson(IdentificationTypeResult::class, $result_data);
         $result->setResponse($response);
