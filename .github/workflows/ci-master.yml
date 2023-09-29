@@ -1,10 +1,10 @@
-name: CI Develop V3
+name: CI Master V3
 
 on:
   push:
-    branches: [ "develop-v3" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "develop-v3" ]
+    branches: [ "master" ]
 
 jobs:
   build:
