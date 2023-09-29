@@ -53,7 +53,7 @@ final class MerchantOrderClientITTest extends TestCase
 
         $merchant_order_getted = $client->get($merchant_order_created->id);
         $this->assertNotNull($merchant_order_getted->id);
-        $this->assertEquals("test_reference", $merchant_order_getted->external_reference);
+        $this->assertSame("test_reference", $merchant_order_getted->external_reference);
     }
 
     public function testGetWithRequestOptionsFailure(): void
@@ -78,7 +78,7 @@ final class MerchantOrderClientITTest extends TestCase
 
         $merchant_order_updated = $client->update($merchant_order_created->id, $this->updateRequest());
         $this->assertNotNull($merchant_order_updated->id);
-        $this->assertEquals("https://www.test.com", $merchant_order_updated->notification_url);
+        $this->assertSame("https://www.test.com", $merchant_order_updated->notification_url);
     }
 
     public function testUpdateWithRequestOptionsFailure(): void
@@ -104,10 +104,10 @@ final class MerchantOrderClientITTest extends TestCase
         sleep(3);
         $search_request = new MPSearchRequest(1, 0, ["preference_id" => $preference->id]);
         $search_result = $client->search($search_request);
-        $this->assertEquals(1, $search_result->next_offset);
-        $this->assertEquals(1, $search_result->total);
-        $this->assertEquals(1, count($search_result->elements));
-        $this->assertEquals($merchant_order_created->id, $search_result->elements[0]->id);
+        $this->assertSame(1, $search_result->next_offset);
+        $this->assertSame(1, $search_result->total);
+        $this->assertSame(1, count($search_result->elements));
+        $this->assertSame($merchant_order_created->id, $search_result->elements[0]->id);
     }
 
     public function testSearchWithRequestOptionsFailure(): void

@@ -60,7 +60,7 @@ final class PreferenceClientITTest extends TestCase
         $client = new PreferenceClient();
         $created_preference = $client->create($this->createRequest());
         $preference = $client->update($created_preference->id, $this->updateRequest());
-        $this->assertEquals("https://www.test.com", $preference->notification_url);
+        $this->assertSame("https://www.test.com", $preference->notification_url);
     }
 
     public function testUpdateWithRequestOptionsFailure(): void
@@ -85,11 +85,11 @@ final class PreferenceClientITTest extends TestCase
         sleep(3);
         $search_request = new MPSearchRequest(1, 0, ["external_reference" => $external_reference]);
         $search_result = $client->search($search_request);
-        $this->assertEquals(1, $search_result->next_offset);
-        $this->assertEquals(1, $search_result->total);
-        $this->assertEquals(1, count($search_result->elements));
+        $this->assertSame(1, $search_result->next_offset);
+        $this->assertSame(1, $search_result->total);
+        $this->assertSame(1, count($search_result->elements));
         $this->assertNotNull($search_result->elements[0]->id);
-        $this->assertEquals($created_preference->external_reference, $search_result->elements[0]->external_reference);
+        $this->assertSame($created_preference->external_reference, $search_result->elements[0]->external_reference);
     }
 
     public function testSearchWithRequestOptionsFailure(): void

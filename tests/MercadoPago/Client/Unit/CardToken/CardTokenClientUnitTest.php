@@ -22,13 +22,13 @@ final class CardTokenClientUnitTest extends BaseClient
 
         $client = new CardTokenClient();
         $card_token = $client->create($this->createRequest());
-        $this->assertEquals(200, $card_token->getResponse()->getStatusCode());
-        $this->assertEquals("60aca73f30e817f", $card_token->id);
-        $this->assertEquals("2023-08-15T12:51:56.624-04:00", $card_token->date_created);
-        $this->assertEquals("active", $card_token->status);
-        $this->assertEquals(3, $card_token->security_code_length);
-        $this->assertEquals(16, $card_token->card_number_length);
-        $this->assertEquals("123456", $card_token->first_six_digits);
+        $this->assertSame(200, $card_token->getResponse()->getStatusCode());
+        $this->assertSame("60aca73f30e817f", $card_token->id);
+        $this->assertSame("2023-08-15T12:51:56.624-04:00", $card_token->date_created);
+        $this->assertSame("active", $card_token->status);
+        $this->assertSame(3, $card_token->security_code_length);
+        $this->assertSame(16, $card_token->card_number_length);
+        $this->assertSame("123456", $card_token->first_six_digits);
     }
 
     private function createRequest(): array
