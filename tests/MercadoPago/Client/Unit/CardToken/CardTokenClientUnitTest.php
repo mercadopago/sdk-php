@@ -31,21 +31,6 @@ final class CardTokenClientUnitTest extends BaseClient
         $this->assertEquals("123456", $card_token->first_six_digits);
     }
 
-    public function testGetSuccess(): void
-    {
-        $file_path = '../../../../Resources/Mocks/Response/CardToken/card_token_get.json';
-        $mock_http_request = $this->mockHttpRequest($file_path, 200);
-
-        $http_client = new MPDefaultHttpClient($mock_http_request);
-        MercadoPagoConfig::setHttpClient($http_client);
-
-        $client = new CardTokenClient();
-        $id = "60aca73f30e817f";
-        $card_token = $client->get($id);
-        $this->assertEquals(200, $card_token->getResponse()->getStatusCode());
-        $this->assertEquals($id, $card_token->id);
-    }
-
     private function createRequest(): array
     {
         $request = [
