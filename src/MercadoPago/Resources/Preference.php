@@ -134,7 +134,7 @@ class Preference extends MPResource
     public ?string $purpose;
 
     /** Total amount. */
-    public array|object|null $total_amount;
+    public ?int $total_amount;
 
     /** Headers. */
     public $headers;

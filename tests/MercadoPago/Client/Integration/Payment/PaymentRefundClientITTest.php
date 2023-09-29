@@ -33,7 +33,7 @@ final class PaymentRefundClientITTest extends TestCase
         $refund_client = new PaymentRefundClient();
         $refund = $refund_client->refund($payment->id, 50);
         $this->assertNotNull($refund->id);
-        $this->assertSame(50, $refund->amount);
+        $this->assertSame(50.0, $refund->amount);
         $this->assertSame("approved", $refund->status);
     }
 
@@ -68,7 +68,7 @@ final class PaymentRefundClientITTest extends TestCase
         $refund_client = new PaymentRefundClient();
         $refund = $refund_client->refundTotal($payment->id);
         $this->assertNotNull($refund->id);
-        $this->assertSame(100, $refund->amount);
+        $this->assertSame(100.0, $refund->amount);
         $this->assertSame("approved", $refund->status);
     }
 
@@ -105,7 +105,7 @@ final class PaymentRefundClientITTest extends TestCase
         $this->assertNotNull($refund->id);
 
         $get_refund = $refund_client->get($payment->id, $refund->id);
-        $this->assertSame(100, $get_refund->amount);
+        $this->assertSame(100.0, $get_refund->amount);
         $this->assertSame("approved", $get_refund->status);
     }
 
@@ -150,10 +150,10 @@ final class PaymentRefundClientITTest extends TestCase
         $list_refund = $refund_client->list($payment->id);
         $this->assertSame(2, count($list_refund->data));
 
-        $this->assertSame(20, $list_refund->data[0]->amount);
+        $this->assertSame(20.0, $list_refund->data[0]->amount);
         $this->assertSame("approved", $list_refund->data[0]->status);
 
-        $this->assertSame(30, $list_refund->data[1]->amount);
+        $this->assertSame(30.0, $list_refund->data[1]->amount);
         $this->assertSame("approved", $list_refund->data[1]->status);
     }
 
