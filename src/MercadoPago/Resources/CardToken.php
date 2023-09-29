@@ -39,25 +39,25 @@ class CardToken extends MPResource
     public ?int $card_id;
 
     /** Current status of card. E.g. active. */
-    public string $status;
+    public ?string $status;
 
     /** Date token expires. */
     public ?string $date_due;
 
     /** Flag indicating if Luhn validation is used. */
-    public bool $luhn_validation;
+    public ?bool $luhn_validation;
 
     /** Flag indicating if this is a production card token. */
-    public bool $live_mode;
+    public ?bool $live_mode;
 
     /** Require esc. */
-    public bool $require_esc;
+    public ?bool $require_esc;
 
     /** Security code of the card. */
-    public int $card_number_length;
+    public ?int $card_number_length;
 
     /** Security code of the card. */
-    public int $security_code_length;
+    public ?int $security_code_length;
 
 
     private $map = [
