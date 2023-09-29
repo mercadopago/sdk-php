@@ -100,7 +100,7 @@ class MercadoPagoClient
         if (!$this->headerExists($headers, 'X-Platform-Id') && !empty(MercadoPagoConfig::getPlatformId())) {
             array_push($tracking_headers, 'X-Platform-Id: ' . MercadoPagoConfig::getPlatformId());
         }
-        
+
         if (!$this->headerExists($headers, 'X-Integrator-Id') && !empty(MercadoPagoConfig::getIntegratorId())) {
             array_push($tracking_headers, 'X-Integrator-Id: ' . MercadoPagoConfig::getIntegratorId());
         }
