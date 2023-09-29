@@ -9,7 +9,7 @@ use MercadoPago\Serialization\Mapper;
 class CustomerCard extends MPResource
 {
     /** Class mapper. */
-    use mapper;
+    use Mapper;
 
     /** Id of the card. */
     public ?string $id;

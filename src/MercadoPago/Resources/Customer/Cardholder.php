@@ -8,7 +8,7 @@ use MercadoPago\Serialization\Mapper;
 class Cardholder
 {
     /** Class mapper. */
-    use mapper;
+    use Mapper;
 
     /** Name of cardholder. */
     public ?string $name;
