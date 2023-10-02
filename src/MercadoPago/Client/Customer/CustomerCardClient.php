@@ -74,7 +74,8 @@ final class CustomerCardClient extends MercadoPagoClient
         return $result;
     }
 
-    /**     * Method responsible for Customer Card deletion.
+    /**
+     * Method responsible for Customer Card deletion.
      * @param string $customer_id customer ID.
      * @param string $card_id card ID.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
