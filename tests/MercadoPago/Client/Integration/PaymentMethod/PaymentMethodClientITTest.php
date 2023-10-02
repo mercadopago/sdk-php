@@ -21,7 +21,7 @@ final class PaymentMethodClientITTest extends TestCase
     public function testGetSuccess(): void
     {
         $client = new PaymentMethodClient();
-        $payment_method = $client->get();
+        $payment_method = $client->list();
         $this->assertNotNull($payment_method);
         $this->assertSame(200, $payment_method->getResponse()->getStatusCode());
         $this->assertNotNull($payment_method->data[0]->id);
@@ -33,6 +33,6 @@ final class PaymentMethodClientITTest extends TestCase
         $client = new PaymentMethodClient();
         $request_options = new RequestOptions();
         $request_options->setAccessToken("invalid_access_token");
-        $client->get($request_options);
+        $client->list($request_options);
     }
 }
