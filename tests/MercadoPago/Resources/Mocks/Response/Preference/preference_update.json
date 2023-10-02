@@ -1,0 +1,113 @@
+{
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+        "failure": "",
+        "pending": "",
+        "success": ""
+    },
+    "binary_mode": false,
+    "client_id": "5887075667929427",
+    "collector": {
+        "tags": [
+            "normal",
+            "test_user",
+            "messages_as_seller"
+        ],
+        "operator_id": null
+    },
+    "collector_id": 831921084,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2023-08-22T08:11:50.310-04:00",
+    "created_by_app": "traffic-layer",
+    "created_source": "public",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "test_reference",
+    "headers": [],
+    "id": "111111111-31b00b3b-3572-4fbb-a090-12c1dedc4dd7",
+    "init_point": "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=111111111-31b00b3b-3572-4fbb-a090-12c1dedc4dd7",
+    "internal_metadata": null,
+    "items": [
+        {
+            "id": "4567",
+            "category_id": "eletronico",
+            "currency_id": "BRL",
+            "description": "Playstation",
+            "picture_url": "https://http2.mlstatic.com/D_NQ_NP_858050-MLB71945016150_092023-F.jpg",
+            "title": "Videogame",
+            "quantity": 2,
+            "unit_price": 5
+        }
+    ],
+    "live_mode": true,
+    "marketplace": "MP-MKT-5887075667929427",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "https://www.test.com",
+    "operation_type": "regular_payment",
+    "payer": {
+        "phone": {
+            "area_code": "",
+            "number": ""
+        },
+        "address": {
+            "zip_code": "",
+            "street_name": "",
+            "street_number": null
+        },
+        "email": "",
+        "identification": {
+            "number": "",
+            "type": ""
+        },
+        "name": "test name",
+        "surname": "test surname",
+        "date_created": null,
+        "last_purchase": null
+    },
+    "payment_methods": {
+        "default_card_id": null,
+        "default_payment_method_id": "master",
+        "excluded_payment_methods": [
+            {
+                "id": ""
+            }
+        ],
+        "excluded_payment_types": [
+            {
+                "id": "ticket"
+            }
+        ],
+        "installments": 12,
+        "default_installments": 1
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "purpose": "",
+    "redirect_urls": {
+        "failure": "",
+        "pending": "",
+        "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.br/checkout/v1/redirect?pref_id=111111111-31b00b3b-3572-4fbb-a090-12c1dedc4dd7",
+    "site_id": "MLB",
+    "shipments": {
+        "default_shipping_method": null,
+        "receiver_address": {
+            "zip_code": "",
+            "street_name": "",
+            "street_number": null,
+            "floor": "",
+            "apartment": "",
+            "city_name": null,
+            "state_name": null,
+            "country_name": null
+        }
+    },
+    "total_amount": 10,
+    "last_updated": "2023-09-29T15:33:08.769-04:00"
+}

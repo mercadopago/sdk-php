@@ -1,0 +1,143 @@
+{
+  "id": 17014025134,
+  "date_created": "2021-09-17T11:59:10.367-04:00",
+  "date_approved": "2021-09-17T11:59:11.481-04:00",
+  "date_last_updated": "2021-09-17T11:59:11.481-04:00",
+  "date_of_expiration": null,
+  "money_release_date": "2021-09-17T11:59:11.481-04:00",
+  "operation_type": "regular_payment",
+  "issuer_id": "24",
+  "payment_method_id": "master",
+  "payment_type_id": "credit_card",
+  "status": "cancelled",
+  "status_detail": "accredited",
+  "currency_id": "BRL",
+  "description": "PEDIDO NOVO - VIDEOGAME",
+  "live_mode": true,
+  "sponsor_id": null,
+  "authorization_code": "301299",
+  "money_release_schema": null,
+  "taxes_amount": 0,
+  "counter_currency": null,
+  "brand_id": null,
+  "shipping_amount": 0,
+  "pos_id": null,
+  "store_id": null,
+  "integrator_id": null,
+  "platform_id": null,
+  "corporation_id": null,
+  "collector_id": 810882223,
+  "payer": {
+    "type": null,
+    "id": "128185910",
+    "operator_id": null,
+    "email": "test_user_1631894348@testuser.com",
+    "identification": {
+      "type": "CPF",
+      "number": "19119119100"
+    },
+    "phone": {
+      "area_code": null,
+      "number": null,
+      "extension": null
+    },
+    "first_name": null,
+    "last_name": null,
+    "entity_type": null
+  },
+  "marketplace_owner": null,
+  "metadata": {
+    "order_number": "order_1631894348"
+  },
+  "additional_info": {
+    "items": [
+      {
+        "id": "1941",
+        "title": "Ingresso Antecipado",
+        "description": "Natal Iluminado 2019",
+        "picture_url": null,
+        "category_id": "Tickets",
+        "quantity": "1",
+        "unit_price": "100.0"
+      }
+    ],
+    "payer": {
+      "phone": {
+        "area_code": "11",
+        "number": "987654321"
+      },
+      "address": {
+        "zip_code": "06233-200",
+        "street_name": "Av. das Nações Unidas",
+        "street_number": "3003"
+      },
+      "first_name": "Nome",
+      "last_name": "Sobrenome",
+      "registration_date": "2013-08-06T09:25:04.000-03:00"
+    },
+    "shipments": {
+      "receiver_address": {
+        "zip_code": "95630000",
+        "street_name": "são Luiz",
+        "street_number": "15"
+      }
+    },
+    "available_balance": null,
+    "nsu_processadora": null,
+    "authentication_code": null
+  },
+  "order": {},
+  "external_reference": "1631894348",
+  "transaction_amount": 12.34,
+  "transaction_amount_refunded": 0,
+  "coupon_amount": 0,
+  "differential_pricing_id": null,
+  "deduction_schema": null,
+  "installments": 1,
+  "transaction_details": {
+    "payment_method_reference_id": null,
+    "net_received_amount": 11.72,
+    "total_paid_amount": 12.34,
+    "overpaid_amount": 0,
+    "external_resource_url": null,
+    "installment_amount": 12.34,
+    "financial_institution": null,
+    "payable_deferral_period": null,
+    "acquirer_reference": null
+  },
+  "fee_details": [
+    {
+      "type": "mercadopago_fee",
+      "amount": 0.62,
+      "fee_payer": "collector"
+    }
+  ],
+  "charges_details": [],
+  "captured": true,
+  "binary_mode": false,
+  "call_for_authorize_id": null,
+  "statement_descriptor": "Mercadopago*fake",
+  "card": {
+    "id": null,
+    "first_six_digits": "503143",
+    "last_four_digits": "6351",
+    "expiration_month": 12,
+    "expiration_year": 2022,
+    "date_created": "2021-09-17T11:59:10.000-04:00",
+    "date_last_updated": "2021-09-17T11:59:10.000-04:00",
+    "cardholder": {
+      "name": "APRO",
+      "identification": {
+        "number": "19119119100",
+        "type": "CPF"
+      }
+    }
+  },
+  "notification_url": "https://seu-site.com.br/webhookshttps://seu-site.com.br/webhooks",
+  "refunds": [],
+  "processing_mode": "aggregator",
+  "merchant_account_id": null,
+  "merchant_number": null,
+  "acquirer_reconciliation": [],
+  "point_of_interaction": {}
+}
