@@ -14,6 +14,14 @@ use MercadoPago\Tests\Client\Unit\Base\BaseClient;
  */
 final class OAuthClientUnitTest extends BaseClient
 {
+    public function testGetAuthorizationURLSuccess(): void
+    {
+        $client = new OAuthClient();
+        $url = $client->getAuthorizationURL("app_id", "redirect_uri", "random_id");
+        $expected = "https://auth.mercadopago.com?client_id=app_id&response_type=code&platform_id=mp&state=random_id&redirect_uri=redirect_uri";
+        $this->assertSame($expected, $url);
+    }
+
     public function testCreateSuccess(): void
     {
         $filepath = '../../../../Resources/Mocks/Response/OAuth/oauth_base.json';
@@ -44,7 +52,7 @@ final class OAuthClientUnitTest extends BaseClient
         MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new OAuthClient();
-        $oauth = $client->create($this->createRequest());
+        $oauth = $client->refresh($this->refreshRequest());
         $this->assertSame(200, $oauth->getResponse()->getStatusCode());
         $this->assertSame("APP_USR-367604750109681-091211-fbad3ab32ad4f89bf1c385141ba5626a-1160535239", $oauth->access_token);
         $this->assertSame("Bearer", $oauth->token_type);
@@ -71,9 +79,7 @@ final class OAuthClientUnitTest extends BaseClient
         $request = new OAuthRefreshRequest();
         $request->client_secret = "CLIENT_SECRET";
         $request->client_id = "CLIENT_ID";
-        $request->code = "CODE";
         $request->refresh_token = "REFRESH_TOKEN";
-        $request->redirect_uri = "REDIRECT_URI";
         return $request;
     }
 }

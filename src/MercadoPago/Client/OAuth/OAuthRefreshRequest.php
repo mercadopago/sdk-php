@@ -16,10 +16,4 @@ class OAuthRefreshRequest
 
     /** Refresh token. */
     public string $refresh_token;
-
-    /** Code. */
-    public string $code;
-
-    /** Redirect URI. */
-    public string $redirect_uri;
 }

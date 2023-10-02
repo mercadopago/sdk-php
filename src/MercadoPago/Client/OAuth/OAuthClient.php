@@ -28,12 +28,13 @@ final class OAuthClient extends MercadoPagoClient
      * @param string $redirect_uri redirect uri.
      * @return string authorization url.
      */
-    public function getAuthorizationURL(string $app_id, string $redirect_uri): string
+    public function getAuthorizationURL(string $app_id, string $redirect_uri, string $random_id): string
     {
         $query_params = [
             "client_id" => $app_id,
             "response_type" => "code",
             "platform_id" => "mp",
+            "state" => $random_id,
             "redirect_uri" => $redirect_uri
         ];
 
