@@ -21,13 +21,13 @@ final class PaymentMethodClient extends MercadoPagoClient
     }
 
     /**
-     * Method responsible for getting array from payment methods.
+     * Method responsible for list payment methods.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Resources\PaymentMethodResult result from payment method found.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function get(?RequestOptions $request_options = null): PaymentMethodResult
+    public function list(?RequestOptions $request_options = null): PaymentMethodResult
     {
         $response = parent::send(self::URL, HttpMethod::GET, null, null, $request_options);
         $result_data = array("data" => $response->getContent());

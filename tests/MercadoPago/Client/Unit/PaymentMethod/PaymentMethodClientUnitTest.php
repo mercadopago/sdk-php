@@ -21,7 +21,7 @@ final class PaymentMethodClientUnitTest extends BaseClient
         MercadoPagoConfig::setHttpClient($http_client);
 
         $client = new PaymentMethodClient();
-        $payment_method_result = $client->get();
+        $payment_method_result = $client->list();
         $this->assertNotNull($payment_method_result->data);
         $this->assertSame(200, $payment_method_result->getResponse()->getStatusCode());
         $this->assertCount(2, $payment_method_result->getResponse()->getContent());
