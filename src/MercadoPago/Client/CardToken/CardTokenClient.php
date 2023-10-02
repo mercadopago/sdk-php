@@ -6,6 +6,7 @@ use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
+use MercadoPago\Net\MPHttpClient;
 use MercadoPago\Resources\CardToken;
 use MercadoPago\Serialization\Serializer;
 
@@ -14,10 +15,10 @@ final class CardTokenClient extends MercadoPagoClient
 {
     private const URL = "/v1/card_tokens";
 
-    /** Default constructor. Uses the default http client used by the SDK. */
-    public function __construct()
+    /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
+    public function __construct(?MPHttpClient $MPHttpClient = null)
     {
-        parent::__construct(MercadoPagoConfig::getHttpClient());
+        parent::__construct($MPHttpClient ?: MercadoPagoConfig::getHttpClient());
     }
 
     /**
