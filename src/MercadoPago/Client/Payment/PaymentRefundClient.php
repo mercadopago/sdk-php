@@ -6,6 +6,7 @@ use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
+use MercadoPago\Net\MPHttpClient;
 use MercadoPago\Resources\PaymentRefund;
 use MercadoPago\Resources\PaymentRefundResult;
 use MercadoPago\Serialization\Serializer;
@@ -17,10 +18,10 @@ final class PaymentRefundClient extends MercadoPagoClient
 
     private const URL_WITH_REFUND_ID = "/v1/payments/%s/refunds/%s";
 
-    /** Default constructor. Uses the default http client used by the SDK. */
-    public function __construct()
+    /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
+    public function __construct(?MPHttpClient $MPHttpClient = null)
     {
-        parent::__construct(MercadoPagoConfig::getHttpClient());
+        parent::__construct($MPHttpClient ?: MercadoPagoConfig::getHttpClient());
     }
 
     /**

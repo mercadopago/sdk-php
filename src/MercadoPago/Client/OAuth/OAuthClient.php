@@ -6,6 +6,7 @@ use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
+use MercadoPago\Net\MPHttpClient;
 use MercadoPago\Resources\OAuth;
 use MercadoPago\Serialization\Serializer;
 
@@ -16,10 +17,10 @@ final class OAuthClient extends MercadoPagoClient
 
     private const URL = "/oauth/token";
 
-    /** Default constructor. Uses the default http client used by the SDK. */
-    public function __construct()
+    /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
+    public function __construct(?MPHttpClient $MPHttpClient = null)
     {
-        parent::__construct(MercadoPagoConfig::getHttpClient());
+        parent::__construct($MPHttpClient ?: MercadoPagoConfig::getHttpClient());
     }
 
     /**

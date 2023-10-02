@@ -6,6 +6,7 @@ use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
+use MercadoPago\Net\MPHttpClient;
 use MercadoPago\Net\MPSearchRequest;
 use MercadoPago\Resources\PaymentIntent;
 use MercadoPago\Resources\PaymentIntentCancel;
@@ -32,10 +33,10 @@ final class PointClient extends MercadoPagoClient
 
     private const DEVICE_WITH_ID_URL = "/point/integration-api/devices/%s";
 
-    /** Default constructor. Uses the default http client used by the SDK. */
-    public function __construct()
+    /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
+    public function __construct(?MPHttpClient $MPHttpClient = null)
     {
-        parent::__construct(MercadoPagoConfig::getHttpClient());
+        parent::__construct($MPHttpClient ?: MercadoPagoConfig::getHttpClient());
     }
 
     /**
