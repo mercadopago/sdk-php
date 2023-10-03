@@ -29,7 +29,6 @@ Text
 - ...
 ```
 
-
 ### Dependency Update
 The new version of the MercadoPago PHP SDK requires PHP version 8.2 or higher. Make sure your application meets this requirement before proceeding with the migration.
 
