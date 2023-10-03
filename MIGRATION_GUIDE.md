@@ -13,7 +13,6 @@ In the new version, the SDK structure has been reorganized to improve code reada
 
 Here is the new SDK structure:
 
-Text
 ```
 - src/
     - MercadoPago/
