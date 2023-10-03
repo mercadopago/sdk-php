@@ -136,7 +136,25 @@ try {
 }
 ```
 
-### Step 4: Review the Documentation
+### Step 4: Update exception handling
+The way we handle exceptions has changed. Now it's easier to identify if the error is from some API catching the `MPApiException` and accessing it's status code and content.
+
+```php
+catch (MPApiException $e) {
+    echo $e->getApiResponse()->getStatusCode();
+    echo $e->getApiResponse()->getContent();
+}
+```
+
+And not API errors can be catched by using the standart Exception.
+
+```php
+catch (Exception $e) {
+    echo $e->getMessage();
+}
+```
+
+### Step 5: Review the Documentation
 The new version of the MercadoPago PHP SDK comes with more comprehensive and up-to-date documentation. We recommend that you review the documentation to understand all the changes and take advantage of the new available features.
 
 - [SDKs documentation](https://www.mercadopago.com.br/developers/en/docs/sdks-library/server-side).
