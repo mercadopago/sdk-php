@@ -1,17 +1,17 @@
-## Cambios realizados para el feature:
- * item 1
+## Changes made to the feature:
+ * Item 1
 
-## Cambios generales
- * item 1
+## General changes
+ * Item 1
 
-## Issues cerrados
+## Issues closed
  * Closes #XX
 
 
-## Checklist validación PR:
+## PR validation checklist:
 
-- [ ] Título y descripción clara del PR
-- [ ] Tests de mi funcionalidad
-- [ ] Documentación de mi funcionalidad
-- [ ] Tests ejecutados y pasados
+- [ ] Title and clear description of the PR
+- [ ] Tests of my functionality
+- [ ] Documentation of my functionality
+- [ ] Tests executed and passed
 - [ ] Branch Coverage >= 80%
