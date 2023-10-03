@@ -12,6 +12,8 @@ The SDK Supports PHP version 8.2 or higher.
 
 ## 💻 Installation
 
+If you already use another version of MercadoPago PHP SDK, take a look at our [migration guide](MIGRATION_GUIDE.md) from version 2 to version 3.
+
 First time using Mercado Pago? Create your [Mercado Pago account](https://www.mercadopago.com), if you don’t have one already.
 
 1. Download [Composer](https://getcomposer.org/doc/00-intro.md) if not already installed.
