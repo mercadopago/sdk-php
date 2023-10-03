@@ -146,7 +146,7 @@ catch (MPApiException $e) {
 }
 ```
 
-And not API errors can be catched by using the standart Exception.
+And not API errors can be catched by using the standard Exception.
 
 ```php
 catch (Exception $e) {
@@ -157,7 +157,7 @@ catch (Exception $e) {
 ### Step 5: Review the Documentation
 The new version of the MercadoPago PHP SDK comes with more comprehensive and up-to-date documentation. We recommend that you review the documentation to understand all the changes and take advantage of the new available features.
 
-- [SDKs documentation](https://www.mercadopago.com.br/developers/en/docs/sdks-library/server-side).
+- [SDKs documentation](https://www.mercadopago.com/developers/en/docs/sdks-library/server-side).
 
 ## Conclusion
 This guide has provided the necessary steps to migrate from MercadoPago PHP SDK v2 to the new version. We hope this information is helpful to you and that you make the most of the resources and improvements available in the new version.
