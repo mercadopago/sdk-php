@@ -141,6 +141,9 @@ All contributions are welcome, ranging from people wanting to triage issues, oth
 Please read and follow our [contribution guidelines](CONTRIBUTING.md). Contributions not following these guidelines will
 be disregarded. The guidelines are in place to make all of our lives easier and make contribution a consistent process for everyone.
 
+### Patches to version 2.x.x
+Since the release of version 3.0.0, version 2 is deprecated and will not be receiving new features, only bug fixes. If you need to submit PRs for that version, please do so by using [master-v2](https://github.com/mercadopago/sdk-php/tree/master-v2) as your base branch.
+
 ## ❤️ Support
 
 If you require technical support, please contact our support team at our developers site: [English](https://www.mercadopago.com/developers/en/support/center/contact) / [Portuguese](https://www.mercadopago.com/developers/pt/support/center/contact) / [Spanish](https://www.mercadopago.com/developers/es/support/center/contact)
