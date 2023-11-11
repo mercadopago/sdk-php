@@ -142,7 +142,7 @@ The way we handle exceptions has changed. Now it's easier to identify if the err
 ```php
 catch (MPApiException $e) {
     echo $e->getApiResponse()->getStatusCode();
-    echo $e->getApiResponse()->getContent();
+    var_dump($e->getApiResponse()->getContent());
 }
 ```
 
