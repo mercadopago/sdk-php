@@ -58,6 +58,8 @@ class MPDefaultHttpClient implements MPHttpClient
     private function makeRequest(MPRequest $request): MPResponse
     {
         $request_options = $this->createHttpRequestOptions($request);
+        error_log("request_options");
+        error_log(json_encode($request_options));
         $this->httpRequest->setOptionArray($request_options);
         $api_result = $this->httpRequest->execute();
         $status_code = $this->httpRequest->getInfo(CURLINFO_HTTP_CODE);
@@ -100,8 +102,8 @@ class MPDefaultHttpClient implements MPHttpClient
         );
 
         if (MercadoPagoConfig::getRuntimeEnviroment() === MercadoPagoConfig::LOCAL) {
-            $options['CURLOPT_SSL_VERIFYHOST'] = false;
-            $options['CURLOPT_SSL_VERIFYPEER'] = false;
+            $options += [CURLOPT_SSL_VERIFYHOST => false];
+            $options += [CURLOPT_SSL_VERIFYPEER => false];
         }
 
         return $options;
