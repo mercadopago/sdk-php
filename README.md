@@ -154,7 +154,6 @@ try{
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\Exceptions\MPApiException;
-use Log;
 ```
 
 ### Step 2: Create an authentication function
@@ -253,8 +252,6 @@ public function createPaymentPreference(): ?Preference
         // Useful props you could use from this object is 'init_point' (URL to Checkout Pro) or the 'id'
         return $preference;
     } catch (MPApiException $error) {
-        Log::debug("Error creating Preference: " . $error->getApiResponse());
-
         // Here you might return whatever your app needs.
         // We are returning null here as an example.
         return null;
