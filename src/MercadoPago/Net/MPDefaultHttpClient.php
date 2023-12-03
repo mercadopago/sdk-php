@@ -89,7 +89,7 @@ class MPDefaultHttpClient implements MPHttpClient
     {
         $connection_timeout = $request->getConnectionTimeout() ?: MercadoPagoConfig::getConnectionTimeout();
 
-        return array(
+        $options = array(
             CURLOPT_URL => MercadoPagoConfig::$BASE_URL . $request->getUri(),
             CURLOPT_CUSTOMREQUEST => $request->getMethod(),
             CURLOPT_HTTPHEADER => $request->getHeaders(),
@@ -98,6 +98,13 @@ class MPDefaultHttpClient implements MPHttpClient
             CURLOPT_MAXCONNECTS => MercadoPagoConfig::getMaxConnections(),
             CURLOPT_RETURNTRANSFER => true
         );
+
+        if (MercadoPagoConfig::getEnviroment() === MercadoPagoConfig::ENVIROMENT_TYPES::LOCAL) {
+            $options['CURLOPT_SSL_VERIFYHOST'] = false;
+            $options['CURLOPT_SSL_VERIFYPEER'] = false;
+        }
+
+        return $options;
     }
 
     private function isServerError(int $status_code): bool
