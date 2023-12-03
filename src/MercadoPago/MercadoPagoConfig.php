@@ -5,7 +5,6 @@ namespace MercadoPago;
 use MercadoPago\Exceptions\InvalidArgumentException;
 use MercadoPago\Net\MPDefaultHttpClient;
 use MercadoPago\Net\MPHttpClient;
-use App\Enum;
 
 /** Mercado Pago configuration class. */
 class MercadoPagoConfig
