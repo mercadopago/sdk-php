@@ -45,6 +45,8 @@ Simple usage looks like:
 
     // Step 2: Set production or sandbox access token
     MercadoPagoConfig::setAccessToken("<ACCESS_TOKEN>");
+    // Step 2.2: Set your runtime enviroment from MercadoPagoConfig::RUNTIME_ENVIROMENTS (default is SERVER)
+    MercadoPagoConfig::setRuntimeEnviroment(MercadoPagoConfig::RUNTIME_ENVIROMENTS::LOCAL);
 
     // Step 3: Initialize the API client
     $client = new PaymentClient();
@@ -77,6 +79,7 @@ Simple usage looks like:
 ```
 
 ### Step 1: Require the library from your Composer vendor folder
+
 ```php
 require_once 'vendor/autoload.php';
 
@@ -86,6 +89,7 @@ use MercadoPago\MercadoPagoConfig;
 ```
 
 ### Step 2: Set production or sandbox access token
+
 ```php
 MercadoPagoConfig::setAccessToken("<ACCESS_TOKEN>");
 ```
@@ -93,11 +97,13 @@ MercadoPagoConfig::setAccessToken("<ACCESS_TOKEN>");
 You can also set another properties as quantity of retries, tracking headers, timeouts and a custom http client.
 
 ### Step 3: Initialize the API client
+
 ```php
 $client = new PaymentClient();
 ```
 
 ### Step 4: Create the request array
+
 ```php
 $request = [
     "transaction_amount" => 100,
@@ -112,11 +118,13 @@ $request = [
 ```
 
 ### Step 5: Make the request
+
 ```php
 $payment = $client->create($request);
 ```
 
 ### Step 6: Handle exceptions
+
 ```php
 ...
 // Handle API exceptions
@@ -144,6 +152,7 @@ Please read and follow our [contribution guidelines](CONTRIBUTING.md). Contribut
 be disregarded. The guidelines are in place to make all of our lives easier and make contribution a consistent process for everyone.
 
 ### Patches to version 2.x.x
+
 Since the release of version 3.0.0, version 2 is deprecated and will not be receiving new features, only bug fixes. If you need to submit PRs for that version, please do so by using [master-v2](https://github.com/mercadopago/sdk-php/tree/master-v2) as your base branch.
 
 ## ❤️ Support

@@ -231,7 +231,7 @@ class MercadoPagoConfig
      * Gets the enviroment the user is running at.
      * @return string enviroment
      */
-    public static function getEnviroment(): string
+    public static function getRuntimeEnviroment(): string
     {
         return self::$RUNTIME_ENVIROMENT;
     }
@@ -241,7 +241,7 @@ class MercadoPagoConfig
      * @param string $enviroment one of the ENVIROMENT_TYPES
      * @return void
      */
-    public static function setEnviroment(string $enviroment): void
+    public static function setRuntimeEnviroment(string $enviroment): void
     {
         if (!in_array($enviroment, self::RUNTIME_ENVIROMENTS)) {
             throw new InvalidArgumentException("Enviroment must be equal to one of the options in MercadoPagoConfig::RUNTIME_ENVIROMENTS.");
