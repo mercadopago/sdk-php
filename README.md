@@ -37,7 +37,7 @@ That's it! Mercado Pago SDK has been successfully installed.
 
 Here you can check eg. data structures for each parameter used by the SDK for each class.
 
-## 🌟 Getting Started with payment data collected in your own website forms
+## 🌟 Getting Started with payment via your own website forms
 
 Simple usage looks like:
 
@@ -134,19 +134,19 @@ $payment = $client->create($request);
 ### Step 6: Handle exceptions
 
 ```php
-...
-// Handle API exceptions
+try{
+    // Do your stuff here
 } catch (MPApiException $e) {
+    // Handle API exceptions
     echo "Status code: " . $e->getApiResponse()->getStatusCode() . "\n";
     echo "Content: " . $e->getApiResponse()->getContent() . "\n";
-
-// Handle all other exceptions
 } catch (\Exception $e) {
+    // Handle all other exceptions
     echo $e->getMessage();
 }
 ```
 
-## 🌟 Getting started with payment data collected via Checkout Pro
+## 🌟 Getting started with payment via Checkout Pro
 
 ### Step 1: Require the libraries
 
