@@ -25,7 +25,7 @@ class MercadoPagoConfig
     const SERVER = 'server';
 
     /** @var string Actual enviroment the user is running at. Default is SERVER */
-    private static string $runtime_enviroment = self::LOCAL;
+    private static string $runtime_enviroment = self::SERVER;
 
     /** @var string access token */
     private static string $access_token = "";

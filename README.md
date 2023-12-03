@@ -45,7 +45,7 @@ Simple usage looks like:
 
     // Step 2: Set production or sandbox access token
     MercadoPagoConfig::setAccessToken("<ACCESS_TOKEN>");
-    // Step 2.2: Set your runtime enviroment from MercadoPagoConfig::RUNTIME_ENVIROMENTS (default is SERVER)
+    // Step 2.1 (optional - default is SERVER): Set your runtime enviroment from MercadoPagoConfig::RUNTIME_ENVIROMENTS
     MercadoPagoConfig::setRuntimeEnviroment(MercadoPagoConfig::RUNTIME_ENVIROMENTS::LOCAL);
 
     // Step 3: Initialize the API client
