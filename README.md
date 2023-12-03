@@ -203,7 +203,7 @@ function createPreferenceRequest($items, $payer): array
 }
 ```
 
-### Step 4: Create the preference on Mercado Pago and retrieve it's ID [docs](https://www.mercadopago.com.br/developers/pt/docs/sdks-library/server-side/php/preferences)
+### Step 4: Create the preference on Mercado Pago ([DOCS](https://www.mercadopago.com.br/developers/pt/docs/sdks-library/server-side/php/preferences))
 
 ```php
 public function createPaymentPreference(): ?Preference
