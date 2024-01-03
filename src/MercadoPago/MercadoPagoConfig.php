@@ -2,6 +2,7 @@
 
 namespace MercadoPago;
 
+use MercadoPago\Exceptions\InvalidArgumentException;
 use MercadoPago\Net\MPDefaultHttpClient;
 use MercadoPago\Net\MPHttpClient;
 
@@ -16,6 +17,15 @@ class MercadoPagoConfig
 
     /** @var string Mercado Pago SDK PHP product version */
     public static string $PRODUCT_ID = "BC32A7RU643001OI3940";
+
+    /** @var string Class constant for local runtime enviroment */
+    const LOCAL = 'local';
+
+    /** @var string Class constant for server runtime enviroment */
+    const SERVER = 'server';
+
+    /** @var string Actual enviroment the user is running at. Default is SERVER */
+    private static string $runtime_enviroment = self::SERVER;
 
     /** @var string access token */
     private static string $access_token = "";
@@ -215,5 +225,27 @@ class MercadoPagoConfig
     public static function setConnectionTimeout(int $connection_timeout): void
     {
         self::$connection_timeout = $connection_timeout;
+    }
+
+    /**
+     * Gets the enviroment the user is running at.
+     * @return string enviroment
+     */
+    public static function getRuntimeEnviroment(): string
+    {
+        return self::$runtime_enviroment;
+    }
+
+    /**
+     * Sets the enviroment the user is running at.
+     * @param string $enviroment one of the ENVIROMENT_TYPES
+     * @return void
+     */
+    public static function setRuntimeEnviroment(string $enviroment): void
+    {
+        if ($enviroment != self::LOCAL && $enviroment != self::SERVER) {
+            throw new InvalidArgumentException("Enviroment must be equal to MercadoPagoConfig::LOCAL or MercadoPagoConfig::SERVER.");
+        }
+        self::$runtime_enviroment = $enviroment;
     }
 }

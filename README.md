@@ -30,7 +30,14 @@ composer require "mercadopago/dx-php:3.0.0"
 
 That's it! Mercado Pago SDK has been successfully installed.
 
-## 🌟 Getting Started
+## Useful links
+
+- [SDK Docs](https://www.mercadopago.com.br/developers/pt/docs/sdks-library/server-side)
+- [REST API (consumed by the SDK)](https://www.mercadopago.com.br/developers/en/reference)
+
+Here you can check eg. data structures for each parameter used by the SDK for each class.
+
+## 🌟 Getting Started with payment via your own website forms
 
 Simple usage looks like:
 
@@ -45,6 +52,9 @@ Simple usage looks like:
 
     // Step 2: Set production or sandbox access token
     MercadoPagoConfig::setAccessToken("<ACCESS_TOKEN>");
+    // Step 2.1 (optional - default is SERVER): Set your runtime enviroment from MercadoPagoConfig::RUNTIME_ENVIROMENTS
+    // In case you want to test in your local machine first, set runtime enviroment to LOCAL
+    MercadoPagoConfig::setRuntimeEnviroment(MercadoPagoConfig::LOCAL);
 
     // Step 3: Initialize the API client
     $client = new PaymentClient();
@@ -77,6 +87,7 @@ Simple usage looks like:
 ```
 
 ### Step 1: Require the library from your Composer vendor folder
+
 ```php
 require_once 'vendor/autoload.php';
 
@@ -86,6 +97,7 @@ use MercadoPago\MercadoPagoConfig;
 ```
 
 ### Step 2: Set production or sandbox access token
+
 ```php
 MercadoPagoConfig::setAccessToken("<ACCESS_TOKEN>");
 ```
@@ -93,11 +105,13 @@ MercadoPagoConfig::setAccessToken("<ACCESS_TOKEN>");
 You can also set another properties as quantity of retries, tracking headers, timeouts and a custom http client.
 
 ### Step 3: Initialize the API client
+
 ```php
 $client = new PaymentClient();
 ```
 
 ### Step 4: Create the request array
+
 ```php
 $request = [
     "transaction_amount" => 100,
@@ -112,22 +126,144 @@ $request = [
 ```
 
 ### Step 5: Make the request
+
 ```php
 $payment = $client->create($request);
 ```
 
 ### Step 6: Handle exceptions
+
 ```php
-...
-// Handle API exceptions
+try{
+    // Do your stuff here
 } catch (MPApiException $e) {
+    // Handle API exceptions
     echo "Status code: " . $e->getApiResponse()->getStatusCode() . "\n";
     echo "Content: " . $e->getApiResponse()->getContent() . "\n";
-
-// Handle all other exceptions
 } catch (\Exception $e) {
+    // Handle all other exceptions
     echo $e->getMessage();
 }
+```
+
+## 🌟 Getting started with payment via Checkout Pro
+
+### Step 1: Require the libraries
+
+```php
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Preference\PreferenceClient;
+use MercadoPago\Exceptions\MPApiException;
+```
+
+### Step 2: Create an authentication function
+
+```php
+protected function authenticate()
+{
+    // Getting the access token from .env file (create your own function)
+    $mpAccessToken = getVariableFromEnv('mercado_pago_access_token');
+    // Set the token the SDK's config
+    MercadoPagoConfig::setAccessToken($mpAccessToken);
+    // (Optional) Set the runtime enviroment to LOCAL if you want to test on localhost
+    // Default value is set to SERVER
+    MercadoPagoConfig::setRuntimeEnviroment(MercadoPagoConfig::LOCAL);
+}
+```
+
+### Step 3: Create customer's preference before proceeding to Checkout Pro page
+
+```php
+// Function that will return a request object to be sent to Mercado Pago API
+function createPreferenceRequest($items, $payer): array
+{
+    $paymentMethods = [
+        "excluded_payment_methods" => [],
+        "installments" => 12,
+        "default_installments" => 1
+    ];
+
+    $backUrls = array(
+        'success' => route('mercadopago.success'),
+        'failure' => route('mercadopago.failed')
+    );
+
+    $request = [
+        "items" => $items,
+        "payer" => $payer,
+        "payment_methods" => $paymentMethods,
+        "back_urls" => $backUrls,
+        "statement_descriptor" => "NAME_DISPLAYED_IN_USER_BILLING",
+        "external_reference" => "1234567890",
+        "expires" => false,
+        "auto_return" => 'approved',
+    ];
+
+    return $request;
+}
+```
+
+### Step 4: Create the preference on Mercado Pago ([DOCS](https://www.mercadopago.com.br/developers/pt/docs/sdks-library/server-side/php/preferences))
+
+```php
+public function createPaymentPreference(): ?Preference
+{
+    // Fill the data about the product(s) being pruchased
+    $product1 = array(
+        "id" => "1234567890",
+        "title" => "Product 1 Title",
+        "description" => "Product 1 Description",
+        "currency_id" => "BRL",
+        "quantity" => 12,
+        "unit_price" => 9.90
+    );
+
+    $product2 = array(
+        "id" => "9012345678",
+        "title" => "Product 2 Title",
+        "description" => "Product 2 Description",
+        "currency_id" => "BRL",
+        "quantity" => 5,
+        "unit_price" => 19.90
+    );
+
+    // Mount the array of products that will integrate the purchase amount
+    $items = array($product1, $product2);
+
+    // Retrieve information about the user (use your own function)
+    $user = getSessionUser();
+
+    $payer = array(
+        "name" => $user->name,
+        "surname" => $user->surname,
+        "email" => $user->email,
+    );
+
+    // Create the request object to be sent to the API when the preference is created
+    $request = createPreferenceRequest($item, $payer);
+
+    // Instantiate a new Preference Client
+    $client = new PreferenceClient();
+
+    try {
+        // Send the request that will create the new preference for user's checkout flow
+        $preference = $client->create($request);
+
+        // Useful props you could use from this object is 'init_point' (URL to Checkout Pro) or the 'id'
+        return $preference;
+    } catch (MPApiException $error) {
+        // Here you might return whatever your app needs.
+        // We are returning null here as an example.
+        return null;
+    }
+}
+```
+
+In case you need to retrieve the preference by ID:
+
+```php
+    $client = new PreferenceClient();
+    $client->get("123456789");
 ```
 
 ## 📚 Documentation
@@ -144,6 +280,7 @@ Please read and follow our [contribution guidelines](CONTRIBUTING.md). Contribut
 be disregarded. The guidelines are in place to make all of our lives easier and make contribution a consistent process for everyone.
 
 ### Patches to version 2.x.x
+
 Since the release of version 3.0.0, version 2 is deprecated and will not be receiving new features, only bug fixes. If you need to submit PRs for that version, please do so by using [master-v2](https://github.com/mercadopago/sdk-php/tree/master-v2) as your base branch.
 
 ## ❤️ Support
