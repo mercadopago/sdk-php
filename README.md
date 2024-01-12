@@ -21,7 +21,7 @@ First time using Mercado Pago? Create your [Mercado Pago account](https://www.me
 2. Install PHP SDK for MercadoPago running in command line:
 
 ```
-composer require "mercadopago/dx-php:3.0.1"
+composer require "mercadopago/dx-php:3.0.2"
 ```
 
 > You can also run _composer require "mercadopago/dx-php:2.6.1"_ for PHP7.1 or _composer require "mercadopago/dx-php:1.12.5"_ for PHP5.6.
@@ -80,7 +80,9 @@ Simple usage looks like:
     // Step 6: Handle exceptions
     } catch (MPApiException $e) {
         echo "Status code: " . $e->getApiResponse()->getStatusCode() . "\n";
-        echo "Content: " . $e->getApiResponse()->getContent() . "\n";
+        echo "Content: ";
+        var_dump($e->getApiResponse()->getContent());
+        echo "\n";
     } catch (\Exception $e) {
         echo $e->getMessage();
     }
@@ -139,7 +141,9 @@ try{
 } catch (MPApiException $e) {
     // Handle API exceptions
     echo "Status code: " . $e->getApiResponse()->getStatusCode() . "\n";
-    echo "Content: " . $e->getApiResponse()->getContent() . "\n";
+    echo "Content: ";
+    var_dump($e->getApiResponse()->getContent());
+    echo "\n";
 } catch (\Exception $e) {
     // Handle all other exceptions
     echo $e->getMessage();
