@@ -2,9 +2,14 @@
 
 namespace MercadoPago\Resources\Common;
 
+use MercadoPago\Serialization\Mapper;
+
 /** Address class. */
 class Address
 {
+    /** Class mapper. */
+    use Mapper;
+
     /** Addess ID. */
     public ?string $id;
 
@@ -18,5 +23,17 @@ class Address
     public ?int $street_number;
 
     /** City. */
-    public ?string $city;
+    public array|object|null $city;
+
+    private $map = [
+        "city" => "MercadoPago\Resources\Common\City"
+    ];
+
+    /**
+     * Method responsible for getting map of entities.
+     */
+    public function getMap(): array
+    {
+        return $this->map;
+    }
 }
