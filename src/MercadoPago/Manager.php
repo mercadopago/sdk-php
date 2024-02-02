@@ -414,9 +414,10 @@ class Manager
         if (!isset($configuration->methods[$method])) {
             return;
         }
-
-        if ($method != 'get' && array_key_exists('headers', array_change_key_case($query)) && !array_key_exists('x-idempotency-key', array_change_key_case($query['headers']))){
-            $query['headers']['x-idempotency-key'] = generateUUID();
+        if ($method != 'get' && $method != 'delete') {
+            if (array_key_exists('headers', array_change_key_case($query)) && !array_key_exists('x-idempotency-key', array_change_key_case($query['headers']))){
+                $query['headers']['x-idempotency-key'] = generateUUID();
+            }
         }
     }
     /**
