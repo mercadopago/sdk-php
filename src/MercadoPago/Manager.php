@@ -411,9 +411,6 @@ class Manager
      */
     protected function _setIdempotencyHeader(&$query, $configuration, $method)
     {
-        if (!isset($configuration->methods[$method])) {
-            return;
-        }
         if ($method != 'get' && $method != 'delete') {
             if (array_key_exists('headers', array_change_key_case($query)) && !array_key_exists('x-idempotency-key', array_change_key_case($query['headers']))){
                 $query['headers']['x-idempotency-key'] = $this->_generateUUID();
