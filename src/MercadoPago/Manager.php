@@ -415,7 +415,7 @@ class Manager
             return;
         }
 
-        if ($method != 'get' && $query['headers'] != '' && !array_key_exists('x-idempotency-key', array_change_key_case($query['headers']))){
+        if ($method != 'get' && array_key_exists('headers', array_change_key_case($query)) && !array_key_exists('x-idempotency-key', array_change_key_case($query['headers']))){
             $query['headers']['x-idempotency-key'] = generateUUID();
         }
     }
