@@ -422,7 +422,7 @@ class Manager
     /**
      * generateUUID()
      */
-    private function generateUUID()
+    protected function generateUUID()
     {
         return sprintf(
             '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
