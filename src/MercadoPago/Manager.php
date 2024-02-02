@@ -87,8 +87,6 @@ class Manager
         $this->_setIdempotencyHeader($configuration->query, $configuration, $method);
         $this->setQueryParams($entity);
 
-        var_dump($configuration->query);
-
         return $this->_client->{$method}($configuration->url, $configuration->query);
     }
 
@@ -413,19 +411,19 @@ class Manager
      */
     protected function _setIdempotencyHeader(&$query, $configuration, $method)
     {
-        echo "_setIdempotencyHeader" . "\n";
-        echo $method . "\n";
-        
+        if (!isset($configuration->methods[$method])) {
+            return;
+        }
         if ($method != 'get' && $method != 'delete') {
             if (array_key_exists('headers', array_change_key_case($query)) && !array_key_exists('x-idempotency-key', array_change_key_case($query['headers']))){
-                $query['headers']['x-idempotency-key'] = $this->generateUUID();
+                $query['headers']['x-idempotency-key'] = $this->_generateUUID();
             }
         }
     }
     /**
-     * generateUUID()
+     * _generateUUID()
      */
-    protected function generateUUID()
+    protected function _generateUUID()
     {
         return sprintf(
             '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
