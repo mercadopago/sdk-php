@@ -84,7 +84,7 @@ class Manager
 
         $this->_setDefaultHeaders($configuration->query);
         $this->_setCustomHeaders($entity, $configuration->query);
-        //$this->_setIdempotencyHeader($configuration->query, $configuration, $method);
+        $this->_setIdempotencyHeader($configuration->query, $configuration, $method);
         $this->setQueryParams($entity);
         
         return $this->_client->{$method}($configuration->url, $configuration->query);
@@ -414,27 +414,10 @@ class Manager
         if (!isset($configuration->methods[$method])) {
             return;
         }
-        $fields = '';
-        if ($configuration->methods[$method]['idempotency']) {
-            $fields = $this->_getIdempotencyAttributes($configuration->attributes);
-        }
-        if ($fields != '') {
-            $query['headers']['x-idempotency-key'] = hash(self::$CIPHER, $fields);
+
+        if ($method != 'get' && $query['headers'] != '' && !array_key_exists('x-idempotency-key', array_change_key_case($query['headers']))){
+            $query['headers']['x-idempotency-key'] = generateUUID();
         }
     }
-    /**
-     * @param $attributes
-     *
-     * @return string
-     */
-    protected function _getIdempotencyAttributes($attributes)
-    {
-        $result = [];
-        foreach ($attributes as $key => $value) {
-            if ($value['idempotency']) {
-                $result[] = $key;
-            }
-        }
-        return implode('&', $result);
-    }
+
 }
