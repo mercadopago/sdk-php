@@ -3,7 +3,7 @@
   "type": "library",
   "homepage": "https://github.com/mercadopago/sdk-php",
   "license": "MIT",
-  "version": "1.12.5",
+  "version": "1.12.6",
   "config": {
     "platform": {
         "php": "5.6"
