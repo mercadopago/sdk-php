@@ -73,11 +73,15 @@ Simple usage looks like:
             ]
         ];
 
-        // Step 5: Make the request
-        $payment = $client->create($request);
+        // Step 5: Create the request options, setting X-Idempotency-Key
+        $request_options = new RequestOptions();
+        $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
+
+        // Step 6: Make the request
+        $payment = $client->create($request, $request_options);
         echo $payment->id;
 
-    // Step 6: Handle exceptions
+    // Step 7: Handle exceptions
     } catch (MPApiException $e) {
         echo "Status code: " . $e->getApiResponse()->getStatusCode() . "\n";
         echo "Content: ";
@@ -126,14 +130,19 @@ $request = [
     ]
 ];
 ```
-
-### Step 5: Make the request
-
+### Step 5: Create the request options, setting X-Idempotency-Key
 ```php
-$payment = $client->create($request);
+$request_options = new RequestOptions();
+$request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
 ```
 
-### Step 6: Handle exceptions
+### Step 6: Make the request
+
+```php
+$payment = $client->create($request, $request_options);
+```
+
+### Step 7: Handle exceptions
 
 ```php
 try{
