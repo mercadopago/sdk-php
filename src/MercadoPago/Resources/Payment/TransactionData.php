@@ -31,12 +31,18 @@ class TransactionData
     /** Ticket Url. */
     public ?string $ticket_url;
 
-
     /** E2E ID. */
     public ?string $e2e_id;
 
+    /** Barcode info. */
+    public array|object|null $barcode;
+
+    /** Verification code info. */
+    public ?string $verification_code;
+
     private $map = [
         "bank_info" => "MercadoPago\Resources\Payment\BankInfo",
+        "barcode" => "MercadoPago\Resources\Payment\Barcode",
     ];
 
     /**
