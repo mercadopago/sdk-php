@@ -2,9 +2,14 @@
 
 namespace MercadoPago\Resources\Payment;
 
+use MercadoPago\Serialization\Mapper;
+
 /** TransactionDetails class. */
 class TransactionDetails
 {
+    /** Class mapper. */
+    use Mapper;
+
     /** External financial institution identifier. */
     public ?string $financial_institution;
 
@@ -40,4 +45,22 @@ class TransactionDetails
 
     /** Transaction ID. */
     public ?string $transaction_id;
+
+    /** Barcode info. */
+    public array|object|null $barcode;
+
+    /** Verification code info. */
+    public ?string $verification_code;
+
+    private $map = [
+        "barcode" => "MercadoPago\Resources\Payment\Barcode",
+    ];
+
+    /**
+    * Method responsible for getting map of entities.
+    */
+    public function getMap(): array
+    {
+        return $this->map;
+    }
 }

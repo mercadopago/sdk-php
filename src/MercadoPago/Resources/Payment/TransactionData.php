@@ -31,7 +31,6 @@ class TransactionData
     /** Ticket Url. */
     public ?string $ticket_url;
 
-
     /** E2E ID. */
     public ?string $e2e_id;
 
