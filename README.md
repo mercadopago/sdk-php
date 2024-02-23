@@ -21,10 +21,10 @@ First time using Mercado Pago? Create your [Mercado Pago account](https://www.me
 2. Install PHP SDK for MercadoPago running in command line:
 
 ```
-composer require "mercadopago/dx-php:3.0.2"
+composer require "mercadopago/dx-php:3.0.3"
 ```
 
-> You can also run _composer require "mercadopago/dx-php:2.6.1"_ for PHP7.1 or _composer require "mercadopago/dx-php:1.12.5"_ for PHP5.6.
+> You can also run _composer require "mercadopago/dx-php:3.0.3"_ for PHP7.1 or _composer require "mercadopago/dx-php:1.12.5"_ for PHP5.6.
 
 3. Copy the access_token in the [credentials](https://www.mercadopago.com/developers/en/docs/your-integrations/credentials) section of the page and replace YOUR_ACCESS_TOKEN with it.
 

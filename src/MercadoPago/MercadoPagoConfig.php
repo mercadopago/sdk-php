@@ -10,7 +10,7 @@ use MercadoPago\Net\MPHttpClient;
 class MercadoPagoConfig
 {
     /** @var string Mercado Pago SDK version. */
-    public static string $CURRENT_VERSION = "3.0.2";
+    public static string $CURRENT_VERSION = "3.0.3";
 
     /** @var string Mercado Pago Base URL */
     public static string $BASE_URL = "https://api.mercadopago.com";
@@ -19,10 +19,10 @@ class MercadoPagoConfig
     public static string $PRODUCT_ID = "BC32A7RU643001OI3940";
 
     /** @var string Class constant for local runtime enviroment */
-    const LOCAL = 'local';
+    public const LOCAL = 'local';
 
     /** @var string Class constant for server runtime enviroment */
-    const SERVER = 'server';
+    public const SERVER = 'server';
 
     /** @var string Actual enviroment the user is running at. Default is SERVER */
     private static string $runtime_enviroment = self::SERVER;
