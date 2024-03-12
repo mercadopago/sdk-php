@@ -23,7 +23,7 @@ class Payment
     public ?string $status;
 
     /** Gives more detailed information on the current state or rejection cause. */
-    public ?string $status_details;
+    public ?string $status_detail;
 
     /** Operation type. */
     public ?string $operation_type;
