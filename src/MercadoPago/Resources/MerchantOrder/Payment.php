@@ -22,6 +22,9 @@ class Payment
     /** Payment status. */
     public ?string $status;
 
+    /** @deprecated deprecated since SDK version 3.0.4. */
+    public ?string $status_details;
+
     /** Gives more detailed information on the current state or rejection cause. */
     public ?string $status_detail;
 
