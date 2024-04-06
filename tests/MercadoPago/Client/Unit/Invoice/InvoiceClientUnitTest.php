@@ -31,7 +31,7 @@ final class InvoiceClientUnitTest extends BaseClient
         $this->assertSame("2022-01-01T11:12:25.892-04:00", $invoice->last_modified);
         $this->assertSame("2c938084726fca480172750000000000", $invoice->preapproval_id);
         $this->assertSame("Yoga classes", $invoice->reason);
-        $this->assertSame(23546246234, $invoice->external_reference);
+        $this->assertSame("YG-23546246234", $invoice->external_reference);
         $this->assertSame("ARS", $invoice->currency_id);
         $this->assertSame(10.0, $invoice->transaction_amount);
         $this->assertSame("2022-01-01T11:12:25.892-04:00", $invoice->debit_date);
