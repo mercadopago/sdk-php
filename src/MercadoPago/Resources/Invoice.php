@@ -38,8 +38,14 @@ class Invoice extends MPResource
     /** The transaction amount. */
     public ?float $transaction_amount;
 
+    /** The date for the next retry attempt. */
+    public ?string $next_retry_date;
+
     /** The debit date and time for the invoice. */
     public ?string $debit_date;
+
+    /** The payment method ID. */
+    public ?string $payment_method_id;
 
     /** The retry attempt count. */
     public ?int $retry_attempt;
