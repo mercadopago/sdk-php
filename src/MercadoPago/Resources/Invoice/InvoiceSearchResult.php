@@ -29,7 +29,7 @@ class InvoiceSearchResult
     public ?string $reason;
 
     /** The external reference for the invoice. */
-    public ?int $external_reference;
+    public ?string $external_reference;
 
     /** The currency ID. */
     public ?string $currency_id;
