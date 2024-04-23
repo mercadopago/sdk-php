@@ -3,6 +3,7 @@
 namespace MercadoPago\Net;
 
 /** MPResource class. */
+#[\AllowDynamicProperties]
 class MPResource
 {
     private MPResponse $response;
