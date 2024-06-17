@@ -49,6 +49,9 @@ class TransactionDetails
     /** Barcode info. */
     public array|object|null $barcode;
 
+    /** digitable_line.  */
+    public ?string $digitable_line;
+
     /** Verification code info. */
     public ?string $verification_code;
 
