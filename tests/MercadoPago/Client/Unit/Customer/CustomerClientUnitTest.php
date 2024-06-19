@@ -45,7 +45,7 @@ final class CustomerClientUnitTest extends BaseClient
         $this->assertSame("1322811505", $customer->address->id);
         $this->assertSame("02675031", $customer->address->zip_code);
         $this->assertSame("Av. das Nações Unidas", $customer->address->street_name);
-        $this->assertSame('3000', $customer->address->street_number);
+        $this->assertSame("3000", $customer->address->street_number);
     }
 
     public function testCreateByEmailSuccess(): void
@@ -105,7 +105,7 @@ final class CustomerClientUnitTest extends BaseClient
         $this->assertSame("1322811505", $customer->address->id);
         $this->assertSame("02675031", $customer->address->zip_code);
         $this->assertSame("Av. das Nações Unidas", $customer->address->street_name);
-        $this->assertSame(3000, $customer->address->street_number);
+        $this->assertSame("3000", $customer->address->street_number);
     }
 
     public function testUpdateSuccess(): void
@@ -142,7 +142,7 @@ final class CustomerClientUnitTest extends BaseClient
         $this->assertSame("1322811505", $customer->address->id);
         $this->assertSame("02675031", $customer->address->zip_code);
         $this->assertSame("Av. das Nações Unidas", $customer->address->street_name);
-        $this->assertSame(3000, $customer->address->street_number);
+        $this->assertSame("3000", $customer->address->street_number);
     }
 
     public function testSearchSuccess(): void
