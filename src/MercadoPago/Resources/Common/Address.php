@@ -20,7 +20,7 @@ class Address
     public ?string $street_name;
 
     /** Street number. */
-    public ?int $street_number;
+    public ?string $street_number;
 
     /** City. */
     public array|object|null $city;
