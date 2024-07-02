@@ -46,6 +46,6 @@ class SubMerchant
 
     /** Payment Facilitator URL . */
     public ?string $url;
-  
+
 
 }

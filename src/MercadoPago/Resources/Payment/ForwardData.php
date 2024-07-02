@@ -12,7 +12,7 @@ class ForwardData
 
     public array|object|null $sub_merchant;
 
-   
+
     private $map = [
         "identification" => "MercadoPago\Resources\Common\SubMerchant",
     ];
