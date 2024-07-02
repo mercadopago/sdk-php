@@ -15,7 +15,7 @@ class SubMerchant
     public ?string $country;
 
     /** Street number where the submerchant is located. */
-    public ?string $address_door_number;
+    public ?number_format $address_door_number;
 
     /**  CEP of the submerchant. */
     public ?string $zip;
