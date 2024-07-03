@@ -98,6 +98,9 @@ class Payment extends MPResource
     /** Payer. */
     public array|object|null $payer;
 
+    /** ForwardData. */
+    public array|object|null $forward_data;
+
     /** Collector ID. */
     public ?int $collector_id;
 
@@ -222,6 +225,7 @@ class Payment extends MPResource
     public array|object|null $three_ds_info;
 
     private $map = [
+        "forward_data" => "MercadoPago\Resources\Payment\ForwardData",
         "payer" => "MercadoPago\Resources\Payment\Payer",
         "fee_details" => "MercadoPago\Resources\Payment\FeeDetails",
         "additional_info" => "MercadoPago\Resources\Payment\AdditionalInfo",
