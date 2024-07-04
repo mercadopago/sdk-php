@@ -14,7 +14,7 @@ class ForwardData
 
 
     private $map = [
-        "identification" => "MercadoPago\Resources\Common\SubMerchant",
+        "sub_merchant" => "MercadoPago\Resources\Common\SubMerchant",
     ];
 
     /**
