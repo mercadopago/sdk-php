@@ -13,6 +13,15 @@ class PaymentMethodData
     /** Payment rules. */
     public array|object|null $rules;
 
+    /** Reference ID. */
+    public ?string $reference_id;
+
+    /** External reference ID. */
+    public ?string $external_reference_id;
+
+    /** External Resource URL. */
+    public ?string $external_resource_url;
+
     private $map = [
         "rules" => "MercadoPago\Resources\Payment\PaymentMethodRules",
     ];
