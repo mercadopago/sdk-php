@@ -14,6 +14,9 @@ class Payment extends MPResource
     /** Payment ID. */
     public ?int $id;
 
+    /** Acquirer. */
+    public ?array $acquirer;
+
     /** Acquirer reconciliation. */
     public ?array $acquirer_reconciliation;
 
