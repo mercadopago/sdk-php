@@ -14,6 +14,45 @@ class Payment extends MPResource
     /** Payment ID. */
     public ?int $id;
 
+    /** Status. */
+    public ?string $status;
+
+    /** Status detail. */
+    public ?string $status_detail;
+
+    /** Payment type ID. */
+    public ?string $payment_type_id;
+
+    /** Date created. */
+    public ?string $date_created;
+
+    /** Approval date. */
+    public ?string $date_approved;
+
+    /** Last modified date. */
+    public ?string $date_last_updated;
+
+    /** Currency ID. */
+    public ?string $currency_id;
+
+    /** Description. */
+    public ?string $description;
+
+    /** Collector ID. */
+    public ?int $collector_id;
+
+    /** Payer. */
+    public array|object|null $payer;
+
+    /** Transaction amount. */
+    public ?float $transaction_amount;
+
+    /** Transaction details. */
+    public array|object|null $transaction_details;
+
+    /** Installments. */
+    public ?int $installments;
+
     /** Acquirer. */
     public ?array $acquirer;
 
@@ -50,35 +89,20 @@ class Payment extends MPResource
     /** Financing group. */
     public ?string $financing_group;
 
-    /** Status. */
-    public ?string $status;
-
-    /** Status detail. */
-    public ?string $status_detail;
-
     /** Store ID. */
     public ?string $store_id;
 
     /** Taxes amount. */
     public ?int $taxes_amount;
 
-    /** Date created. */
-    public ?string $date_created;
-
     /** Live Mode. */
     public ?bool $live_mode;
-
-    /** Last modified date. */
-    public ?string $date_last_updated;
 
     /** Date of expiration. */
     public ?string $date_of_expiration;
 
     /** Deduction schema. */
     public ?string $deduction_schema;
-
-    /** Approval date. */
-    public ?string $date_approved;
 
     /** Money release date. */
     public ?string $money_release_date;
@@ -89,23 +113,11 @@ class Payment extends MPResource
     /** Money release status. */
     public ?string $money_release_status;
 
-    /** Currency ID. */
-    public ?string $currency_id;
-
-    /** Transaction amount. */
-    public ?float $transaction_amount;
-
     /** Transaction amount refunded. */
     public ?float $transaction_amount_refunded;
 
-    /** Payer. */
-    public array|object|null $payer;
-
     /** ForwardData. */
     public array|object|null $forward_data;
-
-    /** Collector ID. */
-    public ?int $collector_id;
 
     /** Counter currency. */
     public ?string $counter_currency;
@@ -116,14 +128,8 @@ class Payment extends MPResource
     /** Payment method. */
     public array|object|null $payment_method;
 
-    /** Payment type ID. */
-    public ?string $payment_type_id;
-
     /** Pos ID. */
     public ?string $pos_id;
-
-    /** Transaction details. */
-    public array|object|null $transaction_details;
 
     /** Fee details. */
     public ?array $fee_details;
@@ -158,14 +164,8 @@ class Payment extends MPResource
     /** Coupon amount. */
     public ?float $coupon_amount;
 
-    /** Installments. */
-    public ?int $installments;
-
     /** Token. */
     public ?string $token;
-
-    /** Description. */
-    public ?string $description;
 
     /** Notification url. */
     public ?string $notification_url;
@@ -227,6 +227,9 @@ class Payment extends MPResource
     /** 3DS info. */
     public array|object|null $three_ds_info;
 
+    /** Barcode info. */
+    public array|object|null $barcode;
+
     private $map = [
         "forward_data" => "MercadoPago\Resources\Payment\ForwardData",
         "payer" => "MercadoPago\Resources\Payment\Payer",
@@ -238,6 +241,7 @@ class Payment extends MPResource
         "payment_method" => "MercadoPago\Resources\Payment\PaymentMethod",
         "metadata" => "MercadoPago\Resources\Payment\Metadata",
         "three_ds_info" => "MercadoPago\Resources\Payment\ThreeDSInfo",
+        "barcode" => "MercadoPago\Resources\Payment\Barcode",
     ];
 
     /**
