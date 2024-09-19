@@ -4,20 +4,22 @@ namespace MercadoPago\Resources\Payment;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Cardholder class. */
-class Cardholder
+/** CategoryDescriptor class. */
+class CategoryDescriptor
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Cardholder Name. */
-    public ?string $name;
+    /** Object passenger */
+    public array|object|null $passenger;
 
-    /** Cardholder identification. */
-    public array|object|null $identification;
+    /** Object Route*/
+    public array|object|null $route;
+
 
     private $map = [
-        "identification" => "MercadoPago\Resources\Common\Identification"
+      "passenger" => "MercadoPago\Resources\Common\Passenger",
+      "route" => "MercadoPago\Resources\Common\Route",
     ];
 
     /**

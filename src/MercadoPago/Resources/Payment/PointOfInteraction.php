@@ -22,9 +22,17 @@ class PointOfInteraction
     /** Transaction data. */
     public array|object|null $transaction_data;
 
+    public array|object|null $business_info;
+
+    public array|object|null $location;
+
+    public ?string $release_info;
+
     private $map = [
         "application_data" => "MercadoPago\Resources\Payment\ApplicationData",
         "transaction_data" => "MercadoPago\Resources\Payment\TransactionData",
+        "business_info" => "MercadoPago\Resources\Common\BussinessInfo",
+        "location" => "MercadoPago\Resources\Common\Location",
     ];
 
     /**

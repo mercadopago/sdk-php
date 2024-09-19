@@ -37,6 +37,18 @@ class Payer
     /** Operator ID */
     public ?string $operator_id;
 
+    /** Buyer registration date on your website */
+    public ?string $registration_date;
+
+    public ?string $is_prime_user;
+
+    public ?string $is_first_purchase_online;
+
+    public ?string $last_purchase;
+
+    public ?string $authentication_type;
+
+
     private $map = [
         "identification" => "MercadoPago\Resources\Common\Identification",
         "phone" => "MercadoPago\Resources\Common\Phone"

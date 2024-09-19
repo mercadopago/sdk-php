@@ -18,4 +18,7 @@ class ReceiverAddress extends Address
 
     /** Floor. */
     public ?string $floor;
+
+    /** Província */
+    public ?string $state_name;
 }
