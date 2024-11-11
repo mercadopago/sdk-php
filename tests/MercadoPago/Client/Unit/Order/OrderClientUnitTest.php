@@ -32,7 +32,7 @@ final class OrderClientUnitTest extends BaseClient
         $this->assertSame("1000.00", $order->transactions->payments[0]->amount);
         $this->assertSame("master", $order->transactions->payments[0]->payment_method->id);
         $this->assertSame("credit_card", $order->transactions->payments[0]->payment_method->type);
-        $this->assertSame("test_user@testuser.com", $order->payer->email);
+        $this->assertSame("test_1731350184@testuser.com", $order->payer->email);
     }
 
     private function createRequest(): array
@@ -47,13 +47,15 @@ final class OrderClientUnitTest extends BaseClient
                         "amount" => "1000.00",
                         "payment_method" => [
                             "id" => "master",
-                            "token" => "card_token"
+                            "type" => "credit_card",
+                            "token" => "<card_token>",
+                            "installments" => 1,
                         ],
                     ],
                 ]
             ],
             "payer" => [
-                "email" => "test_user@testuser.com",
+                "email" => "test_1731350184@testuser.com",
             ]
         ];
         return $request;

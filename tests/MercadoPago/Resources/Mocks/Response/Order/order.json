@@ -23,14 +23,15 @@
           },
           "payment_method": {
             "id": "master",
-            "type": "credit_card"
+            "type": "credit_card",
+            "installments": 1
           },
           "currency": "ARS"
         }
       ]
     },
     "payer": {
-      "email": "test_user@testuser.com"
+      "email": "test_1731350184@testuser.com"
     },
     "processing_mode": "automatic",
     "marketplace": "NONE"

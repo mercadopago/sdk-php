@@ -20,9 +20,17 @@ final class OrderClientITTest extends TestCase
 
     public function testCreateSuccess(): void
     {
-        $client = new OrderClient();
-        $order = $client->create($this->createRequest());
-        $this->assertNotNull($order->id);
+        try {
+            $client = new OrderClient();
+            $request = $this->createRequest();
+            $order = $client->create($request);
+            $this->assertNotNull($order->id);
+        } catch (MPApiException $e) {
+            $apiResponse = $e->getApiResponse();
+            $statusCode = $apiResponse->getStatusCode();
+            $responseBody = json_encode($apiResponse->getContent());
+            $this->fail("API Exception: " . $statusCode . " - " . $responseBody);
+        }
     }
 
     private function createRequest(): array
@@ -36,14 +44,14 @@ final class OrderClientITTest extends TestCase
                     [
                         "amount" => "1000.00",
                         "payment_method" => [
-                            "id" => "master",
-                            "token" => "card_token"
+                            "id" => "pix",
+                            "type" => "bank_transfer"
                         ],
                     ],
                 ]
             ],
             "payer" => [
-                "email" => "test_user@testuser.com",
+                "email" => "test_1731350184@testuser.com",
             ]
         ];
         return $request;
