@@ -16,23 +16,28 @@ final class OrderClientUnitTest extends BaseClient
     {
         $filepath = '../../../../Resources/Mocks/Response/Order/order.json';
         $mock_http_request = $this->mockHttpRequest($filepath, 200);
-
         $http_client = new MPDefaultHttpClient($mock_http_request);
         MercadoPagoConfig::setHttpClient($http_client);
-
         $client = new OrderClient();
+
         $order = $client->create($this->createRequest());
+
         $this->assertSame(200, $order->getResponse()->getStatusCode());
         $this->assertSame("01HRYFWNYRE1MR1E60MW3X0T2P", $order->id);
         $this->assertSame("online", $order->type);
         $this->assertSame("1000.00", $order->total_amount);
         $this->assertSame("ext_ref_1234", $order->external_reference);
+        $this->assertSame("processed", $order->status);
+        $this->assertSame("accredited", $order->status_detail);
         $this->assertSame("01HRYFXQ53Q3JPEC48MYWMR0TE", $order->transactions->payments[0]->id);
         $this->assertSame("processed", $order->transactions->payments[0]->status);
         $this->assertSame("1000.00", $order->transactions->payments[0]->amount);
         $this->assertSame("master", $order->transactions->payments[0]->payment_method->id);
         $this->assertSame("credit_card", $order->transactions->payments[0]->payment_method->type);
+        $this->assertSame(1, $order->transactions->payments[0]->payment_method->installments);
         $this->assertSame("test_1731350184@testuser.com", $order->payer->email);
+        $this->assertSame("automatic", $order->processing_mode);
+        $this->assertSame("NONE", $order->marketplace);
     }
 
     private function createRequest(): array
@@ -48,7 +53,7 @@ final class OrderClientUnitTest extends BaseClient
                         "payment_method" => [
                             "id" => "master",
                             "type" => "credit_card",
-                            "token" => "<card_token>",
+                            "token" => "{{card_token}}",
                             "installments" => 1,
                         ],
                     ],

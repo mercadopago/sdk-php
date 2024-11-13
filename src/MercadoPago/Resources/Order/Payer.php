@@ -1,6 +1,6 @@
 <?php
 
-/** API version: 54cea3ac-c258-4a6f-aea9-988e641cff30 */
+/** API version: 5d077b6f-61b2-4b3a-8333-7a64ee547448 */
 
 namespace MercadoPago\Resources\Order;
 
@@ -20,24 +20,6 @@ class Payer
 
     /** Last name. */
     public ?string $last_name;
-
-    /** Authentication type. */
-    public ?string $authentication_type;
-
-    /** Registration date. */
-    public ?string $registration_date;
-
-    /** Last purchase. */
-    public ?string $last_purchase;
-
-    /** Entity type. */
-    public ?string $entity_type;
-
-    /** Is prime user. */
-    public ?bool $is_prime_user;
-
-    /** Is first purchase online. */
-    public ?bool $is_first_purchase_online;
 
     /** Identification. */
     public array|object|null $identification;

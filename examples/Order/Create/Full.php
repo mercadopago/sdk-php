@@ -26,31 +26,26 @@ try {
         "total_amount" => "1000.00",
         "external_reference" => "ext_ref_1234",
         "type_config" => [
-            "capture_mode" => "automatic",
-            "ip_address" => "127.0.0.1",
-            "callback_url" => "https://mysite.com/callback"
+            "capture_mode" => "automatic"
         ],
         "transactions" => [
             "payments" => [
                 [
                     "amount" => "1000.00",
-                    "currency" => "BRL",
                     "payment_method" => [
                         "id" => "master",
                         "type" => "credit_card",
                         "token" => "<CARD_TOKEN>",
                         "installments" => 1,
-                        "issuer_id" => "master",
-                        "statement_descriptor" => "STORE NAME"
+                        "statement_descriptor" => "Store name",
                     ]
                 ]
             ]
         ],
-        "currency" => "BRL",
         "processing_mode" => "automatic",
         "description" => "some description",
         "payer" => [
-            "email" => "test_1731350184@testuser.com",
+            "email" => "<PAYER_EMAIL>",
             "first_name" => "John",
             "last_name" => "Doe",
             "identification" => [
@@ -62,73 +57,22 @@ try {
                 "number" => "99999999999"
             ],
             "address" => [
-                "zip_code" => "9999999",
                 "street_name" => "Av. das Nações Unidas",
                 "street_number" => "99"
-            ],
-            "authentication_type" => "gmail",
-            "registration_date" => "2024-01-01T00:00:00",
-            "last_purchase" => "2024-01-01T00:00:00",
-            "is_prime_user" => true,
-            "is_first_purchase_online" => true,
-            "entity_type" => "individual"
+            ]
         ],
         "marketplace" => "NONE",
         "marketplace_fee" => "10.00",
-        "campaign_id" => "campaign_id",
         "items" => [
             [
                 "title" => "Some item title",
                 "unit_price" => "1000.00",
                 "quantity" => 1,
                 "description" => "Some item description",
-                "code" => "item_code",
-                "type" => "item_type",
-                "picture_url" => "https://mysite.com/img/item.jpg",
-                "warranty" => true,
-                "category_descriptor" => [
-                    "event_date" => "2024-01-01T00:00:00",
-                    "passenger" => [
-                        "first_name" => "John",
-                        "last_name" => "Doe",
-                        "identification_type" => "CPF",
-                        "identification_number" => "00000000000"
-                    ],
-                    "route" => [
-                        "departure" => "São Paulo",
-                        "destination" => "Buenos Aires",
-                        "departure_date_time" => "2024-01-01T00:00:00",
-                        "arrival_date_time" => "2024-01-01T00:00:00",
-                        "company" => "Airline company"
-                    ]
-                ]
+                "id" => "item_id",
+                "category_id" => "category_id",
+                "picture_url" => "https://mysite.com/img/item.jpg"
             ]
-        ],
-        "coupon" => [
-            "code" => "coupon_code",
-            "amount" => "50.00"
-        ],
-        "splits" => [
-            [
-                "oauth_token" => "oauth_token",
-                "type" => "amount",
-                "value" => "10.00"
-            ]
-        ],
-        "shipment" => [
-            "receiver_address" => [
-                "street_name" => "Av. das Nações Unidas",
-                "street_number" => "99",
-                "zip_code" => "99999999",
-                "city_name" => "São Paulo",
-                "state_name" => "SP",
-                "floor" => "1",
-                "apartment" => "1"
-            ],
-            "width" => 1,
-            "height" => 1,
-            "express_shipment" => true,
-            "pick_up_on_seller" => false
         ],
         "expiration_time" => "P3D"
     ];

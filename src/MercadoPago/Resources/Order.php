@@ -1,6 +1,6 @@
 <?php
 
-/** API version: 54cea3ac-c258-4a6f-aea9-988e641cff30 */
+/** API version: 5d077b6f-61b2-4b3a-8333-7a64ee547448 */
 
 namespace MercadoPago\Resources;
 
@@ -30,26 +30,14 @@ class Order extends MPResource
     /** Marketplace fee. */
     public ?string $marketplace_fee;
 
-    /** Campaign ID. */
-    public ?string $campaign_id;
-
     /** Total amount. */
     public ?string $total_amount;
-
-    /** Currency. */
-    public ?string $currency;
 
     /** Expiration time. */
     public ?string $expiration_time;
 
     /** Site ID. */
     public ?string $site_id;
-
-    /** Client ID. */
-    public ?string $client_id;
-
-    /** Collector ID. */
-    public ?string $collector_id;
 
     /** Created date. */
     public ?string $created_date;
@@ -63,6 +51,9 @@ class Order extends MPResource
     /** Status. */
     public ?string $status;
 
+    /** Status detail. */
+    public ?string $status_detail;
+
     /** Type config. */
     public array|object|null $type_config;
 
@@ -72,9 +63,6 @@ class Order extends MPResource
     /** Transactions. */
     public array|object|null $transactions;
 
-    /** Shipment. */
-    public array|object|null $shipment;
-
     /** Items. */
     public ?array $items;
 
@@ -82,7 +70,6 @@ class Order extends MPResource
         "type_config" => "MercadoPago\Resources\Order\TypeConfig",
         "payer" => "MercadoPago\Resources\Order\Payer",
         "transactions" => "MercadoPago\Resources\Order\Transactions",
-        "shipment" => "MercadoPago\Resources\Order\Shipment",
         "items" => "MercadoPago\Resources\Order\Items",
     ];
 

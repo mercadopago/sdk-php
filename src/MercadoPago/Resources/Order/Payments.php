@@ -1,6 +1,6 @@
 <?php
 
-/** API version: 54cea3ac-c258-4a6f-aea9-988e641cff30 */
+/** API version: 5d077b6f-61b2-4b3a-8333-7a64ee547448 */
 
 namespace MercadoPago\Resources\Order;
 
@@ -15,11 +15,8 @@ class Payments
     /** Payment ID. */
     public ?string $id;
 
-    /** Amount. */
-    public ?string $amount;
-
-    /** Currency. */
-    public ?string $currency;
+    /** Reference ID. */
+    public ?string $reference_id;
 
     /** Status. */
     public ?string $status;
@@ -27,14 +24,13 @@ class Payments
     /** Status detail. */
     public ?string $status_detail;
 
-    /** Reference. */
-    public array|object|null $reference;
+    /** Amount. */
+    public ?string $amount;
 
     /** Payment method. */
     public array|object|null $payment_method;
 
     private $map = [
-        "reference" => "MercadoPago\Resources\Order\PaymentReference",
         "payment_method" => "MercadoPago\Resources\Order\PaymentMethod",
     ];
 

@@ -1,6 +1,6 @@
 <?php
 
-/** API version: 54cea3ac-c258-4a6f-aea9-988e641cff30 */
+/** API version: 5d077b6f-61b2-4b3a-8333-7a64ee547448 */
 
 namespace MercadoPago\Resources\Order;
 
@@ -13,15 +13,33 @@ class PaymentMethod
     /** Payment method type. */
     public ?string $type;
 
-    /** Token. */
-    public ?string $token;
+    /** Card ID. */
+    public ?string $card_id;
 
     /** Issuer ID. */
     public ?string $issuer_id;
 
+    /** Token. */
+    public ?string $token;
+
+    /** Installments. */
+    public ?int $installments;
+
     /** Statement descriptor. */
     public ?string $statement_descriptor;
 
-    /** Installments. */
-    public ?string $installments;
+    /** External resource URL. */
+    public ?string $external_resource_url;
+
+    /** Barcode content. */
+    public ?string $barcode_content;
+
+    /** Reference. */
+    public ?string $reference;
+
+    /** Verification code. */
+    public ?string $verification_code;
+
+    /** Financial institution. */
+    public ?string $financial_institution;
 }

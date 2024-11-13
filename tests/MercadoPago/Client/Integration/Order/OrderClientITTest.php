@@ -2,7 +2,6 @@
 
 namespace MercadoPago\Tests\Client\Integration\Order;
 
-use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\Order\OrderClient;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
@@ -23,13 +22,17 @@ final class OrderClientITTest extends TestCase
         try {
             $client = new OrderClient();
             $request = $this->createRequest();
-            $order = $client->create($request);
+
+            $order = $client->create($request, $request_options);
+
             $this->assertNotNull($order->id);
         } catch (MPApiException $e) {
             $apiResponse = $e->getApiResponse();
             $statusCode = $apiResponse->getStatusCode();
             $responseBody = json_encode($apiResponse->getContent());
             $this->fail("API Exception: " . $statusCode . " - " . $responseBody);
+        } catch (\Exception $e) {
+            $this->fail("Exception: " . $e->getMessage());
         }
     }
 
