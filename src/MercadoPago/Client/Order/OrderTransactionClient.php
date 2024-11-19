@@ -23,16 +23,16 @@ final class OrderTransactionClient extends MercadoPagoClient
 
     /**
      * Method responsible for creating transactions for an Order.
-     * @param int $order_id Order ID.
+     * @param string $order_id Order ID.
      * @param \MercadoPago\Client\Order\CreateTransactionRequest $request Create Transaction request.
      * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
      * @return \MercadoPago\Client\Order\TransactionResponse Transaction created.
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function create(int $order_id, CreateTransactionRequest $request, ?RequestOptions $request_options = null): TransactionResponse
+    public function create(string $order_id, CreateTransactionRequest $request, ?RequestOptions $request_options = null): TransactionResponse
     {
-        $path = sprintf(self::URL, strval($order_id));
+        $path = sprintf(self::URL, $order_id);
         $response = parent::send($path, HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(TransactionResponse::class, $response->getContent());
         $result->setResponse($response);
