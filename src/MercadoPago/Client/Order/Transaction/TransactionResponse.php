@@ -1,11 +1,12 @@
 <?php
 
-namespace MercadoPago\Client\Order;
+namespace MercadoPago\Client\Order\Transaction;
 
+use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
 /** TransactionResponse class. */
-class TransactionResponse
+class TransactionResponse extends MPResource
 {
     /** Class mapper. */
     use Mapper;

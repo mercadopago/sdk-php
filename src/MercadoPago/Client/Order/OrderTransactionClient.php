@@ -5,6 +5,7 @@ namespace MercadoPago\Client\Order;
 use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\Client\Order\Transaction\CreateTransactionRequest;
+use MercadoPago\Client\Order\Transaction\TransactionResponse;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPHttpClient;
