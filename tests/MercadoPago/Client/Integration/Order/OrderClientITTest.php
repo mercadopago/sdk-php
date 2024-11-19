@@ -23,7 +23,7 @@ final class OrderClientITTest extends TestCase
             $client = new OrderClient();
             $request = $this->createRequest();
 
-            $order = $client->create($request, $request_options);
+            $order = $client->create($request);
 
             $this->assertNotNull($order->id);
         } catch (MPApiException $e) {
