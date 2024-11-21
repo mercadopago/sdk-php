@@ -80,4 +80,29 @@ final class OrderClientUnitTest extends BaseClient
         $this->assertSame("processed", $order->status);
     }
 
+
+    /**
+    * Order Client unit tests.
+    */
+    public function testGetSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/Order/get_order_response.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+        $client = new OrderClient();
+
+        $orderId = "01JD2P9GGXAPBDGG6YT90N77M3";
+        $order = $client->get($orderId);
+
+        $this->assertSame(200, $order->getResponse()->getStatusCode());
+        $this->assertSame("01JD2P9GGXAPBDGG6YT90N77M3", $order->id);
+        $this->assertSame("online", $order->type);
+        $this->assertSame("200.00", $order->total_amount);
+        $this->assertSame("ext_ref_1234", $order->external_reference);
+        $this->assertSame("processed", $order->status);
+        $this->assertSame("accredited", $order->status_detail);
+        $this->assertSame("test_1731354550@testuser.com", $order->payer->email); // Verificando o payer
+        $this->assertSame("automatic", $order->processing_mode);
+    }
 }

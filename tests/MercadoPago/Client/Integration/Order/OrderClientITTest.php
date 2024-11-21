@@ -37,6 +37,7 @@ final class OrderClientITTest extends TestCase
         }
     }
 
+
     private function createRequest(): array
     {
         $request = [
@@ -111,5 +112,33 @@ final class OrderClientITTest extends TestCase
             ]
         ];
         return $request;
+    }
+
+
+    public function testGetOrderSuccess(): void
+    {
+        try {
+            $client = new OrderClient();
+            $orderId = "01JD2P9GGXAPBDGG6YT90N77M3";
+            $request_options = new RequestOptions();
+            $request_options->setCustomHeaders(["X-Sandbox: true"]);
+            $order = $client->get($orderId, $request_options);
+
+            $this->assertNotNull($order->id);
+            $this->assertSame("01JD2P9GGXAPBDGG6YT90N77M3", $order->id);
+            $this->assertSame("online", $order->type);
+            $this->assertSame("200.00", $order->total_amount);
+            $this->assertSame("ext_ref_1234", $order->external_reference);
+            $this->assertSame("processed", $order->status);
+            $this->assertSame("accredited", $order->status_detail);
+            $this->assertSame("test_1731354550@testuser.com", $order->payer->email);
+        } catch (MPApiException $e) {
+            $apiResponse = $e->getApiResponse();
+            $statusCode = $apiResponse->getStatusCode();
+            $responseBody = json_encode($apiResponse->getContent());
+            $this->fail("API Exception: " . $statusCode . " - " . $responseBody);
+        } catch (\Exception $e) {
+            $this->fail("Exception: " . $e->getMessage());
+        }
     }
 }
