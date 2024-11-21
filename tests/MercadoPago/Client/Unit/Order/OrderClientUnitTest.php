@@ -65,4 +65,19 @@ final class OrderClientUnitTest extends BaseClient
         ];
         return $request;
     }
+
+    public function testCaptureSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/Order/order_capture.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+        $client = new OrderClient();
+
+        $order = $client->capture("01HRYFWNYRE1MR1E60MW3X0T2P");
+
+        $this->assertSame(200, $order->getResponse()->getStatusCode());
+        $this->assertSame("processed", $order->status);
+    }
+
 }
