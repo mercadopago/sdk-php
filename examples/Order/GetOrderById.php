@@ -1,6 +1,6 @@
 <?php
 
-namespace Exemples\Order;
+namespace Examples\Order;
 
 // Step 1: Require the library from your Composer vendor folder
 require_once '../../vendor/autoload.php';
@@ -20,10 +20,14 @@ MercadoPagoConfig::setRuntimeEnviroment(MercadoPagoConfig::LOCAL);
 $client = new OrderClient();
 
 try {
+    // Step 4: Set the Order ID to be fetched
     $order_id = "<ORDER_ID>";
+
+    // Step 5: Create the request options, setting X-Idempotency-Key
     $request_options = new RequestOptions();
     $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
 
+    // Step 6: Make the request
     $order = $client->get($order_id, $request_options);
 
     echo "Order ID: " . $order->id . "\n";
@@ -43,6 +47,7 @@ try {
         echo "No payments found for this order.\n";
     }
 
+    // Step 7: Handle exceptions
 } catch (MPApiException $e) {
     echo "Status code: " . $e->getApiResponse()->getStatusCode() . "\n";
     echo "Content: ";

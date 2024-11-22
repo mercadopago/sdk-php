@@ -59,7 +59,7 @@ try {
     $request_options_capture = new RequestOptions();
     $request_options_capture->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>", "X-Sandbox: true"]);
 
-    // step 7: Capture the order
+    // Step 7: Capture the order
     $order = $client->capture($order->id, $request_options_capture);
     echo "Order Status:" . $order->status;
 
