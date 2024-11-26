@@ -4,6 +4,7 @@ namespace MercadoPago\Tests\Client\Unit\Order;
 
 use MercadoPago\Client\Order\OrderTransactionClient;
 use MercadoPago\Client\Order\Transaction\CreateTransactionRequest;
+use MercadoPago\Client\Order\Transaction\UpdateTransactionRequest;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
 use MercadoPago\Tests\Client\Unit\Base\BaseClient;
@@ -47,5 +48,24 @@ final class OrderTransactionClientUnitTest extends BaseClient
             ],
         ];
         return $request;
+    }
+
+    public function testUpdateSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/Order/updated_transaction.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+        $client = new OrderTransactionClient();
+        $order_id = "01JD26HQ96FFHBD2CHDTXZ9MSH";
+        $transaction_id = "pay_01JD26HQ96FFHBD2CHDW984TZM";
+        $request = new UpdateTransactionRequest();
+        $request->amount = "299.90";
+
+        $transaction = $client->update($order_id, $transaction_id, $request);
+
+        $this->assertSame(200, $transaction->getResponse()->getStatusCode());
+        $this->assertSame("pay_01JD26HQ96FFHBD2CHDW984TZM", $transaction->id);
+        $this->assertSame("299.90", $transaction->amount);
     }
 }
