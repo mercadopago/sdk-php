@@ -7,17 +7,18 @@ use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\Client\Order\Transaction\CreateTransactionRequest;
 use MercadoPago\Client\Order\Transaction\TransactionResponse;
 use MercadoPago\Client\Order\Transaction\UpdateTransactionRequest;
-use MercadoPago\Client\Order\Transaction\UpdateTransactionResponse;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPHttpClient;
+use MercadoPago\Resources\Order\Transaction\UpdateTransaction;
+
 use MercadoPago\Serialization\Serializer;
 
 /** Client responsible for performing Order transactions actions. */
 final class OrderTransactionClient extends MercadoPagoClient
 {
     private const URL = "/v1/orders/%s/transactions";
-    private const URL_WITH_ID = "/v1/orders/%s/transactions/%s";
+    private const URL_WITH_ID = self::URL . "/%s";
 
     /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
     public function __construct(?MPHttpClient $MPHttpClient = null)
@@ -53,11 +54,11 @@ final class OrderTransactionClient extends MercadoPagoClient
      * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
      * @throws \Exception if the request fails.
      */
-    public function update(string $order_id, string $transaction_id, UpdateTransactionRequest $request, ?RequestOptions $request_options = null): UpdateTransactionResponse
+    public function update(string $order_id, string $transaction_id, UpdateTransactionRequest $request, ?RequestOptions $request_options = null): UpdateTransaction
     {
         $path = sprintf(self::URL_WITH_ID, $order_id, $transaction_id);
         $response = parent::send($path, HttpMethod::PATCH, json_encode($request), null, $request_options);
-        $result = Serializer::deserializeFromJson(UpdateTransactionResponse::class, $response->getContent());
+        $result = Serializer::deserializeFromJson(UpdateTransaction::class, $response->getContent());
         $result->setResponse($response);
         return $result;
     }

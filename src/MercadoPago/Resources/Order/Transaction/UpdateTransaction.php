@@ -2,13 +2,13 @@
 
 /** API version: 5d077b6f-61b2-4b3a-8333-7a64ee547448 */
 
-namespace MercadoPago\Client\Order\Transaction;
+namespace MercadoPago\Resources\Order\Transaction;
 
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** UpdateTransactionResponse class. */
-class UpdateTransactionResponse extends MPResource
+/** UpdateTransaction class. */
+class UpdateTransaction extends MPResource
 {
     /** Class mapper. */
     use Mapper;
@@ -23,7 +23,7 @@ class UpdateTransactionResponse extends MPResource
     public array|object|null $payment_method;
 
     private $map = [
-        "payment_method" => "MercadoPago\Client\Order\Transaction\PaymentMethodRequest",
+        "payment_method" => "MercadoPago\Resources\Order\Transaction\PaymentMethod",
     ];
 
     /**

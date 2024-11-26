@@ -67,5 +67,6 @@ final class OrderTransactionClientUnitTest extends BaseClient
         $this->assertSame(200, $transaction->getResponse()->getStatusCode());
         $this->assertSame("pay_01JD26HQ96FFHBD2CHDW984TZM", $transaction->id);
         $this->assertSame("299.90", $transaction->amount);
+        $this->assertSame("master", $transaction->payment_method->id);
     }
 }
