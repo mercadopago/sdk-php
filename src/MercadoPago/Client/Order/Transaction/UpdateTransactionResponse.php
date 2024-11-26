@@ -7,11 +7,14 @@ namespace MercadoPago\Client\Order\Transaction;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** UpdateTransaction class. */
-class UpdateTransaction extends MPResource
+/** UpdateTransactionResponse class. */
+class UpdateTransactionResponse extends MPResource
 {
     /** Class mapper. */
     use Mapper;
+
+    /** Transaction ID. */
+    public ?string $id;
 
     /** Amount. */
     public ?string $amount;
