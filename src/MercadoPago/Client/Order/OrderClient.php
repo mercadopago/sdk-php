@@ -14,8 +14,10 @@ use MercadoPago\Serialization\Serializer;
 final class OrderClient extends MercadoPagoClient
 {
     private const URL = "/v1/orders";
-    private const URL_CAPTURE = "/v1/orders/%s/capture";
     private const URL_WITH_ID = "/v1/orders/%s";
+    private const URL_CAPTURE = self::URL_WITH_ID . '/capture';
+    private const URL_CANCEL = self::URL_WITH_ID . '/cancel';
+    private const URL_PROCESS = self::URL_WITH_ID . '/process';
 
     /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
     public function __construct(?MPHttpClient $MPHttpClient = null)
@@ -67,6 +69,40 @@ final class OrderClient extends MercadoPagoClient
     public function get(string $order_id, ?RequestOptions $request_options = null): Order
     {
         $response = parent::send(sprintf(self::URL_WITH_ID, $order_id), HttpMethod::GET, null, null, $request_options);
+        $result = Serializer::deserializeFromJson(Order::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
+    }
+
+    /**
+ * Method responsible for canceling an existing Order.
+ *
+ * @param string $order_id ID of the Order to cancel.
+ * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
+ * @return \MercadoPago\Resources\Order response with cancellation details.
+ * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+ * @throws \Exception if the request fails.
+ */
+    public function cancel(string $order_id, ?RequestOptions $request_options = null): Order
+    {
+        $response = parent::send(sprintf(self::URL_CANCEL, $order_id), HttpMethod::POST, null, null, $request_options);
+        $result = Serializer::deserializeFromJson(Order::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
+    }
+
+    /**
+    * Method responsible for processing an Order.
+    *
+    * @param string $order_id ID of the Order to process.
+    * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
+    * @return \MercadoPago\Resources\Order response with processing details.
+    * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+    * @throws \Exception if the request fails.
+    */
+    public function process(string $order_id, ?RequestOptions $request_options = null): Order
+    {
+        $response = parent::send(sprintf(self::URL_PROCESS, $order_id), HttpMethod::POST, null, null, $request_options);
         $result = Serializer::deserializeFromJson(Order::class, $response->getContent());
         $result->setResponse($response);
         return $result;
