@@ -4,8 +4,8 @@
 
 namespace MercadoPago\Resources\Order;
 
-/** Refunds class. */
-class Refunds
+/** Refund class. */
+class Refund
 {
     /** Refund ID. */
     public ?string $id;

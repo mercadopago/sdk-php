@@ -3,7 +3,6 @@
 namespace MercadoPago\Tests\Client\Unit\Order;
 
 use MercadoPago\Client\Order\OrderTransactionClient;
-use MercadoPago\Client\Order\Transaction\CreateTransactionRequest;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
 use MercadoPago\Tests\Client\Unit\Base\BaseClient;
@@ -32,21 +31,21 @@ final class OrderTransactionClientUnitTest extends BaseClient
         $this->assertSame(3, $transaction->payments[0]->payment_method->installments);
     }
 
-    private function createRequest(): CreateTransactionRequest
+    private function createRequest(): array
     {
-        $request = new CreateTransactionRequest();
-        $request->payments = [
-            [
-                "amount" => "100.00",
-                "payment_method" => [
-                    "id" => "master",
-                    "type" => "credit_card",
-                    "token" => "{{card_token}}",
-                    "installments" => 3,
+        return [
+            "payments" => [
+                [
+                    "amount" => "100.00",
+                    "payment_method" => [
+                        "id" => "master",
+                        "type" => "credit_card",
+                        "token" => "{{card_token}}",
+                        "installments" => 3,
+                    ],
                 ],
             ],
         ];
-        return $request;
     }
 
     public function testUpdateSuccess(): void

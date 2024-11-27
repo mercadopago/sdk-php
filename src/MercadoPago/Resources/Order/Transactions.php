@@ -4,10 +4,11 @@
 
 namespace MercadoPago\Resources\Order;
 
+use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
 /** Transactions class. */
-class Transactions
+class Transactions extends MPResource
 {
     /** Class mapper. */
     use Mapper;
@@ -19,8 +20,8 @@ class Transactions
     public ?array $refunds;
 
     private $map = [
-        "payments" => "MercadoPago\Resources\Order\Payments",
-        "refunds" => "MercadoPago\Resources\Order\Refunds",
+        "payments" => "MercadoPago\Resources\Order\Payment",
+        "refunds" => "MercadoPago\Resources\Order\Refund",
     ];
 
     /**

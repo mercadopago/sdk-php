@@ -2,15 +2,27 @@
 
 /** API version: 5d077b6f-61b2-4b3a-8333-7a64ee547448 */
 
-namespace MercadoPago\Client\Order\Transaction;
+namespace MercadoPago\Resources\Order;
 
 use MercadoPago\Serialization\Mapper;
 
-/** PaymentsRequest class. */
-class PaymentsRequest
+/** Payment class. */
+class Payment
 {
     /** Class mapper. */
     use Mapper;
+
+    /** Payment ID. */
+    public ?string $id;
+
+    /** Reference ID. */
+    public ?string $reference_id;
+
+    /** Status. */
+    public ?string $status;
+
+    /** Status detail. */
+    public ?string $status_detail;
 
     /** Amount. */
     public ?string $amount;
@@ -19,7 +31,7 @@ class PaymentsRequest
     public array|object|null $payment_method;
 
     private $map = [
-        "payment_method" => "MercadoPago\Client\Order\Transaction\PaymentMethodRequest",
+        "payment_method" => "MercadoPago\Resources\Order\PaymentMethod",
     ];
 
     /**
