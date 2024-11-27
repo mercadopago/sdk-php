@@ -62,6 +62,7 @@ final class OrderTransactionClientITTest extends TestCase
             $update_transaction_request = [
                 "amount" => "299.90",
             ];
+
             $order = $order_client->create($create_order_request);
             sleep(3);
             $transaction = $order_transaction_client->update($order->id, $order->transactions->payments[0]->id, $update_transaction_request);
