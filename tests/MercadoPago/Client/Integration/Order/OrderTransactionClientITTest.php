@@ -81,7 +81,7 @@ final class OrderTransactionClientITTest extends TestCase
 
     private function createOrderRequest(): array
     {
-        $request = [
+        return [
             "type" => "online",
             "processing_mode" => "manual",
             "total_amount" => "100.00",
@@ -101,6 +101,5 @@ final class OrderTransactionClientITTest extends TestCase
                 "email" => "test_1731350184@testuser.com",
             ]
         ];
-        return $request;
     }
 }
