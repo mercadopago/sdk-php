@@ -8,7 +8,6 @@ require_once '../../../vendor/autoload.php';
 use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\Order\OrderClient;
 use MercadoPago\Client\Order\OrderTransactionClient;
-use MercadoPago\Client\Order\Transaction\UpdateTransactionRequest;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 
@@ -58,8 +57,9 @@ try {
     echo "\nAmount: " . $order->transactions->payments[0]->amount;
 
     // Step 8: Create the request to update a transaction
-    $update_transaction_request = new UpdateTransactionRequest();
-    $update_transaction_request->amount = "299.90";
+    $update_transaction_request = [
+        "amount" => "299.90",
+    ];
 
     // Step 9: Create the request options, setting X-Idempotency-Key
     $update_transaction_request_options = new RequestOptions();

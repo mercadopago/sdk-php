@@ -4,7 +4,6 @@ namespace MercadoPago\Tests\Client\Unit\Order;
 
 use MercadoPago\Client\Order\OrderTransactionClient;
 use MercadoPago\Client\Order\Transaction\CreateTransactionRequest;
-use MercadoPago\Client\Order\Transaction\UpdateTransactionRequest;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
 use MercadoPago\Tests\Client\Unit\Base\BaseClient;
@@ -59,8 +58,9 @@ final class OrderTransactionClientUnitTest extends BaseClient
         $client = new OrderTransactionClient();
         $order_id = "01JD26HQ96FFHBD2CHDTXZ9MSH";
         $transaction_id = "pay_01JD26HQ96FFHBD2CHDW984TZM";
-        $request = new UpdateTransactionRequest();
-        $request->amount = "299.90";
+        $request = [
+            "amount" => "299.90",
+        ];
 
         $transaction = $client->update($order_id, $transaction_id, $request);
 

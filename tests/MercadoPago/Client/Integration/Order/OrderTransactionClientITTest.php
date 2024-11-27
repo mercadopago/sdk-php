@@ -5,7 +5,6 @@ namespace MercadoPago\Tests\Client\Integration\Order;
 use MercadoPago\Client\Order\OrderClient;
 use MercadoPago\Client\Order\OrderTransactionClient;
 use MercadoPago\Client\Order\Transaction\CreateTransactionRequest;
-use MercadoPago\Client\Order\Transaction\UpdateTransactionRequest;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use PHPUnit\Framework\TestCase;
@@ -60,9 +59,9 @@ final class OrderTransactionClientITTest extends TestCase
             $order_client = new OrderClient();
             $order_transaction_client = new OrderTransactionClient();
             $create_order_request = $this->createOrderRequest();
-            $update_transaction_request = new UpdateTransactionRequest();
-            $update_transaction_request->amount = "299.90";
-
+            $update_transaction_request = [
+                "amount" => "299.90",
+            ];
             $order = $order_client->create($create_order_request);
             sleep(3);
             $transaction = $order_transaction_client->update($order->id, $order->transactions->payments[0]->id, $update_transaction_request);
