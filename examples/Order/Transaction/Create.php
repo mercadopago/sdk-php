@@ -35,7 +35,6 @@ try {
         ],
     ];
 
-
     // Step 5: Create the request options, setting X-Idempotency-Key
     $request_options = new RequestOptions();
     $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
