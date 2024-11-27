@@ -7,7 +7,6 @@ require_once '../../../vendor/autoload.php';
 
 use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\Order\OrderTransactionClient;
-use MercadoPago\Client\Order\Transaction\CreateTransactionRequest;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 
@@ -22,19 +21,19 @@ $client = new OrderTransactionClient();
 
 try {
     // Step 4: Create the request
-    $request = new CreateTransactionRequest();
-    $request->payments = [
-        [
-            "amount" => "100.00",
-            "payment_method" => [
-                "id" => "master",
-                "type" => "credit_card",
-                "token" => "<CARD_TOKEN>",
-                "installments" => 1,
+    $request = [
+        "payments" => [
+            [
+                "amount" => "100.00",
+                "payment_method" => [
+                    "id" => "master",
+                    "type" => "credit_card",
+                    "token" => "<CARD_TOKEN>",
+                    "installments" => 1,
+                ],
             ],
         ],
     ];
-
 
     // Step 5: Create the request options, setting X-Idempotency-Key
     $request_options = new RequestOptions();

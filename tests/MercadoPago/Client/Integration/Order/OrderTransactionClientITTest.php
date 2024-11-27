@@ -3,7 +3,6 @@
 namespace MercadoPago\Tests\Client\Integration\Order;
 
 use MercadoPago\Client\Order\OrderTransactionClient;
-use MercadoPago\Client\Order\Transaction\CreateTransactionRequest;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use PHPUnit\Framework\TestCase;
@@ -37,15 +36,16 @@ final class OrderTransactionClientITTest extends TestCase
         }
     }
 
-    private function createRequest(): CreateTransactionRequest
+    private function createRequest(): array
     {
-        $request = new CreateTransactionRequest();
-        $request->payments = [
-            [
-                "amount" => "100.00",
-                "payment_method" => [
-                    "id" => "pix",
-                    "type" => "bank_transfer",
+        $request = [
+            "payments" => [
+                [
+                    "amount" => "100.00",
+                    "payment_method" => [
+                        "id" => "pix",
+                        "type" => "bank_transfer",
+                    ],
                 ],
             ],
         ];

@@ -4,10 +4,11 @@
 
 namespace MercadoPago\Resources\Order;
 
+use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
 /** Transactions class. */
-class Transactions
+class Transactions extends MPResource
 {
     /** Class mapper. */
     use Mapper;
