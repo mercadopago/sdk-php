@@ -33,7 +33,7 @@ final class OrderTransactionClientUnitTest extends BaseClient
 
     private function createRequest(): array
     {
-        $request = [
+        return [
             "payments" => [
                 [
                     "amount" => "100.00",
@@ -46,6 +46,5 @@ final class OrderTransactionClientUnitTest extends BaseClient
                 ],
             ],
         ];
-        return $request;
     }
 }

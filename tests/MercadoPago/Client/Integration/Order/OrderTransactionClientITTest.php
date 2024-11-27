@@ -38,7 +38,7 @@ final class OrderTransactionClientITTest extends TestCase
 
     private function createRequest(): array
     {
-        $request = [
+        return [
             "payments" => [
                 [
                     "amount" => "100.00",
@@ -49,6 +49,5 @@ final class OrderTransactionClientITTest extends TestCase
                 ],
             ],
         ];
-        return $request;
     }
 }
