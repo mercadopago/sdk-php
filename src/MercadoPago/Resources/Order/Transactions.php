@@ -20,8 +20,8 @@ class Transactions extends MPResource
     public ?array $refunds;
 
     private $map = [
-        "payments" => "MercadoPago\Resources\Order\Payments",
-        "refunds" => "MercadoPago\Resources\Order\Refunds",
+        "payments" => "MercadoPago\Resources\Order\Payment",
+        "refunds" => "MercadoPago\Resources\Order\Refund",
     ];
 
     /**

@@ -6,8 +6,8 @@ namespace MercadoPago\Resources\Order;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Payments class. */
-class Payments
+/** Payment class. */
+class Payment
 {
     /** Class mapper. */
     use Mapper;
