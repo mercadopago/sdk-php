@@ -5,6 +5,8 @@ namespace MercadoPago\Tests\Client\Unit\Order;
 use MercadoPago\Client\Order\OrderTransactionClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\MPDefaultHttpClient;
+use MercadoPago\Net\MPHttpClient;
+use MercadoPago\Net\MPResponse;
 use MercadoPago\Tests\Client\Unit\Base\BaseClient;
 
 /**
@@ -12,6 +14,15 @@ use MercadoPago\Tests\Client\Unit\Base\BaseClient;
  */
 final class OrderTransactionClientUnitTest extends BaseClient
 {
+    private $httpClientMock;
+    private $client;
+
+    protected function setUp(): void
+    {
+        $this->httpClientMock = $this->createMock(MPHttpClient::class);
+        $this->client = new OrderTransactionClient($this->httpClientMock);
+    }
+
     public function testCreateSuccess(): void
     {
         $filepath = '../../../../Resources/Mocks/Response/Order/transaction.json';
@@ -67,5 +78,30 @@ final class OrderTransactionClientUnitTest extends BaseClient
         $this->assertSame("pay_01JD26HQ96FFHBD2CHDW984TZM", $transaction->id);
         $this->assertSame("299.90", $transaction->amount);
         $this->assertSame("master", $transaction->payment_method->id);
+    }
+
+    public function testDeleteSucess(): void
+    {
+        $order_id = "1234321";
+        $transaction_id = "pay_3456789";
+        $expectedResponse = new MPResponse(204, []);
+
+        $this->httpClientMock->method('send')->willReturn($expectedResponse);
+        $response = $this->client->delete($order_id, $transaction_id);
+
+        $this->assertEquals(204, $response->getStatusCode());
+        $this->assertEmpty($response->getContent());
+    }
+
+    public function testDeleteErrorNotFound()
+    {
+        $order_id = "1234321";
+        $transaction_id = "pay_3456789";
+        $expectedResponse = new MPResponse(404, ['Order not found.']);
+
+        $this->httpClientMock->method('send')->willReturn($expectedResponse);
+        $response = $this->client->delete($order_id, $transaction_id);
+
+        $this->assertEquals(404, $response->getStatusCode());
     }
 }

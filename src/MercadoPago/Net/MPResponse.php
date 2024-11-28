@@ -12,7 +12,7 @@ class MPResponse
      */
     public function __construct(
         private int $status_code,
-        private array $content
+        private ?array $content
     ) {
     }
 

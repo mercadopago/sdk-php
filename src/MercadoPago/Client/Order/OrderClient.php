@@ -75,14 +75,14 @@ final class OrderClient extends MercadoPagoClient
     }
 
     /**
- * Method responsible for canceling an existing Order.
- *
- * @param string $order_id ID of the Order to cancel.
- * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
- * @return \MercadoPago\Resources\Order response with cancellation details.
- * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
- * @throws \Exception if the request fails.
- */
+     * Method responsible for canceling an existing Order.
+     *
+     * @param string $order_id ID of the Order to cancel.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
+     * @return \MercadoPago\Resources\Order response with cancellation details.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
+     */
     public function cancel(string $order_id, ?RequestOptions $request_options = null): Order
     {
         $response = parent::send(sprintf(self::URL_CANCEL, $order_id), HttpMethod::POST, null, null, $request_options);

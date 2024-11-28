@@ -18,8 +18,8 @@ MercadoPagoConfig::setRuntimeEnviroment(MercadoPagoConfig::LOCAL);
 
 // Step 3: Initialize the API client
 $client = new OrderClient();
-
 $order_id = "<ORDER_ID>";
+
 try {
     $request_options = new RequestOptions();
     $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);

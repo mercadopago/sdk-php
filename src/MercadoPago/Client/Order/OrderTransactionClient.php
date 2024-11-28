@@ -10,6 +10,7 @@ use MercadoPago\Net\MPHttpClient;
 use MercadoPago\Resources\Order\Transaction\UpdateTransaction;
 use MercadoPago\Resources\Order\Transactions;
 use MercadoPago\Serialization\Serializer;
+use MercadoPago\Net\MPResponse;
 
 /** Client responsible for performing Order transactions actions. */
 final class OrderTransactionClient extends MercadoPagoClient
@@ -58,5 +59,20 @@ final class OrderTransactionClient extends MercadoPagoClient
         $result = Serializer::deserializeFromJson(UpdateTransaction::class, $response->getContent());
         $result->setResponse($response);
         return $result;
+    }
+
+    /**
+     * Method responsible for deleting a transaction of an Order.
+     * @param string $order_id Order ID.
+     * @param string $transaction_id Transaction ID.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
+     * @return Response
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
+     */
+    public function delete(string $order_id, string $transaction_id, ?RequestOptions $request_options = null): MPResponse
+    {
+        $path = sprintf(self::URL_WITH_ID, $order_id, $transaction_id);
+        return parent::send($path, HttpMethod::DELETE, null, null, $request_options);
     }
 }
