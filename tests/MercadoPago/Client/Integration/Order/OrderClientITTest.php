@@ -28,13 +28,11 @@ final class OrderClientITTest extends TestCase
             $request_options->setCustomHeaders(["X-Sandbox: true"]);
             $order = $client->create($request, $request_options);
             $this->assertNotNull($order->id);
-
         } catch (MPApiException $e) {
             $apiResponse = $e->getApiResponse();
             $statusCode = $apiResponse->getStatusCode();
             $responseBody = json_encode($apiResponse->getContent());
             $this->fail("API Exception: " . $statusCode . " - " . $responseBody);
-
         } catch (\Exception $e) {
             $this->fail("Exception: " . $e->getMessage());
         }
@@ -76,13 +74,11 @@ final class OrderClientITTest extends TestCase
 
             $order_capture = $client->capture($order->id, $request_options);
             $this->assertSame($order_capture->status, "processed");
-
         } catch (MPApiException $e) {
             $apiResponse = $e->getApiResponse();
             $statusCode = $apiResponse->getStatusCode();
             $responseBody = json_encode($apiResponse->getContent());
             $this->fail("API Exception: " . $statusCode . " - " . $responseBody);
-
         } catch (\Exception $e) {
             $this->fail("Exception: " . $e->getMessage());
         }
@@ -138,13 +134,11 @@ final class OrderClientITTest extends TestCase
             $this->assertSame($order->total_amount, $order_get->total_amount);
             $this->assertSame($order->status, $order_get->status);
             $this->assertSame($order->status_detail, $order_get->status_detail);
-
         } catch (MPApiException $e) {
             $apiResponse = $e->getApiResponse();
             $statusCode = $apiResponse->getStatusCode();
             $responseBody = json_encode($apiResponse->getContent());
             $this->fail("API Exception: " . $statusCode . " - " . $responseBody);
-
         } catch (\Exception $e) {
             $this->fail("Exception: " . $e->getMessage());
         }
@@ -165,13 +159,11 @@ final class OrderClientITTest extends TestCase
             $order_cancelled = $client->cancel($order->id, $request_options);
             $this->assertNotNull($order_cancelled->id);
             $this->assertSame("cancelled", $order_cancelled->status);
-
         } catch (MPApiException $e) {
             $apiResponse = $e->getApiResponse();
             $statusCode = $apiResponse->getStatusCode();
             $responseBody = json_encode($apiResponse->getContent());
             $this->fail("API Exception: " . $statusCode . " - " . $responseBody);
-
         } catch (\Exception $e) {
             $this->fail("Exception: " . $e->getMessage());
         }
@@ -189,13 +181,11 @@ final class OrderClientITTest extends TestCase
 
             $order_processed = $client->process($order->id, $request_options);
             $this->assertSame("processed", $order_processed->status);
-
         } catch (MPApiException $e) {
             $apiResponse = $e->getApiResponse();
             $statusCode = $apiResponse->getStatusCode();
             $responseBody = json_encode($apiResponse->getContent());
             $this->fail("API Exception: " . $statusCode . " - " . $responseBody);
-
         } catch (\Exception $e) {
             $this->fail("Exception: " . $e->getMessage());
         }
@@ -207,7 +197,7 @@ final class OrderClientITTest extends TestCase
         $card_token = $client_token->create($this->createCardTokenRequest());
         $this->assertNotNull($card_token->id);
 
-        return[
+        return [
             "type" => "online",
             "processing_mode" => "manual",
             "total_amount" => "200.00",
@@ -231,11 +221,103 @@ final class OrderClientITTest extends TestCase
         ];
     }
 
+    public function testRefundTotalSuccess(): void
+    {
+        try {
+            $client = new OrderClient();
+            $request = $this->createRequestOrderCreditCard();
+            $request_options = new RequestOptions();
+            $request_options->setCustomHeaders(["X-Sandbox: true"]);
+
+            $order = $client->create($request, $request_options);
+            sleep(3);
+            $refunded_order = $client->refund($order->id, null, $request_options);
+
+            $this->assertSame($order->id, $refunded_order->id);
+            $this->assertSame("refunded", $refunded_order->status);
+            $this->assertSame("refunded", $refunded_order->status_detail);
+            $this->assertSame("100.00", $refunded_order->transactions->refunds[0]->amount);
+            $this->assertSame("processed", $refunded_order->transactions->refunds[0]->status);
+        } catch (MPApiException $e) {
+            $apiResponse = $e->getApiResponse();
+            $statusCode = $apiResponse->getStatusCode();
+            $responseBody = json_encode($apiResponse->getContent());
+            $this->fail("API Exception: " . $statusCode . " - " . $responseBody);
+        } catch (\Exception $e) {
+            $this->fail("Exception: " . $e->getMessage());
+        }
+    }
+
+    public function testRefundPartialSuccess(): void
+    {
+        try {
+            $client = new OrderClient();
+            $request = $this->createRequestOrderCreditCard();
+            $request_options = new RequestOptions();
+            $request_options->setCustomHeaders(["X-Sandbox: true"]);
+
+            $order = $client->create($request, $request_options);
+            $refund_request = [
+                "transactions" => [
+                    [
+                        "id" => $order->transactions->payments[0]->id,
+                        "amount" => "25.00",
+                    ],
+                ],
+            ];
+            sleep(3);
+            $refunded_order = $client->refund($order->id, $refund_request, $request_options);
+
+            $this->assertSame($order->id, $refunded_order->id);
+            $this->assertSame("processed", $refunded_order->status);
+            $this->assertSame("partially_refunded", $refunded_order->status_detail);
+            $this->assertSame("25.00", $refunded_order->transactions->refunds[0]->amount);
+            $this->assertSame("processed", $refunded_order->transactions->refunds[0]->status);
+        } catch (MPApiException $e) {
+            $apiResponse = $e->getApiResponse();
+            $statusCode = $apiResponse->getStatusCode();
+            $responseBody = json_encode($apiResponse->getContent());
+            $this->fail("API Exception: " . $statusCode . " - " . $responseBody);
+        } catch (\Exception $e) {
+            $this->fail("Exception: " . $e->getMessage());
+        }
+    }
+
+    private function createRequestOrderCreditCard(): array
+    {
+        $client_token = new CardTokenClient();
+        $card_token = $client_token->create($this->createCardTokenRequest());
+        $this->assertNotNull($card_token->id);
+
+        return [
+            "type" => "online",
+            "processing_mode" => "automatic",
+            "total_amount" => "100.00",
+            "external_reference" => "ext_ref_1234",
+            "transactions" => [
+                "payments" => [
+                    [
+                        "amount" => "100.00",
+                        "payment_method" => [
+                            "id" => "master",
+                            "type" => "credit_card",
+                            "token" => $card_token->id,
+                            "installments" => 1,
+                        ]
+                    ]
+                ]
+            ],
+            "payer" => [
+                "email" => "test_1731350184@testuser.com",
+            ]
+        ];
+    }
+
     private function createCardTokenRequest(): array
     {
         return [
             "card_number" => "5031433215406351",
-            "expiration_year" => "2025",
+            "expiration_year" => "2099",
             "expiration_month" => "12",
             "security_code" => "123",
             "cardholder" => [
