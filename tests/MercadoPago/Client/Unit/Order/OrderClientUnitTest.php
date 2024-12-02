@@ -136,4 +136,56 @@ final class OrderClientUnitTest extends BaseClient
         $this->assertSame($order_id, $order->id);
         $this->assertSame("processed", $order->status);
     }
+
+    public function testRefundTotalSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/Order/order_refund_total.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 201);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+        $client = new OrderClient();
+
+        $order_id = "01JDWHNG2GR2WHGBMRFX126YBC";
+        $order = $client->refund($order_id);
+
+        $this->assertSame(201, $order->getResponse()->getStatusCode());
+        $this->assertSame($order_id, $order->id);
+        $this->assertSame("refunded", $order->status);
+        $this->assertSame("refunded", $order->status_detail);
+        $this->assertSame("ref_01JDWHPXYC42ESJ40V4D3SMHW1", $order->transactions->refunds[0]->id);
+        $this->assertSame("pay_01JDWHNG2GR2WHGBMRFY7HP5ZB", $order->transactions->refunds[0]->transaction_id);
+        $this->assertSame("01JDWHPX7WMAVAQG5546553QDW", $order->transactions->refunds[0]->reference_id);
+        $this->assertSame("100.00", $order->transactions->refunds[0]->amount);
+        $this->assertSame("processed", $order->transactions->refunds[0]->status);
+    }
+
+    public function testRefundPartialSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/Order/order_refund_partial.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 201);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+        $client = new OrderClient();
+        $request = [
+            "transactions" => [
+                [
+                    "id" => "pay_01JDWMFW1WQK1YJR6SJHYTY0MY",
+                    "amount" => "25.00",
+                ],
+            ],
+        ];
+
+        $order_id = "01JDWMFW1WQK1YJR6SJFW7KND5";
+        $order = $client->refund($order_id, $request);
+
+        $this->assertSame(201, $order->getResponse()->getStatusCode());
+        $this->assertSame($order_id, $order->id);
+        $this->assertSame("processed", $order->status);
+        $this->assertSame("partially_refunded", $order->status_detail);
+        $this->assertSame("ref_01JDWMHTXPBT4117BVGAWV29HG", $order->transactions->refunds[0]->id);
+        $this->assertSame("pay_01JDWMFW1WQK1YJR6SJHYTY0MY", $order->transactions->refunds[0]->transaction_id);
+        $this->assertSame("01JDWMHS78C51NMZ1J7V2MF8HM", $order->transactions->refunds[0]->reference_id);
+        $this->assertSame("25.00", $order->transactions->refunds[0]->amount);
+        $this->assertSame("processed", $order->transactions->refunds[0]->status);
+    }
 }

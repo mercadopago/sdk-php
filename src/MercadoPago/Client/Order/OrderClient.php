@@ -18,6 +18,7 @@ final class OrderClient extends MercadoPagoClient
     private const URL_CAPTURE = self::URL_WITH_ID . '/capture';
     private const URL_CANCEL = self::URL_WITH_ID . '/cancel';
     private const URL_PROCESS = self::URL_WITH_ID . '/process';
+    private const URL_REFUND = self::URL_WITH_ID . '/refund';
 
     /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
     public function __construct(?MPHttpClient $MPHttpClient = null)
@@ -92,17 +93,38 @@ final class OrderClient extends MercadoPagoClient
     }
 
     /**
-    * Method responsible for processing an Order.
-    *
-    * @param string $order_id ID of the Order to process.
-    * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-    * @return \MercadoPago\Resources\Order response with processing details.
-    * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-    * @throws \Exception if the request fails.
-    */
+     * Method responsible for processing an Order.
+     *
+     * @param string $order_id ID of the Order to process.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
+     * @return \MercadoPago\Resources\Order response with processing details.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
+     */
     public function process(string $order_id, ?RequestOptions $request_options = null): Order
     {
         $response = parent::send(sprintf(self::URL_PROCESS, $order_id), HttpMethod::POST, null, null, $request_options);
+        $result = Serializer::deserializeFromJson(Order::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
+    }
+
+    /**
+     * Method responsible for refunding an Order (total or partial).
+     * @param string $order_id Order ID.
+     * @param array $request Refund request.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
+     * @return \MercadoPago\Resources\Order Order refunded.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
+     */
+    public function refund(string $order_id, ?array $request = null, ?RequestOptions $request_options = null): Order
+    {
+        $path = sprintf(self::URL_REFUND, $order_id);
+        if ($request !== null) {
+            $request = json_encode($request);
+        }
+        $response = parent::send($path, HttpMethod::POST, $request, null, $request_options);
         $result = Serializer::deserializeFromJson(Order::class, $response->getContent());
         $result->setResponse($response);
         return $result;
