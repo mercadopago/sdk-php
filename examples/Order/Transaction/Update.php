@@ -35,10 +35,13 @@ try {
                 [
                     "amount" => "100.00",
                     "payment_method" => [
-                        "id" => "pix",
-                        "type" => "bank_transfer"
-                    ],
-                ],
+                        "id" => "master",
+                        "type" => "credit_card",
+                        "token" => "<CARD_TOKEN>",
+                        "installments" => 1,
+                        "statement_descriptor" => "Store",
+                    ]
+                ]
             ]
         ],
         "payer" => [
@@ -58,7 +61,11 @@ try {
 
     // Step 8: Create the request to update a transaction
     $update_transaction_request = [
-        "amount" => "299.90",
+        "payment_method" => [
+          "type" => "credit_card",
+           "installments" => 3,
+           "statement_descriptor" => "Store",
+        ]
     ];
 
     // Step 9: Create the request options, setting X-Idempotency-Key
@@ -70,8 +77,8 @@ try {
     $transaction = $order_transaction_client->update($order->id, $order->transactions->payments[0]->id, $update_transaction_request, $update_transaction_request_options);
 
     echo "\n===== AFTER UPDATE =====";
-    echo "\nPayment ID: " . $transaction->id;
-    echo "\nAmount: " . $transaction->amount;
+    echo "\nTransaction Updated: \n";
+    print_r($transaction);
 
     // Step 11: Handle exceptions
 } catch (MPApiException $e) {

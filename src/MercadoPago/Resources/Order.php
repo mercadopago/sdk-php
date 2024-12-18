@@ -1,6 +1,6 @@
 <?php
 
-/** API version: 5d077b6f-61b2-4b3a-8333-7a64ee547448 */
+/** API version: b950ae02-4f49-4686-9ad3-7929b21b6495 */
 
 namespace MercadoPago\Resources;
 
@@ -54,8 +54,8 @@ class Order extends MPResource
     /** Status detail. */
     public ?string $status_detail;
 
-    /** Type config. */
-    public array|object|null $type_config;
+    /**  Capture mode. */
+    public ?string $capture_mode;
 
     /** Payer. */
     public array|object|null $payer;
@@ -67,7 +67,6 @@ class Order extends MPResource
     public ?array $items;
 
     private $map = [
-        "type_config" => "MercadoPago\Resources\Order\TypeConfig",
         "payer" => "MercadoPago\Resources\Order\Payer",
         "transactions" => "MercadoPago\Resources\Order\Transactions",
         "items" => "MercadoPago\Resources\Order\Items",

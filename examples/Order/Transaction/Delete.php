@@ -29,7 +29,7 @@ try {
       "total_amount" => "200.00",
       "external_reference" => "ext_ref_1234",
       "payer" => [
-          "email" => "test_212345@testuser.com"
+          "email" => "<PAYER_EMAIL>"
       ],
       "transactions" => [
           "payments" => [
@@ -46,13 +46,13 @@ try {
       ],
 ];
     $request_options = new RequestOptions();
-    $request_options->setCustomHeaders(["X-Idempotency-Key:<SOME_UNIQUE_VALUE>"]);
+    $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
     $order = $client->create($request, $request_options);
     $transaction_id = $order->transactions->payments[0]->id;
     $order_id = $order->id;
 
     // Step 5: Delete a transaction
-    $request_options->setCustomHeaders(["X-Idempotency-Key:<SOME_UNIQUE_VALUE>"]);
+    $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
     $response = $client_transactions->delete($order_id, $transaction_id, $request_options);
     if ($response->getStatusCode() === 204) {
         echo "Transaction deleted successfully. HTTP Status Code: 204\n";

@@ -63,9 +63,9 @@ try {
     echo "\nStatus detail: " . $refunded_order->status_detail;
 
     // Step 9: Handle exceptions
-} catch (MPApiException $e) {
-    echo "Status code: " . $e->getApiResponse()->getStatusCode() . "\n";
-    echo "Content: ";
+}catch (MPApiException $e) {
+    echo "\nStatus code: " . $e->getApiResponse()->getStatusCode();
+    echo "\nContent: ";
     var_dump($e->getApiResponse()->getContent());
     echo "\n";
 } catch (\Exception $e) {

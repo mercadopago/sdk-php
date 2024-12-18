@@ -1,6 +1,6 @@
 <?php
 
-/** API version: 5d077b6f-61b2-4b3a-8333-7a64ee547448 */
+/** API version: b950ae02-4f49-4686-9ad3-7929b21b6495 */
 
 namespace MercadoPago\Resources\Order\Transaction;
 
@@ -16,14 +16,11 @@ class UpdateTransaction extends MPResource
     /** Transaction ID. */
     public ?string $id;
 
-    /** Amount. */
-    public ?string $amount;
-
     /** Payment method. */
     public array|object|null $payment_method;
 
     private $map = [
-        "payment_method" => "MercadoPago\Resources\Order\Transaction\PaymentMethod",
+        "payment_method" => "MercadoPago\Resources\Order\PaymentMethod",
     ];
 
     /**

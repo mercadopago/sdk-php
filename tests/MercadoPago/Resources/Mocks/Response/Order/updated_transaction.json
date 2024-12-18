@@ -1,6 +1,4 @@
 {
-  "id": "pay_01JD26HQ96FFHBD2CHDW984TZM",
-  "amount": "299.90",
   "payment_method": {
     "id": "master",
     "type": "credit_card",

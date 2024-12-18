@@ -2,6 +2,7 @@
   "id": "01JDASYCCVWTT08J5RDYAJ5CBZ",
   "type": "online",
   "processing_mode": "automatic",
+  "capture_mode": "manual",
   "external_reference": "ext_ref_1234",
   "total_amount": "200.00",
   "site_id": "MLB",
@@ -29,8 +30,5 @@
               }
           }
       ]
-  },
-  "type_config": {
-      "capture_mode": "manual"
   }
 }

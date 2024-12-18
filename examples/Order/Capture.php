@@ -29,9 +29,8 @@ try {
         "payer" => [
             "email" => "<PAYER_EMAIL>"
         ],
-        "type_config" => [
-            "capture_mode" => "manual"
-        ],
+        "capture_mode" => "manual",
+
         "transactions" => [
             "payments" => [
                 [
@@ -49,24 +48,24 @@ try {
 
     // Step 5: Create the request options, setting X-Idempotency-Key
     $request_options = new RequestOptions();
-    $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>", "X-Sandbox: true"]);
+    $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
 
     // Step 6: Create the order
     $order = $client->create($request, $request_options);
-    echo "Order ID:" . $order->id;
-    echo "Order" . $order->status;
+    echo "\nOrder ID:" . $order->id;
+    echo "\nOrder" . $order->status;
 
     $request_options_capture = new RequestOptions();
-    $request_options_capture->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>", "X-Sandbox: true"]);
+    $request_options_capture->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
 
     // Step 7: Capture the order
     $order = $client->capture($order->id, $request_options_capture);
-    echo "Order Status:" . $order->status;
+    echo "\nOrder Status:" . $order->status;
 
     // Step 8: Handle exceptions
 } catch (MPApiException $e) {
     echo "Status code: " . $e->getApiResponse()->getStatusCode() . "\n";
-    echo "Content: ";
+    echo "\nContent: ";
     var_dump($e->getApiResponse()->getContent());
     echo "\n";
 } catch (\Exception $e) {

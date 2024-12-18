@@ -25,9 +25,7 @@ try {
         "type" => "online",
         "total_amount" => "1000.00",
         "external_reference" => "ext_ref_1234",
-        "type_config" => [
-            "capture_mode" => "automatic"
-        ],
+        "capture_mode" => "automatic",
         "transactions" => [
             "payments" => [
                 [

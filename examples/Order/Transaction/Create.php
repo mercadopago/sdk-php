@@ -47,8 +47,8 @@ try {
 
     // Step 7: Handle exceptions
 } catch (MPApiException $e) {
-    echo "Status code: " . $e->getApiResponse()->getStatusCode() . "\n";
-    echo "Content: ";
+    echo "\nStatus code: " . $e->getApiResponse()->getStatusCode();
+    echo "\nContent: ";
     var_dump($e->getApiResponse()->getContent());
     echo "\n";
 } catch (\Exception $e) {

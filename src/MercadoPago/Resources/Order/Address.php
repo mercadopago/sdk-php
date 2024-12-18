@@ -1,6 +1,6 @@
 <?php
 
-/** API version: 5d077b6f-61b2-4b3a-8333-7a64ee547448 */
+/** API version: 950ae02-4f49-4686-9ad3-7929b21b6495 */
 
 namespace MercadoPago\Resources\Order;
 
@@ -12,4 +12,7 @@ class Address
 
     /** Street number. */
     public ?string $street_number;
+
+    /** Zip Code. */
+    public ?string $zip_code;
 }

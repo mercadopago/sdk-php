@@ -1,6 +1,6 @@
 <?php
 
-/** API version: 5d077b6f-61b2-4b3a-8333-7a64ee547448 */
+/** API version: b950ae02-4f49-4686-9ad3-7929b21b6495 */
 
 namespace MercadoPago\Resources\Order;
 
@@ -42,4 +42,13 @@ class PaymentMethod
 
     /** Financial institution. */
     public ?string $financial_institution;
+
+    /** Qr Code */
+    public ?string $qr_code;
+
+    /** Qr Code Base64 */
+    public ?string $qr_code_base64;
+
+    /** Digitable Line */
+    public ?string $digitable_line;
 }

@@ -55,7 +55,7 @@ final class OrderTransactionClient extends MercadoPagoClient
     public function update(string $order_id, string $transaction_id, array $request, ?RequestOptions $request_options = null): UpdateTransaction
     {
         $path = sprintf(self::URL_WITH_ID, $order_id, $transaction_id);
-        $response = parent::send($path, HttpMethod::PATCH, json_encode($request), null, $request_options);
+        $response = parent::send($path, HttpMethod::PUT, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(UpdateTransaction::class, $response->getContent());
         $result->setResponse($response);
         return $result;

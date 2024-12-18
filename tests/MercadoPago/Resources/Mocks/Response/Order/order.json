@@ -8,9 +8,7 @@
   "last_updated_date": "2024-09-02T22:04:04.429289Z",
   "status": "processed",
   "status_detail": "accredited",
-  "type_config": {
-    "capture_mode": "automatic"
-  },
+  "capture_mode": "automatic",
   "transactions": {
     "payments": [
       {

@@ -1,6 +1,6 @@
 <?php
 
-/** API version: 5d077b6f-61b2-4b3a-8333-7a64ee547448 */
+/** API version: b950ae02-4f49-4686-9ad3-7929b21b6495 */
 
 namespace MercadoPago\Resources\Order;
 
@@ -30,8 +30,20 @@ class Payment
     /** Payment method. */
     public array|object|null $payment_method;
 
+    /** Automatic Payments. */
+    public array|object|null $automatic_payments;
+
+    /** Stored Payments */
+    public array|object|null $stored_credential;
+
+    /** Subscription Data */
+    public array|object|null $subscription_data;
+
     private $map = [
         "payment_method" => "MercadoPago\Resources\Order\PaymentMethod",
+        "automatic_payments" => "MercadoPago\Resources\Order\AutomaticPayments" ,
+        "stored_credential" => "MercadoPago\Resources\Order\StoredCredential",
+        "subscription_data" => "MercadoPago\Resources\Order\SubscriptionData",
     ];
 
     /**
