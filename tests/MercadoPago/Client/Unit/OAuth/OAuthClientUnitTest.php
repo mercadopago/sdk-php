@@ -18,7 +18,7 @@ final class OAuthClientUnitTest extends BaseClient
     {
         $client = new OAuthClient();
         $url = $client->getAuthorizationURL("app_id", "redirect_uri", "random_id");
-        $expected = "https://auth.mercadopago.com?client_id=app_id&response_type=code&platform_id=mp&state=random_id&redirect_uri=redirect_uri";
+        $expected = "https://auth.mercadopago.com/authorization?client_id=app_id&response_type=code&platform_id=mp&state=random_id&redirect_uri=redirect_uri";
         $this->assertSame($expected, $url);
     }
 
