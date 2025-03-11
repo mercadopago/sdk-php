@@ -33,7 +33,8 @@ class AdditionalInfo
 
     private $map = [
       "payer" => "MercadoPago\Resources\Payment\AdditionalInfoPayer",
-      "shipments" => "MercadoPago\Resources\Payment\Shipments"
+      "shipments" => "MercadoPago\Resources\Payment\Shipments",
+      "items" => "MercadoPago\Resources\Preference\Item",
     ];
 
     /**
