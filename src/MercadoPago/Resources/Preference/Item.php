@@ -28,4 +28,16 @@ class Item
 
     /** Currency ID. ISO_4217 code. */
     public ?string $currency_id;
+
+    /** Category Descriptor */
+    public array|object|null $category_descriptor;
+
+    public $map = [
+        "category_descriptor" => "MercadoPago\Resources\Preference\CategoryDescriptor",
+    ];
+
+    public function getMap(): array
+    {
+        return $this->map;
+    }
 }
