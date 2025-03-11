@@ -6,7 +6,7 @@ namespace MercadoPago\Resources\Preference;
 class CategoryDescriptor
 {
     /** Event date. */
-    public ?string $eventDate;
+    public ?string $event_date;
 
     /** Passenger name. */
     public ?string $passenger;

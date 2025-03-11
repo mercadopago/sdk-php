@@ -2,7 +2,7 @@
 
 namespace Examples\Preference;
 
-// Passo 1: Requerir a biblioteca do Composer
+// Step 1: Require the Composer library
 require_once '../../vendor/autoload.php';
 
 use MercadoPago\Client\Common\RequestOptions;
@@ -10,33 +10,33 @@ use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 
-// Passo 2: Definir o token de acesso de produção ou sandbox
+// Step 2: Set the production or sandbox access token
 MercadoPagoConfig::setAccessToken("<YOUR_ACCESS_TOKEN>");
 
-// Passo 2.1 (opcional): Definir o ambiente de runtime
+// Step 2.1 (optional): Define the runtime environment
 MercadoPagoConfig::setRuntimeEnviroment(MercadoPagoConfig::SERVER);
 
-// Passo 3: Inicializar o cliente da API
+// Step 3: Initialize the API client
 $client = new PreferenceClient();
 
 try {
-    // Passo 4: Criar o array de requisição
+    // Step 4: Create the request array
     $request = [
         "back_urls" => [
-            "success" => "http://www.mercadopago.cl/success",
-            "pending" => "http://www.mercadopago.cl/pending",
-            "failure" => "http://www.mercadopago.cl/failure"
+            "success" => "http://www.mercadopago.com/success",
+            "pending" => "http://www.mercadopago.com/pending",
+            "failure" => "http://www.mercadopago.com/failure"
         ],
         "payer" => [
             "name" => "Juan",
             "surname" => "Lopez",
-            "email" => "juanlopez@email.com"
+            "email" => "<PAYER_EMAIL>"
         ],
         "items" => [
             [
-                "title" => "Producto sin descripción", // Título do item
-                "unit_price" => 1000,                // Preço unitário
-                "quantity" => 1,                     // Quantidade
+                "title" => "Product without description",
+                "unit_price" => 1000,
+                "quantity" => 1,
                 "category_descriptor" => [
                     "event_date" => "2022-03-12T12:58:41.425-04:00"
                 ]
@@ -52,15 +52,15 @@ try {
         ]
     ];
 
-    // Passo 5: Criar as opções de requisição, definindo X-Idempotency-Key
+    // Step 5: Create the request options, setting X-Idempotency-Key
     $request_options = new RequestOptions();
     $request_options->setCustomHeaders(["X-Idempotency-Key: <UNIQUE_KEY>"]);
 
-    // Passo 6: Fazer a requisição
+    // Step 6: Make the request
     $preference = $client->create($request, $request_options);
     echo "Preference ID: " . $preference->id;
 
-    // Passo 7: Lidar com exceções
+    // Step 7: Handle exceptions
 } catch (MPApiException $e) {
     echo "Status code: " . $e->getApiResponse()->getStatusCode() . "\n";
     echo "Content: ";
