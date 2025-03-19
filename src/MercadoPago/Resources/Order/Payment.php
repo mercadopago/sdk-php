@@ -27,23 +27,27 @@ class Payment
     /** Amount. */
     public ?string $amount;
 
+    /** Paid amount. */
+    public ?string $paid_amount;
+
+    /** Date of expiration. */
+    public ?string $date_of_expiration;
+
+    /** Expiration time. */
+    public ?string $expiration_time;
+
+    /** Attempt number. */
+    public ?int $attempt_number;
+
+    /** Attempts. */
+    public ?array $attempts;
+
     /** Payment method. */
     public array|object|null $payment_method;
 
-    /** Automatic Payments. */
-    public array|object|null $automatic_payments;
-
-    /** Stored Payments */
-    public array|object|null $stored_credential;
-
-    /** Subscription Data */
-    public array|object|null $subscription_data;
-
     private $map = [
         "payment_method" => "MercadoPago\Resources\Order\PaymentMethod",
-        "automatic_payments" => "MercadoPago\Resources\Order\AutomaticPayments" ,
-        "stored_credential" => "MercadoPago\Resources\Order\StoredCredential",
-        "subscription_data" => "MercadoPago\Resources\Order\SubscriptionData",
+        "attempts" => "MercadoPago\Resources\Order\Attempt",
     ];
 
     /**

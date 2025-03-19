@@ -15,38 +15,14 @@ class Order extends MPResource
     /** Order ID. */
     public ?string $id;
 
-    /** Processing mode. */
-    public ?string $processing_mode;
+    /** Type. */
+    public ?string $type;
 
     /** External reference. */
     public ?string $external_reference;
 
-    /** Description. */
-    public ?string $description;
-
-    /** Marketplace. */
-    public ?string $marketplace;
-
-    /** Marketplace fee. */
-    public ?string $marketplace_fee;
-
-    /** Total amount. */
-    public ?string $total_amount;
-
-    /** Expiration time. */
-    public ?string $expiration_time;
-
-    /** Site ID. */
-    public ?string $site_id;
-
-    /** Created date. */
-    public ?string $created_date;
-
-    /** Last updated date. */
-    public ?string $last_updated_date;
-
-    /** Type. */
-    public ?string $type;
+    /** Country code. */
+    public ?string $country_code;
 
     /** Status. */
     public ?string $status;
@@ -57,8 +33,44 @@ class Order extends MPResource
     /**  Capture mode. */
     public ?string $capture_mode;
 
-    /** Payer. */
-    public array|object|null $payer;
+    /** User ID. */
+    public ?string $user_id;
+
+    /** Client token. */
+    public ?string $client_token;
+
+    /** Total amount. */
+    public ?string $total_amount;
+
+    /** Total paid amount. */
+    public ?string $total_paid_amount;
+
+    /** Processing mode. */
+    public ?string $processing_mode;
+
+    /** Description. */
+    public ?string $description;
+
+    /** Marketplace. */
+    public ?string $marketplace;
+
+    /** Marketplace fee. */
+    public ?string $marketplace_fee;
+
+    /** Created date. */
+    public ?string $created_date;
+
+    /** Last updated date. */
+    public ?string $last_updated_date;
+
+    /** Checkout available at. */
+    public ?string $checkout_available_at;
+
+    /** Expiration time. */
+    public ?string $expiration_time;
+
+    /** Integration data. */
+    public array|object|null $integration_data;
 
     /** Transactions. */
     public array|object|null $transactions;
@@ -66,10 +78,14 @@ class Order extends MPResource
     /** Items. */
     public ?array $items;
 
+    /** Config. */
+    public array|object|null $config;
+
     private $map = [
-        "payer" => "MercadoPago\Resources\Order\Payer",
         "transactions" => "MercadoPago\Resources\Order\Transactions",
         "items" => "MercadoPago\Resources\Order\Items",
+        "integration_data" => "MercadoPago\Resources\Order\IntegrationData",
+        "config" => "MercadoPago\Resources\Order\Config",
     ];
 
     /**

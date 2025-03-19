@@ -16,9 +16,6 @@ class PaymentMethod
     /** Card ID. */
     public ?string $card_id;
 
-    /** Issuer ID. */
-    public ?string $issuer_id;
-
     /** Token. */
     public ?string $token;
 
@@ -28,14 +25,17 @@ class PaymentMethod
     /** Statement descriptor. */
     public ?string $statement_descriptor;
 
-    /** External resource URL. */
-    public ?string $external_resource_url;
+    /** Ticket URL. */
+    public ?string $ticket_url;
 
     /** Barcode content. */
     public ?string $barcode_content;
 
     /** Reference. */
     public ?string $reference;
+
+    /** Reference ID. */
+    public ?string $reference_id;
 
     /** Verification code. */
     public ?string $verification_code;
