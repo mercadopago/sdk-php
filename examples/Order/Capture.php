@@ -53,14 +53,14 @@ try {
     // Step 6: Create the order
     $order = $client->create($request, $request_options);
     echo "\nOrder ID:" . $order->id;
-    echo "\nOrder" . $order->status;
+    echo "\nOrder status before capture: " . $order->status;
 
     $request_options_capture = new RequestOptions();
     $request_options_capture->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
 
     // Step 7: Capture the order
     $order = $client->capture($order->id, $request_options_capture);
-    echo "\nOrder Status:" . $order->status;
+    echo "\nOrder status after capture: " . $order->status;
 
     // Step 8: Handle exceptions
 } catch (MPApiException $e) {

@@ -67,7 +67,6 @@ try {
                 "unit_price" => "1000.00",
                 "quantity" => 1,
                 "description" => "Some item description",
-                "id" => "item_id",
                 "category_id" => "category_id",
                 "picture_url" => "https://mysite.com/img/item.jpg"
             ]
