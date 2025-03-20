@@ -23,10 +23,13 @@ final class OrderTransactionClientITTest extends TestCase
     public function testCreateSuccess(): void
     {
         try {
+            $order_client = new OrderClient();
+            $create_order_request = $this->createOrderRequestWithEmptyTransactions();
             $client = new OrderTransactionClient();
             $request = $this->createRequest();
 
-            $transaction = $client->create("<ORDER_ID>", $request);
+            $order = $order_client->create($create_order_request);
+            $transaction = $client->create($order->id, $request);
 
             $this->assertNotNull($transaction->payments[0]->id);
         } catch (MPApiException $e) {
@@ -54,6 +57,19 @@ final class OrderTransactionClientITTest extends TestCase
         ];
     }
 
+    private function createOrderRequestWithEmptyTransactions(): array
+    {
+        return [
+            "type" => "online",
+            "processing_mode" => "manual",
+            "total_amount" => "100.00",
+            "external_reference" => "ext_ref_1234",
+            "payer" => [
+                "email" => "test_1731350184@testuser.com",
+            ]
+        ];
+    }
+
     public function testUpdateSuccess(): void
     {
         try {
@@ -61,15 +77,18 @@ final class OrderTransactionClientITTest extends TestCase
             $order_transaction_client = new OrderTransactionClient();
             $create_order_request = $this->createOrderRequest();
             $update_transaction_request = [
-                "amount" => "299.90",
+                "payment_method" => [
+                    "id" => "master",
+                    "type" => "credit_card",
+                ]
             ];
 
             $order = $order_client->create($create_order_request);
             sleep(3);
             $transaction = $order_transaction_client->update($order->id, $order->transactions->payments[0]->id, $update_transaction_request);
 
-            $this->assertSame($order->transactions->payments[0]->id, $transaction->id);
-            $this->assertSame("299.90", $transaction->amount);
+            $this->assertSame("master", $transaction->payment_method->id);
+            $this->assertSame("credit_card", $transaction->payment_method->type);
         } catch (MPApiException $e) {
             $apiResponse = $e->getApiResponse();
             $statusCode = $apiResponse->getStatusCode();
@@ -125,7 +144,6 @@ final class OrderTransactionClientITTest extends TestCase
             $statusCode = $apiResponse->getStatusCode();
             $responseBody = json_encode($apiResponse->getContent());
             $this->fail("API Exception: " . $statusCode . " - " . $responseBody);
-
         } catch (\Exception $e) {
             $this->fail("Exception: " . $e->getMessage());
         }
