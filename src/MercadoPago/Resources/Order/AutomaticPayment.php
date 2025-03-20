@@ -1,21 +1,21 @@
 <?php
 
-/** API version: b950ae02-4f49-4686-9ad3-7929b21b6495 */
+/** API version: 7d364c51-04c7-45e3-af61-f82423bcc39c */
 
 namespace MercadoPago\Resources\Order;
 
 /** Automatic Payment Class */
 class AutomaticPayment
 {
-  /** Payment profile id */
-  public ?string $payment_profile_id;
+    /** Payment profile id */
+    public ?string $payment_profile_id;
 
-  /** Retries */
-  public ?int  $retries;
+    /** Retries */
+    public ?int  $retries;
 
-  /** Schedule Date */
-  public ?string $schedule_date;
+    /** Schedule Date */
+    public ?string $schedule_date;
 
-  /** Due Date */
-  public ?string $due_date;
+    /** Due Date */
+    public ?string $due_date;
 }
