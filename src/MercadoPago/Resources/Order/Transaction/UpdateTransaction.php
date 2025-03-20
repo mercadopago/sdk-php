@@ -13,9 +13,6 @@ class UpdateTransaction extends MPResource
     /** Class mapper. */
     use Mapper;
 
-    /** Transaction ID. */
-    public ?string $id;
-
     /** Payment method. */
     public array|object|null $payment_method;
 

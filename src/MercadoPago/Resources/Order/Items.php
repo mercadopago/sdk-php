@@ -16,8 +16,8 @@ class Items
     /** Quantity. */
     public ?int $quantity;
 
-    /** Item ID. */
-    public ?string $id;
+    /** External code. */
+    public ?string $external_code;
 
     /** Category ID. */
     public ?string $category_id;
@@ -27,7 +27,4 @@ class Items
 
     /** Picture URL. */
     public ?string $picture_url;
-
-    /** Item Type. */
-    public ?string $type;
 }
