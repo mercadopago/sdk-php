@@ -45,9 +45,21 @@ class Payment
     /** Payment method. */
     public array|object|null $payment_method;
 
+    /** Automatic payments. */
+    public array|object|null $automatic_payments;
+
+    /** Stored credential. */
+    public array|object|null $stored_credential;
+
+    /** Subscription data. */
+    public array|object|null $subscription_data;
+
     private $map = [
         "payment_method" => "MercadoPago\Resources\Order\PaymentMethod",
         "attempts" => "MercadoPago\Resources\Order\Attempt",
+        "automatic_payments" => "MercadoPago\Resources\Order\AutomaticPayments",
+        "stored_credential" => "MercadoPago\Resources\Order\StoredCredential",
+        "subscription_data" => "MercadoPago\Resources\Order\SubscriptionData",
     ];
 
     /**
