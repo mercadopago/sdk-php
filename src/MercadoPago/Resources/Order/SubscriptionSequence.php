@@ -1,15 +1,15 @@
 <?php
 
-/** API version: b950ae02-4f49-4686-9ad3-7929b21b6495 */
+/** API version: 7d364c51-04c7-45e3-af61-f82423bcc39c */
 
 namespace MercadoPago\Resources\Order;
 
-/** Subscription Sequence Class */
+/** Subscription sequence class. */
 class SubscriptionSequence
 {
-  /** Number */
-  public ?int $number;
+    /** Number. */
+    public ?int $number;
 
-  /** Total */
-  public ?int $total;
+    /** Total. */
+    public ?int $total;
 }

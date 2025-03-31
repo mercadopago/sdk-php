@@ -14,13 +14,15 @@ use MercadoPago\Tests\Client\Unit\Base\BaseClient;
  */
 final class OrderTransactionClientUnitTest extends BaseClient
 {
-    private $httpClientMock;
+    private $http_client_mock;
     private $client;
 
     protected function setUp(): void
     {
-        $this->httpClientMock = $this->createMock(MPHttpClient::class);
-        $this->client = new OrderTransactionClient($this->httpClientMock);
+        /** @var MPHttpClient|\PHPUnit\Framework\MockObject\MockObject $http_client_mock */
+        $this->http_client_mock = $this->createMock(MPHttpClient::class);
+
+        $this->client = new OrderTransactionClient($this->http_client_mock);
     }
 
     public function testCreateSuccess(): void
@@ -87,7 +89,7 @@ final class OrderTransactionClientUnitTest extends BaseClient
         $transaction_id = "pay_3456789";
         $expectedResponse = new MPResponse(204, []);
 
-        $this->httpClientMock->method('send')->willReturn($expectedResponse);
+        $this->http_client_mock->method('send')->willReturn($expectedResponse);
         $response = $this->client->delete($order_id, $transaction_id);
 
         $this->assertEquals(204, $response->getStatusCode());
@@ -100,7 +102,7 @@ final class OrderTransactionClientUnitTest extends BaseClient
         $transaction_id = "pay_3456789";
         $expectedResponse = new MPResponse(404, ['Order not found.']);
 
-        $this->httpClientMock->method('send')->willReturn($expectedResponse);
+        $this->http_client_mock->method('send')->willReturn($expectedResponse);
         $response = $this->client->delete($order_id, $transaction_id);
 
         $this->assertEquals(404, $response->getStatusCode());

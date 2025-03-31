@@ -1,6 +1,6 @@
 <?php
 
-/** API version: b950ae02-4f49-4686-9ad3-7929b21b6495 */
+/** API version: 7d364c51-04c7-45e3-af61-f82423bcc39c */
 
 namespace MercadoPago\Resources\Order;
 
@@ -16,8 +16,8 @@ class Items
     /** Quantity. */
     public ?int $quantity;
 
-    /** Item ID. */
-    public ?string $id;
+    /** External code. */
+    public ?string $external_code;
 
     /** Category ID. */
     public ?string $category_id;
@@ -27,7 +27,4 @@ class Items
 
     /** Picture URL. */
     public ?string $picture_url;
-
-    /** Item Type. */
-    public ?string $type;
 }

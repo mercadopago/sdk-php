@@ -2,16 +2,24 @@
 
 /** API version: 7d364c51-04c7-45e3-af61-f82423bcc39c */
 
-namespace MercadoPago\Resources\Order\Transaction;
+namespace MercadoPago\Resources\Order;
 
-use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** UpdateTransaction class. */
-class UpdateTransaction extends MPResource
+/** Attempt class. */
+class Attempt
 {
     /** Class mapper. */
     use Mapper;
+
+    /** Attempt ID. */
+    public ?string $id;
+
+    /** Status. */
+    public ?string $status;
+
+    /** Status detail. */
+    public ?string $status_detail;
 
     /** Payment method. */
     public array|object|null $payment_method;

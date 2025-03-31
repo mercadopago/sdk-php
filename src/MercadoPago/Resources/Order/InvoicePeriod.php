@@ -1,15 +1,15 @@
 <?php
 
-/** API version: b950ae02-4f49-4686-9ad3-7929b21b6495 */
+/** API version: 7d364c51-04c7-45e3-af61-f82423bcc39c */
 
 namespace MercadoPago\Resources\Order;
 
-/** Invoice period Class */
+/** Invoice period class. */
 class InvoicePeriod
 {
-  /** Period */
-  public ?int  $period;
+    /** Period. */
+    public ?int  $period;
 
-  /** Type  */
-  public ?string $type;
+    /** Type. */
+    public ?string $type;
 }

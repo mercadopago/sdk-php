@@ -2,13 +2,12 @@
 
 /** API version: 7d364c51-04c7-45e3-af61-f82423bcc39c */
 
-namespace MercadoPago\Resources\Order\Transaction;
+namespace MercadoPago\Resources\Order;
 
-use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** UpdateTransaction class. */
-class UpdateTransaction extends MPResource
+/** Config class. */
+class Config
 {
     /** Class mapper. */
     use Mapper;
@@ -16,8 +15,12 @@ class UpdateTransaction extends MPResource
     /** Payment method. */
     public array|object|null $payment_method;
 
+    /** Online. */
+    public array|object|null $online;
+
     private $map = [
-        "payment_method" => "MercadoPago\Resources\Order\PaymentMethod",
+        "payment_method" => "MercadoPago\Resources\Order\PaymentMethodConfig",
+        "online" => "MercadoPago\Resources\Order\OnlineConfig",
     ];
 
     /**

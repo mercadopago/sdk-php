@@ -68,7 +68,7 @@ Simple usage looks like:
             "processing_mode" => "automatic",
             "total_amount" => "1000.00",
             "external_reference" => "ext_ref_1234",
-            "capture_mode" => "automatic",
+            "capture_mode" => "automatic_async",
             "payer" => [
                 "email" => "<PAYER_EMAIL>",
             ]
@@ -140,7 +140,7 @@ $request = [
             "processing_mode" => "automatic",
             "total_amount" => "1000.00",
             "external_reference" => "ext_ref_1234",
-            "capture_mode" => "automatic",
+            "capture_mode" => "automatic_async",
             "payer" => [
                 "email" => "<PAYER_EMAIL>",
             ]
@@ -157,7 +157,7 @@ $request = [
                     ]
                 ]
             ]
-        ] 
+        ]
 ],
 ```
 

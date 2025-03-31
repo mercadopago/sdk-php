@@ -1,6 +1,6 @@
 <?php
 
-/** API version: b950ae02-4f49-4686-9ad3-7929b21b6495 */
+/** API version: 7d364c51-04c7-45e3-af61-f82423bcc39c */
 
 namespace MercadoPago\Resources\Order;
 
@@ -27,21 +27,37 @@ class Payment
     /** Amount. */
     public ?string $amount;
 
+    /** Paid amount. */
+    public ?string $paid_amount;
+
+    /** Date of expiration. */
+    public ?string $date_of_expiration;
+
+    /** Expiration time. */
+    public ?string $expiration_time;
+
+    /** Attempt number. */
+    public ?int $attempt_number;
+
+    /** Attempts. */
+    public ?array $attempts;
+
     /** Payment method. */
     public array|object|null $payment_method;
 
-    /** Automatic Payments. */
+    /** Automatic payments. */
     public array|object|null $automatic_payments;
 
-    /** Stored Payments */
+    /** Stored credential. */
     public array|object|null $stored_credential;
 
-    /** Subscription Data */
+    /** Subscription data. */
     public array|object|null $subscription_data;
 
     private $map = [
         "payment_method" => "MercadoPago\Resources\Order\PaymentMethod",
-        "automatic_payments" => "MercadoPago\Resources\Order\AutomaticPayments" ,
+        "attempts" => "MercadoPago\Resources\Order\Attempt",
+        "automatic_payments" => "MercadoPago\Resources\Order\AutomaticPayments",
         "stored_credential" => "MercadoPago\Resources\Order\StoredCredential",
         "subscription_data" => "MercadoPago\Resources\Order\SubscriptionData",
     ];

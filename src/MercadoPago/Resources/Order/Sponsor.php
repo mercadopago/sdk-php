@@ -4,9 +4,9 @@
 
 namespace MercadoPago\Resources\Order;
 
-/** Payer class. */
-class Payer
+/** Sponsor class. */
+class Sponsor
 {
-    /** Customer ID. */
-    public ?string $customer_id;
+    /** Sponsor ID. */
+    public ?string $id;
 }

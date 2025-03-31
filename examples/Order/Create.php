@@ -25,7 +25,7 @@ try {
         "type" => "online",
         "total_amount" => "1000.00",
         "external_reference" => "ext_ref_1234",
-        "capture_mode" => "automatic",
+        "capture_mode" => "automatic_async",
         "transactions" => [
             "payments" => [
                 [
@@ -67,7 +67,6 @@ try {
                 "unit_price" => "1000.00",
                 "quantity" => 1,
                 "description" => "Some item description",
-                "id" => "item_id",
                 "category_id" => "category_id",
                 "picture_url" => "https://mysite.com/img/item.jpg"
             ]

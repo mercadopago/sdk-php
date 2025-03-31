@@ -62,9 +62,7 @@ try {
     // Step 8: Create the request to update a transaction
     $update_transaction_request = [
         "payment_method" => [
-          "type" => "credit_card",
-           "installments" => 3,
-           "statement_descriptor" => "Store",
+            "installments" => 3,
         ]
     ];
 
@@ -77,8 +75,8 @@ try {
     $transaction = $order_transaction_client->update($order->id, $order->transactions->payments[0]->id, $update_transaction_request, $update_transaction_request_options);
 
     echo "\n===== AFTER UPDATE =====";
-    echo "\nTransaction Updated: \n";
-    print_r($transaction);
+    echo "\nTransaction installments updated: \n";
+    print_r($transaction->payment_method);
 
     // Step 11: Handle exceptions
 } catch (MPApiException $e) {

@@ -152,7 +152,7 @@ class Preference extends MPResource
         "back_urls" => "MercadoPago\Resources\Preference\BackUrls",
         "redirect_urls" => "MercadoPago\Resources\Preference\RedirectUrls",
         "shipments" => "MercadoPago\Resources\Preference\Shipments",
-        "differential_pricing" => "MercadoPago\Resources\Preference\DifferentialPricing",
+        "differential_pricing" => "MercadoPago\Resources\Common\DifferentialPricing",
         "taxes" => "MercadoPago\Resources\Preference\Tax",
         "tracks" => "MercadoPago\Resources\Preference\Tracks",
     ];
