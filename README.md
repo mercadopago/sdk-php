@@ -253,7 +253,7 @@ function createPreferenceRequest($items, $payer): array
 ```php
 public function createPaymentPreference(): ?Preference
 {
-    // Fill the data about the product(s) being pruchased
+    // Fill the data about the product(s) being purchased
     $product1 = array(
         "id" => "1234567890",
         "title" => "Product 1 Title",
