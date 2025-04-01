@@ -1,6 +1,6 @@
 <?php
 
-namespace MercadoPago\Resources\Preference;
+namespace MercadoPago\Resources\Common;
 
 /** DifferentialPricing class. */
 class DifferentialPricing

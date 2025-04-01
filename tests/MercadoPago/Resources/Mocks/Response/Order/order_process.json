@@ -1,0 +1,38 @@
+{
+  "id": "01JDA7QG60QFWMA06AWM5MMXHD",
+  "type": "online",
+  "processing_mode": "manual",
+  "capture_mode": "automatic_async",
+  "external_reference": "ext_12345",
+  "total_amount": "100.00",
+  "site_id": "MLB",
+  "status": "processed",
+  "status_detail": "processed",
+  "created_date": "2024-11-22T15:26:56.704Z",
+  "last_updated_date": "2024-11-22T15:27:23.987Z",
+  "integration_data": {
+    "application_id": "7329832788213154"
+  },
+  "payer": {
+    "email": "jota2@testuser.com"
+  },
+  "transactions": {
+    "payments": [
+      {
+        "id": "pay_01JDA7QQKNZYWFRZ72V4FD13CV",
+        "amount": "100.00",
+        "reference_id": "0001puaa94",
+        "status": "processed",
+        "status_detail": "processed",
+        "payment_method": {
+          "id": "master",
+          "type": "credit_card",
+          "token": "card_token",
+          "issuer_id": "master",
+          "statement_descriptor": "statement",
+          "installments": 1
+        }
+      }
+    ]
+  }
+}

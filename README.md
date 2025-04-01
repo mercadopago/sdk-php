@@ -21,7 +21,7 @@ First time using Mercado Pago? Create your [Mercado Pago account](https://www.me
 2. Install PHP SDK for MercadoPago running in command line:
 
 ```
-composer require "mercadopago/dx-php:3.1.0"
+composer require "mercadopago/dx-php:3.2.0"
 ```
 
 > You can also run _composer require "mercadopago/dx-php:2.6.2"_ for PHP7.1 or _composer require "mercadopago/dx-php:1.12.6"_ for PHP5.6.
@@ -47,7 +47,7 @@ Simple usage looks like:
     require_once 'vendor/autoload.php';
 
     use MercadoPago\Client\Common\RequestOptions;
-    use MercadoPago\Client\Payment\PaymentClient;
+    use MercadoPago\Client\Order\OrderClient;
     use MercadoPago\Exceptions\MPApiException;
     use MercadoPago\MercadoPagoConfig;
 
@@ -58,29 +58,43 @@ Simple usage looks like:
     MercadoPagoConfig::setRuntimeEnviroment(MercadoPagoConfig::LOCAL);
 
     // Step 3: Initialize the API client
-    $client = new PaymentClient();
+    $client = new OrderClient();
 
     try {
 
         // Step 4: Create the request array
         $request = [
-            "transaction_amount" => 100,
-            "token" => "YOUR_CARD_TOKEN",
-            "description" => "description",
-            "installments" => 1,
-            "payment_method_id" => "visa",
+            "type" => "online",
+            "processing_mode" => "automatic",
+            "total_amount" => "1000.00",
+            "external_reference" => "ext_ref_1234",
+            "capture_mode" => "automatic_async",
             "payer" => [
-                "email" => "user@test.com",
+                "email" => "<PAYER_EMAIL>",
             ]
-        ];
+            "transactions" => [
+                "payments" => [
+                [
+                    "amount" => "1000.00",
+                    "payment_method" => [
+                        "id" => "master",
+                        "type" => "credit_card",
+                        "token" => "<CARD_TOKEN>",
+                        "installments" => 1,
+                        "statement_descriptor" => "Store name",
+                    ]
+                ]
+            ]
+        ],
+    ];
 
         // Step 5: Create the request options, setting X-Idempotency-Key
         $request_options = new RequestOptions();
         $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
 
         // Step 6: Make the request
-        $payment = $client->create($request, $request_options);
-        echo $payment->id;
+        $order = $client->create($request, $request_options);
+        echo "Order ID:" . $order->id;
 
     // Step 7: Handle exceptions
     } catch (MPApiException $e) {
@@ -99,7 +113,7 @@ Simple usage looks like:
 require_once 'vendor/autoload.php';
 
 use MercadoPago\Client\Common\RequestOptions;
-use MercadoPago\Client\Payment\PaymentClient;
+use MercadoPago\Client\Order\OrderClient;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 ```
@@ -115,22 +129,36 @@ You can also set another properties as quantity of retries, tracking headers, ti
 ### Step 3: Initialize the API client
 
 ```php
-$client = new PaymentClient();
+$client = new OrderClient();
 ```
 
 ### Step 4: Create the request array
 
 ```php
 $request = [
-    "transaction_amount" => 100,
-    "token" => "YOUR_CARD_TOKEN",
-    "description" => "description",
-    "installments" => 1,
-    "payment_method_id" => "visa",
-    "payer" => [
-        "email" => "user@test.com",
-    ]
-];
+            "type" => "online",
+            "processing_mode" => "automatic",
+            "total_amount" => "1000.00",
+            "external_reference" => "ext_ref_1234",
+            "capture_mode" => "automatic_async",
+            "payer" => [
+                "email" => "<PAYER_EMAIL>",
+            ]
+            "transactions" => [
+                "payments" => [
+                [
+                    "amount" => "1000.00",
+                    "payment_method" => [
+                        "id" => "master",
+                        "type" => "credit_card",
+                        "token" => "<CARD_TOKEN>",
+                        "installments" => 1,
+                        "statement_descriptor" => "Store name",
+                    ]
+                ]
+            ]
+        ]
+],
 ```
 
 ### Step 5: Create the request options, setting X-Idempotency-Key
@@ -143,7 +171,7 @@ $request_options->setCustomHeaders(["X-Idempotency-Key: <SOME_UNIQUE_VALUE>"]);
 ### Step 6: Make the request
 
 ```php
-$payment = $client->create($request, $request_options);
+$order = $client->create($request, $request_options);
 ```
 
 ### Step 7: Handle exceptions
