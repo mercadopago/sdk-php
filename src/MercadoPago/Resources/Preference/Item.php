@@ -20,6 +20,9 @@ class Item
     /** Category of the item. */
     public ?string $category_id;
 
+    /** Type items. */
+    public ?string $type;
+
     /** Item's quantity. */
     public ?int $quantity;
 
@@ -31,6 +34,9 @@ class Item
 
     /** Category Descriptor */
     public array|object|null $category_descriptor;
+
+     /** Warranty */
+    public ?bool $warranty;
 
     public $map = [
         "category_descriptor" => "MercadoPago\Resources\Preference\CategoryDescriptor",
