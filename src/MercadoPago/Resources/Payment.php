@@ -185,6 +185,9 @@ class Payment extends MPResource
     /** Coupon code. */
     public ?string $coupon_code;
 
+    /** Release Info. */
+    public ?string $release_info;
+
     /** Marketplace owner. */
     public ?string $marketplace_owner;
 

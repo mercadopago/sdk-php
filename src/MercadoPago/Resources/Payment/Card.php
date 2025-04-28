@@ -31,6 +31,9 @@ class Card
     /** Last update of data from the card. */
     public ?string $date_last_updated;
 
+    /** Country Card. */
+    public ?string $country;
+
     /** Card's owner data. */
     public array|object|null $cardholder;
 
