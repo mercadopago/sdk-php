@@ -23,7 +23,7 @@ try {
     // Step 4: Create the request array
     $request = [
         "transaction_amount" => 1000,
-        "description"        => "Título do produto",
+        "description"        => "Product title",
         "payment_method_id"  => "master",
         "token"              => "{{CARD_TOKEN}}",
         "installments"       => 1,
@@ -32,12 +32,12 @@ try {
         "capture"            => true,
         "external_reference" => "Pedido01",
         "metadata"           => new \stdClass(),
-        "notification_url"   => "http://requestbin.fullcontact.com/1ogudgk1",
+        "notification_url"   => "https://www.mercadopago.com",
         "sponsor_id"         => null,
         "statement_descriptor" => "LOJA 123",
         "payer" => [
-            "first_name" => "Nome",
-            "last_name"  => "Sobrenome",
+            "first_name" => "Name",
+            "last_name"  => "Surname",
             "email"      => "{{EMAIL}}",
             "identification" => [
                 "number" => "{{DOCUMENT_NUMBER}}",
@@ -68,7 +68,7 @@ try {
                 "region_code"        => "BR",
                 "document_type"      => "CNPJ",
                 "phone"              => "{{PHONE}}",
-                "url"                => "www.rappi.com.br"
+                "url"                => "www.mercadopago.com"
             ]
         ],
         "additional_info" => [
@@ -81,16 +81,16 @@ try {
                     "quantity"     => 1,
                     "unit_price"   => 1000.00,
                     "event_date"   => "2019-12-25T19:30:00.000-03:00",
-                    "picture_url"  => "<URL_IMAGE>",
+                    "picture_url"  => "{{IMAGE_URL}}",
                     "type"         => "my_items_type",
                     "warranty"     => true,
                     "category_descriptor" => [
                         "passenger" => [
-                            "first_name"    => "Guest Nome",
-                            "last_name"     => "Guest Sobrenome",
+                            "first_name"    => "Guest name",
+                            "last_name"     => "Guest surname",
                             "identification"=> [
                                 "type"      => "DNI",
-                                "number"    => "012345678"
+                                "number"    => "{{DOCUMENT}}"
                             ]
                         ],
                         "route" => [
@@ -104,8 +104,8 @@ try {
                 ]
             ],
             "payer" => [
-                "first_name" => "Nome",
-                "last_name"  => "Sobrenome",
+                "first_name" => "Name",
+                "last_name"  => "Surname",
                 "is_prime_user" => true,
                 "is_first_purchase_online" => true,
                 "last_purchase" => "2019-10-25T19:30:00.000-03:00",
