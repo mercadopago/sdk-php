@@ -13,6 +13,9 @@ class AdditionalInfo
     /** IP from where the request comes from (only for bank transfers). */
     public ?string $ip_address;
 
+    /** The ID of tracking. */
+    public ?string $tracking_id;
+
     /** List of items to be paid. */
     public ?array $items;
 

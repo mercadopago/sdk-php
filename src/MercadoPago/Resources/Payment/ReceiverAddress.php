@@ -10,6 +10,9 @@ class ReceiverAddress extends Address
     /** Street name. */
     public ?string $street_name;
 
+    /** State name. */
+    public ?string $state_name;
+
     /** Apartment. */
     public ?string $apartment;
 
