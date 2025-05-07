@@ -9,4 +9,8 @@ class Payer
 {
     /** Customer ID. */
     public ?string $customer_id;
+
+    /** Customer Email */
+    public ?string $email;
+    
 }
