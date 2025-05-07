@@ -40,7 +40,7 @@ class Serializer
                         $object->$key = self::_deserializeFromJson($class_name, $value);
                     }
                 }
-            } else {
+            } elseif (property_exists($object, $key)) {
                 $object->{$key} = $value;
             }
         }

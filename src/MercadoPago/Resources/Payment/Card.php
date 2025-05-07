@@ -41,6 +41,9 @@ class Card
         "cardholder" => "MercadoPago\Resources\Payment\Cardholder"
     ];
 
+    public ?int $bin;
+
+    public array|object|null $tags;
     /**
      * Method responsible for getting map of entities.
      */
