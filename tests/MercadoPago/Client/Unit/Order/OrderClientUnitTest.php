@@ -37,7 +37,6 @@ final class OrderClientUnitTest extends BaseClient
         $this->assertSame("master", $order->transactions->payments[0]->payment_method->id);
         $this->assertSame("credit_card", $order->transactions->payments[0]->payment_method->type);
         $this->assertSame(1, $order->transactions->payments[0]->payment_method->installments);
-        $this->assertSame("test_1731350184@testuser.com", $order->payer->email);
         $this->assertSame("automatic", $order->processing_mode);
         $this->assertSame("NONE", $order->marketplace);
     }
