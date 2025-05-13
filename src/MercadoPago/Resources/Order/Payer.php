@@ -9,4 +9,5 @@ class Payer
 {
     /** Customer ID. */
     public ?string $customer_id;
+
 }
