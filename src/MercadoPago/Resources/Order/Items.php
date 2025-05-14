@@ -34,6 +34,6 @@ class Items
     /** Warranty. */
     public ?bool $warranty;
 
-    /** EventDate */
+    /** Event Date */
     public ?string $event_date;
 }

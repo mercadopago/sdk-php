@@ -84,9 +84,6 @@ class Order extends MPResource
     /** Config. */
     public array|object|null $config;
 
-    /** Shipment  */
-    public array|object|null $shipment;
-
     /** Additional info. */
     public ?array $additional_info;
 
@@ -96,7 +93,6 @@ class Order extends MPResource
         "integration_data" => "MercadoPago\Resources\Order\IntegrationData",
         "payer" => "MercadoPago\Resources\Order\Payer",
         "config" => "MercadoPago\Resources\Order\Config",
-        "shipment" => "MercadoPago\Resources\Order\Shipment",
     ];
 
     /**
