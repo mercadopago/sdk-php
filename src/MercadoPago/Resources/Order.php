@@ -84,6 +84,9 @@ class Order extends MPResource
     /** Config. */
     public array|object|null $config;
 
+    /** Additional info. */
+    public ?array $additional_info;
+
     private $map = [
         "transactions" => "MercadoPago\Resources\Order\Transactions",
         "items" => "MercadoPago\Resources\Order\Items",

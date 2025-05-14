@@ -27,4 +27,13 @@ class Items
 
     /** Picture URL. */
     public ?string $picture_url;
+
+    /** Type. */
+    public ?string $type;
+
+    /** Warranty. */
+    public ?bool $warranty;
+
+    /** EventDate */
+    public ?string $event_date;
 }
