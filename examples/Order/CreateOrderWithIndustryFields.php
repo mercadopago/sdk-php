@@ -1,6 +1,6 @@
 <?php
 
-/** API version: acd67b14-97c4-4a4a-840d-0a018c09654f */
+/** API version: 7c223ec9-4635-4eae-8501-604c35ea1b00 */
 
 namespace Examples\Order;
 

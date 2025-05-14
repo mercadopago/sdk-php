@@ -1,6 +1,6 @@
 <?php
 
-/** API version: 7d364c51-04c7-45e3-af61-f82423bcc39c */
+/** API version: 7c223ec9-4635-4eae-8501-604c35ea1b00 */
 
 namespace MercadoPago\Resources;
 
@@ -84,6 +84,9 @@ class Order extends MPResource
     /** Config. */
     public array|object|null $config;
 
+    /** Shipment  */
+    public array|object|null $shipment;
+
     /** Additional info. */
     public ?array $additional_info;
 
@@ -93,6 +96,7 @@ class Order extends MPResource
         "integration_data" => "MercadoPago\Resources\Order\IntegrationData",
         "payer" => "MercadoPago\Resources\Order\Payer",
         "config" => "MercadoPago\Resources\Order\Config",
+        "shipment" => "MercadoPago\Resources\Order\Shipment",
     ];
 
     /**
