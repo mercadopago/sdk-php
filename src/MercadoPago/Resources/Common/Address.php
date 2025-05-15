@@ -22,6 +22,15 @@ class Address
     /** Street number. */
     public ?string $street_number;
 
+    /** Neighborhood. */
+    public ?string $neighborhood;
+
+    /** State. */
+    public ?string $state;
+
+    /** Complement */
+    public ?string $complement;
+
     /** City. */
     public array|object|null $city;
 
