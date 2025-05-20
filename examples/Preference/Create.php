@@ -27,6 +27,7 @@ try {
             "pending" => "http://www.mercadopago.com/pending",
             "failure" => "http://www.mercadopago.com/failure"
         ],
+        "notification_url" => "https://webhook.site/your-dummy-url",
         "payer" => [
             "name" => "Juan",
             "surname" => "Lopez",
