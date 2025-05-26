@@ -17,9 +17,6 @@ class PreApproval extends MPResource
     /** Payer ID. */
     public ?int $payer_id;
 
-    /** Payer email. */
-    public ?string $payer_email;
-
     /** Return URL. */
     public ?string $back_url;
 
