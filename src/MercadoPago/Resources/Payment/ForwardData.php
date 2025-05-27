@@ -12,9 +12,11 @@ class ForwardData
 
     public array|object|null $sub_merchant;
 
+    public array|object|null $network_transaction_data;
 
     private $map = [
         "sub_merchant" => "MercadoPago\Resources\Common\SubMerchant",
+        "network_transaction_data" => "MercadoPago\Resources\Payment\NetworkTransactionData",
     ];
 
     /**
