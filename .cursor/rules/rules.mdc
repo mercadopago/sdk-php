@@ -1,0 +1,469 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Mercado Pago PHP SDK - Cursor Rules
+
+## Visão Geral do Projeto
+Este é o SDK oficial do Mercado Pago para PHP, uma biblioteca de processamento de pagamentos que segue as melhores práticas PHP e convenções PSR. O SDK é distribuído via Composer e segue uma arquitetura modular com clara separação de responsabilidades.
+
+## Estrutura e Organização do Projeto
+
+### Estrutura de Diretórios Principal
+```
+src/
+├── MercadoPago/                 # Namespace principal
+│   ├── Client/                  # Clientes de API
+│   │   ├── Base/               # Classes base
+│   │   └── Resource/           # Clientes específicos
+│   ├── Config/                 # Configurações
+│   │   └── Config.php         # Classe de configuração
+│   ├── Core/                  # Funcionalidades principais
+│   │   ├── Annotation/       # Anotações personalizadas
+│   │   └── Http/            # Cliente HTTP
+│   ├── Entity/              # Entidades/Modelos
+│   │   ├── Payment.php     # Modelo de pagamento
+│   │   └── Preference.php  # Modelo de preferência
+│   ├── Exception/          # Exceções personalizadas
+│   └── Utils/             # Utilitários
+tests/
+├── Unit/                  # Testes unitários
+└── Integration/          # Testes de integração
+```
+
+## Convenções de Nomenclatura
+
+### Classes e Interfaces
+- **Namespaces**: `MercadoPago\{Module}` (ex: `MercadoPago\Client`)
+- **Clientes**: `{Resource}Client` (ex: `PaymentClient`, `PreferenceClient`)
+- **Modelos**: Nomes em PascalCase (ex: `Payment`, `Preference`)
+- **Interfaces**: Sufixo `Interface` (ex: `ClientInterface`, `PaymentInterface`)
+- **Exceções**: Sufixo `Exception` (ex: `MPException`, `ValidationException`)
+
+### Métodos e Variáveis
+- Métodos em camelCase
+- Propriedades em camelCase
+- Constantes em SCREAMING_SNAKE_CASE
+- Parâmetros em camelCase
+
+### Arquivos e Diretórios
+- Arquivos .php em PascalCase
+- Diretórios em PascalCase
+- Testes com sufixo Test
+- PSR-4 autoloading
+
+## Padrões de Código
+
+### Estilo PHP
+```php
+<?php
+
+namespace MercadoPago\Client;
+
+use MercadoPago\Entity\Payment;
+use MercadoPago\Exception\MPException;
+
+class PaymentClient extends BaseClient
+{
+    private const PATH = '/v1/payments';
+    
+    public function __construct(
+        private readonly HttpClientInterface $httpClient,
+        private readonly ConfigInterface $config
+    ) {
+        parent::__construct($httpClient, $config);
+    }
+    
+    public function create(array $paymentData): Payment
+    {
+        try {
+            $response = $this->post(self::PATH, $paymentData);
+            return Payment::fromArray($response);
+        } catch (Exception $e) {
+            throw new MPException('Error creating payment', 0, $e);
+        }
+    }
+}
+```
+
+### Modelos
+```php
+<?php
+
+namespace MercadoPago\Entity;
+
+use DateTimeImmutable;
+use JsonSerializable;
+
+class Payment implements JsonSerializable
+{
+    private string $id;
+    private float $amount;
+    private string $status;
+    private DateTimeImmutable $dateCreated;
+    private ?string $externalReference = null;
+    private array $metadata = [];
+    
+    public function __construct(array $data = [])
+    {
+        $this->populate($data);
+    }
+    
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'amount' => $this->amount,
+            'status' => $this->status,
+            'date_created' => $this->dateCreated->format(DATE_ISO8601),
+            'external_reference' => $this->externalReference,
+            'metadata' => $this->metadata,
+        ];
+    }
+    
+    public static function fromArray(array $data): self
+    {
+        return new self($data);
+    }
+}
+```
+
+### Configuração
+```php
+<?php
+
+namespace MercadoPago\Config;
+
+class Config implements ConfigInterface
+{
+    private const DEFAULT_TIMEOUT = 5;
+    private const DEFAULT_BASE_URL = 'https://api.mercadopago.com';
+    
+    public function __construct(
+        private readonly string $accessToken,
+        private readonly ?int $timeout = self::DEFAULT_TIMEOUT,
+        private readonly ?string $baseUrl = self::DEFAULT_BASE_URL
+    ) {}
+    
+    public function getAccessToken(): string
+    {
+        return $this->accessToken;
+    }
+    
+    public function getTimeout(): int
+    {
+        return $this->timeout ?? self::DEFAULT_TIMEOUT;
+    }
+    
+    public function getBaseUrl(): string
+    {
+        return $this->baseUrl ?? self::DEFAULT_BASE_URL;
+    }
+}
+```
+
+## Práticas de Desenvolvimento
+
+### Geral
+- Seguir PSR-12 para estilo de código
+- Usar type hints e return types
+- Implementar interfaces para contratos
+- Seguir princípios SOLID
+- Documentar com PHPDoc
+
+### Tratamento de Erros
+```php
+<?php
+
+namespace MercadoPago\Exception;
+
+class MPException extends Exception
+{
+    private string $errorCode;
+    private array $details;
+    
+    public function __construct(
+        string $message,
+        string $errorCode = '',
+        array $details = [],
+        ?Throwable $previous = null
+    ) {
+        parent::__construct($message, 0, $previous);
+        $this->errorCode = $errorCode;
+        $this->details = $details;
+    }
+    
+    public function getErrorCode(): string
+    {
+        return $this->errorCode;
+    }
+    
+    public function getDetails(): array
+    {
+        return $this->details;
+    }
+}
+```
+
+### Logging
+```php
+<?php
+
+namespace MercadoPago\Service;
+
+use Psr\Log\LoggerInterface;
+
+class PaymentService
+{
+    public function __construct(
+        private readonly PaymentClient $client,
+        private readonly LoggerInterface $logger
+    ) {}
+    
+    public function processPayment(array $paymentData): Payment
+    {
+        $this->logger->info('Processing payment', ['data' => $paymentData]);
+        
+        try {
+            $payment = $this->client->create($paymentData);
+            $this->logger->info('Payment processed', ['id' => $payment->getId()]);
+            return $payment;
+        } catch (Exception $e) {
+            $this->logger->error('Payment processing failed', [
+                'error' => $e->getMessage(),
+                'data' => $paymentData
+            ]);
+            throw $e;
+        }
+    }
+}
+```
+
+## Testes
+
+### PHPUnit
+```php
+<?php
+
+namespace Tests\Unit\Client;
+
+use PHPUnit\Framework\TestCase;
+use MercadoPago\Client\PaymentClient;
+
+class PaymentClientTest extends TestCase
+{
+    private PaymentClient $client;
+    private MockObject $httpClient;
+    
+    protected function setUp(): void
+    {
+        $this->httpClient = $this->createMock(HttpClientInterface::class);
+        $this->client = new PaymentClient($this->httpClient, new Config('test-token'));
+    }
+    
+    public function testCreatePayment(): void
+    {
+        // Arrange
+        $paymentData = [
+            'amount' => 100.0,
+            'description' => 'Test payment'
+        ];
+        
+        $expected = [
+            'id' => 'test-id',
+            'status' => 'pending'
+        ];
+        
+        $this->httpClient
+            ->expects($this->once())
+            ->method('post')
+            ->with('/v1/payments', $paymentData)
+            ->willReturn($expected);
+            
+        // Act
+        $result = $this->client->create($paymentData);
+        
+        // Assert
+        $this->assertInstanceOf(Payment::class, $result);
+        $this->assertEquals('test-id', $result->getId());
+        $this->assertEquals('pending', $result->getStatus());
+    }
+}
+```
+
+## Documentação
+
+### PHPDoc
+```php
+/**
+ * Processa um pagamento usando a API do Mercado Pago.
+ *
+ * @param array $paymentData Os dados do pagamento
+ * @return Payment O pagamento processado
+ * @throws PaymentProcessingException Se houver erro no processamento
+ * @throws ValidationException Se os dados forem inválidos
+ */
+public function processPayment(array $paymentData): Payment
+{
+    // Implementação
+}
+```
+
+## Gerenciamento de Dependências
+
+### composer.json
+```json
+{
+    "name": "mercadopago/sdk-php",
+    "description": "Mercado Pago PHP SDK",
+    "type": "library",
+    "require": {
+        "php": ">=8.1",
+        "guzzlehttp/guzzle": "^7.0",
+        "psr/log": "^3.0",
+        "symfony/validator": "^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "phpstan/phpstan": "^1.0",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "MercadoPago\\": "src/MercadoPago"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
+```
+
+## Segurança
+
+### Práticas
+- Validar todas as entradas
+- Usar HTTPS sempre
+- Implementar rate limiting
+- Seguir OWASP guidelines
+
+### Validação
+```php
+<?php
+
+namespace MercadoPago\Entity;
+
+use Symfony\Component\Validator\Constraints as Assert;
+
+class PaymentRequest
+{
+    #[Assert\NotBlank]
+    #[Assert\GreaterThan(0)]
+    private float $amount;
+    
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    private string $description;
+    
+    #[Assert\Valid]
+    private ?PayerInfo $payer = null;
+    
+    public function validate(): array
+    {
+        $validator = Validation::createValidator();
+        return $validator->validate($this);
+    }
+}
+```
+
+## Performance
+
+### Otimizações
+- Usar connection pooling
+- Implementar caching
+- Configurar timeouts
+- Usar async quando apropriado
+
+### Cache
+```php
+<?php
+
+namespace MercadoPago\Cache;
+
+use Psr\Cache\CacheItemPoolInterface;
+
+class PaymentCache
+{
+    public function __construct(
+        private readonly CacheItemPoolInterface $cache
+    ) {}
+    
+    public function get(string $id): ?Payment
+    {
+        $item = $this->cache->getItem("payment.$id");
+        return $item->isHit() ? $item->get() : null;
+    }
+    
+    public function save(Payment $payment): void
+    {
+        $item = $this->cache->getItem("payment.{$payment->getId()}");
+        $item->set($payment);
+        $item->expiresAfter(3600);
+        $this->cache->save($item);
+    }
+}
+```
+
+## Qualidade de Código
+
+### Ferramentas
+- PHP_CodeSniffer para estilo
+- PHPStan para análise estática
+- PHPUnit para testes
+- SonarQube para qualidade
+
+### CI/CD
+- GitHub Actions
+- Composer scripts
+- Testes automatizados
+- Deploy automático
+
+## Configuração do Editor
+
+### VSCode/PHPStorm
+```json
+{
+    "php.suggest.basic": false,
+    "php.validate.enable": true,
+    "php.format.rules.alignLineComments": true,
+    "php.format.rules.spacesBeforeBrace": true
+}
+```
+
+## Scripts Composer
+
+### composer.json
+```json
+{
+    "scripts": {
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-html coverage",
+        "cs": "phpcs --standard=PSR12 src tests",
+        "cs:fix": "phpcbf --standard=PSR12 src tests",
+        "stan": "phpstan analyse src tests",
+        "check": [
+            "@cs",
+            "@stan",
+            "@test"
+        ]
+    }
+}
+```
