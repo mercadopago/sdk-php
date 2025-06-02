@@ -1,10 +1,12 @@
 <?php
 
-namespace Tests\MercadoPago\Client\Unit\Chargeback;
+namespace MercadoPago\Tests\Client\Unit\Chargeback;
 
 use MercadoPago\Client\Chargeback\ChargebackClient;
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Net\MPDefaultHttpClient;
 use MercadoPago\Net\MPSearchRequest;
-use Tests\MercadoPago\Client\Unit\Base\BaseClient;
+use MercadoPago\Tests\Client\Unit\Base\BaseClient;
 
 /**
  * ChargebackClient unit tests.
@@ -13,8 +15,16 @@ final class ChargebackClientUnitTest extends BaseClient
 {
     public function testGetSuccess(): void
     {
-        $filePath = '../../../../Resources/Mocks/Response/Chargeback/chargeback_base.json';
-        $chargeback = $this->getClient($filePath, 200)->get("123456");
+        $filepath = '../../../../Resources/Mocks/Response/Chargeback/chargeback_base.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new ChargebackClient();
+        $chargeback = $client->get("123456");
+        
+        $this->assertSame(200, $chargeback->getResponse()->getStatusCode());
         $this->assertSame("123456", $chargeback->id);
         $this->assertSame(987654321, $chargeback->payment_id);
         $this->assertSame(100.0, $chargeback->amount);
@@ -26,21 +36,21 @@ final class ChargebackClientUnitTest extends BaseClient
 
     public function testSearchSuccess(): void
     {
-        $filePath = '../../../../Resources/Mocks/Response/Chargeback/chargeback_search.json';
+        $filepath = '../../../../Resources/Mocks/Response/Chargeback/chargeback_search.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new ChargebackClient();
         $filters = array("payment_id" => "987654321");
-        $search_request = new MPSearchRequest($filters);
-        $search_result = $this->getClient($filePath, 200)->search($search_request);
+        $search_request = new MPSearchRequest(50, 0, $filters);
+        $search_result = $client->search($search_request);
         
+        $this->assertSame(200, $search_result->getResponse()->getStatusCode());
         $this->assertSame(1, $search_result->paging->total);
         $this->assertSame(1, count($search_result->results));
         $this->assertSame("123456", $search_result->results[0]->id);
         $this->assertSame(987654321, $search_result->results[0]->payment_id);
-    }
-
-    private function getClient(string $filePath, int $statusCode): ChargebackClient
-    {
-        $responseBody = file_get_contents(__DIR__ . $filePath);
-        $httpClient = $this->createHttpClientMock($statusCode, $responseBody);
-        return new ChargebackClient($httpClient);
     }
 } 
