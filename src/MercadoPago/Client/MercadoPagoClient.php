@@ -115,7 +115,8 @@ class MercadoPagoClient
     private function headerExists(array $headers, string $header): bool
     {
         foreach($headers as $h) {
-            if (strtolower($h) == strtolower($header)) {
+            $headerName = trim(explode(':', $h, 2)[0]);
+            if (strtolower($headerName) == strtolower($header)) {
                 return true;
             }
         }
