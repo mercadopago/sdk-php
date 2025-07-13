@@ -1,0 +1,42 @@
+{
+  "id": "123456",
+  "payment_id": 987654321,
+  "amount": 100.0,
+  "currency": "BRL",
+  "reason": "fraud",
+  "stage": "chargeback",
+  "status": "open",
+  "date_created": "2023-01-15T10:30:00.000-04:00",
+  "date_last_updated": "2023-01-15T10:30:00.000-04:00",
+  "documentation_deadline": "2023-01-22T23:59:59.000-04:00",
+  "coverage_applied": false,
+  "coverage_eligible": true,
+  "external_reference": "ext_ref_123",
+  "metadata": {
+    "key1": "value1",
+    "key2": "value2"
+  },
+  "documentation_status": "pending",
+  "chargeback_sequence_number": 1,
+  "source": {
+    "id": "475845652",
+    "name": "Test Source",
+    "type": "collector"
+  },
+  "case": {
+    "id": "case_123",
+    "number": "CB-123456789",
+    "type": "chargeback"
+  },
+  "risk_score": 75.5,
+  "payment_method": {
+    "id": "visa",
+    "type": "credit_card"
+  },
+  "transaction_details": {
+    "net_received_amount": 95.0,
+    "total_paid_amount": 100.0,
+    "overpaid_amount": 0,
+    "installment_amount": 100.0
+  }
+} 
