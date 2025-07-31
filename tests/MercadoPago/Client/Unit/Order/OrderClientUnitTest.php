@@ -316,6 +316,7 @@ final class OrderClientUnitTest extends BaseClient
             ->disableOriginalConstructor()
             ->getMock();
 
+
         $mockHttpRequest->method('execute')->willReturn(json_encode($mockResponse));
         $mockHttpRequest->method('getInfo')->willReturnCallback(
             fn($option) => $option === CURLINFO_HTTP_CODE ? 201 : null
