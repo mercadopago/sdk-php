@@ -17,6 +17,8 @@ final class OAuthClient extends MercadoPagoClient
 
     private const URL = "/oauth/token";
 
+    private const AUTHORIZATION_URL = "/authorization";
+
     /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
     public function __construct(?MPHttpClient $MPHttpClient = null)
     {
@@ -40,7 +42,7 @@ final class OAuthClient extends MercadoPagoClient
         ];
 
         $query_string = http_build_query($query_params);
-        return OAuthClient::AUTH_URL . '?' . $query_string;
+        return OAuthClient::AUTH_URL . OAuthClient::AUTHORIZATION_URL . '?' . $query_string;
     }
 
     /**
