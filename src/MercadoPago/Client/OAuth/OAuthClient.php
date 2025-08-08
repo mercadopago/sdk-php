@@ -13,7 +13,7 @@ use MercadoPago\Serialization\Serializer;
 /** Client responsible for performing OAuth authorizartion. */
 final class OAuthClient extends MercadoPagoClient
 {
-    private const AUTH_URL = "https://auth.mercadopago.com";
+    private const AUTH_URL = "https://auth.mercadopago.com/authorization";
 
     private const URL = "/oauth/token";
 
