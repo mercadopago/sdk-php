@@ -1,0 +1,225 @@
+{
+  "paging": {
+    "limit": 10,
+    "offset": 0,
+    "total": 2
+  },
+  "results": [
+    {
+      "id": "1469979538-52qKdADBYeloaX",
+      "email": "test_cust_1693832456@testuser.com",
+      "first_name": "Test",
+      "last_name": "Customer",
+      "phone": {
+        "area_code": "11",
+        "number": "999990101"
+      },
+      "identification": {
+        "type": "CPF",
+        "number": "19119119100"
+      },
+      "address": {
+        "id": "1322811505",
+        "zip_code": "02675031",
+        "street_name": "Av. das Nações Unidas",
+        "street_number": "3000"
+      },
+      "date_registered": null,
+      "description": "Customer description",
+      "date_created": "2023-09-04T09:00:57.374-04:00",
+      "date_last_updated": "2023-09-04T09:00:57.374-04:00",
+      "default_card": null,
+      "default_address": "1322811505",
+      "live_mode": true,
+      "user_id": 1469979538,
+      "merchant_id": 471763966,
+      "client_id": 558881221729581,
+      "status": "active",
+      "addresses": [
+        {
+          "apartment": null,
+          "city": {
+            "id": "BR-SP-45",
+            "name": "Osasco"
+          },
+          "comments": null,
+          "country": {
+            "id": "BR",
+            "name": "Brasil"
+          },
+          "date_created": "2023-09-04T09:00:57.325-04:00",
+          "date_last_updated": null,
+          "floor": null,
+          "id": "1322811505",
+          "municipality": {
+            "id": null,
+            "name": null
+          },
+          "name": null,
+          "neighborhood": {
+            "id": null,
+            "name": "Bonfim"
+          },
+          "normalized": true,
+          "phone": "0000000000",
+          "state": {
+            "id": "BR-SP",
+            "name": "São Paulo"
+          },
+          "street_name": "Av. das Nações Unidas",
+          "street_number": 3003,
+          "verifications": {
+            "shipment": {
+              "errors": [],
+              "success": true
+            }
+          },
+          "zip_code": "02675031"
+        }
+      ],
+      "cards": [
+        {
+          "cardholder": {
+            "name": "APRO",
+            "identification": {
+              "number": "19119119100",
+              "type": "CPF"
+            }
+          },
+          "customer_id": "1469979538-52qKdADBYeloaX",
+          "date_created": "2023-08-31T14:21:58-04:00",
+          "date_last_updated": "2023-08-31T14:21:58-04:00",
+          "expiration_month": 12,
+          "expiration_year": 2023,
+          "first_six_digits": "503143",
+          "id": "9267060453",
+          "issuer": {
+            "id": 24,
+            "name": "Mastercard"
+          },
+          "last_four_digits": "6351",
+          "payment_method": {
+            "id": "master",
+            "name": "Mastercard",
+            "payment_type_id": "credit_card",
+            "thumbnail": "https://http2.mlstatic.com/storage/logos-api-admin/0daa1670-5c81-11ec-ae75-df2bef173be2-xl@2x.png",
+            "secure_thumbnail": "https://http2.mlstatic.com/storage/logos-api-admin/0daa1670-5c81-11ec-ae75-df2bef173be2-xl@2x.png"
+          },
+          "security_code": {
+            "length": 3,
+            "card_location": "back"
+          },
+          "user_id": "1466743052"
+        }
+      ]
+    },
+    {
+      "id": "1439324851-zk2BeFiet6otYD",
+      "email": "test_user_1684943300@testuser.com",
+      "first_name": "Test",
+      "last_name": "Customer",
+      "phone": {
+        "area_code": "11",
+        "number": "999990101"
+      },
+      "identification": {
+        "type": "CPF",
+        "number": "19119119100"
+      },
+      "address": {
+        "id": "1322811505",
+        "zip_code": "02675031",
+        "street_name": "Av. das Nações Unidas",
+        "street_number": "3000"
+      },
+      "date_registered": null,
+      "description": "Customer description",
+      "date_created": "2023-09-04T09:00:57.374-04:00",
+      "date_last_updated": "2023-09-04T09:00:57.374-04:00",
+      "default_card": null,
+      "default_address": "1322811505",
+      "live_mode": true,
+      "user_id": 1469979538,
+      "merchant_id": 471763966,
+      "client_id": 558881221729581,
+      "status": "active",
+      "addresses": [
+        {
+          "apartment": null,
+          "city": {
+            "id": "BR-SP-45",
+            "name": "Osasco"
+          },
+          "comments": null,
+          "country": {
+            "id": "BR",
+            "name": "Brasil"
+          },
+          "date_created": "2023-09-04T09:00:57.325-04:00",
+          "date_last_updated": null,
+          "floor": null,
+          "id": "1322811505",
+          "municipality": {
+            "id": null,
+            "name": null
+          },
+          "name": null,
+          "neighborhood": {
+            "id": null,
+            "name": "Bonfim"
+          },
+          "normalized": true,
+          "phone": "0000000000",
+          "state": {
+            "id": "BR-SP",
+            "name": "São Paulo"
+          },
+          "street_name": "Av. das Nações Unidas",
+          "street_number": 3003,
+          "verifications": {
+            "shipment": {
+              "errors": [],
+              "success": true
+            }
+          },
+          "zip_code": "02675031"
+        }
+      ],
+      "cards": [
+        {
+          "cardholder": {
+            "name": "APRO",
+            "identification": {
+              "number": "19119119100",
+              "type": "CPF"
+            }
+          },
+          "customer_id": "1439324851-zk2BeFiet6otYD",
+          "date_created": "2023-08-31T14:21:58-04:00",
+          "date_last_updated": "2023-08-31T14:21:58-04:00",
+          "expiration_month": 12,
+          "expiration_year": 2023,
+          "first_six_digits": "503143",
+          "id": "9267060453",
+          "issuer": {
+            "id": 24,
+            "name": "Mastercard"
+          },
+          "last_four_digits": "6351",
+          "payment_method": {
+            "id": "master",
+            "name": "Mastercard",
+            "payment_type_id": "credit_card",
+            "thumbnail": "https://http2.mlstatic.com/storage/logos-api-admin/0daa1670-5c81-11ec-ae75-df2bef173be2-xl@2x.png",
+            "secure_thumbnail": "https://http2.mlstatic.com/storage/logos-api-admin/0daa1670-5c81-11ec-ae75-df2bef173be2-xl@2x.png"
+          },
+          "security_code": {
+            "length": 3,
+            "card_location": "back"
+          },
+          "user_id": "1466743052"
+        }
+      ]
+    }
+  ]
+}

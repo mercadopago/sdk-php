@@ -1,0 +1,74 @@
+{
+  "id": "1469979538-52qKdADBYeloaX",
+  "email": "test_cust_1693832456@testuser.com",
+  "first_name": "Test",
+  "last_name": "Customer",
+  "phone": {
+    "area_code": "11",
+    "number": "999990101"
+  },
+  "identification": {
+    "type": "CPF",
+    "number": "19119119100"
+  },
+  "address": {
+    "id": "1322811505",
+    "zip_code": "02675031",
+    "street_name": "Av. das Nações Unidas",
+    "street_number": "3000"
+  },
+  "date_registered": null,
+  "description": "Customer description",
+  "date_created": "2023-09-04T09:00:57.374-04:00",
+  "date_last_updated": "2023-09-04T09:00:57.374-04:00",
+  "default_card": null,
+  "default_address": "1322811505",
+  "cards": [],
+  "addresses": [
+    {
+      "apartment": null,
+      "city": {
+        "id": "BR-SP-45",
+        "name": "Osasco"
+      },
+      "comments": null,
+      "country": {
+        "id": "BR",
+        "name": "Brasil"
+      },
+      "date_created": "2023-09-04T09:00:57.325-04:00",
+      "date_last_updated": null,
+      "floor": null,
+      "id": "1322811505",
+      "municipality": {
+        "id": null,
+        "name": null
+      },
+      "name": null,
+      "neighborhood": {
+        "id": null,
+        "name": "Bonfim"
+      },
+      "normalized": true,
+      "phone": "0000000000",
+      "state": {
+        "id": "BR-SP",
+        "name": "São Paulo"
+      },
+      "street_name": "Av. das Nações Unidas",
+      "street_number": 3003,
+      "verifications": {
+        "shipment": {
+          "errors": [],
+          "success": true
+        }
+      },
+      "zip_code": "02675031"
+    }
+  ],
+  "live_mode": true,
+  "user_id": 1469979538,
+  "merchant_id": 471763966,
+  "client_id": 558881221729581,
+  "status": "active"
+}

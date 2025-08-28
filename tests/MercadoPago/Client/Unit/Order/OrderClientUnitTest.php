@@ -187,4 +187,171 @@ final class OrderClientUnitTest extends BaseClient
         $this->assertSame("25.00", $order->transactions->refunds[0]->amount);
         $this->assertSame("processed", $order->transactions->refunds[0]->status);
     }
+
+    public function testCreateOrderWithMinimalAdditionalInfo(): void
+    {
+        // Resposta de sucesso mínima (NÃO inclua additional_info aqui!)
+        $mockResponse = [
+            'id' => 'test_order_123',
+            'status' => 'pending'
+        ];
+
+        $mockHttpRequest = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockHttpRequest->method('execute')->willReturn(json_encode($mockResponse));
+        $mockHttpRequest->method('getInfo')->willReturnCallback(function ($option) {
+            return $option === CURLINFO_HTTP_CODE ? 201 : null;
+        });
+
+        $httpClient = new MPDefaultHttpClient($mockHttpRequest);
+        MercadoPagoConfig::setHttpClient($httpClient);
+
+        $request = [
+            "type" => "online",
+            "total_amount" => "42.00",
+            "transactions" => [
+                "payments" => [
+                    [
+                        "amount" => "42.00",
+                        "payment_method" => [
+                            "id" => "pix",
+                            "type" => "bank_transfer"
+                        ]
+                    ]
+                ]
+            ],
+            "payer" => [
+                "email" => "testuser@mock.com"
+            ],
+            "additional_info" => [
+                "payer" => [
+                    "authentication_type" => "app"
+                ]
+            ]
+        ];
+
+
+        $this->assertArrayHasKey('additional_info', $request, 'O nó additional_info deve estar no request na raiz.');
+        $this->assertArrayHasKey('payer', $request['additional_info'], 'O nó payer deve estar dentro de additional_info');
+        $this->assertEquals('app', $request['additional_info']['payer']['authentication_type']);
+
+        // Envia para o SDK ‒ só valide campos realmente existentes na response!
+        $client = new OrderClient();
+        $order = $client->create($request);
+        $this->assertEquals('test_order_123', $order->id);
+        $this->assertEquals('pending', $order->status);
+    }
+
+    public function testRequestContainsCaptureMode(): void
+    {
+        // Resposta mockada mínima da API (não precisa conter capture_mode)
+        $mockResponse = [
+            'id' => 'order_capture_mode_test',
+            'status' => 'pending'
+        ];
+
+        $mockHttpRequest = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mockHttpRequest->method('execute')->willReturn(json_encode($mockResponse));
+        $mockHttpRequest->method('getInfo')->willReturnCallback(
+            fn($option) => $option === CURLINFO_HTTP_CODE ? 201 : null
+        );
+
+        MercadoPagoConfig::setHttpClient(new MPDefaultHttpClient($mockHttpRequest));
+
+        $request = [
+            "type" => "online",
+            "total_amount" => "42.00",
+            "capture_mode" => "automatic_async",
+            "transactions" => [
+                "payments" => [
+                    [
+                        "amount" => "42.00",
+                        "payment_method" => [
+                            "id" => "pix",
+                            "type" => "bank_transfer"
+                        ]
+                    ]
+                ]
+            ],
+            "payer" => [
+                "email" => "testuser@mock.com"
+            ]
+        ];
+
+        $this->assertArrayHasKey('capture_mode', $request, 'O campo capture_mode deve existir no array de request');
+        $this->assertEquals(
+            'automatic_async',
+            $request['capture_mode'],
+            'O campo capture_mode deve ser igual a "automatic_async"'
+        );
+
+        $order = (new OrderClient())->create($request);
+        $this->assertEquals('order_capture_mode_test', $order->id);
+        $this->assertEquals('pending', $order->status);
+    }
+
+    public function testBoletoFieldReplacesBolbradescoInRequestAndResponse(): void
+    {
+        $mockResponse = [
+            'id' => 'order_boleto_test',
+            'status' => 'pending',
+            'transactions' => [
+                'payments' => [
+                    [
+                        'id' => 'pay_123',
+                        'payment_method' => [
+                            'id' => 'boleto',  // <-- novo campo na resposta
+                            'type' => 'ticket'
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $mockHttpRequest = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+
+        $mockHttpRequest->method('execute')->willReturn(json_encode($mockResponse));
+        $mockHttpRequest->method('getInfo')->willReturnCallback(
+            fn($option) => $option === CURLINFO_HTTP_CODE ? 201 : null
+        );
+
+        MercadoPagoConfig::setHttpClient(new MPDefaultHttpClient($mockHttpRequest));
+
+        $request = [
+            "type" => "online",
+            "total_amount" => "42.00",
+            "transactions" => [
+                "payments" => [
+                    [
+                        "amount" => "42.00",
+                        "payment_method" => [
+                            "id" => "boleto",
+                            "type" => "ticket"
+                        ]
+                    ]
+                ]
+            ],
+            "payer" => [
+                "email" => "testuser@mock.com"
+            ]
+        ];
+
+
+        $this->assertEquals('boleto', $request['transactions']['payments'][0]['payment_method']['id']);
+
+        $order = (new OrderClient())->create($request);
+
+        $this->assertEquals('order_boleto_test', $order->id);
+        $this->assertEquals('pending', $order->status);
+        $this->assertEquals('boleto', $order->transactions->payments[0]->payment_method->id,
+            'O campo payment_method.id da resposta deve ser "boleto".'
+        );
+    }
 }
