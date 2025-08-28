@@ -34,6 +34,7 @@ That's it! Mercado Pago SDK has been successfully installed.
 
 - [SDK Docs](https://www.mercadopago.com.br/developers/pt/docs/sdks-library/server-side)
 - [REST API (consumed by the SDK)](https://www.mercadopago.com.br/developers/en/reference)
+- [CHANGELOG](./CHANGELOG.md)
 
 Here you can check eg. data structures for each parameter used by the SDK for each class.
 
