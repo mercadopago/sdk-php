@@ -1,0 +1,34 @@
+{
+  "id": "01JDASYCCVWTT08J5RDYAJ5CBZ",
+  "type": "online",
+  "processing_mode": "automatic",
+  "capture_mode": "manual",
+  "external_reference": "ext_ref_1234",
+  "total_amount": "200.00",
+  "site_id": "MLB",
+  "status": "cancelled",
+  "status_detail": "cancelled",
+  "created_date": "2024-11-22T20:45:16.572Z",
+  "last_updated_date": "2024-11-22T20:45:44.063Z",
+  "integration_data": {
+      "application_id": "874202490252970"
+  },
+  "transactions": {
+      "payments": [
+          {
+              "id": "pay_01JDASYCCVWTT08J5RE06G466S",
+              "amount": "200.00",
+              "reference_id": "0001pxxhc4",
+              "status": "cancelled",
+              "status_detail": "cancelled_transaction",
+              "payment_method": {
+                  "id": "master",
+                  "type": "credit_card",
+                  "token": "card_token",
+                  "issuer_id": "master",
+                  "installments": 1
+              }
+          }
+      ]
+  }
+}
