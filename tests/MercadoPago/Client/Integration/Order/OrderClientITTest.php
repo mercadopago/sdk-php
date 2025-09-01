@@ -152,7 +152,7 @@ final class OrderClientITTest extends TestCase
 
             $order_cancelled = $client->cancel($order->id, $request_options);
             $this->assertNotNull($order_cancelled->id);
-            $this->assertSame("canceled", $order_cancelled->status); 
+            $this->assertSame("canceled", $order_cancelled->status);
         } catch (MPApiException $e) {
             $apiResponse = $e->getApiResponse();
             $statusCode = $apiResponse->getStatusCode();

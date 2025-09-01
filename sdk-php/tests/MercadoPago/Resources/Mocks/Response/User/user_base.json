@@ -1,0 +1,164 @@
+{
+    "id": 1160535239,
+    "nickname": "TETE2893135",
+    "registration_date": "2022-07-14T08:05:06.000-04:00",
+    "first_name": "Test",
+    "last_name": "Test",
+    "gender": "",
+    "country_id": "BR",
+    "email": "test_user_5001277@testuser.com",
+    "identification": {
+        "number": "15635614680",
+        "type": "CPF"
+    },
+    "address": {
+        "address": "Test Address 123",
+        "city": "Sao Paulo",
+        "state": "BR-SP",
+        "zip_code": "47807078"
+    },
+    "phone": {
+        "area_code": "01",
+        "extension": "",
+        "number": "1111-1111",
+        "verified": false
+    },
+    "alternative_phone": {
+        "area_code": "",
+        "extension": "",
+        "number": ""
+    },
+    "user_type": "normal",
+    "tags": [
+        "normal",
+        "test_user",
+        "messages_as_seller"
+    ],
+    "logo": null,
+    "points": 100,
+    "site_id": "MLB",
+    "permalink": "http://perfil.mercadolivre.com.br/TETE2893135",
+    "seller_experience": "NEWBIE",
+    "bill_data": {
+        "accept_credit_note": null
+    },
+    "seller_reputation": {
+        "level_id": null,
+        "power_seller_status": null,
+        "transactions": {
+            "canceled": 0,
+            "completed": 0,
+            "period": "historic",
+            "ratings": {
+                "negative": 0,
+                "neutral": 0,
+                "positive": 0
+            },
+            "total": 0
+        },
+        "metrics": {
+            "sales": {
+                "period": "365 days",
+                "completed": 0
+            },
+            "claims": {
+                "period": "365 days",
+                "rate": 0,
+                "value": 0
+            },
+            "delayed_handling_time": {
+                "period": "365 days",
+                "rate": 0,
+                "value": 0
+            },
+            "cancellations": {
+                "period": "365 days",
+                "rate": 0,
+                "value": 0
+            }
+        }
+    },
+    "buyer_reputation": {
+        "canceled_transactions": 0,
+        "tags": [],
+        "transactions": {
+            "canceled": {
+                "paid": null,
+                "total": null
+            },
+            "completed": null,
+            "not_yet_rated": {
+                "paid": null,
+                "total": null,
+                "units": null
+            },
+            "period": "historic",
+            "total": null,
+            "unrated": {
+                "paid": null,
+                "total": null
+            }
+        }
+    },
+    "status": {
+        "billing": {
+            "allow": true,
+            "codes": []
+        },
+        "buy": {
+            "allow": true,
+            "codes": [],
+            "immediate_payment": {
+                "reasons": [],
+                "required": false
+            }
+        },
+        "confirmed_email": false,
+        "shopping_cart": {
+            "buy": "allowed",
+            "sell": "allowed"
+        },
+        "immediate_payment": false,
+        "list": {
+            "allow": true,
+            "codes": [],
+            "immediate_payment": {
+                "reasons": [],
+                "required": false
+            }
+        },
+        "mercadoenvios": "not_accepted",
+        "mercadopago_account_type": "personal",
+        "mercadopago_tc_accepted": true,
+        "required_action": null,
+        "sell": {
+            "allow": true,
+            "codes": [],
+            "immediate_payment": {
+                "reasons": [],
+                "required": false
+            }
+        },
+        "site_status": "active",
+        "user_type": null
+    },
+    "secure_email": "ttest.1160535239@mail.mercadolivre.com",
+    "company": {
+        "brand_name": null,
+        "city_tax_id": "",
+        "corporate_name": "",
+        "identification": "",
+        "state_tax_id": "",
+        "cust_type_id": "CO",
+        "soft_descriptor": null
+    },
+    "credit": {
+        "consumed": 0,
+        "credit_level_id": "MLB1",
+        "rank": "premium"
+    },
+    "context": {
+        "ip_address": "200.0.0.0"
+    },
+    "registration_identifiers": []
+}

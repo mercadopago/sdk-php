@@ -26,6 +26,7 @@ try {
     $request = [
         "type" => "online",
         "external_reference" => "ext_ref_1234",
+        "capture_mode" => "automatic_async",
         "processing_mode" => "automatic",
         "marketplace" => "NONE",
         "total_amount" => "1000.00",
