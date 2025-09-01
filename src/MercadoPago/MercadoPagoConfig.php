@@ -10,7 +10,7 @@ use MercadoPago\Net\MPHttpClient;
 class MercadoPagoConfig
 {
     /** @var string Mercado Pago SDK version. */
-    public static string $CURRENT_VERSION = "3.5.1";
+    public static string $CURRENT_VERSION = "3.6.0";
   
     /** @var string Mercado Pago Base URL */
     public static string $BASE_URL = "https://api.mercadopago.com";
