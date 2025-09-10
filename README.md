@@ -72,22 +72,22 @@ Simple usage looks like:
             "capture_mode" => "automatic_async",
             "payer" => [
                 "email" => "<PAYER_EMAIL>",
-            ]
+            ],
             "transactions" => [
                 "payments" => [
-                [
-                    "amount" => "1000.00",
-                    "payment_method" => [
-                        "id" => "master",
-                        "type" => "credit_card",
-                        "token" => "<CARD_TOKEN>",
-                        "installments" => 1,
-                        "statement_descriptor" => "Store name",
+                    [
+                        "amount" => "1000.00",
+                        "payment_method" => [
+                            "id" => "master",
+                            "type" => "credit_card",
+                            "token" => "<CARD_TOKEN>",
+                            "installments" => 1,
+                            "statement_descriptor" => "Store name",
+                        ]
                     ]
                 ]
             ]
-        ],
-    ];
+        ];
 
         // Step 5: Create the request options, setting X-Idempotency-Key
         $request_options = new RequestOptions();
@@ -137,29 +137,29 @@ $client = new OrderClient();
 
 ```php
 $request = [
-            "type" => "online",
-            "processing_mode" => "automatic",
-            "total_amount" => "1000.00",
-            "external_reference" => "ext_ref_1234",
-            "capture_mode" => "automatic_async",
-            "payer" => [
-                "email" => "<PAYER_EMAIL>",
-            ]
-            "transactions" => [
-                "payments" => [
-                [
-                    "amount" => "1000.00",
-                    "payment_method" => [
-                        "id" => "master",
-                        "type" => "credit_card",
-                        "token" => "<CARD_TOKEN>",
-                        "installments" => 1,
-                        "statement_descriptor" => "Store name",
-                    ]
+    "type" => "online",
+    "processing_mode" => "automatic",
+    "total_amount" => "1000.00",
+    "external_reference" => "ext_ref_1234",
+    "capture_mode" => "automatic_async",
+    "payer" => [
+        "email" => "<PAYER_EMAIL>",
+    ],
+    "transactions" => [
+        "payments" => [
+            [
+                "amount" => "1000.00",
+                "payment_method" => [
+                    "id" => "master",
+                    "type" => "credit_card",
+                    "token" => "<CARD_TOKEN>",
+                    "installments" => 1,
+                    "statement_descriptor" => "Store name",
                 ]
             ]
         ]
-],
+    ]
+];
 ```
 
 ### Step 5: Create the request options, setting X-Idempotency-Key
