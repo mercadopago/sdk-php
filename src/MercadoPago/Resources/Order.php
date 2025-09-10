@@ -87,12 +87,27 @@ class Order extends MPResource
     /** Additional info. */
     public ?array $additional_info;
 
+    /** Shipment. */
+    public array|object|null $shipment;
+
+    /** Currency. */
+    public ?string $currency;
+
+    /** Discounts. */
+    public array|object|null $discounts;
+
+    /** Taxes. */
+    public ?array $taxes;
+
     private $map = [
         "transactions" => "MercadoPago\Resources\Order\Transactions",
         "items" => "MercadoPago\Resources\Order\Items",
         "integration_data" => "MercadoPago\Resources\Order\IntegrationData",
         "payer" => "MercadoPago\Resources\Order\Payer",
         "config" => "MercadoPago\Resources\Order\Config",
+        "shipment" => "MercadoPago\Resources\Order\Shipment",
+        "discounts" => "MercadoPago\Resources\Order\Discounts",
+        "taxes" => "MercadoPago\Resources\Order\Taxes",
     ];
 
     /**

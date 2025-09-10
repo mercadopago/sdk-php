@@ -45,6 +45,7 @@ try {
         "currency" => "BRL",
         "description" => "some description",
         "payer" => [
+            "entity_type" => "individual",
             "email" => "<PAYER_EMAIL>",
             "first_name" => "John",
             "last_name" => "Doe",
@@ -70,12 +71,19 @@ try {
         "marketplace_fee" => "10.00",
         "items" => [
             [
+                "id" => "item_001",
                 "title" => "Some item title",
                 "external_code" => "item_id",
                 "unit_price" => "1000.00",
                 "quantity" => 1,
+                "unit_measure" => "unit",
                 "description" => "Some item description",
                 "category_id" => "category_id",
+                "external_categories" => [
+                    [
+                        "id" => "cat_001"
+                    ]
+                ],
                 "picture_url" => "https://mysite.com/img/item.jpg",
                 "type" => "product",
                 "warranty" => true,
@@ -152,6 +160,21 @@ try {
                     "arrival_date_time" => "2020-01-01T00:00:00.000-03:00",
                     "company" => "azul"
                 ]
+            ]
+        ],
+        "discounts" => [
+            "payment_methods" => [
+                [
+                    "type" => "credit_card",
+                    "new_total_amount" => "950.00"
+                ]
+            ]
+        ],
+        "taxes" => [
+            [
+                "payer_condition" => "payment_taxable_iva",
+                "value" => "50.00",
+                "type" => "IVA"
             ]
         ],
         "expiration_time" => "P3D"
