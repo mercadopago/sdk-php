@@ -13,7 +13,7 @@ use MercadoPago\Serialization\Serializer;
 /** Client responsible for performing OAuth authorizartion. */
 final class OAuthClient extends MercadoPagoClient
 {
-    private const AUTH_URL = "https://auth.mercadopago.com";
+    private const AUTH_URL = "https://auth.mercadopago.com/authorization";
 
     private const URL = "/oauth/token";
 
@@ -32,14 +32,15 @@ final class OAuthClient extends MercadoPagoClient
     public function getAuthorizationURL(string $app_id, string $redirect_uri, string $random_id): string
     {
         $query_params = [
-            "client_id" => $app_id,
-            "response_type" => "code",
-            "platform_id" => "mp",
-            "state" => $random_id,
-            "redirect_uri" => $redirect_uri
+            "client_id=".urlencode($app_id),
+            "response_type=code",
+            "platform_id=mp",
+            "state=".urlencode($random_id),
+            "redirect_uri=".$redirect_uri
         ];
 
-        $query_string = http_build_query($query_params);
+        $query_string = implode('&',$query_params);
+
         return OAuthClient::AUTH_URL . '?' . $query_string;
     }
 
