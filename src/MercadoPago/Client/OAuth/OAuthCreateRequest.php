@@ -19,4 +19,7 @@ class OAuthCreateRequest
 
     /** Redirect URI. */
     public string $redirect_uri;
+    
+    /** Test Token */
+    public string $test_token = "false";
 }
