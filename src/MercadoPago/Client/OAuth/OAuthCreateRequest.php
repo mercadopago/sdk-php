@@ -21,5 +21,5 @@ class OAuthCreateRequest
     public string $redirect_uri;
     
     /** Test Token */
-    public bool $test_token = false;
+    public string $test_token = "false";
 }
