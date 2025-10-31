@@ -1,7 +1,0 @@
-{
-  "payment_method": {
-    "id": "master",
-    "type": "credit_card",
-    "installments": 1
-  }
-}
