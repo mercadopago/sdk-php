@@ -57,10 +57,10 @@ class Customer extends MPResource
     public ?string $status;
 
     /** List cards of the customer. */
-    public array $cards;
+    public array $cards = [];
 
     /** List addresses of the customer. */
-    public array $addresses;
+    public array $addresses = [];
 
     /** Phone of the customer. */
     public array|object|null $phone;
@@ -75,6 +75,8 @@ class Customer extends MPResource
         "phone" => "MercadoPago\Resources\Common\Phone",
         "identification" => "MercadoPago\Resources\Common\Identification",
         "address" => "MercadoPago\Resources\Common\Address",
+        "addresses" => "MercadoPago\Resources\Common\Address",
+        "cards" => "MercadoPago\Resources\CustomerCard",
     ];
 
     /**
