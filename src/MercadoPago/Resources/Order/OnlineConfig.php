@@ -30,8 +30,12 @@ class OnlineConfig
     /** Differential pricing. */
     public array|object|null $differential_pricing;
 
+    /** Transaction security. */
+    public array|object|null $transaction_security;
+
     private $map = [
         "differential_pricing" => "MercadoPago\Resources\Common\DifferentialPricing",
+        "transaction_security" => "MercadoPago\Resources\Order\TransactionSecurity",
     ];
 
     /**
