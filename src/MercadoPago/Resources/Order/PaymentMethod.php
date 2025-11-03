@@ -4,9 +4,13 @@
 
 namespace MercadoPago\Resources\Order;
 
+use MercadoPago\Serialization\Mapper;
+
 /** PaymentMethod class. */
 class PaymentMethod
 {
+    /** Class mapper. */
+    use Mapper;
     /** Payment method ID. */
     public ?string $id;
 
@@ -51,4 +55,19 @@ class PaymentMethod
 
     /** Digitable Line */
     public ?string $digitable_line;
+
+    /** Transaction security. */
+    public array|object|null $transaction_security;
+
+    private $map = [
+        "transaction_security" => "MercadoPago\Resources\Order\TransactionSecurity",
+    ];
+
+    /**
+     * Method responsible for getting map of entities.
+     */
+    public function getMap(): array
+    {
+        return $this->map;
+    }
 }
