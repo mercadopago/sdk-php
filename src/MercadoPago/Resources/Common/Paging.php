@@ -6,11 +6,14 @@ namespace MercadoPago\Resources\Common;
 class Paging
 {
     /** Total. */
-    public ?int $total;
+    public ?string $total;
+
+    /** Total pages. */
+    public ?string $total_pages;
 
     /** Limit. */
-    public ?int $limit;
+    public ?string $limit;
 
     /** Offset. */
-    public ?int $offset;
+    public ?string $offset;
 }

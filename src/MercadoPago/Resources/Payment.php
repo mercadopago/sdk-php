@@ -238,7 +238,7 @@ class Payment extends MPResource
         "payment_method" => "MercadoPago\Resources\Payment\PaymentMethod",
         "metadata" => "MercadoPago\Resources\Payment\Metadata",
         "three_ds_info" => "MercadoPago\Resources\Payment\ThreeDSInfo",
-        "order"=> "MercadoPago\Resources\Payment\Order",
+        "order" => "MercadoPago\Resources\Payment\Order",
         "expanded" => "MercadoPago\Resources\Payment\Expanded"
     ];
 

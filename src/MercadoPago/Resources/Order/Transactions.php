@@ -19,9 +19,13 @@ class Transactions extends MPResource
     /** Refunds. */
     public ?array $refunds;
 
+    /** Chargebacks. */
+    public ?array $chargebacks;
+
     private $map = [
         "payments" => "MercadoPago\Resources\Order\Payment",
         "refunds" => "MercadoPago\Resources\Order\Refund",
+        "chargebacks" => "MercadoPago\Resources\Order\Chargeback",
     ];
 
     /**

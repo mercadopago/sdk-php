@@ -27,6 +27,9 @@ class Refund
     /** Status. */
     public ?string $status;
 
+    /** E2E ID. */
+    public ?string $e2e_id;
+
     /** Items. */
     public ?array $items;
 

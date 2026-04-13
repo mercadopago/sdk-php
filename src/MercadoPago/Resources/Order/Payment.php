@@ -54,12 +54,22 @@ class Payment
     /** Subscription data. */
     public array|object|null $subscription_data;
 
+    /** Refunded amount. */
+    public ?string $refunded_amount;
+
+    /** Provider. */
+    public ?string $provider;
+
+    /** Discounts. */
+    public ?array $discounts;
+
     private $map = [
         "payment_method" => "MercadoPago\Resources\Order\PaymentMethod",
         "attempts" => "MercadoPago\Resources\Order\Attempt",
         "automatic_payments" => "MercadoPago\Resources\Order\AutomaticPayments",
         "stored_credential" => "MercadoPago\Resources\Order\StoredCredential",
         "subscription_data" => "MercadoPago\Resources\Order\SubscriptionData",
+        "discounts" => "MercadoPago\Resources\Order\PaymentDiscount",
     ];
 
     /**
