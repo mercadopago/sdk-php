@@ -257,7 +257,7 @@ final class OrderClientUnitTest extends BaseClient
 
         $mockHttpRequest->method('execute')->willReturn(json_encode($mockResponse));
         $mockHttpRequest->method('getInfo')->willReturnCallback(
-            fn($option) => $option === CURLINFO_HTTP_CODE ? 201 : null
+            fn ($option) => $option === CURLINFO_HTTP_CODE ? 201 : null
         );
 
         MercadoPagoConfig::setHttpClient(new MPDefaultHttpClient($mockHttpRequest));
@@ -319,7 +319,7 @@ final class OrderClientUnitTest extends BaseClient
 
         $mockHttpRequest->method('execute')->willReturn(json_encode($mockResponse));
         $mockHttpRequest->method('getInfo')->willReturnCallback(
-            fn($option) => $option === CURLINFO_HTTP_CODE ? 201 : null
+            fn ($option) => $option === CURLINFO_HTTP_CODE ? 201 : null
         );
 
         MercadoPagoConfig::setHttpClient(new MPDefaultHttpClient($mockHttpRequest));
@@ -350,8 +350,30 @@ final class OrderClientUnitTest extends BaseClient
 
         $this->assertEquals('order_boleto_test', $order->id);
         $this->assertEquals('pending', $order->status);
-        $this->assertEquals('boleto', $order->transactions->payments[0]->payment_method->id,
+        $this->assertEquals(
+            'boleto',
+            $order->transactions->payments[0]->payment_method->id,
             'O campo payment_method.id da resposta deve ser "boleto".'
         );
+    }
+
+    public function testSearchSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/Order/order_search.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new OrderClient();
+        $search_request = new \MercadoPago\Net\MPSearchRequest(5, 0, []);
+        $search_result = $client->search($search_request);
+        $this->assertSame(200, $search_result->getResponse()->getStatusCode());
+        $this->assertSame(10, $search_result->paging->total);
+        $this->assertSame(2, $search_result->paging->total_pages);
+        $this->assertSame(5, $search_result->paging->limit);
+        $this->assertSame(0, $search_result->paging->offset);
+        $this->assertSame(1, count($search_result->data));
+        $this->assertSame("01JD2P9GGXAPBDGG6YT90N77M3", $search_result->data[0]->id);
     }
 }
