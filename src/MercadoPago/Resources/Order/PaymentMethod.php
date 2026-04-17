@@ -56,6 +56,12 @@ class PaymentMethod
     /** Digitable Line */
     public ?string $digitable_line;
 
+    /** E2E ID. */
+    public ?string $e2e_id;
+
+    /** Redirect URL. */
+    public ?string $redirect_url;
+
     /** Transaction security. */
     public array|object|null $transaction_security;
 

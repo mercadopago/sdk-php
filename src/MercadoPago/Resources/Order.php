@@ -99,6 +99,9 @@ class Order extends MPResource
     /** Taxes. */
     public ?array $taxes;
 
+    /** Type response. */
+    public array|object|null $type_response;
+
     private $map = [
         "transactions" => "MercadoPago\Resources\Order\Transactions",
         "items" => "MercadoPago\Resources\Order\Items",
@@ -108,6 +111,7 @@ class Order extends MPResource
         "shipment" => "MercadoPago\Resources\Order\Shipment",
         "discounts" => "MercadoPago\Resources\Order\Discounts",
         "taxes" => "MercadoPago\Resources\Order\Taxes",
+        "type_response" => "MercadoPago\Resources\Order\TypeResponse",
     ];
 
     /**

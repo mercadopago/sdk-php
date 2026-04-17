@@ -12,6 +12,9 @@ class TransactionSecurity
     /** Class mapper. */
     use Mapper;
 
+    /** Transaction security ID. */
+    public ?string $id;
+
     /** Validation. */
     public ?string $validation;
 
@@ -29,4 +32,3 @@ class TransactionSecurity
         return [];
     }
 }
-

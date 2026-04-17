@@ -5,9 +5,11 @@ namespace MercadoPago\Client\Order;
 use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\Resources\Order;
+use MercadoPago\Resources\OrderSearch;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPHttpClient;
+use MercadoPago\Net\MPSearchRequest;
 use MercadoPago\Serialization\Serializer;
 
 /** Client responsible for performing Order actions. */
@@ -15,6 +17,7 @@ final class OrderClient extends MercadoPagoClient
 {
     private const URL = "/v1/orders";
     private const URL_WITH_ID = "/v1/orders/%s";
+    private const URL_SEARCH = "/v1/orders";
     private const URL_CAPTURE = self::URL_WITH_ID . '/capture';
     private const URL_CANCEL = self::URL_WITH_ID . '/cancel';
     private const URL_PROCESS = self::URL_WITH_ID . '/process';
@@ -126,6 +129,24 @@ final class OrderClient extends MercadoPagoClient
         }
         $response = parent::send($path, HttpMethod::POST, $request, null, $request_options);
         $result = Serializer::deserializeFromJson(Order::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
+    }
+
+    /**
+     * Method responsible for searching Orders.
+     *
+     * @param \MercadoPago\Net\MPSearchRequest $request search request.
+     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
+     * @return \MercadoPago\Resources\OrderSearch search results.
+     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
+     * @throws \Exception if the request fails.
+     */
+    public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): OrderSearch
+    {
+        $query_params = isset($request) ? $request->getParameters() : null;
+        $response = parent::send(self::URL_SEARCH, HttpMethod::GET, null, $query_params, $request_options);
+        $result = Serializer::deserializeFromJson(OrderSearch::class, $response->getContent());
         $result->setResponse($response);
         return $result;
     }

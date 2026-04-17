@@ -8,6 +8,9 @@ class Paging
     /** Total. */
     public ?int $total;
 
+    /** Total pages. */
+    public ?int $total_pages;
+
     /** Limit. */
     public ?int $limit;
 
