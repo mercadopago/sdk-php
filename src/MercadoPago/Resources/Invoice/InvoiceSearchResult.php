@@ -4,7 +4,14 @@ namespace MercadoPago\Resources\Invoice;
 
 use MercadoPago\Serialization\Mapper;
 
-/** InvoiceSearchResult class. */
+/**
+ * Invoice Search Result resource.
+ *
+ * Represents a single invoice entry within a search result set. Contains the core
+ * invoice fields including billing cycle details, payment status, and retry information.
+ *
+ * @see \MercadoPago\Resources\InvoiceSearch
+ */
 class InvoiceSearchResult
 {
     /** Class mapper. */

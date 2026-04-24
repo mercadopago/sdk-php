@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\PaymentMethod;
 
-/** Bin class. */
+/**
+ * Payment Method BIN (Bank Identification Number) settings resource.
+ *
+ * Defines regex patterns that determine which card BINs are accepted,
+ * excluded, or eligible for installments within a payment method's settings.
+ */
 class Bin
 {
     /** Bin pattern. */

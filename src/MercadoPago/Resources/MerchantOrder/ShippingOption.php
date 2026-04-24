@@ -2,6 +2,16 @@
 
 namespace MercadoPago\Resources\MerchantOrder;
 
+/**
+ * Merchant Order Shipping Option resource.
+ *
+ * Represents a selectable shipping option for a merchant order shipment.
+ * Includes cost, carrier method, estimated delivery time, and shipping speed details.
+ *
+ * Fields are mapped to nested DTOs:
+ * - estimated_delivery -> {@see \MercadoPago\Resources\MerchantOrder\ShippingEstimatedDelivery}
+ * - speed -> {@see \MercadoPago\Resources\MerchantOrder\ShippingSpeed}
+ */
 class ShippingOption
 {
     /** Shipping option ID. */

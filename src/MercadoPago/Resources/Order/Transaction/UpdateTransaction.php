@@ -7,13 +7,20 @@ namespace MercadoPago\Resources\Order\Transaction;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** UpdateTransaction class. */
+/**
+ * Represents the response from updating a transaction within a MercadoPago order.
+ *
+ * Returned by the update transaction endpoint, this resource contains
+ * the updated payment method details after modifying an existing transaction.
+ *
+ * @see \MercadoPago\Client\Order\OrderTransactionClient
+ */
 class UpdateTransaction extends MPResource
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Payment method. */
+    /** Updated payment method details for the transaction. Maps to {@see \MercadoPago\Resources\Order\PaymentMethod}. */
     public array|object|null $payment_method;
 
     private $map = [

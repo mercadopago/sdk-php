@@ -4,6 +4,17 @@ namespace MercadoPago\Resources\MerchantOrder;
 
 use MercadoPago\Serialization\Mapper;
 
+/**
+ * Merchant Order Shipment resource.
+ *
+ * Represents a shipment associated with a merchant order. Tracks shipping logistics
+ * including mode, status, sender/receiver details, and the chosen shipping option
+ * with its delivery address.
+ *
+ * Fields are mapped to nested DTOs:
+ * - receiver_address -> {@see \MercadoPago\Resources\MerchantOrder\ReceiverAddress}
+ * - shipping_option -> {@see \MercadoPago\Resources\MerchantOrder\ShippingOption}
+ */
 class Shipment
 {
     /** Class mapper. */

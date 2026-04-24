@@ -4,12 +4,19 @@
 
 namespace MercadoPago\Resources\Order;
 
-/** Subscription sequence class. */
+/**
+ * Represents the sequence position of a payment within a subscription plan.
+ *
+ * Tracks which installment or billing cycle this payment corresponds to
+ * out of the total number of planned payments.
+ *
+ * @see \MercadoPago\Resources\Order\SubscriptionData
+ */
 class SubscriptionSequence
 {
-    /** Number. */
+    /** Current payment number in the subscription series (e.g., 3 for the third payment). */
     public ?int $number;
 
-    /** Total. */
+    /** Total number of planned payments in the subscription (null if open-ended). */
     public ?int $total;
 }

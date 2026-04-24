@@ -6,37 +6,44 @@ namespace MercadoPago\Resources\Order;
 
 use MercadoPago\Serialization\Mapper;
 
-/** PaymentMethodConfig class. */
+/**
+ * Represents payment method configuration and restrictions for an order.
+ *
+ * Controls which payment methods are allowed or excluded, sets defaults,
+ * and configures installment limits and cost absorption rules.
+ *
+ * @see \MercadoPago\Resources\Order\Config
+ */
 class PaymentMethodConfig
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Not allowed ids. */
+    /** List of payment method IDs excluded from the checkout (e.g., ["amex", "visa"]). */
     public ?array $not_allowed_ids;
 
-    /** Not allowed types. */
+    /** List of payment method types excluded from the checkout (e.g., ["credit_card"]). */
     public ?array $not_allowed_types;
 
-    /** Default ID. */
+    /** Default payment method ID pre-selected in the checkout. */
     public ?string $default_id;
 
-    /** Default type. */
+    /** Default payment method type pre-selected in the checkout. */
     public ?string $default_type;
 
-    /** Max installments. */
+    /** Maximum number of installments allowed for the order. */
     public ?int $max_installments;
 
-    /** Default installments. */
+    /** Default number of installments pre-selected in the checkout. */
     public ?int $default_installments;
 
-    /** Min installments. */
+    /** Minimum number of installments allowed for the order. */
     public ?int $min_installments;
 
-    /** Installments cost. */
+    /** Who absorbs the installment interest cost (e.g., "seller", "buyer"). */
     public ?string $installments_cost;
 
-    /** Installments configuration. */
+    /** Detailed installment configuration including promotions. Maps to {@see Installments}. */
     public array|object|null $installments;
 
     private $map = [

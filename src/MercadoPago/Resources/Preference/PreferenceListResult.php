@@ -4,7 +4,15 @@ namespace MercadoPago\Resources\Preference;
 
 use MercadoPago\Net\MPResource;
 
-/** PreferePreferenceListResultnce class. */
+/**
+ * Preference List Result resource.
+ *
+ * Represents a single preference summary within a search result set. Contains a subset
+ * of the full {@see \MercadoPago\Resources\Preference} fields focused on identification,
+ * status, dates, and configuration metadata.
+ *
+ * @see \MercadoPago\Resources\PreferenceSearch
+ */
 class PreferenceListResult extends MPResource
 {
     /** Preference ID. */

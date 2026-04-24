@@ -9,25 +9,38 @@ use MercadoPago\Net\MPHttpClient;
 use MercadoPago\Net\MPRequest;
 use MercadoPago\Net\MPResponse;
 
-/** Mercado Pago client class. */
+/**
+ * Abstract base class for all MercadoPago API client classes.
+ *
+ * Handles request assembly (headers, authentication, idempotency keys, tracking)
+ * and delegates HTTP transport to the injected {@see MPHttpClient}.
+ * Concrete clients (PaymentClient, CustomerClient, etc.) extend this class
+ * and expose domain-specific methods (create, get, search, etc.).
+ */
 class MercadoPagoClient
 {
     /**
-     * MercadoPagoClient constructor.
-     * @param \MercadoPago\Net\MPHttpClient $http_client http client to be used.
+     * @param MPHttpClient $http_client HTTP transport used to execute API requests.
      */
     public function __construct(protected MPHttpClient $http_client)
     {
     }
 
     /**
-     * Method used directly or by other methods to make requests with request options.
-     * @param string $uri path to be requested.
-     * @param string $method method to be used.
-     * @param mixed $payload payload to be sent.
-     * @param mixed $query_params query params to be sent.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Net\MPResponse response from the request.
+     * Assembles and sends an HTTP request to the MercadoPago API.
+     *
+     * Builds the full request (URI, headers, auth, idempotency key) and delegates
+     * execution to the HTTP client. This is the central dispatch point used by
+     * all concrete client methods.
+     *
+     * @param string              $uri             API path (e.g., "/v1/payments").
+     * @param string              $method          HTTP verb — one of {@see HttpMethod} constants.
+     * @param string|null         $payload         JSON-encoded request body.
+     * @param array<string,mixed>|null $query_params Query-string parameters.
+     * @param RequestOptions|null $request_options Per-request overrides (access token, custom headers, timeout).
+     * @return MPResponse Parsed API response.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     protected function send(string $uri, string $method, ?string $payload = null, ?array $query_params = [], ?RequestOptions $request_options = null): MPResponse
     {

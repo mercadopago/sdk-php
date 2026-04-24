@@ -6,13 +6,19 @@ namespace MercadoPago\Resources\Order;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Shipment class. */
+/**
+ * Represents shipping information for a MercadoPago order.
+ *
+ * Contains the delivery address details for physical goods in the order.
+ *
+ * @see \MercadoPago\Resources\Order
+ */
 class Shipment
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Address. */
+    /** Delivery address for the shipment. Maps to Address. */
     public array|object|null $address;
 
     private $map = [

@@ -4,7 +4,12 @@ namespace MercadoPago\Resources\PreApprovalPlan;
 
 use MercadoPago\Serialization\Mapper;
 
-/** PaymentMethodsAllowed class. */
+/**
+ * PreApproval Plan Allowed Payment Methods resource.
+ *
+ * Specifies which payment types and specific payment methods are permitted
+ * for subscriptions created under this plan.
+ */
 class PaymentMethodsAllowed
 {
     /** Payment types. */

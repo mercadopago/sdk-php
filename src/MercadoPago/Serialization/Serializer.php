@@ -4,14 +4,24 @@ namespace MercadoPago\Serialization;
 
 use MercadoPago\Net\MPResource;
 
-/** Serializer class, responsible for objects serialization and deserialization. */
+/**
+ * Hydrates resource DTOs from decoded JSON arrays returned by the MercadoPago API.
+ *
+ * Supports nested objects and collections via the {@see Mapper} trait.
+ * When a resource class uses {@see Mapper::getMap()}, the serializer looks up
+ * the target class for each nested key and recursively deserializes it.
+ */
 class Serializer
 {
     /**
-     * Method responsible for deserialize objects.
-     * @param mixed $entity entity to be deserialized.
-     * @param mixed $data data to be deserialized.
-     * @return \MercadoPago\Net\MPResource deserialized object.
+     * Creates and populates a resource instance from a decoded JSON associative array.
+     *
+     * Nested objects are resolved using the resource's {@see Mapper::map()} method.
+     * Numeric-keyed arrays are treated as collections and each element is deserialized individually.
+     *
+     * @param class-string<MPResource> $entity Fully-qualified class name to instantiate.
+     * @param array<string,mixed>|null $data   Decoded JSON body from {@see \MercadoPago\Net\MPResponse::getContent()}.
+     * @return MPResource Fully-hydrated resource instance.
      */
     public static function deserializeFromJson(mixed $entity, mixed $data): MPResource
     {

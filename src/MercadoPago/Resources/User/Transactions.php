@@ -4,7 +4,15 @@ namespace MercadoPago\Resources\User;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Transactions class. */
+/**
+ * User Seller Transactions resource.
+ *
+ * Provides a summary of the seller's transaction history for a given period,
+ * including counts of cancelled, completed, and total transactions, along with
+ * buyer rating distribution (positive, neutral, negative).
+ *
+ * @property array|object|null $ratings Rating breakdown, mapped to {@see \MercadoPago\Resources\User\Ratings}.
+ */
 class Transactions
 {
     /** Class mapper. */

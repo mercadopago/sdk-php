@@ -2,9 +2,13 @@
 
 namespace MercadoPago\Client\Payment;
 
-/** PaymentCancelRequest class. */
+/**
+ * Internal request payload for payment cancellation.
+ *
+ * Used by {@see PaymentClient::cancel()} to set the payment status to "cancelled".
+ */
 class PaymentCancelRequest
 {
-    /** Status cancelled. */
+    /** Target payment status. Always "cancelled" for this request type. */
     public string $status = "cancelled";
 }

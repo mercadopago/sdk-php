@@ -5,55 +5,61 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** Payment Refund class. */
+/**
+ * Represents a refund issued against a MercadoPago payment.
+ *
+ * Contains refund details including the refunded amount, status, and the source
+ * that initiated the refund. Returned by
+ * {@see \MercadoPago\Client\Payment\PaymentRefundClient} operations (create, get, list).
+ */
 class PaymentRefund extends MPResource
 {
-    /** Class mapper. */
+    /** Maps nested objects to their corresponding DTO classes. */
     use Mapper;
 
-    /** Refund ID. */
+    /** Unique refund identifier assigned by MercadoPago. */
     public ?int $id;
 
-    /** ID of the refunded payment. */
+    /** Identifier of the original payment that was refunded. */
     public ?int $payment_id;
 
-    /** Amount refunded. */
+    /** Amount refunded (may be partial or the full transaction amount). */
     public ?float $amount;
 
-    /** Adjustment amount. */
+    /** Adjustment applied to the refund amount (e.g. currency conversion differences). */
     public ?float $adjustment_amount;
 
-    /** Refund status. */
+    /** Current refund status (e.g. "approved", "in_process"). */
     public ?string $status;
 
-    /** Refund mode. */
+    /** How the refund was processed (e.g. "standard"). */
     public ?string $refund_mode;
 
-    /** Date of creation. */
+    /** ISO 8601 timestamp when the refund was created. */
     public ?string $date_created;
 
-    /** Refund reason. */
+    /** Reason provided for issuing the refund. */
     public ?string $reason;
 
-    /** Unique sequence number. */
+    /** Unique sequence number for reconciliation with financial systems. */
     public ?string $unique_sequence_number;
 
-    /** Source of the refund. */
+    /** @var \MercadoPago\Resources\Common\Source|array|null Actor or system that initiated the refund. */
     public array|object|null $source;
 
-    /** Amount refunded to the payer. */
+    /** Net amount returned to the payer's payment method. */
     public ?int $amount_refunded_to_payer;
 
-    /** Partition details. */
+    /** Breakdown details when the refund is split across multiple destinations. */
     public array|object|null $partition_details;
 
-    /** Labels. */
+    /** Classification labels attached to the refund by MercadoPago. */
     public array|object|null $labels;
 
-    /** Additional data. */
+    /** Additional contextual data associated with the refund. */
     public array|object|null $additional_data;
 
-    /** Expiration date. */
+    /** ISO 8601 date when the refund expires if not yet processed. */
     public ?string $expiration_date;
 
     public $map = [

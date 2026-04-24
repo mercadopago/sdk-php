@@ -2,7 +2,15 @@
 
 namespace MercadoPago\Resources\Preference;
 
-/** Item class. */
+/**
+ * Preference Item resource.
+ *
+ * Represents a product or service line item within a checkout preference.
+ * Each item defines what the buyer is purchasing, including its title,
+ * description, quantity, unit price, and optional category descriptor.
+ *
+ * @property array|object|null $category_descriptor Category metadata, mapped to {@see \MercadoPago\Resources\Preference\CategoryDescriptor}.
+ */
 class Item
 {
     /** Item code. */

@@ -2,9 +2,13 @@
 
 namespace MercadoPago\Client\Customer;
 
-/** Customer Create Request class. */
+/**
+ * Request payload for creating a customer with minimal data (email only).
+ *
+ * Used internally by {@see CustomerClient::createByEmail()}.
+ */
 class CustomerCreateRequest
 {
-    /** Customer email. */
+    /** Customer's email address. Must be unique across the merchant's customer base. */
     public string $email;
 }

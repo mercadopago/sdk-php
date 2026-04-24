@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\PaymentMethod;
 
-/** SecurityCode class. */
+/**
+ * Payment Method Security Code settings resource.
+ *
+ * Defines the security code (CVV/CVC) requirements for a payment method,
+ * including its length, input mode, and physical location on the card.
+ */
 class SecurityCode
 {
     /** Security code mode. */

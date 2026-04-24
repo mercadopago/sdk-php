@@ -7,99 +7,108 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
+/**
+ * Represents a MercadoPago Order resource.
+ *
+ * An order is the top-level entity that groups items, payer information,
+ * transactions (payments, refunds, chargebacks), shipping details, and
+ * configuration for a purchase flow in the MercadoPago Orders API.
+ *
+ * @see \MercadoPago\Client\Order\OrderClient
+ */
 class Order extends MPResource
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Order ID. */
+    /** Unique identifier of the order assigned by MercadoPago. */
     public ?string $id;
 
-    /** Type. */
+    /** Order type (e.g., "online" for e-commerce transactions). */
     public ?string $type;
 
-    /** External reference. */
+    /** Seller-defined reference to correlate the order with an external system. */
     public ?string $external_reference;
 
-    /** Country code. */
+    /** ISO 3166-1 alpha-2 country code where the order is processed. */
     public ?string $country_code;
 
-    /** Status. */
+    /** Current high-level status of the order (e.g., "opened", "closed", "expired"). */
     public ?string $status;
 
-    /** Status detail. */
+    /** Granular detail complementing the order status. */
     public ?string $status_detail;
 
-    /**  Capture mode. */
+    /** Determines how funds are captured (e.g., "automatic" or "manual"). */
     public ?string $capture_mode;
 
-    /** User ID. */
+    /** MercadoPago user ID of the seller who owns the order. */
     public ?string $user_id;
 
-    /** Client token. */
+    /** Temporary token identifying the client session for the checkout. */
     public ?string $client_token;
 
-    /** Total amount. */
+    /** Total amount of the order before any discounts or fees. */
     public ?string $total_amount;
 
-    /** Total paid amount. */
+    /** Total amount effectively paid by the buyer. */
     public ?string $total_paid_amount;
 
-    /** Processing mode. */
+    /** Processing mode for payments (e.g., "aggregator", "gateway"). */
     public ?string $processing_mode;
 
-    /** Description. */
+    /** Short description of the order shown to the buyer. */
     public ?string $description;
 
-    /** Marketplace. */
+    /** Marketplace identifier when the order is placed through a marketplace. */
     public ?string $marketplace;
 
-    /** Marketplace fee. */
+    /** Fee charged by the marketplace on this order. */
     public ?string $marketplace_fee;
 
-    /** Created date. */
+    /** ISO 8601 timestamp when the order was created. */
     public ?string $created_date;
 
-    /** Last updated date. */
+    /** ISO 8601 timestamp of the last update to the order. */
     public ?string $last_updated_date;
 
-    /** Checkout available at. */
+    /** ISO 8601 timestamp indicating when the checkout becomes available. */
     public ?string $checkout_available_at;
 
-    /** Expiration time. */
+    /** ISO 8601 duration or timestamp after which the order expires. */
     public ?string $expiration_time;
 
-    /** Integration data. */
+    /** Integration metadata linking the order to a platform, integrator, or sponsor. Maps to {@see IntegrationData}. */
     public array|object|null $integration_data;
 
-    /** Payer. */
+    /** Buyer information associated with this order. Maps to {@see Payer}. */
     public array|object|null $payer;
 
-    /** Transactions. */
+    /** Transaction container holding payments, refunds, and chargebacks. Maps to {@see Transactions}. */
     public array|object|null $transactions;
 
-    /** Items. */
+    /** Line items included in the order. Each element maps to {@see Items}. */
     public ?array $items;
 
-    /** Config. */
+    /** Order-level configuration for payment methods and online checkout. Maps to {@see Config}. */
     public array|object|null $config;
 
-    /** Additional info. */
+    /** Arbitrary key-value pairs with additional context about the order. */
     public ?array $additional_info;
 
-    /** Shipment. */
+    /** Shipping details and delivery address for the order. Maps to {@see Shipment}. */
     public array|object|null $shipment;
 
-    /** Currency. */
+    /** ISO 4217 currency code for the order amounts (e.g., "BRL", "ARS"). */
     public ?string $currency;
 
-    /** Discounts. */
+    /** Discount rules applied to the order by payment method. Maps to {@see Discounts}. */
     public array|object|null $discounts;
 
-    /** Taxes. */
+    /** Tax entries applied to the order. Each element maps to {@see Taxes}. */
     public ?array $taxes;
 
-    /** Type response. */
+    /** Type-specific response data (e.g., QR code for QR-based orders). Maps to {@see TypeResponse}. */
     public array|object|null $type_response;
 
     private $map = [

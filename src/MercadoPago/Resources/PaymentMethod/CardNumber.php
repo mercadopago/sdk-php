@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\PaymentMethod;
 
-/** CardNumber class. */
+/**
+ * Payment Method Card Number settings resource.
+ *
+ * Defines the expected card number length and validation algorithm (e.g. "standard",
+ * "none") for a payment method's card number input.
+ */
 class CardNumber
 {
     /** Card number length. */

@@ -2,12 +2,17 @@
 
 namespace MercadoPago\Resources\Common;
 
-/** City class. */
+/**
+ * Represents a city within the MercadoPago API.
+ *
+ * Used as a nested DTO inside {@see Address} to identify the city
+ * portion of a physical address.
+ */
 class City
 {
-    /** City ID. */
+    /** MercadoPago internal identifier for the city. */
     public ?string $id;
 
-    /** City name. */
+    /** Human-readable name of the city. */
     public ?string $name;
 }

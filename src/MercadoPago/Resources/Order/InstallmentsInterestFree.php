@@ -2,12 +2,19 @@
 
 namespace MercadoPago\Resources\Order;
 
-/** InstallmentsInterestFree class. */
+/**
+ * Represents interest-free installment promotion rules for a payment method.
+ *
+ * Defines promotional installment plans where the seller absorbs the interest cost,
+ * allowing buyers to pay in installments without additional charges.
+ *
+ * @see \MercadoPago\Resources\Order\Installments
+ */
 class InstallmentsInterestFree
 {
-    /** Interest-free installment type. */
+    /** Promotion type that determines who absorbs the interest cost (e.g., "seller_costs"). */
     public ?string $type = null;
 
-    /** List of available interest-free installment numbers. */
+    /** Allowed installment counts for this promotion (e.g., [3, 6, 12]). */
     public ?array $values = null;
 }

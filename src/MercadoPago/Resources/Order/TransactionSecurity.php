@@ -6,22 +6,30 @@ namespace MercadoPago\Resources\Order;
 
 use MercadoPago\Serialization\Mapper;
 
-/** TransactionSecurity class. */
+/**
+ * Represents 3D Secure and other transaction security details for an order payment.
+ *
+ * Tracks the authentication status, liability shift outcome, and challenge URL
+ * for card payments requiring strong customer authentication (SCA/3DS).
+ *
+ * @see \MercadoPago\Resources\Order\PaymentMethod
+ * @see \MercadoPago\Resources\Order\OnlineConfig
+ */
 class TransactionSecurity
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Transaction security ID. */
+    /** Unique identifier of the 3DS authentication transaction. */
     public ?string $id;
 
-    /** Validation. */
+    /** Authentication validation status (e.g., "automatic", "manual"). */
     public ?string $validation;
 
-    /** Liability shift. */
+    /** Whether liability shifted to the issuer after 3DS authentication (e.g., "yes", "no"). */
     public ?string $liability_shift;
 
-    /** URL. */
+    /** Challenge URL where the buyer must complete 3DS authentication. */
     public ?string $url;
 
     /**

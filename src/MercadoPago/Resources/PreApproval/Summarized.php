@@ -2,7 +2,13 @@
 
 namespace MercadoPago\Resources\PreApproval;
 
-/** Summarized class. */
+/**
+ * PreApproval Summarized billing resource.
+ *
+ * Provides a summary of the subscription's billing history, including how many
+ * installments have been charged, how many are pending, total amounts charged
+ * and pending, and the date/amount of the last successful charge.
+ */
 class Summarized
 {
     /** The number of quotas (or installments). */

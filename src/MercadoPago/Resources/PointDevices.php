@@ -5,7 +5,18 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** PointDevices class. */
+/**
+ * Point Devices list resource.
+ *
+ * Represents the paginated list of Point smart terminal devices associated with
+ * the seller's account. Each device entry includes its ID, POS/store association,
+ * and operating mode.
+ *
+ * @property array|object|null $paging Pagination info, mapped to {@see \MercadoPago\Resources\Common\Paging}.
+ * @property array|object|null $devices Device list, mapped to {@see \MercadoPago\Resources\Point\Device}.
+ *
+ * @see \MercadoPago\Client\Point\PointClient
+ */
 class PointDevices extends MPResource
 {
     /** Class mapper. */

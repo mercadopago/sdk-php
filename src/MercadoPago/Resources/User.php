@@ -5,7 +5,22 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** User class. */
+/**
+ * User resource.
+ *
+ * Represents a MercadoPago/MercadoLibre user account. Contains comprehensive profile
+ * information including personal details, identification, contact info, company data,
+ * seller/buyer reputation metrics, account status, and credit information.
+ *
+ * @property array|object|null $identification User ID document, mapped to {@see \MercadoPago\Resources\Common\Identification}.
+ * @property array|object|null $address User address, mapped to {@see \MercadoPago\Resources\User\Address}.
+ * @property array|object|null $phone User phone, mapped to {@see \MercadoPago\Resources\User\Phone}.
+ * @property array|object|null $seller_reputation Seller metrics, mapped to {@see \MercadoPago\Resources\User\SellerReputation}.
+ * @property array|object|null $buyer_reputation Buyer metrics, mapped to {@see \MercadoPago\Resources\User\BuyerReputation}.
+ * @property array|object|null $status Account status, mapped to {@see \MercadoPago\Resources\User\Status}.
+ *
+ * @see \MercadoPago\Client\User\UserClient
+ */
 class User extends MPResource
 {
     /** Class mapper. */

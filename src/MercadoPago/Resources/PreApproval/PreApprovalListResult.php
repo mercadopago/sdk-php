@@ -4,7 +4,15 @@ namespace MercadoPago\Resources\PreApproval;
 
 use MercadoPago\Serialization\Mapper;
 
-/** PreApprovalListResult class. */
+/**
+ * PreApproval (Subscription) List Result resource.
+ *
+ * Represents a single subscription entry within a search result set. Contains the full
+ * subscription details including payer information, auto-recurring configuration,
+ * billing summary, and payment method.
+ *
+ * @see \MercadoPago\Resources\PreApprovalSearch
+ */
 class PreApprovalListResult
 {
     /** Class mapper. */

@@ -2,12 +2,16 @@
 
 namespace MercadoPago\Client\Payment;
 
-/** PaymentCaptureRequest class. */
+/**
+ * Internal request payload for payment capture.
+ *
+ * Used by {@see PaymentClient::capture()} to capture an authorized payment.
+ */
 class PaymentCaptureRequest
 {
-    /** Status cancelled. */
+    /** Flag indicating this is a capture operation. Always true. */
     public bool $capture = true;
 
-    /** Transaction amount. */
+    /** Amount to capture. When null, the full authorized amount is captured. */
     public float $transaction_amount;
 }

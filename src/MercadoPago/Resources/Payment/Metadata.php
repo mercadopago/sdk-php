@@ -2,9 +2,14 @@
 
 namespace MercadoPago\Resources\Payment;
 
-/** Metadata class. */
+/**
+ * Represents custom metadata associated with a payment in the MercadoPago API.
+ *
+ * Allows integrators to attach key-value data to payments for internal tracking
+ * and reconciliation purposes. Nested within {@see \MercadoPago\Resources\Payment}.
+ */
 class Metadata
 {
-    /** Order number. */
+    /** Integrator-defined order number for mapping payments to internal orders. */
     public ?string $order_number;
 }

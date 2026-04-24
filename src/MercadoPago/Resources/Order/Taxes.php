@@ -4,15 +4,22 @@
 
 namespace MercadoPago\Resources\Order;
 
-/** Taxes class. */
+/**
+ * Represents a tax entry applied to a MercadoPago order.
+ *
+ * Each tax defines its type, amount, and the fiscal condition of the payer
+ * that determines tax applicability.
+ *
+ * @see \MercadoPago\Resources\Order
+ */
 class Taxes
 {
-    /** Payer condition. */
+    /** Fiscal condition of the payer that determines tax applicability (e.g., "IVA_responsable_inscripto"). */
     public ?string $payer_condition;
 
-    /** Value. */
+    /** Tax amount or rate applied to the order. */
     public ?string $value;
 
-    /** Type. */
+    /** Tax type identifier (e.g., "IVA", "IGMP"). */
     public ?string $type;
 }

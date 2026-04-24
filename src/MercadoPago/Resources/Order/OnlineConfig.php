@@ -6,31 +6,39 @@ namespace MercadoPago\Resources\Order;
 
 use MercadoPago\Serialization\Mapper;
 
-/** OnlineConfig class. */
+/**
+ * Represents the online checkout configuration for a MercadoPago order.
+ *
+ * Controls the buyer's redirect flow after completing checkout, including
+ * success/failure/pending URLs, and additional checkout behavior such as
+ * differential pricing and 3DS security.
+ *
+ * @see \MercadoPago\Resources\Order\Config
+ */
 class OnlineConfig
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Callback URL. */
+    /** URL where MercadoPago sends asynchronous payment notifications (IPN/webhook). */
     public ?string $callback_url;
 
-    /** Success URL. */
+    /** URL to redirect the buyer after a successful payment. */
     public ?string $success_url;
 
-    /** Pending URL. */
+    /** URL to redirect the buyer when the payment is pending approval. */
     public ?string $pending_url;
 
-    /** Failure URL. */
+    /** URL to redirect the buyer after a failed payment. */
     public ?string $failure_url;
 
-    /** Auto return URL. */
+    /** URL for automatic redirection after the buyer completes checkout. */
     public ?string $auto_return_url;
 
-    /** Differential pricing. */
+    /** Differential pricing configuration for offering different prices per payment method. Maps to DifferentialPricing. */
     public array|object|null $differential_pricing;
 
-    /** Transaction security. */
+    /** 3D Secure and other transaction security settings. Maps to {@see TransactionSecurity}. */
     public array|object|null $transaction_security;
 
     private $map = [

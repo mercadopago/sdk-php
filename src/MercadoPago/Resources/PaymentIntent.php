@@ -5,7 +5,18 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** PaymentIntent class. */
+/**
+ * Payment Intent resource (Point integration).
+ *
+ * Represents a payment intent created for a MercadoPago Point smart terminal device.
+ * A payment intent instructs a Point device to initiate a card-present transaction
+ * with the specified amount, description, and payment configuration.
+ *
+ * @property array|object|null $additional_info Additional metadata, mapped to {@see \MercadoPago\Resources\Point\PaymentIntentAdditionalInfo}.
+ * @property array|object|null $payment Payment config, mapped to {@see \MercadoPago\Resources\Point\PaymentIntentPayment}.
+ *
+ * @see \MercadoPago\Client\Point\PointClient
+ */
 class PaymentIntent extends MPResource
 {
     /** Class mapper. */

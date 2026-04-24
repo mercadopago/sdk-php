@@ -5,7 +5,23 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** Preference class. */
+/**
+ * Preference resource.
+ *
+ * Represents a checkout preference in MercadoPago, which defines the payment experience
+ * for buyers. A preference configures items to purchase, accepted payment methods,
+ * shipping options, callback URLs, expiration rules, and tracking integration.
+ * The init_point URL redirects buyers to the MercadoPago Checkout flow.
+ *
+ * @property array|null $items Items to be paid, mapped to {@see \MercadoPago\Resources\Preference\Item}.
+ * @property array|object|null $payer Buyer info, mapped to {@see \MercadoPago\Resources\Preference\Payer}.
+ * @property array|object|null $payment_methods Payment method configuration, mapped to {@see \MercadoPago\Resources\Preference\PaymentMethods}.
+ * @property array|object|null $back_urls Return URLs after checkout, mapped to {@see \MercadoPago\Resources\Preference\BackUrls}.
+ * @property array|object|null $redirect_urls Redirect URLs, mapped to {@see \MercadoPago\Resources\Preference\RedirectUrls}.
+ * @property array|object|null $shipments Shipping configuration, mapped to {@see \MercadoPago\Resources\Preference\Shipments}.
+ *
+ * @see \MercadoPago\Client\Preference\PreferenceClient
+ */
 class Preference extends MPResource
 {
     /** Class mapper. */

@@ -4,7 +4,17 @@ namespace MercadoPago\Resources\Preference;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Shipments class. */
+/**
+ * Preference Shipments configuration resource.
+ *
+ * Configures the shipping options for a checkout preference. Supports multiple modes:
+ * "me2" (MercadoEnvios managed shipping), "custom" (seller-managed shipping), and
+ * "not_specified". Includes cost, free shipping options, dimensions, and the receiver address.
+ *
+ * Fields are mapped to nested DTOs:
+ * - free_methods -> {@see \MercadoPago\Resources\Preference\FreeMethod}
+ * - receiver_address -> {@see \MercadoPago\Resources\Preference\ReceiverAddress}
+ */
 class Shipments
 {
     /** Class mapper. */

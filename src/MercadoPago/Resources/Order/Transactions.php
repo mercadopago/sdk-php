@@ -7,19 +7,28 @@ namespace MercadoPago\Resources\Order;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** Transactions class. */
+/**
+ * Represents the transaction container for a MercadoPago order.
+ *
+ * Groups all financial operations associated with an order: payments,
+ * refunds, and chargebacks. An order may contain multiple payments
+ * (split payment scenarios) and their corresponding reversals.
+ *
+ * @see \MercadoPago\Resources\Order
+ * @see \MercadoPago\Client\Order\OrderTransactionClient
+ */
 class Transactions extends MPResource
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Payments. */
+    /** Payments associated with this order. Each element maps to {@see Payment}. */
     public ?array $payments;
 
-    /** Refunds. */
+    /** Refunds processed for this order's payments. Each element maps to {@see Refund}. */
     public ?array $refunds;
 
-    /** Chargebacks. */
+    /** Chargebacks filed against this order's payments. Each element maps to {@see Chargeback}. */
     public ?array $chargebacks;
 
     private $map = [

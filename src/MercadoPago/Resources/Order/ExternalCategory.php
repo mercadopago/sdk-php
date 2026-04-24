@@ -4,9 +4,16 @@
 
 namespace MercadoPago\Resources\Order;
 
-/** ExternalCategory class. */
+/**
+ * Represents an external product category associated with an order item.
+ *
+ * Used to classify items according to the seller's own category taxonomy,
+ * which can influence fraud analysis and payment processing rules.
+ *
+ * @see \MercadoPago\Resources\Order\Items
+ */
 class ExternalCategory
 {
-    /** ID. */
+    /** Seller-defined category identifier for the item. */
     public ?string $id;
 }

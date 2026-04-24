@@ -2,49 +2,55 @@
 
 namespace MercadoPago\Resources\Common;
 
-/** Submerchant identification class. */
+/**
+ * Represents a sub-merchant (payment facilitator participant) in the MercadoPago API.
+ *
+ * Contains identification and location data for the sub-merchant receiving the payment
+ * in a payment facilitator (PayFac) model. Sent within {@see \MercadoPago\Resources\Payment\ForwardData}
+ * to comply with card brand and regulatory requirements.
+ */
 class SubMerchant
 {
-    /** Submerchant code. */
+    /** Unique identifier assigned to the sub-merchant by the payment facilitator. */
     public ?string $sub_merchant_id;
 
-    /** Submerchant MCC according to Abecs decision and/or primary CNAE. */
+    /** Merchant Category Code (MCC) per ABECS/CNAE classification. */
     public ?string $mcc;
 
-    /** Country where the submerchant is located. */
+    /** ISO 3166-1 country code where the sub-merchant operates. */
     public ?string $country;
 
-    /** Street number where the submerchant is located. */
+    /** Street/door number of the sub-merchant's address. */
     public ?number $address_door_number;
 
-    /**  CEP of the submerchant. */
+    /** Postal code (CEP) of the sub-merchant's address. */
     public ?string $zip;
 
-    /** CPF or CNPJ identification of the submerchant. */
+    /** Tax identification number of the sub-merchant (e.g. CPF or CNPJ). */
     public ?string $document_number;
 
-    /** City where the submerchant is located. */
+    /** City where the sub-merchant is located. */
     public ?string $city;
 
-    /** Street where the submerchant is located. */
+    /** Street name of the sub-merchant's address. */
     public ?string $address_street;
 
-    /** Name of the submerchant . */
+    /** Registered business name of the sub-merchant. */
     public ?string $business_name;
 
-    /** State where the submerchant is located . */
+    /** ISO state/region code where the sub-merchant is located. */
     public ?string $region_code_iso;
 
-    /** Postal code of the submerchant . */
+    /** Region or state code of the sub-merchant. */
     public ?string $region_code;
 
-    /** CPF or CNPJ number of the submerchant . */
+    /** Type of identification document (e.g. "CPF", "CNPJ"). */
     public ?string $document_type;
 
-    /** Phone number of the submerchant . */
+    /** Contact phone number of the sub-merchant. */
     public ?string $phone;
 
-    /** Payment Facilitator URL . */
+    /** URL of the payment facilitator or sub-merchant website. */
     public ?string $url;
 
 

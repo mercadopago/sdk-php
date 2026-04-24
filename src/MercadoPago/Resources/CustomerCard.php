@@ -5,57 +5,69 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** Customer Card class. */
+/**
+ * Represents a payment card saved to a customer's profile in MercadoPago.
+ *
+ * Contains tokenized card details (BIN, last four digits, expiration), the associated
+ * payment method, issuer, and cardholder information. Card numbers are never stored
+ * in full; only partial digits are available for display purposes.
+ *
+ * @see \MercadoPago\Client\Customer\CustomerCardClient
+ */
 class CustomerCard extends MPResource
 {
-    /** Class mapper. */
     use Mapper;
 
-    /** Id of the card. */
+    /** Unique card identifier assigned by MercadoPago. */
     public ?string $id;
 
-    /** Id of the customer. */
+    /** ID of the customer who owns this card. */
     public ?string $customer_id;
 
-    /** Month the card expires. */
+    /** Card expiration month (1-12). */
     public ?int $expiration_month;
 
-    /** Year the card expires. */
+    /** Card expiration year (four-digit). */
     public ?int $expiration_year;
 
-    /** First six digits of the card. */
+    /** First six digits (BIN) of the card number, used to identify the issuer and card type. */
     public ?string $first_six_digits;
 
-    /** Last four digits of the card. */
+    /** Last four digits of the card number, used for display/identification. */
     public ?string $last_four_digits;
 
-    /** Data related to the chosen payment method. */
+    /** Payment method associated with this card (e.g., Visa, Mastercard). */
     public array|object|null $payment_method;
 
-    /** Security code of the card. */
+    /** Security code (CVV/CVC) metadata, including length and card location. */
     public array|object|null $security_code;
 
-    /** Card issuer. */
+    /** Financial institution that issued this card. */
     public array|object|null $issuer;
 
-    /** Data related to the holder of the card, usually the customer. */
+    /** Cardholder details (name and identification) as printed on the card. */
     public array|object|null  $cardholder;
 
-    /** Creation date of the record. */
+    /** Timestamp when this card record was created (ISO 8601). */
     public ?string $date_created;
 
-    /** Date the record was last updated. */
+    /** Timestamp of the last update to this card record (ISO 8601). */
     public ?string $date_last_updated;
 
-    /** Id of the user. */
+    /** Internal MercadoPago user ID associated with this card. */
     public ?string $user_id;
 
-    /** Flag indicating if this is a record from production or test environment. */
+    /** Whether this record belongs to a production (true) or test (false) environment. */
     public ?bool $live_mode;
 
-    /** Card number is. */
+    /** Unique identifier for the tokenized card number. */
     public ?string $card_number_id;
 
+    /**
+     * Maps nested JSON properties to their corresponding DTO classes.
+     *
+     * @var array<string, class-string>
+     */
     private $map = [
         "payment_method" => "MercadoPago\Resources\Customer\PaymentMethod",
         "security_code" => "MercadoPago\Resources\Customer\SecurityCode",
@@ -64,7 +76,7 @@ class CustomerCard extends MPResource
     ];
 
     /**
-     * Method responsible for getting map of entities.
+     * Returns the property-to-class mapping for nested object deserialization.
      */
     public function getMap(): array
     {

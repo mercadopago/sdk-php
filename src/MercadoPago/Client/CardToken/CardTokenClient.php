@@ -10,24 +10,32 @@ use MercadoPago\Net\MPHttpClient;
 use MercadoPago\Resources\CardToken;
 use MercadoPago\Serialization\Serializer;
 
-/** Client responsible for performing cardtoken actions. */
+/**
+ * Client for the Card Tokens API (`/v1/card_tokens`).
+ *
+ * Card tokens are single-use representations of credit/debit card data used
+ * to create payments without exposing raw card details to the merchant's server.
+ *
+ * @see https://www.mercadopago.com/developers/en/reference/card_token/_card_tokens/post
+ */
 final class CardTokenClient extends MercadoPagoClient
 {
     private const URL = "/v1/card_tokens";
 
-    /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
+    /** @param MPHttpClient|null $MPHttpClient Custom HTTP client. Defaults to the SDK global client. */
     public function __construct(?MPHttpClient $MPHttpClient = null)
     {
         parent::__construct($MPHttpClient ?: MercadoPagoConfig::getHttpClient());
     }
 
     /**
-     * Method responsible for creating card token.
-     * @param array $request card token data.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\CardToken card token created.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Creates a single-use card token from card data.
+     *
+     * @param array<string,mixed> $request Card data (card_number, expiration_month, expiration_year, security_code, cardholder).
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return CardToken The created card token resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function create(array $request, ?RequestOptions $request_options = null): CardToken
     {

@@ -5,7 +5,17 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** PreApprovalPlanSearch class. */
+/**
+ * PreApproval Plan (Subscription Plan) Search resource.
+ *
+ * Represents the paginated result set returned when searching for subscription plans.
+ * Contains matching plan records along with pagination metadata.
+ *
+ * @property array|object|null $paging Pagination info, mapped to {@see \MercadoPago\Resources\Common\Paging}.
+ * @property array|object|null $results Plan results, mapped to {@see \MercadoPago\Resources\PreApprovalPlan\PreApprovalPlanListResult}.
+ *
+ * @see \MercadoPago\Client\PreApprovalPlan\PreApprovalPlanClient
+ */
 class PreApprovalPlanSearch extends MPResource
 {
     /** Class mapper. */

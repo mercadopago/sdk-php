@@ -2,13 +2,17 @@
 
 namespace MercadoPago\Client\Point;
 
-/** PointPaymentIntentListRequest class. */
+/**
+ * Request payload for listing payment intent events within a date range.
+ *
+ * @see PointClient::getPaymentIntentList()
+ */
 class PointPaymentIntentListRequest
 {
-    /** Start date. */
+    /** Start date for the filter range (ISO 8601 format). */
     public string $start_date;
 
-    /** End date. */
+    /** End date for the filter range (ISO 8601 format). */
     public string $end_date;
 
     public function getParameters(): array

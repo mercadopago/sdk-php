@@ -3,39 +3,48 @@
 namespace MercadoPago\Net;
 
 /**
- * Http request interface.
+ * Low-level HTTP transport abstraction.
+ *
+ * Wraps the underlying HTTP library (typically cURL) so that
+ * {@see MPDefaultHttpClient} can execute requests without coupling
+ * to a specific transport implementation. Useful for testing with
+ * mock HTTP responses.
+ *
+ * @see CurlRequest Default cURL-based implementation.
  */
 interface HttpRequest
 {
     /**
-     * Set request options.
-     * @param array $value options to be set.
-     * @return void
+     * Configures the request with the given options array.
+     *
+     * @param array<int,mixed> $value cURL option constants mapped to their values (e.g., CURLOPT_URL => '...').
      */
     public function setOptionArray(array $value): void;
 
     /**
-     * Execute the request.
-     * @return bool|string response from the request.
+     * Executes the configured HTTP request.
+     *
+     * @return string|false Raw response body on success, or false on failure.
      */
     public function execute(): bool|string;
 
     /**
-     * Get information about the request.
-     * @param mixed $name name of the information to be retrieved.
-     * @return mixed information retrieved.
+     * Retrieves metadata about the last executed request.
+     *
+     * @param int $name A CURLINFO_* constant (e.g., CURLINFO_HTTP_CODE).
+     * @return mixed The requested information value.
      */
     public function getInfo(mixed $name): mixed;
 
     /**
-     * Close the request.
-     * @return void
+     * Releases the underlying connection resources.
      */
     public function close(): void;
 
     /**
-     * Return the error from the request.
-     * @return string error from the request.
+     * Returns the human-readable error message from the last failed request.
+     *
+     * @return string Error description, or empty string if no error occurred.
      */
     public function error(): string;
 }

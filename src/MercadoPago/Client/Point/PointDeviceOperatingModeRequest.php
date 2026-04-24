@@ -2,9 +2,13 @@
 
 namespace MercadoPago\Client\Point;
 
-/** PointDeviceOperatingModeRequest class. */
+/**
+ * Request payload for changing a Point device's operating mode.
+ *
+ * @see PointClient::changeDeviceOperatingMode()
+ */
 class PointDeviceOperatingModeRequest
 {
-    /** Operating mode. */
+    /** Target operating mode (e.g., "PDV", "STANDALONE"). */
     public string $operating_mode;
 }

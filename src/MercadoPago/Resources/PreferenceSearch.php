@@ -5,7 +5,18 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** PreferenceSearch class. */
+/**
+ * Preference Search resource.
+ *
+ * Represents the paginated result set returned when searching for checkout preferences.
+ * Contains matching preference summaries along with pagination metadata.
+ *
+ * @property array $elements Search results, mapped to {@see \MercadoPago\Resources\Preference\PreferenceListResult}.
+ * @property int|null $next_offset Offset for retrieving the next page of results.
+ * @property int|null $total Total number of preferences matching the search criteria.
+ *
+ * @see \MercadoPago\Client\Preference\PreferenceClient
+ */
 class PreferenceSearch extends MPResource
 {
     /** Class mapper. */

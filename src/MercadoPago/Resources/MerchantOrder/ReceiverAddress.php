@@ -4,6 +4,17 @@ namespace MercadoPago\Resources\MerchantOrder;
 
 use MercadoPago\Serialization\Mapper;
 
+/**
+ * Merchant Order Receiver Address resource.
+ *
+ * Represents the shipping destination address for a merchant order shipment.
+ * Includes full address details such as street, city, state, country, and geographic coordinates.
+ *
+ * Fields are mapped to nested DTOs:
+ * - city -> {@see \MercadoPago\Resources\MerchantOrder\ReceiverAddressCity}
+ * - state -> {@see \MercadoPago\Resources\MerchantOrder\ReceiverAddressState}
+ * - country -> {@see \MercadoPago\Resources\MerchantOrder\ReceiverAddressCountry}
+ */
 class ReceiverAddress
 {
     /** Class mapper. */

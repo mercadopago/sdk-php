@@ -2,12 +2,17 @@
 
 namespace MercadoPago\Resources\Payment;
 
-/** PaymentMethod class. */
+/**
+ * Represents a fee or interest charge applied to a payment method in the MercadoPago API.
+ *
+ * Used for late-payment fines and interest charges on offline payment methods
+ * (e.g. boleto). Nested within {@see PaymentMethodRules}.
+ */
 class PaymentFee
 {
-    /** Discount type. */
+    /** Fee type (e.g. "fixed", "percentage"). */
     public ?string $type;
 
-    /** Discount value. */
+    /** Fee value (absolute amount or percentage depending on type). */
     public ?float $value;
 }

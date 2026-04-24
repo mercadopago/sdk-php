@@ -2,6 +2,13 @@
 
 namespace MercadoPago\Resources\MerchantOrder;
 
+/**
+ * Merchant Order Payment resource.
+ *
+ * Represents a payment associated with a merchant order. A merchant order may have
+ * multiple payments (e.g. split payments, retries). Each payment tracks its own
+ * amount, status, approval date, and refund information.
+ */
 class Payment
 {
     /** Payment ID. */

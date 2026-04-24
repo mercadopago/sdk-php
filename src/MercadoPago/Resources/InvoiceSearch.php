@@ -5,7 +5,17 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** InvoiceSearch class. */
+/**
+ * Invoice Search resource.
+ *
+ * Represents the paginated result set returned when searching for subscription invoices.
+ * Contains matching invoice records along with pagination metadata.
+ *
+ * @property array|object|null $paging Pagination info, mapped to {@see \MercadoPago\Resources\Common\Paging}.
+ * @property array|object|null $results Invoice search results, mapped to {@see \MercadoPago\Resources\Invoice\InvoiceSearchResult}.
+ *
+ * @see \MercadoPago\Client\Invoice\InvoiceClient
+ */
 class InvoiceSearch extends MPResource
 {
     /** Class mapper. */

@@ -5,7 +5,19 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** PreApproval class. */
+/**
+ * PreApproval (Subscription) resource.
+ *
+ * Represents a subscription (pre-approval) in MercadoPago. A pre-approval authorizes
+ * recurring charges against a payer's payment method according to a defined billing schedule.
+ * Tracks the subscription lifecycle including status, auto-recurring configuration,
+ * payment method, and summarized billing history.
+ *
+ * @property array|object|null $auto_recurring Recurring billing config, mapped to {@see \MercadoPago\Resources\PreApproval\AutoRecurring}.
+ * @property array|object|null $summarized Billing summary, mapped to {@see \MercadoPago\Resources\PreApproval\Summarized}.
+ *
+ * @see \MercadoPago\Client\PreApproval\PreApprovalClient
+ */
 class PreApproval extends MPResource
 {
     /** Class mapper. */

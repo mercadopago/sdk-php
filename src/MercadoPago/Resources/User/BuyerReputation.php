@@ -4,7 +4,14 @@ namespace MercadoPago\Resources\User;
 
 use MercadoPago\Serialization\Mapper;
 
-/** BuyerReputation class. */
+/**
+ * User Buyer Reputation resource.
+ *
+ * Represents the buying reputation of a MercadoLibre user, including the count of
+ * cancelled transactions, reputation tags, and detailed transaction statistics.
+ *
+ * @property array|object|null $transactions Transaction stats, mapped to {@see \MercadoPago\Resources\User\BuyerReputationTransactions}.
+ */
 class BuyerReputation
 {
     /** Class mapper. */

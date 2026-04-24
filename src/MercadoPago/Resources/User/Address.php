@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\User;
 
-/** Address class. */
+/**
+ * User Address resource.
+ *
+ * Represents the registered address of a MercadoPago/MercadoLibre user account,
+ * including street address, city, state code, and postal code.
+ */
 class Address
 {
     /** The user's address. */

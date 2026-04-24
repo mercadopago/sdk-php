@@ -5,16 +5,23 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** OrderSearch class. */
+/**
+ * Represents a paginated search result for MercadoPago Orders.
+ *
+ * Returned by the Orders search endpoint, this resource wraps paging metadata
+ * and the list of matching {@see Order} resources.
+ *
+ * @see \MercadoPago\Client\Order\OrderClient
+ */
 class OrderSearch extends MPResource
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Search paging. */
+    /** Pagination metadata (offset, limit, total). Maps to {@see \MercadoPago\Resources\Common\Paging}. */
     public array|object|null $paging;
 
-    /** Search data. */
+    /** Array of {@see Order} resources matching the search criteria. */
     public array|object|null $data;
 
     private $map = [

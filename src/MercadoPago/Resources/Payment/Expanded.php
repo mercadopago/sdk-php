@@ -4,13 +4,18 @@ namespace MercadoPago\Resources\Payment;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Expanded class. */
+/**
+ * Represents expanded response data included in a payment when gateway mode is used.
+ *
+ * Contains additional gateway-level information such as network transaction references.
+ * Nested within {@see \MercadoPago\Resources\Payment} when expanded fields are requested.
+ */
 class Expanded
 {
-    /** Class mapper. */
+    /** Maps nested objects to their corresponding DTO classes. */
     use Mapper;
 
-    /** Gateway data. */
+    /** @var ExpandedGateway|null Gateway-specific response data including network references. */
     public ?object $gateway;
 
     private $map = [
@@ -26,13 +31,17 @@ class Expanded
     }
 }
 
-/** Gateway class for expanded response. */
+/**
+ * Represents the gateway section of expanded payment data.
+ *
+ * Contains reference information from the payment gateway/acquirer.
+ */
 class ExpandedGateway
 {
-    /** Class mapper. */
+    /** Maps nested objects to their corresponding DTO classes. */
     use Mapper;
 
-    /** Reference data. */
+    /** @var ExpandedGatewayReference|null Reference identifiers returned by the gateway. */
     public ?object $reference;
 
     private $map = [
@@ -48,9 +57,14 @@ class ExpandedGateway
     }
 }
 
-/** GatewayReference class for expanded response. */
+/**
+ * Represents gateway reference identifiers from the card network.
+ *
+ * Used for recurring payment flows and acquirer reconciliation when
+ * a network transaction ID is required for subsequent transactions.
+ */
 class ExpandedGatewayReference
 {
-    /** Network transaction ID. */
+    /** Unique transaction identifier assigned by the card network (e.g. Visa, Mastercard). */
     public ?string $network_transaction_id;
 }
