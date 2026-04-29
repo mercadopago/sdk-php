@@ -29,11 +29,21 @@ class RequestOptions
     ) {
     }
 
+    /**
+     * Returns the per-request access token override.
+     *
+     * @return string|null OAuth Bearer token, or null to use the global default.
+     */
     public function getAccessToken(): string | null
     {
         return $this->access_token;
     }
 
+    /**
+     * Overrides the access token for this request only.
+     *
+     * @param string $access_token OAuth Bearer token (e.g., "APP_USR-..." or "TEST-...").
+     */
     public function setAccessToken(string $access_token): void
     {
         $this->access_token = $access_token;

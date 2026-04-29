@@ -18,7 +18,7 @@ use MercadoPago\Serialization\Serializer;
  * Manages recurring payment subscriptions where the buyer authorizes
  * automatic charges on a defined schedule (monthly, yearly, etc.).
  *
- * @see https://www.mercadopago.com/developers/en/reference/subscriptions/_preapproval/post
+ * @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/create-preapproval/post
  */
 final class PreApprovalClient extends MercadoPagoClient
 {
@@ -42,6 +42,7 @@ final class PreApprovalClient extends MercadoPagoClient
      * @return PreApproval The created subscription resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/create-preapproval/post
      */
     public function create(array $request, ?RequestOptions $request_options = null): PreApproval
     {
@@ -59,6 +60,7 @@ final class PreApprovalClient extends MercadoPagoClient
      * @return PreApproval The found subscription resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/get-preapproval/get
      */
     public function get(string $id, ?RequestOptions $request_options = null): PreApproval
     {
@@ -76,6 +78,7 @@ final class PreApprovalClient extends MercadoPagoClient
      * @return PreApproval The updated subscription resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/update-preapproval/put
      */
     public function update(string $id, array $request, ?RequestOptions $request_options = null): PreApproval
     {
@@ -93,6 +96,7 @@ final class PreApprovalClient extends MercadoPagoClient
      * @return PreApprovalSearch Paginated search results.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/subscriptions/search-preapproval/get
      */
     public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): PreApprovalSearch
     {

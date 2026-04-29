@@ -19,7 +19,7 @@ use MercadoPago\Serialization\Serializer;
  * payment flow. Creating a preference returns URLs (init_point, sandbox_init_point)
  * to redirect the buyer to MercadoPago's hosted checkout.
  *
- * @see https://www.mercadopago.com/developers/en/reference/preferences/_checkout_preferences/post
+ * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-pro/preferences/create-preference/post
  */
 final class PreferenceClient extends MercadoPagoClient
 {
@@ -43,6 +43,7 @@ final class PreferenceClient extends MercadoPagoClient
      * @return Preference The created preference with init_point URLs.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-pro/preferences/create-preference/post
      */
     public function create(array $request, ?RequestOptions $request_options = null): Preference
     {
@@ -60,6 +61,7 @@ final class PreferenceClient extends MercadoPagoClient
      * @return Preference The found preference resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-pro/preferences/get-preference/get
      */
     public function get(string $id, ?RequestOptions $request_options = null): Preference
     {
@@ -78,6 +80,7 @@ final class PreferenceClient extends MercadoPagoClient
      * @return Preference The updated preference resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-pro/preferences/update-preference/put
      */
     public function update(string $id, array $request, ?RequestOptions $request_options = null): Preference
     {
@@ -95,6 +98,7 @@ final class PreferenceClient extends MercadoPagoClient
      * @return PreferenceSearch Paginated search results.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-pro/preferences/search-preferences/get
      */
     public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): PreferenceSearch
     {

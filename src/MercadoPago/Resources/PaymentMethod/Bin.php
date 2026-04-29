@@ -10,12 +10,12 @@ namespace MercadoPago\Resources\PaymentMethod;
  */
 class Bin
 {
-    /** Bin pattern. */
+    /** Regex pattern matching accepted card BINs (first 6-8 digits of the card number). */
     public ?string $pattern;
 
-    /** Bin exclusion pattern. */
+    /** Regex pattern matching card BINs explicitly excluded from this payment method. */
     public ?string $exclusion_pattern;
 
-    /** Bin installments pattern. */
+    /** Regex pattern matching card BINs eligible for installment plans. */
     public ?string $installments_pattern;
 }

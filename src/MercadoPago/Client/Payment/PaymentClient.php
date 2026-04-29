@@ -18,7 +18,7 @@ use MercadoPago\Serialization\Serializer;
  * Provides CRUD operations for payments: create, get, cancel, capture, and search.
  * Refund operations are handled by the dedicated {@see PaymentRefundClient}.
  *
- * @see https://www.mercadopago.com/developers/en/reference/payments/_payments/post
+ * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/create-payment/post
  */
 final class PaymentClient extends MercadoPagoClient
 {
@@ -42,6 +42,7 @@ final class PaymentClient extends MercadoPagoClient
      * @return Payment The created payment resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/create-payment/post
      */
     public function create(array $request, ?RequestOptions $request_options = null): Payment
     {
@@ -59,6 +60,7 @@ final class PaymentClient extends MercadoPagoClient
      * @return Payment The found payment resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/get-payment/get
      */
     public function get(int $id, ?RequestOptions $request_options = null): Payment
     {
@@ -77,6 +79,7 @@ final class PaymentClient extends MercadoPagoClient
      * @return Payment The cancelled payment resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/update-payment/put
      */
     public function cancel(int $id, ?RequestOptions $request_options = null): Payment
     {
@@ -99,6 +102,7 @@ final class PaymentClient extends MercadoPagoClient
      * @return Payment The captured payment resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/update-payment/put
      */
     public function capture(int $id, ?float $amount, ?RequestOptions $request_options = null): Payment
     {
@@ -118,6 +122,7 @@ final class PaymentClient extends MercadoPagoClient
      * @return PaymentSearch Paginated search results containing matching payments.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/search-payments/get
      */
     public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): PaymentSearch
     {

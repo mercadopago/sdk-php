@@ -17,7 +17,7 @@ use MercadoPago\Serialization\Serializer;
  * Provides operations to create partial/total refunds, retrieve a specific refund,
  * and list all refunds for a given payment.
  *
- * @see https://www.mercadopago.com/developers/en/reference/chargebacks/_payments_id_refunds/post
+ * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/create-refund/post
  */
 final class PaymentRefundClient extends MercadoPagoClient
 {
@@ -40,7 +40,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      * @return PaymentRefund The created refund resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
-     * @see https://www.mercadopago.com.br/developers/en/reference/chargebacks/_payments_id_refunds/post
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/create-refund/post
      */
     public function refund(int $payment_id, float $amount, ?RequestOptions $request_options = null): PaymentRefund
     {
@@ -60,7 +60,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      * @return PaymentRefund The created refund resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
-     * @see https://www.mercadopago.com.br/developers/en/reference/chargebacks/_payments_id_refunds/post
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/create-refund/post
      */
     public function refundTotal(int $payment_id, ?RequestOptions $request_options = null): PaymentRefund
     {
@@ -78,7 +78,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      * @return PaymentRefund The found refund resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
-     * @see https://www.mercadopago.com.br/developers/en/reference/chargebacks/_payments_id_refunds_refund_id/get
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/get-refund/get
      */
     public function get(int $payment_id, int $refund_id, ?RequestOptions $request_options = null): PaymentRefund
     {
@@ -96,7 +96,7 @@ final class PaymentRefundClient extends MercadoPagoClient
      * @return PaymentRefundResult Collection of refund resources.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
-     * @see https://www.mercadopago.com.br/developers/en/reference/chargebacks/_payments_id_refunds/get
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/get-refunds/get
      */
     public function list(int $payment_id, ?RequestOptions $request_options = null): PaymentRefundResult
     {

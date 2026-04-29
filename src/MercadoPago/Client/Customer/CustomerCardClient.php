@@ -17,7 +17,7 @@ use MercadoPago\Serialization\Serializer;
  * Manages saved payment cards associated with a customer, enabling
  * one-click checkout experiences without re-entering card details.
  *
- * @see https://www.mercadopago.com/developers/en/reference/cards/_customers_customer_id_cards/post
+ * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/save-card/post
  */
 final class CustomerCardClient extends MercadoPagoClient
 {
@@ -40,6 +40,7 @@ final class CustomerCardClient extends MercadoPagoClient
      * @return CustomerCard The saved card resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/save-card/post
      */
     public function create(string $customer_id, array $request, ?RequestOptions $request_options = null): CustomerCard
     {
@@ -58,6 +59,7 @@ final class CustomerCardClient extends MercadoPagoClient
      * @return CustomerCard The found card resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/get-card/get
      */
     public function get(string $customer_id, string $card_id, ?RequestOptions $request_options = null): CustomerCard
     {
@@ -76,6 +78,7 @@ final class CustomerCardClient extends MercadoPagoClient
      * @return CustomerCard The updated card resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/update-card/put
      */
     public function update(string $customer_id, string $card_id, array $request, ?RequestOptions $request_options = null): CustomerCard
     {
@@ -94,6 +97,7 @@ final class CustomerCardClient extends MercadoPagoClient
      * @return CustomerCard The deleted card resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/delete-card/delete
      */
     public function delete(string $customer_id, string $card_id, ?RequestOptions $request_options = null): CustomerCard
     {
@@ -111,6 +115,7 @@ final class CustomerCardClient extends MercadoPagoClient
      * @return CustomerCardResult Collection of saved card resources.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/get-customer-cards/get
      */
     public function list(string $customer_id, ?RequestOptions $request_options = null): CustomerCardResult
     {

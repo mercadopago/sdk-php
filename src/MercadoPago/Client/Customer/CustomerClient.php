@@ -18,7 +18,7 @@ use MercadoPago\Serialization\Serializer;
  * Manages customer records used to store payer information, saved cards,
  * and addresses for streamlined checkout experiences.
  *
- * @see https://www.mercadopago.com/developers/en/reference/customers/_customers/post
+ * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/customers/create-customer/post
  */
 final class CustomerClient extends MercadoPagoClient
 {
@@ -42,6 +42,7 @@ final class CustomerClient extends MercadoPagoClient
      * @return Customer The created customer resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/customers/create-customer/post
      */
     public function create(array $request, ?RequestOptions $request_options = null): Customer
     {
@@ -61,6 +62,7 @@ final class CustomerClient extends MercadoPagoClient
      * @return Customer The created customer resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/customers/create-customer/post
      */
     public function createByEmail(string $email, ?RequestOptions $request_options = null): Customer
     {
@@ -80,6 +82,7 @@ final class CustomerClient extends MercadoPagoClient
      * @return Customer The found customer resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/customers/get-customer/get
      */
     public function get(string $id, ?RequestOptions $request_options = null): Customer
     {
@@ -98,6 +101,7 @@ final class CustomerClient extends MercadoPagoClient
      * @return Customer The updated customer resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/customers/update-customer/put
      */
     public function update(string $id, array $request, ?RequestOptions $request_options = null): Customer
     {
@@ -115,6 +119,7 @@ final class CustomerClient extends MercadoPagoClient
      * @return CustomerSearch Paginated search results containing matching customers.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/customers/search-customer/get
      */
     public function search(?MPSearchRequest $request  = null, ?RequestOptions $request_options = null): CustomerSearch
     {

@@ -16,7 +16,7 @@ use MercadoPago\Serialization\Serializer;
  * Card tokens are single-use representations of credit/debit card data used
  * to create payments without exposing raw card details to the merchant's server.
  *
- * @see https://www.mercadopago.com/developers/en/reference/card_token/_card_tokens/post
+ * @see https://www.mercadopago.com/developers/en/reference
  */
 final class CardTokenClient extends MercadoPagoClient
 {

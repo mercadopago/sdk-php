@@ -10,9 +10,9 @@ namespace MercadoPago\Resources\PaymentMethod;
  */
 class CardNumber
 {
-    /** Card number length. */
+    /** Expected card number length (e.g., 16 for Visa/Mastercard, 15 for Amex). */
     public ?int $length;
 
-    /** Card number validation. */
+    /** Validation algorithm applied to the card number (e.g., "standard" for Luhn check). */
     public ?string $validation;
 }
