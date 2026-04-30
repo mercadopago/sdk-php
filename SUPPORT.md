@@ -11,7 +11,7 @@
 | 💬 Question about how to use the SDK | [Create Question](../../issues/new/choose) |
 | 🐛 Report an error or bug | [Create Bug Report](../../issues/new/choose) |
 | ✨ Propose new feature | [Create Feature Request](../../issues/new/choose) |
-| 💳 Problem with your MP account | [Official MP Support - ES ](https://www.mercadopago.com.co/developers/en/support/center)-[Official MP Support - PT ](https://www.mercadopago.com.co/developers/pt/support/center) |
+| 💳 Problem with your MP account | [Official MP Support - ES ](https://www.mercadopago.com.co/developers/en/support/center)- [Official MP Support - PT ](https://www.mercadopago.com.co/developers/pt/support/center) |
  
 ---
 
@@ -21,7 +21,7 @@
 
 1. **[Official Documentation](https://www.mercadopago.com/developers/es/docs)** - Most questions are answered here
 2. **[Closed Issues](../../issues?q=is%3Aissue+is%3Aclosed)** - Your problem may be solved
-3. **[Open Issues](../../issues?q=is%3Aissue+is%3Aopened)** - Your problem may be already reported
+3. **[Open Issues](../../issues?q=is%3Aissue+is%3Aopen)** - Your problem may be already reported
 ---
 
 ## 💬 How to Report Issues
@@ -53,7 +53,7 @@
 
 **Steps:**
 
-1. Search in [feature requests](../../issues?q=is%3Aissue+label%3Aenhancement)
+1. Search in [feature requests](../../issues?q=is%3Aissue+label%3Afeature%20request)
 2. [Propose feature](../../issues/new/choose)
 3. **Explain:** problem it solves, use cases, benefit.
 
