@@ -13,7 +13,7 @@ body:
         Please make sure you tested with the latest version of the relevant packages and/or checked existing issues to avoid duplicates. If the bug persists, open the issue with a clear and concise description including screenshots, if applicable. We appreciate your feedback!
 
         **Before reporting a bug:**
-        - 🔍 **Search [existing issues](../../issues) to avoid duplicates**
+        - 🔍 **Search [existing issues](../../issues?q=is%3Aissue) to avoid duplicates**
         - 📚 **Verify you are using the [latest version](../../releases)**
         - 💡 **Try to reproduce the problem in sandbox environment**
         - ⚠️ **IMPORTANT: Your bug will be resolved faster if you can share a self-contained example that doesn't rely on internal or private dependencies.**

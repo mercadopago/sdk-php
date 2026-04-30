@@ -11,7 +11,7 @@ body:
         ## 💡 Thanks for contributing with ideas!
 
         Your feedback is valuable to improve the SDK. Before submitting:
-        - 🔍 **Search [existing issues](../../issues) to avoid duplicates**.
+        - 🔍 **Search [existing issues](../../issues?q=is%3Aissue) to avoid duplicates**.
         - 📚 **Check the [documentation](https://www.mercadopago.com/developers/es/docs) to confirm this isn't already supported**.
 
   - type: dropdown
