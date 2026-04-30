@@ -1,0 +1,14 @@
+.github/ISSUE_TEMPLATE/config.yml
+  h_73c5875c7a1334 1-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "57b8f3978591b4c83ff325f92576abb124b0df69",
+  "prompts": {},
+  "humans": {
+    "h_73c5875c7a1334": {
+      "author": "Daniel Alfaro"
+    }
+  }
+}
