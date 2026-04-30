@@ -13,7 +13,7 @@ body:
         Before asking your question, please:
         - 🔍 **Search [existing issues](../../issues) to see if it was already answered**
         - 📚 **Check the [official documentation](https://www.mercadopago.com/developers/es/docs)**
-        - 💡 **Review the repository examples **
+        - 💡 **Review the repository examples**
 
   - type: input
     id: sdk-version
