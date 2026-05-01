@@ -1,0 +1,14 @@
+.github/ISSUE_TEMPLATE/question.yml
+  h_73c5875c7a1334 14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "027b954fedcec81fc8dc0bc7fa63b81b6e1ae5bf",
+  "prompts": {},
+  "humans": {
+    "h_73c5875c7a1334": {
+      "author": "Daniel Alfaro"
+    }
+  }
+}
