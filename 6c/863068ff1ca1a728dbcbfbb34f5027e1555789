@@ -1,0 +1,16 @@
+.github/ISSUE_TEMPLATE/bug_report.yml
+  h_73c5875c7a1334 16
+.github/ISSUE_TEMPLATE/feature_request.yml
+  h_73c5875c7a1334 14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "6c863068ff1ca1a728dbcbfbb34f5027e1555789",
+  "prompts": {},
+  "humans": {
+    "h_73c5875c7a1334": {
+      "author": "Daniel Alfaro"
+    }
+  }
+}
