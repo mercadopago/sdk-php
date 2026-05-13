@@ -1,0 +1,26 @@
+src/MercadoPago/Exceptions/InvalidWebhookSignatureException.php
+  s_1f89798e886786::t_70a69e1ea9c05e 3-9
+src/MercadoPago/Webhook/WebhookSignatureValidator.php
+  s_1f89798e886786::t_d670f6da5bbe18 6-7
+  s_1f89798e886786::t_d131db58158bde 1-5,8-210
+src/MercadoPago/Exceptions/SignatureFailureReason.php
+  s_1f89798e886786::t_3c824940203a1e 3-7
+tests/MercadoPago/Webhook/Unit/WebhookSignatureValidatorUnitTest.php
+  s_1f89798e886786::t_80576394e37d0e 3-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "65c8087d4b605e621271a5169424824a4f9f2aa0",
+  "prompts": {},
+  "sessions": {
+    "s_1f89798e886786": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1a03db55-28c1-4343-a817-4d847f934bfd",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
