@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\User;
 
-/** Company class. */
+/**
+ * User Company resource.
+ *
+ * Represents the business/company information associated with a user account,
+ * including brand name, corporate name, tax identifiers, and payment descriptor.
+ */
 class Company
 {
     /** The brand name of the company. */

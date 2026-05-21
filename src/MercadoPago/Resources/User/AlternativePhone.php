@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\User;
 
-/** AlternativePhone class. */
+/**
+ * User Alternative Phone resource.
+ *
+ * Represents a secondary/alternative phone number associated with a user account,
+ * including area code, phone number, and optional extension.
+ */
 class AlternativePhone
 {
     /** The area code of the user's phone number. */

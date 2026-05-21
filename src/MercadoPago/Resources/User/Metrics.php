@@ -4,7 +4,18 @@ namespace MercadoPago\Resources\User;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Metrics class. */
+/**
+ * User Seller Metrics resource.
+ *
+ * Aggregates the seller's key performance metrics used for reputation scoring,
+ * including sales volume, claims rate, delayed handling time, and cancellation rate.
+ *
+ * Fields are mapped to nested DTOs:
+ * - sales -> {@see \MercadoPago\Resources\User\Sales}
+ * - claims -> {@see \MercadoPago\Resources\User\Claims}
+ * - delayed_handling_time -> {@see \MercadoPago\Resources\User\DelayedHandlingTime}
+ * - cancellations -> {@see \MercadoPago\Resources\User\Cancellations}
+ */
 class Metrics
 {
     /** Class mapper. */

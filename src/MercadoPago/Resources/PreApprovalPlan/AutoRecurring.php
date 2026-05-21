@@ -4,7 +4,15 @@ namespace MercadoPago\Resources\PreApprovalPlan;
 
 use MercadoPago\Serialization\Mapper;
 
-/** AutoRecurring class. */
+/**
+ * PreApproval Plan Auto-Recurring configuration resource.
+ *
+ * Defines the recurring billing rules for a subscription plan, including charge frequency,
+ * amount, currency, maximum repetitions, billing day, proportional billing settings,
+ * and optional free trial period.
+ *
+ * @property object|null $free_trial Free trial config, mapped to {@see \MercadoPago\Resources\PreApprovalPlan\FreeTrial}.
+ */
 class AutoRecurring
 {
     /** Class mapper. */

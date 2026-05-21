@@ -4,7 +4,15 @@ namespace MercadoPago\Resources\User;
 
 use MercadoPago\Serialization\Mapper;
 
-/** StatusList class. */
+/**
+ * User Status List resource.
+ *
+ * Represents the permission status for a specific user action (buy, sell, or list),
+ * including whether the action is allowed, any restriction codes, and immediate
+ * payment requirements.
+ *
+ * @property array|object|null $immediate_payment Immediate payment config, mapped to {@see \MercadoPago\Resources\User\StatusBuyImmediatePayment}.
+ */
 class StatusList
 {
     /** Class mapper. */

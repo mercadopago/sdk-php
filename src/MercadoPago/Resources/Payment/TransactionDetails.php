@@ -4,55 +4,63 @@ namespace MercadoPago\Resources\Payment;
 
 use MercadoPago\Serialization\Mapper;
 
-/** TransactionDetails class. */
+/**
+ * Represents the financial details of a payment transaction in the MercadoPago API.
+ *
+ * Contains amounts (net, total, installment), payment processor references,
+ * and offline payment data (barcode, digitable line). Nested within
+ * {@see \MercadoPago\Resources\Payment}.
+ */
 class TransactionDetails
 {
-    /** Class mapper. */
+    /** Maps nested objects to their corresponding DTO classes. */
     use Mapper;
 
-    /** External financial institution identifier. */
+    /** Name or code of the financial institution that processed the payment. */
     public ?string $financial_institution;
 
-    /** Amount received by the seller. */
+    /** Net amount received by the seller after all fees are deducted. */
     public ?float $net_received_amount;
 
-    /** Total amount paid by the buyer (includes fees). */
+    /** Total amount paid by the buyer, including fees and taxes. */
     public ?float $total_paid_amount;
 
-    /** Total installments amount. */
+    /** Amount of each installment when paying in installments. */
     public ?float $installment_amount;
 
-    /** Amount overpaid (only for tickets). */
+    /** Amount overpaid by the buyer (applies only to ticket/offline payment methods). */
     public ?float $overpaid_amount;
 
-    /** Identifies the resource in the payment processor. */
+    /** URL to the payment resource on the processor's system (e.g. boleto PDF). */
     public ?string $external_resource_url;
 
     /**
-     * For credit card payments is the USN. For offline payment methods, is the reference to give to
-     * the cashier or to input into the ATM.
+     * Reference ID from the payment method processor.
+     *
+     * For credit card payments this is the USN (Unique Sequence Number).
+     * For offline methods, it is the reference code to present at the cashier or ATM.
      */
     public ?string $payment_method_reference_id;
 
-    /** Acquirer Reference. */
+    /** Reference identifier assigned by the acquirer for reconciliation. */
     public ?string $acquirer_reference;
 
-    /** Payable deferral period. */
+    /** Deferral period before the payment becomes payable to the seller. */
     public ?string $payable_deferral_period;
 
-    /** Bank transfer ID. */
+    /** Identifier of the bank transfer operation. */
     public ?string $bank_transfer_id;
 
-    /** Transaction ID. */
+    /** Transaction identifier within the payment processor. */
     public ?string $transaction_id;
 
-    /** Barcode info. */
+    /** @var Barcode|array|null Barcode data for offline payment methods (e.g. boleto). */
     public array|object|null $barcode;
 
-    /** digitable_line.  */
+    /** Digitable line for boleto payments (typed barcode representation). */
     public ?string $digitable_line;
 
-    /** Verification code info. */
+    /** Verification code for the payment transaction. */
     public ?string $verification_code;
 
     private $map = [

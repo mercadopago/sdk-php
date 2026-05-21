@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\User;
 
-/** Claims class. */
+/**
+ * User Seller Claims Metric resource.
+ *
+ * Represents the seller's claims/disputes metrics for a specific period,
+ * including the claim rate and absolute value used in reputation scoring.
+ */
 class Claims
 {
     /** The claims period (e.g., "365 days"). */

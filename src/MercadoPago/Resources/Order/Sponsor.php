@@ -4,9 +4,16 @@
 
 namespace MercadoPago\Resources\Order;
 
-/** Sponsor class. */
+/**
+ * Represents a sponsor account within the order's integration data.
+ *
+ * A sponsor is a MercadoPago account that receives a portion of the fees
+ * when orders are created through a marketplace or platform integration.
+ *
+ * @see \MercadoPago\Resources\Order\IntegrationData
+ */
 class Sponsor
 {
-    /** Sponsor ID. */
+    /** MercadoPago account ID of the sponsor. */
     public ?string $id;
 }

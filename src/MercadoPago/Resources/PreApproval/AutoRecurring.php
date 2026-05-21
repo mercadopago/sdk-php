@@ -2,7 +2,13 @@
 
 namespace MercadoPago\Resources\PreApproval;
 
-/** AutoRecurring class. */
+/**
+ * PreApproval Auto-Recurring configuration resource.
+ *
+ * Defines the recurring billing schedule for a subscription, including the charge amount,
+ * currency, billing frequency (e.g. every 1 month), date range, and whether billing
+ * is proportional to the subscription start date.
+ */
 class AutoRecurring
 {
     /** Currency ID. */

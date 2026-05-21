@@ -4,7 +4,18 @@ namespace MercadoPago\Resources\PaymentMethod;
 
 use MercadoPago\Serialization\Mapper;
 
-/** PaymentMethodListResult class. */
+/**
+ * Payment Method List Result resource.
+ *
+ * Represents a single payment method entry returned when listing available payment
+ * methods for a country/site. Contains the method's type, status, amount limits,
+ * accreditation time, card settings, and associated financial institutions.
+ *
+ * @property array|object|null $settings Card validation settings, mapped to {@see \MercadoPago\Resources\PaymentMethod\Settings}.
+ * @property array|object|null $financial_institutions Associated banks, mapped to {@see \MercadoPago\Resources\PaymentMethod\FinancialInstitutions}.
+ *
+ * @see \MercadoPago\Client\PaymentMethod\PaymentMethodClient
+ */
 class PaymentMethodListResult
 {
     /** Class mapper. */

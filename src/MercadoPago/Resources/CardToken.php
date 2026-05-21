@@ -5,58 +5,65 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** Card Token class. */
+/**
+ * Represents a tokenized card in the MercadoPago API.
+ *
+ * A card token is a secure, temporary representation of card data generated
+ * by MercadoPago.js on the client side. It is used to create payments without
+ * transmitting sensitive card details through the integrator's server.
+ * Returned by {@see \MercadoPago\Client\CardToken\CardTokenClient} operations.
+ */
 class CardToken extends MPResource
 {
-    /** Class mapper. */
+    /** Maps nested objects to their corresponding DTO classes. */
     use Mapper;
 
-    /** Id of the card. */
+    /** Unique token identifier used to reference this card token in payment requests. */
     public ?string $id;
 
-    /** Last four digits of card number. */
+    /** Last four digits of the card number (for display/verification purposes). */
     public ?string $last_four_digits;
 
-    /** First six digit of card number. */
+    /** First six digits (BIN) of the card number, used to identify the issuer and card type. */
     public ?string $first_six_digits;
 
-    /** Card expiration year. */
+    /** Four-digit expiration year of the card. */
     public ?int $expiration_year;
 
-    /** Card expiration month. */
+    /** Two-digit expiration month of the card (1-12). */
     public ?int $expiration_month;
 
-    /** Creation date of card. */
+    /** ISO 8601 timestamp when the token was created. */
     public ?string $date_created;
 
-    /** Last update of data from the card. */
+    /** ISO 8601 timestamp of the last update to the token. */
     public ?string $date_last_updated;
 
-    /** Card's owner data. */
+    /** @var \MercadoPago\Resources\Payment\Cardholder|array|null Cardholder name and identification data. */
     public array|object|null $cardholder;
 
-    /** Card ID. */
+    /** Saved card identifier if the token was generated from a stored card. */
     public ?int $card_id;
 
-    /** Current status of card. E.g. active. */
+    /** Current status of the token (e.g. "active"). */
     public ?string $status;
 
-    /** Date token expires. */
+    /** ISO 8601 timestamp when the token expires and can no longer be used. */
     public ?string $date_due;
 
-    /** Flag indicating if Luhn validation is used. */
+    /** Whether the card number passed Luhn algorithm validation. */
     public ?bool $luhn_validation;
 
-    /** Flag indicating if this is a production card token. */
+    /** Whether this token was created in production (true) or sandbox (false). */
     public ?bool $live_mode;
 
-    /** Require esc. */
+    /** Whether the token requires ESC (E2E Security Code) for processing. */
     public ?bool $require_esc;
 
-    /** Security code of the card. */
+    /** Total number of digits in the card number. */
     public ?int $card_number_length;
 
-    /** Security code of the card. */
+    /** Number of digits in the card's security code (CVV/CVC). */
     public ?int $security_code_length;
 
 

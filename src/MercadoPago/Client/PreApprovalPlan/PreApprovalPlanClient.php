@@ -12,7 +12,12 @@ use MercadoPago\Resources\PreApprovalPlan;
 use MercadoPago\Resources\PreApprovalPlanSearch;
 use MercadoPago\Serialization\Serializer;
 
-/** Client responsible for performing subscription plan. */
+/**
+ * Client for the Subscription Plans API (`/preapproval_plan`).
+ *
+ * Manages reusable subscription plan templates that define billing frequency,
+ * amount, and trial periods. Subscribers are linked to plans via the PreApproval API.
+ */
 final class PreApprovalPlanClient extends MercadoPagoClient
 {
     private const URL = "/preapproval_plan";
@@ -21,19 +26,20 @@ final class PreApprovalPlanClient extends MercadoPagoClient
 
     private const URL_SEARCH = "/preapproval_plan/search";
 
-    /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
+    /** @param MPHttpClient|null $MPHttpClient Custom HTTP client. Defaults to the SDK global client. */
     public function __construct(?MPHttpClient $MPHttpClient = null)
     {
         parent::__construct($MPHttpClient ?: MercadoPagoConfig::getHttpClient());
     }
 
     /**
-     * Method responsible for creating a subscription plan.
-     * @param array $request subscription plan data.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\PreApprovalPlan subscription plan created.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Creates a new subscription plan.
+     *
+     * @param array<string,mixed> $request Plan data (reason, auto_recurring, back_url, etc.).
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return PreApprovalPlan The created plan resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function create(array $request, ?RequestOptions $request_options = null): PreApprovalPlan
     {
@@ -44,12 +50,13 @@ final class PreApprovalPlanClient extends MercadoPagoClient
     }
 
     /**
-     * Method responsible for getting pre approval plan.
-     * @param string $id pre approval plan ID.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\PreApprovalPlan pre approval plan found.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Retrieves a subscription plan by its ID.
+     *
+     * @param string $id Plan ID.
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return PreApprovalPlan The found plan resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function get(string $id, ?RequestOptions $request_options = null): PreApprovalPlan
     {
@@ -60,13 +67,14 @@ final class PreApprovalPlanClient extends MercadoPagoClient
     }
 
     /**
-     * Method responsible for update pre approval plan.
-     * @param string $id pre approval plan ID.
-     * @param array $request pre approval plan data.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\PreApprovalPlan pre approval plan canceled.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Updates an existing subscription plan.
+     *
+     * @param string $id Plan ID.
+     * @param array<string,mixed> $request Fields to update.
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return PreApprovalPlan The updated plan resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function update(string $id, array $request, ?RequestOptions $request_options = null): PreApprovalPlan
     {
@@ -77,12 +85,13 @@ final class PreApprovalPlanClient extends MercadoPagoClient
     }
 
     /**
-     *  Method responsible for search pre approval plan.
-     * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\PreApprovalPlanSearch search results.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Searches subscription plans with pagination and filters.
+     *
+     * @param MPSearchRequest $request Search criteria (limit, offset, filters).
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return PreApprovalPlanSearch Paginated search results.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): PreApprovalPlanSearch
     {

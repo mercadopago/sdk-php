@@ -11,27 +11,36 @@ use MercadoPago\Resources\CustomerCard;
 use MercadoPago\Resources\CustomerCardResult;
 use MercadoPago\Serialization\Serializer;
 
-/** Client responsible for performing customer card actions. */
+/**
+ * Client for the Customer Cards API (`/v1/customers/{id}/cards`).
+ *
+ * Manages saved payment cards associated with a customer, enabling
+ * one-click checkout experiences without re-entering card details.
+ *
+ * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/save-card/post
+ */
 final class CustomerCardClient extends MercadoPagoClient
 {
     private const URL_CUSTOMER_ID = "/v1/customers/%s/cards";
 
     private const URL_CUSTOMER_ID_AND_CARD_ID = "/v1/customers/%s/cards/%s";
 
-    /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
+    /** @param MPHttpClient|null $MPHttpClient Custom HTTP client. Defaults to the SDK global client. */
     public function __construct(?MPHttpClient $MPHttpClient = null)
     {
         parent::__construct($MPHttpClient ?: MercadoPagoConfig::getHttpClient());
     }
 
     /**
-     * Method responsible for save Customer Card.
-     * @param string $customer_id customer ID.
-     * @param array $request customer card data.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\CustomerCard save.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Saves a new card for a customer using a card token.
+     *
+     * @param string $customer_id Customer ID.
+     * @param array<string,mixed> $request Card data (token is required).
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return CustomerCard The saved card resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/save-card/post
      */
     public function create(string $customer_id, array $request, ?RequestOptions $request_options = null): CustomerCard
     {
@@ -42,13 +51,15 @@ final class CustomerCardClient extends MercadoPagoClient
     }
 
     /**
-     * Method responsible for getting Customer Card.
-     * @param string $customer_id customer ID.
-     * @param string $card_id customer card ID.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\CustomerCard found.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Retrieves a specific saved card for a customer.
+     *
+     * @param string $customer_id Customer ID.
+     * @param string $card_id Card ID.
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return CustomerCard The found card resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/get-card/get
      */
     public function get(string $customer_id, string $card_id, ?RequestOptions $request_options = null): CustomerCard
     {
@@ -58,14 +69,16 @@ final class CustomerCardClient extends MercadoPagoClient
         return $result;
     }
     /**
-     * Method responsible for update Customer Card.
-     * @param string $customer_id customer ID.
-     * @param string $card_id card ID.
-     * @param array $request customer card data.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\CustomerCard update.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Updates a saved card's data (e.g., expiration date).
+     *
+     * @param string $customer_id Customer ID.
+     * @param string $card_id Card ID.
+     * @param array<string,mixed> $request Fields to update.
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return CustomerCard The updated card resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/update-card/put
      */
     public function update(string $customer_id, string $card_id, array $request, ?RequestOptions $request_options = null): CustomerCard
     {
@@ -76,13 +89,15 @@ final class CustomerCardClient extends MercadoPagoClient
     }
 
     /**
-     * Method responsible for Customer Card deletion.
-     * @param string $customer_id customer ID.
-     * @param string $card_id card ID.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\CustomerCard found.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Deletes a saved card from a customer's account.
+     *
+     * @param string $customer_id Customer ID.
+     * @param string $card_id Card ID to delete.
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return CustomerCard The deleted card resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/delete-card/delete
      */
     public function delete(string $customer_id, string $card_id, ?RequestOptions $request_options = null): CustomerCard
     {
@@ -93,12 +108,14 @@ final class CustomerCardClient extends MercadoPagoClient
     }
 
     /**
-     * Method responsible for getting list Customer Card.
-     * @param string $customer_id customer ID.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\CustomerCardResult found.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Lists all saved cards for a customer.
+     *
+     * @param string $customer_id Customer ID.
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return CustomerCardResult Collection of saved card resources.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api/cards/get-customer-cards/get
      */
     public function list(string $customer_id, ?RequestOptions $request_options = null): CustomerCardResult
     {

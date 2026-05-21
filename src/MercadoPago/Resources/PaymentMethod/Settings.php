@@ -4,7 +4,17 @@ namespace MercadoPago\Resources\PaymentMethod;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Settings class. */
+/**
+ * Payment Method Settings resource.
+ *
+ * Groups the card validation settings for a payment method, including BIN patterns,
+ * card number length/validation rules, and security code requirements.
+ *
+ * Fields are mapped to nested DTOs:
+ * - bin -> {@see \MercadoPago\Resources\PaymentMethod\Bin}
+ * - card_number -> {@see \MercadoPago\Resources\PaymentMethod\CardNumber}
+ * - security_code -> {@see \MercadoPago\Resources\PaymentMethod\SecurityCode}
+ */
 class Settings
 {
     /** Class mapper. */

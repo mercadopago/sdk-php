@@ -5,7 +5,17 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** Invoice class. */
+/**
+ * Invoice resource.
+ *
+ * Represents an invoice generated for a subscription (pre-approval) billing cycle in MercadoPago.
+ * Each invoice corresponds to a scheduled charge attempt against the subscriber's payment method,
+ * tracking its amount, status, retry attempts, and the resulting payment.
+ *
+ * @property array|object|null $payment Payment details for this invoice, mapped to {@see \MercadoPago\Resources\Invoice\Payment}.
+ *
+ * @see \MercadoPago\Client\Invoice\InvoiceClient
+ */
 class Invoice extends MPResource
 {
     /** Class mapper. */

@@ -6,13 +6,20 @@ namespace MercadoPago\Resources\Order;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Discounts class. */
+/**
+ * Represents discount rules applied to a MercadoPago order.
+ *
+ * Discounts are organized by payment method, allowing different discount
+ * amounts depending on how the buyer pays.
+ *
+ * @see \MercadoPago\Resources\Order
+ */
 class Discounts
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Payment methods. */
+    /** Discount definitions per payment method type. Each element maps to {@see PaymentMethodDiscount}. */
     public ?array $payment_methods;
 
     private $map = [

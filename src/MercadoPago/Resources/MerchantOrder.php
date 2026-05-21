@@ -5,6 +5,24 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
+/**
+ * Merchant Order resource.
+ *
+ * Represents a merchant order in the MercadoPago platform, which groups one or more payments
+ * associated with a checkout preference. A merchant order tracks the lifecycle of a purchase
+ * including its items, payments, shipments, and overall fulfillment status.
+ *
+ * @property int|null $id Order ID.
+ * @property string|null $preference_id Payment preference identifier associated to the merchant order.
+ * @property string|null $status Current merchant order state (e.g. "opened", "closed").
+ * @property array|object|null $payer Buyer information, mapped to {@see \MercadoPago\Resources\MerchantOrder\Payer}.
+ * @property array|object|null $collector Seller information, mapped to {@see \MercadoPago\Resources\MerchantOrder\Collector}.
+ * @property array|null $payments Payments associated with this order, mapped to {@see \MercadoPago\Resources\MerchantOrder\Payment}.
+ * @property array|null $items Items included in this order, mapped to {@see \MercadoPago\Resources\MerchantOrder\Item}.
+ * @property array|null $shipments Shipments for this order, mapped to {@see \MercadoPago\Resources\MerchantOrder\Shipment}.
+ *
+ * @see \MercadoPago\Client\MerchantOrder\MerchantOrderClient
+ */
 class MerchantOrder extends MPResource
 {
     /** Class mapper. */

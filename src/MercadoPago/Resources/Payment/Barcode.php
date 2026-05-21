@@ -2,9 +2,14 @@
 
 namespace MercadoPago\Resources\Payment;
 
-/** Barcode class. */
+/**
+ * Represents barcode data for offline payment methods (e.g. boleto) in the MercadoPago API.
+ *
+ * Nested within {@see TransactionDetails} to provide the scannable barcode
+ * content for ticket-based payment methods.
+ */
 class Barcode
 {
-    /** Content info. */
+    /** Raw barcode content string that can be rendered as a scannable barcode. */
     public ?string $content;
 }

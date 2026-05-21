@@ -6,16 +6,26 @@ use Exception;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 
-/** Mercado Pago default Http Client class. */
+/**
+ * Default cURL-based HTTP client for the MercadoPago SDK.
+ *
+ * Implements automatic retry with exponential backoff for server errors (5xx)
+ * and transport failures. Retry count and delay are configured via
+ * {@see \MercadoPago\MercadoPagoConfig::setMaxRetries()} and
+ * {@see \MercadoPago\MercadoPagoConfig::setRetryDelay()}.
+ *
+ * SSL verification is disabled when the runtime environment is set to
+ * {@see \MercadoPago\MercadoPagoConfig::LOCAL} — never use LOCAL in production.
+ */
 class MPDefaultHttpClient implements MPHttpClient
 {
+    /** Microseconds per millisecond, used to convert retry delay to usleep units. */
     private const ONE_MILLISECOND = 1000;
 
     private HttpRequest $httpRequest;
 
     /**
-     * Default constructor.
-     * @param \MercadoPago\Net\HttpRequest|null $httpRequest http request to be used.
+     * @param HttpRequest|null $httpRequest Custom transport implementation. Defaults to {@see CurlRequest}.
      */
     public function __construct(?HttpRequest $httpRequest = null)
     {
@@ -23,11 +33,15 @@ class MPDefaultHttpClient implements MPHttpClient
     }
 
     /**
-     * Send Mercado Pago request
-     * @param \MercadoPago\Net\MPRequest $request request to be sent.
-     * @throws \Exception if the request fails.
-     * @throws \MercadoPago\Exceptions\MPApiException if api call returns error.
-     * @return \MercadoPago\Net\MPResponse response from the request.
+     * Sends the request with automatic retry on server errors and transport failures.
+     *
+     * Retries use exponential backoff: delay = 2^attempt × base_delay.
+     * Client errors (4xx) are thrown immediately without retrying.
+     *
+     * @param MPRequest $request The fully-built API request.
+     * @return MPResponse Parsed response on success (2xx).
+     * @throws MPApiException When the API returns a non-2xx status code after exhausting retries.
+     * @throws \Exception On transport-level errors (e.g., DNS failure, timeout) after exhausting retries.
      */
     public function send(MPRequest $request): MPResponse
     {

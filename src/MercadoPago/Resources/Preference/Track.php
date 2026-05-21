@@ -4,7 +4,15 @@ namespace MercadoPago\Resources\Preference;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Track class. */
+/**
+ * Preference Track resource.
+ *
+ * Represents a tracking pixel or conversion tag configuration for a checkout preference.
+ * Supports Google Ads ("google_ad") and Facebook Pixel ("facebook_ad") tracking types,
+ * enabling conversion measurement when buyers complete the checkout flow.
+ *
+ * @property array|object|null $values Track configuration values, mapped to {@see \MercadoPago\Resources\Preference\TrackValues}.
+ */
 class Track
 {
     /** Class mapper. */

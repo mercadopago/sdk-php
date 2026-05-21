@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\User;
 
-/** Cancellations class. */
+/**
+ * User Seller Cancellations Metric resource.
+ *
+ * Represents the seller's order cancellation metrics for a specific period,
+ * including the cancellation rate and absolute value used in reputation scoring.
+ */
 class Cancellations
 {
     /** The cancellations period (e.g., "365 days"). */

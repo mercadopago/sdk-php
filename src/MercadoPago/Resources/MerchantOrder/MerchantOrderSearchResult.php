@@ -4,7 +4,15 @@ namespace MercadoPago\Resources\MerchantOrder;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Merchant Order Search Result class. */
+/**
+ * Merchant Order Search Result resource.
+ *
+ * Represents a single merchant order entry within a search result set. Contains the same
+ * fields as the main {@see \MercadoPago\Resources\MerchantOrder} resource, allowing
+ * iteration over search results with full order detail.
+ *
+ * @see \MercadoPago\Resources\MerchantOrderSearch
+ */
 class MerchantOrderSearchResult
 {
     /** Class mapper. */

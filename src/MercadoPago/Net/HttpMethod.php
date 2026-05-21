@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Net;
 
-/** Mercado Pago SDK HttpMethod class. */
+/**
+ * Supported HTTP methods for MercadoPago API requests.
+ *
+ * Used by {@see MPRequest} and {@see \MercadoPago\Client\MercadoPagoClient}
+ * to specify the verb for each API call.
+ */
 class HttpMethod
 {
     public const GET = "GET";

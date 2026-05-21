@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\User;
 
-/** BuyerReputationNotYetRated class. */
+/**
+ * User Buyer Reputation Not Yet Rated Transactions resource.
+ *
+ * Tracks transactions that the buyer has completed but has not yet
+ * provided a rating for, broken down by paid count, total count, and units.
+ */
 class BuyerReputationNotYetRated
 {
     /** The number of paid transactions not yet rated. */

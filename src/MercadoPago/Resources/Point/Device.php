@@ -2,7 +2,13 @@
 
 namespace MercadoPago\Resources\Point;
 
-/** Device class. */
+/**
+ * Point Device resource.
+ *
+ * Represents a MercadoPago Point smart terminal device. Each device is identified
+ * by its unique ID and can be associated with a point-of-sale (POS) and store.
+ * The operating mode determines how the device processes payment intents.
+ */
 class Device
 {
     /** Device ID. */

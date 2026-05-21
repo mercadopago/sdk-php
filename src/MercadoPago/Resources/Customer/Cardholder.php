@@ -4,24 +4,33 @@ namespace MercadoPago\Resources\Customer;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Cardholder class */
+/**
+ * Represents the holder of a payment card.
+ *
+ * Contains the cardholder's name as printed on the card and their personal
+ * identification document, used for fraud prevention and payment validation.
+ */
 class Cardholder
 {
-    /** Class mapper. */
     use Mapper;
 
-    /** Name of cardholder. */
+    /** Full name of the cardholder as printed on the card. */
     public ?string $name;
 
-    /** Identification of cardholder. */
+    /** Cardholder's personal identification document (e.g., CPF, DNI). */
     public array|object|null $identification;
 
+    /**
+     * Maps nested JSON properties to their corresponding DTO classes.
+     *
+     * @var array<string, class-string>
+     */
     private $map = [
         "identification" => "MercadoPago\Resources\Common\Identification",
     ];
 
     /**
-     * Method responsible for getting map of entities.
+     * Returns the property-to-class mapping for nested object deserialization.
      */
     public function getMap(): array
     {

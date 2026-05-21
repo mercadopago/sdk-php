@@ -2,15 +2,20 @@
 
 namespace MercadoPago\Resources\PaymentMethod;
 
-/** SecurityCode class. */
+/**
+ * Payment Method Security Code settings resource.
+ *
+ * Defines the security code (CVV/CVC) requirements for a payment method,
+ * including its length, input mode, and physical location on the card.
+ */
 class SecurityCode
 {
     /** Security code mode. */
     public ?string $mode;
 
-    /** Security code length. */
+    /** Expected security code length (e.g., 3 for CVV, 4 for Amex CID). */
     public ?int $length;
 
-    /** Security code card location. */
+    /** Physical location on the card ("back" for most cards, "front" for Amex). */
     public ?string $card_location;
 }

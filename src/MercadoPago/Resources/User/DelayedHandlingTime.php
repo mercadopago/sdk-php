@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\User;
 
-/** DelayedHandlingTime class. */
+/**
+ * User Seller Delayed Handling Time Metric resource.
+ *
+ * Represents the seller's delayed handling time metrics for a specific period,
+ * measuring how often the seller takes longer than expected to ship orders.
+ */
 class DelayedHandlingTime
 {
     /** The delayed handling time period (e.g., "365 days"). */

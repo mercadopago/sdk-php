@@ -4,21 +4,27 @@ namespace MercadoPago\Resources\Payment;
 
 use MercadoPago\Resources\Common\Address;
 
-/** ReceiverAddress class. */
+/**
+ * Represents the shipping destination address for a payment in the MercadoPago API.
+ *
+ * Extends the base {@see \MercadoPago\Resources\Common\Address} with additional
+ * fields specific to shipment delivery (apartment, floor, city name).
+ * Nested within {@see Shipments}.
+ */
 class ReceiverAddress extends Address
 {
-    /** Street name. */
+    /** Name of the street at the delivery address. */
     public ?string $street_name;
 
-    /** State name. */
+    /** Name of the state/province at the delivery address. */
     public ?string $state_name;
 
-    /** Apartment. */
+    /** Apartment or unit number at the delivery address. */
     public ?string $apartment;
 
-    /** City. */
+    /** City name at the delivery address. */
     public ?string $city_name;
 
-    /** Floor. */
+    /** Floor number within the building at the delivery address. */
     public ?string $floor;
 }
