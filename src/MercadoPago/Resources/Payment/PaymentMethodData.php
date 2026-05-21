@@ -4,22 +4,27 @@ namespace MercadoPago\Resources\Payment;
 
 use MercadoPago\Serialization\Mapper;
 
-/** PaymentMethod class. */
+/**
+ * Represents method-specific data within a payment method in the MercadoPago API.
+ *
+ * Contains references and business rules (discounts, fines, interest) that
+ * apply to the selected payment method. Nested within {@see PaymentMethod}.
+ */
 class PaymentMethodData
 {
-    /** Class mapper. */
+    /** Maps nested objects to their corresponding DTO classes. */
     use Mapper;
 
-    /** Payment rules. */
+    /** @var PaymentMethodRules|array|null Business rules applied to the payment method (discounts, fine, interest). */
     public array|object|null $rules;
 
-    /** Reference ID. */
+    /** Internal reference identifier for the payment method transaction. */
     public ?string $reference_id;
 
-    /** External reference ID. */
+    /** External reference identifier for cross-system reconciliation. */
     public ?string $external_reference_id;
 
-    /** External Resource URL. */
+    /** URL to an external resource related to the payment (e.g. boleto PDF, ticket page). */
     public ?string $external_resource_url;
 
     private $map = [

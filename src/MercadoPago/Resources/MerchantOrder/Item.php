@@ -2,6 +2,12 @@
 
 namespace MercadoPago\Resources\MerchantOrder;
 
+/**
+ * Merchant Order Item resource.
+ *
+ * Represents a product or service line item within a merchant order. Each item
+ * includes its title, description, quantity, unit price, and currency information.
+ */
 class Item
 {
     /** Item code. */

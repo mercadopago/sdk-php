@@ -10,23 +10,30 @@ use MercadoPago\Net\MPHttpClient;
 use MercadoPago\Resources\IdentificationTypeResult;
 use MercadoPago\Serialization\Serializer;
 
-/** Client responsible for performing identification type actions. */
+/**
+ * Client for the Identification Types API (`/v1/identification_types`).
+ *
+ * Lists the available identification document types (e.g., CPF, CNPJ, DNI)
+ * for the country associated with the access token. Used to validate
+ * payer identification during payment creation.
+ */
 final class IdentificationTypeClient extends MercadoPagoClient
 {
     private const URL = "/v1/identification_types";
 
-    /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
+    /** @param MPHttpClient|null $MPHttpClient Custom HTTP client. Defaults to the SDK global client. */
     public function __construct(?MPHttpClient $MPHttpClient = null)
     {
         parent::__construct($MPHttpClient ?: MercadoPagoConfig::getHttpClient());
     }
 
     /**
-     * Method responsible for list identification types.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\IdentificationTypeResult identification type found.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Lists all available identification types for the current country.
+     *
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return IdentificationTypeResult Collection of identification type resources.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function list(?RequestOptions $request_options = null): IdentificationTypeResult
     {

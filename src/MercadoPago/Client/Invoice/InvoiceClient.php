@@ -12,26 +12,32 @@ use MercadoPago\Resources\Invoice;
 use MercadoPago\Resources\InvoiceSearch;
 use MercadoPago\Serialization\Serializer;
 
-/** Client responsible for performing invoice actions. */
+/**
+ * Client for the Authorized Payments (Invoice) API (`/authorized_payments`).
+ *
+ * Manages invoices generated from subscription (pre-approval) charges.
+ * Each invoice represents a scheduled payment within an active subscription.
+ */
 final class InvoiceClient extends MercadoPagoClient
 {
     private const URL_WITH_ID = "/authorized_payments/%s";
 
     private const URL_SEARCH = "/authorized_payments/search";
 
-    /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
+    /** @param MPHttpClient|null $MPHttpClient Custom HTTP client. Defaults to the SDK global client. */
     public function __construct(?MPHttpClient $MPHttpClient = null)
     {
         parent::__construct($MPHttpClient ?: MercadoPagoConfig::getHttpClient());
     }
 
     /**
-     * Method responsible for getting an invoice.
-     * @param int $id invoice ID.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\Invoice invoice found.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Retrieves an invoice (authorized payment) by its ID.
+     *
+     * @param int $id Invoice ID.
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return Invoice The found invoice resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function get(int $id, ?RequestOptions $request_options = null): Invoice
     {
@@ -42,12 +48,13 @@ final class InvoiceClient extends MercadoPagoClient
     }
 
     /**
-     * Method responsible for search invoices.
-     * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\InvoiceSearch search results.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Searches invoices with pagination and filters.
+     *
+     * @param MPSearchRequest $request Search criteria (limit, offset, filters like status, preapproval_id).
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return InvoiceSearch Paginated search results containing matching invoices.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): InvoiceSearch
     {

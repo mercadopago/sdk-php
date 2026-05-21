@@ -4,7 +4,17 @@ namespace MercadoPago\Resources\User;
 
 use MercadoPago\Serialization\Mapper;
 
-/** BuyerReputationTransactions class. */
+/**
+ * User Buyer Reputation Transactions resource.
+ *
+ * Provides a breakdown of a buyer's transaction history for a given period,
+ * including cancelled, completed, not-yet-rated, and unrated transaction counts.
+ *
+ * Fields are mapped to nested DTOs:
+ * - canceled -> {@see \MercadoPago\Resources\User\BuyerReputationCancelled}
+ * - not_yet_rated -> {@see \MercadoPago\Resources\User\BuyerReputationNotYetRated}
+ * - unrated -> {@see \MercadoPago\Resources\User\BuyerReputationUnrated}
+ */
 class BuyerReputationTransactions
 {
     /** Class mapper. */

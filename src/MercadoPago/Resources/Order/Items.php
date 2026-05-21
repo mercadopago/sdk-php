@@ -6,49 +6,57 @@ namespace MercadoPago\Resources\Order;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Items class. */
+/**
+ * Represents a line item within a MercadoPago order.
+ *
+ * Each item describes a product or service being purchased, including
+ * its price, quantity, and categorization. The sum of all item amounts
+ * should match the order's total amount.
+ *
+ * @see \MercadoPago\Resources\Order
+ */
 class Items
 {
     /** Class mapper. */
     use Mapper;
 
-    /** ID. */
+    /** Unique identifier of the item within the order. */
     public ?string $id;
 
-    /** Title. */
+    /** Display name of the product or service. */
     public ?string $title;
 
-    /** Unit price. */
+    /** Price per unit in the order's currency. */
     public ?string $unit_price;
 
-    /** Quantity. */
+    /** Number of units of this item being purchased. */
     public ?int $quantity;
 
-    /** Unit measure. */
+    /** Unit of measure for the item (e.g., "unit", "kg"). */
     public ?string $unit_measure;
 
-    /** External code. */
+    /** Seller-defined code to identify the item in an external system (e.g., SKU). */
     public ?string $external_code;
 
-    /** External categories. */
+    /** External category classifications for the item. Each element maps to {@see ExternalCategory}. */
     public ?array $external_categories;
 
-    /** Category ID. */
+    /** MercadoPago category identifier used for fraud analysis and processing rules. */
     public ?string $category_id;
 
-    /** Description. */
+    /** Detailed description of the product or service. */
     public ?string $description;
 
-    /** Picture URL. */
+    /** URL of the item's product image. */
     public ?string $picture_url;
 
-    /** Type. */
+    /** Item type classification (e.g., "physical", "digital", "service"). */
     public ?string $type;
 
-    /** Warranty. */
+    /** Whether the item includes a warranty. */
     public ?bool $warranty;
 
-    /** Event Date */
+    /** ISO 8601 date of the event associated with the item (e.g., for ticket sales). */
     public ?string $event_date;
 
     private $map = [

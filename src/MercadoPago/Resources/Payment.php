@@ -5,226 +5,232 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** Payment class. */
+/**
+ * Represents a payment processed through the MercadoPago Payments API.
+ *
+ * Contains all payment details including amount, status, payment method,
+ * payer information, and transaction metadata. Returned by
+ * {@see \MercadoPago\Client\Payment\PaymentClient} operations (create, get, update, cancel, capture).
+ */
 class Payment extends MPResource
 {
-    /** Class mapper. */
+    /** Maps nested objects to their corresponding DTO classes. */
     use Mapper;
 
-    /** Payment ID. */
+    /** Unique payment identifier assigned by MercadoPago. */
     public ?int $id;
 
-    /** Acquirer reconciliation. */
+    /** Acquirer reconciliation data for matching with bank/acquirer records. */
     public ?array $acquirer_reconciliation;
 
-    /** Site ID. */
+    /** MercadoPago site/country identifier (e.g. "MLA", "MLB", "MLM"). */
     public ?string $site_id;
 
-    /** Sponsor ID. */
+    /** Identifier of the sponsor in a marketplace or platform integration. */
     public ?int $sponsor_id;
 
-    /** Operation type. */
+    /** Type of operation (e.g. "regular_payment", "money_transfer"). */
     public ?string $operation_type;
 
-    /** Order. */
+    /** @var \MercadoPago\Resources\Payment\Order|array|null Associated order reference. */
     public array|object|null $order;
 
-    /** Brand ID. */
+    /** Brand identifier for white-label integrations. */
     public ?string $brand_id;
 
-    /** Build version. */
+    /** SDK or API build version used to create the payment. */
     public ?string $build_version;
 
-    /** Binary mode. */
+    /** When true, the payment can only result in "approved" or "rejected" (no "in_process"). */
     public ?bool $binary_mode;
 
-    /** External reference. */
+    /** External reference ID set by the integrator for reconciliation. */
     public ?string $external_reference;
 
-    /** Financing group. */
+    /** Financing group identifier for grouped installment plans. */
     public ?string $financing_group;
 
-    /** Status. */
+    /** Current payment status (e.g. "approved", "rejected", "pending", "in_process"). */
     public ?string $status;
 
-    /** Status detail. */
+    /** Detailed reason for the current status (e.g. "accredited", "cc_rejected_other_reason"). */
     public ?string $status_detail;
 
-    /** Store ID. */
+    /** Identifier of the physical store where the payment originated. */
     public ?string $store_id;
 
-    /** Taxes amount. */
+    /** Total tax amount included in the payment. */
     public ?int $taxes_amount;
 
-    /** Date created. */
+    /** ISO 8601 timestamp when the payment was created. */
     public ?string $date_created;
 
-    /** Live Mode. */
+    /** Whether the payment was created in production (true) or sandbox (false). */
     public ?bool $live_mode;
 
-    /** Last modified date. */
+    /** ISO 8601 timestamp of the last update to the payment. */
     public ?string $date_last_updated;
 
-    /** Date of expiration. */
+    /** ISO 8601 timestamp when the payment expires (for pending payments). */
     public ?string $date_of_expiration;
 
-    /** Deduction schema. */
+    /** Schema that defines how deductions are applied. */
     public ?string $deduction_schema;
 
-    /** Approval date. */
+    /** ISO 8601 timestamp when the payment was approved. */
     public ?string $date_approved;
 
-    /** Money release date. */
+    /** ISO 8601 date when the funds will be released to the seller. */
     public ?string $money_release_date;
 
-    /** Money release schema. */
+    /** Schema that defines the money release schedule. */
     public ?string $money_release_schema;
 
-    /** Money release status. */
+    /** Current status of the money release process. */
     public ?string $money_release_status;
 
-    /** Currency ID. */
+    /** ISO 4217 currency code (e.g. "ARS", "BRL", "MXN"). */
     public ?string $currency_id;
 
-    /** Transaction amount. */
+    /** Total amount charged to the payer. */
     public ?float $transaction_amount;
 
-    /** Transaction amount refunded. */
+    /** Cumulative amount that has been refunded for this payment. */
     public ?float $transaction_amount_refunded;
 
-    /** Payer. */
+    /** @var \MercadoPago\Resources\Payment\Payer|array|null Payer information (buyer). */
     public array|object|null $payer;
 
-    /** ForwardData. */
+    /** @var \MercadoPago\Resources\Payment\ForwardData|array|null Data forwarded to acquirers (sub-merchant, network transaction). */
     public array|object|null $forward_data;
 
-    /** Collector ID. */
+    /** MercadoPago user ID of the payment collector (seller). */
     public ?int $collector_id;
 
-    /** Counter currency. */
+    /** Counter-currency identifier for cross-border payments. */
     public ?string $counter_currency;
 
-    /** Payment method ID. */
+    /** Identifier of the payment method used (e.g. "visa", "pix", "bolbradesco"). */
     public ?string $payment_method_id;
 
-    /** Payment method. */
+    /** @var \MercadoPago\Resources\Payment\PaymentMethod|array|null Detailed payment method information. */
     public array|object|null $payment_method;
 
-    /** Payment type ID. */
+    /** Payment method type (e.g. "credit_card", "debit_card", "ticket", "bank_transfer"). */
     public ?string $payment_type_id;
 
-    /** Pos ID. */
+    /** Identifier of the Point of Sale device, if applicable. */
     public ?string $pos_id;
 
-    /** Transaction details. */
+    /** @var \MercadoPago\Resources\Payment\TransactionDetails|array|null Financial details of the transaction. */
     public array|object|null $transaction_details;
 
-    /** Fee details. */
+    /** @var FeeDetails[] List of fees applied to the payment. */
     public ?array $fee_details;
 
-    /** Differential pricing ID. */
+    /** Identifier of the differential pricing plan applied. */
     public ?string $differential_pricing_id;
 
-    /** Application fee. */
+    /** Fee charged by the marketplace to the seller on this payment. */
     public ?float $application_fee;
 
-    /** Authorization code. */
+    /** Authorization code returned by the card issuer. */
     public ?string $authorization_code;
 
-    /** Captured. */
+    /** Whether the payment amount has been captured (relevant for two-step payments). */
     public ?bool $captured;
 
-    /** Card. */
+    /** @var \MercadoPago\Resources\Payment\Card|array|null Card details used in the payment. */
     public array|object|null $card;
 
-    /** Call for authorize ID. */
+    /** Identifier for call-for-authorize flows when the issuer requires phone confirmation. */
     public ?string $call_for_authorize_id;
 
-    /** Statement descriptor. */
+    /** Text that appears on the payer's card statement. */
     public ?string $statement_descriptor;
 
-    /** Shipping amount. */
+    /** Shipping cost amount included in the payment. */
     public ?float $shipping_amount;
 
-    /** Additional info. */
+    /** @var \MercadoPago\Resources\Payment\AdditionalInfo|array|null Additional information about items, payer, and shipment. */
     public array|object|null $additional_info;
 
-    /** Coupon amount. */
+    /** Discount coupon amount applied to the payment. */
     public ?float $coupon_amount;
 
-    /** Installments. */
+    /** Number of installments chosen by the payer. */
     public ?int $installments;
 
-    /** Token. */
+    /** Card token generated by MercadoPago.js for secure card data handling. */
     public ?string $token;
 
-    /** Description. */
+    /** Short description of the payment purpose shown to the payer. */
     public ?string $description;
 
-    /** Notification url. */
+    /** URL where MercadoPago sends webhook notifications for status changes. */
     public ?string $notification_url;
 
-    /** Issuer ID. */
+    /** Identifier of the card issuer. */
     public ?string $issuer_id;
 
-    /** Processing mode. */
+    /** Processing mode for the payment (e.g. "aggregator", "gateway"). */
     public ?string $processing_mode;
 
-    /** Merchant account ID. */
+    /** Merchant account identifier for gateway mode processing. */
     public ?string $merchant_account_id;
 
-    /** Merchant number. */
+    /** Merchant number assigned by the acquirer. */
     public ?string $merchant_number;
 
-    /** Metadata. */
+    /** @var \MercadoPago\Resources\Payment\Metadata|array|null Custom key-value metadata attached to the payment. */
     public array|object|null $metadata;
 
-    /** Callback url. */
+    /** URL to redirect the payer after a payment attempt. */
     public ?string $callback_url;
 
-    /** Coupon code. */
+    /** Coupon code applied by the payer at checkout. */
     public ?string $coupon_code;
 
-    /** Release Info. */
+    /** Information about the money release process. */
     public ?string $release_info;
 
-    /** Marketplace owner. */
+    /** Marketplace owner identifier. */
     public ?string $marketplace_owner;
 
-    /** Integrator ID. */
+    /** Integrator identifier for tracking third-party platform integrations. */
     public ?string $integrator_id;
 
-    /** Corporation ID. */
+    /** Corporation identifier for enterprise-level tracking. */
     public ?string $corporation_id;
 
-    /** Platform ID. */
+    /** Platform identifier for multi-platform tracking. */
     public ?string $platform_id;
 
-    /** Charges details. */
+    /** Breakdown of charges applied to the payment. */
     public ?array $charges_details;
 
-    /** Taxes. */
+    /** Tax details applied to the payment. */
     public ?array $taxes;
 
-    /** Net amount. */
+    /** Net amount received by the seller after fees. */
     public ?float $net_amount;
 
-    /** Point of interaction. */
+    /** @var \MercadoPago\Resources\Payment\PointOfInteraction|array|null Information about where the payment interaction occurred (e.g. QR, deep link). */
     public array|object|null $point_of_interaction;
 
-    /** Accounts info. */
+    /** Account-level information related to the transaction. */
     public array|object|null $accounts_info;
 
-    /** Tags. */
+    /** Internal tags associated with the payment. */
     public array|object|null $tags;
 
-    /** Refunds. */
+    /** List of refunds applied to this payment. */
     public ?array $refunds;
 
-    /** 3DS info. */
+    /** @var \MercadoPago\Resources\Payment\ThreeDSInfo|array|null 3D Secure authentication information. */
     public array|object|null $three_ds_info;
 
-    /** Expanded data. */
+    /** @var \MercadoPago\Resources\Payment\Expanded|array|null Expanded response data (e.g. gateway references). */
     public array|object|null $expanded;
 
     private $map = [

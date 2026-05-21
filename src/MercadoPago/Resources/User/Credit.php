@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\User;
 
-/** Credit class. */
+/**
+ * User Credit resource.
+ *
+ * Represents the MercadoPago credit/lending information for a user account,
+ * including consumed credit amount, credit level, and rank classification.
+ */
 class Credit
 {
     /** The amount of consumed credit. */

@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\Point;
 
-/** PaymentIntentAdditionalInfo class. */
+/**
+ * Point Payment Intent Additional Info resource.
+ *
+ * Contains supplementary metadata for a Point payment intent, such as an external
+ * reference for reconciliation and whether to print a receipt on the terminal.
+ */
 class PaymentIntentAdditionalInfo
 {
     /** External reference of the payment. */

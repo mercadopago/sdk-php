@@ -6,25 +6,32 @@ namespace MercadoPago\Resources\Order;
 
 use MercadoPago\Serialization\Mapper;
 
-/** IntegrationData class. */
+/**
+ * Represents integration metadata for a MercadoPago order.
+ *
+ * Contains identifiers that link the order to a specific platform, integrator,
+ * application, or corporation within the MercadoPago partner ecosystem.
+ *
+ * @see \MercadoPago\Resources\Order
+ */
 class IntegrationData
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Corporation ID. */
+    /** Identifier of the corporation that owns the integration. */
     public ?string $corporation_id;
 
-    /** Application ID. */
+    /** MercadoPago application ID used to create the order. */
     public ?string $application_id;
 
-    /** Integrator ID. */
+    /** Certified integrator identifier assigned by MercadoPago. */
     public ?string $integrator_id;
 
-    /** Platform ID. */
+    /** E-commerce platform identifier (e.g., for WooCommerce, Magento, etc.). */
     public ?string $platform_id;
 
-    /** Sponsor. */
+    /** Sponsor details when the order is created on behalf of another account. Maps to {@see Sponsor}. */
     public array|object|null $sponsor;
 
     private $map = [

@@ -6,34 +6,41 @@ namespace MercadoPago\Resources\Order;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Payer class. */
+/**
+ * Represents the buyer (payer) associated with a MercadoPago order.
+ *
+ * Contains the buyer's personal information used for payment processing,
+ * fraud prevention, and receipt generation.
+ *
+ * @see \MercadoPago\Resources\Order
+ */
 class Payer
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Customer ID. */
+    /** MercadoPago customer ID if the payer is a registered customer. */
     public ?string $customer_id;
 
-    /** Entity type. */
+    /** Legal entity type of the payer (e.g., "individual", "association"). */
     public ?string $entity_type;
 
-    /** Email. */
+    /** Payer's email address used for notifications and receipts. */
     public ?string $email;
 
-    /** First name. */
+    /** Payer's first name. */
     public ?string $first_name;
 
-    /** Last name. */
+    /** Payer's last name. */
     public ?string $last_name;
 
-    /** Identification. */
+    /** Payer's identification document (type and number). Maps to Identification. */
     public array|object|null $identification;
 
-    /** Phone. */
+    /** Payer's phone number details. Maps to Phone. */
     public array|object|null $phone;
 
-    /** Address. */
+    /** Payer's address details. Maps to Address. */
     public array|object|null $address;
 
     private $map = [

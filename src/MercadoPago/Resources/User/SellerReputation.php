@@ -4,7 +4,16 @@ namespace MercadoPago\Resources\User;
 
 use MercadoPago\Serialization\Mapper;
 
-/** SellerReputation class. */
+/**
+ * User Seller Reputation resource.
+ *
+ * Represents the selling reputation of a MercadoLibre user, including their
+ * seller level, power seller status, transaction history, and performance metrics.
+ *
+ * Fields are mapped to nested DTOs:
+ * - transactions -> {@see \MercadoPago\Resources\User\Transactions}
+ * - metrics -> {@see \MercadoPago\Resources\User\Metrics}
+ */
 class SellerReputation
 {
     /** Class mapper. */

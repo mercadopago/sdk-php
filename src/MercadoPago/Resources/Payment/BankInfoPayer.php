@@ -2,27 +2,32 @@
 
 namespace MercadoPago\Resources\Payment;
 
-/** BankInfoPayer class. */
+/**
+ * Represents the payer's (buyer's) bank account details in a bank transfer payment.
+ *
+ * Nested within {@see BankInfo} to identify the source bank account
+ * from which the funds were transferred.
+ */
 class BankInfoPayer
 {
-    /** ID. */
+    /** Unique identifier of the payer in the banking context. */
     public ?string $id;
 
-    /** Email. */
+    /** Email address associated with the payer's bank account. */
     public ?string $email;
 
-    /** Account ID. */
+    /** Bank account identifier of the payer. */
     public ?string $account_id;
 
-    /** Account long name. */
+    /** Full display name of the payer's bank account. */
     public ?string $long_name;
 
-    /** External account ID. */
+    /** External identifier for the payer's account in third-party systems. */
     public ?string $external_account_id;
 
-    /** Account Holder Name */
+    /** Name of the account holder at the payer's bank. */
     public ?string $account_holder_name;
 
-    /** Identification */
+    /** @var \MercadoPago\Resources\Common\Identification|array|null Payer's identification document associated with the bank account. */
     public array|object|null $identification;
 }

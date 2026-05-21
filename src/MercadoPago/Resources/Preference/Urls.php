@@ -2,7 +2,13 @@
 
 namespace MercadoPago\Resources\Preference;
 
-/** URLs class. */
+/**
+ * Preference URLs base resource.
+ *
+ * Base class for checkout redirect URLs. Defines the three outcome-based URLs
+ * (success, pending, failure) that the buyer is redirected to after checkout.
+ * Extended by {@see BackUrls} and {@see RedirectUrls}.
+ */
 class Urls
 {
     /** URL to when the payment succeed. */

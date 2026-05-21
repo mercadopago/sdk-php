@@ -5,13 +5,18 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** PaymentMethodResult class. */
+/**
+ * Represents the result of listing available payment methods from the MercadoPago API.
+ *
+ * Wraps the array of payment method definitions returned by
+ * {@see \MercadoPago\Client\PaymentMethod\PaymentMethodClient::list()}.
+ */
 class PaymentMethodResult extends MPResource
 {
-    /** Class mapper. */
+    /** Maps nested objects to their corresponding DTO classes. */
     use Mapper;
 
-    /** Payment Method Result data. */
+    /** @var PaymentMethodListResult[]|array|null List of available payment methods for the account. */
     public array|object|null $data;
 
     private $map = [

@@ -2,21 +2,27 @@
 
 namespace MercadoPago\Resources\Customer;
 
-/** Payment Method class. */
+/**
+ * Represents the payment method (card brand/network) associated with a saved card.
+ *
+ * Provides the brand name, type classification, and logo URLs for display in
+ * checkout UIs. Used as a nested object within {@see \MercadoPago\Resources\CustomerCard}
+ * and {@see \MercadoPago\Resources\Customer\CustomerCardListResult}.
+ */
 class PaymentMethod
 {
-    /** Id of the payment method. */
+    /** Payment method identifier (e.g., "visa", "master", "amex"). */
     public ?string $id;
 
-    /** Name of payment method. */
+    /** Human-readable name of the payment method (e.g., "Visa", "Mastercard"). */
     public ?string $name;
 
-    /** Type of payment method. */
+    /** Payment type classification (e.g., "credit_card", "debit_card", "prepaid_card"). */
     public ?string $payment_type_id;
 
-    /** Thumbnail of payment method. */
+    /** URL to the payment method logo image (HTTP). */
     public ?string $thumbnail;
 
-    /** Thumbnail of payment method from a secure source. */
+    /** URL to the payment method logo image over HTTPS. */
     public ?string $secure_thumbnail;
 }

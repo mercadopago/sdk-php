@@ -4,7 +4,20 @@ namespace MercadoPago\Resources\User;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Status class. */
+/**
+ * User Account Status resource.
+ *
+ * Represents the overall account status of a MercadoPago/MercadoLibre user, including
+ * buying/selling permissions, email confirmation, MercadoEnvios status, account type,
+ * and per-feature status details (billing, shopping cart, listing).
+ *
+ * Fields are mapped to nested DTOs:
+ * - billing -> {@see \MercadoPago\Resources\User\StatusBilling}
+ * - buy -> {@see \MercadoPago\Resources\User\StatusList}
+ * - shopping_cart -> {@see \MercadoPago\Resources\User\StatusShoppingCart}
+ * - list -> {@see \MercadoPago\Resources\User\StatusList}
+ * - sell -> {@see \MercadoPago\Resources\User\StatusList}
+ */
 class Status
 {
     /** Class mapper. */

@@ -2,13 +2,19 @@
 
 namespace MercadoPago\Resources\Customer;
 
-/** Security Code class. */
+/**
+ * Describes the security code (CVV/CVC) configuration for a payment card.
+ *
+ * Indicates how many digits the security code has and where it is physically
+ * located on the card. Used as a nested object within {@see \MercadoPago\Resources\CustomerCard}
+ * and {@see \MercadoPago\Resources\Customer\CustomerCardListResult}.
+ */
 class SecurityCode
 {
-    /** Length of security code. */
+    /** Number of digits in the security code (typically 3 or 4). */
     public ?int $length;
 
-    /** Location of security code in the card. */
+    /** Physical location of the security code on the card (e.g., "back", "front"). */
     public ?string $card_location;
 
 }

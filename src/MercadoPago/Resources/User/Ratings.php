@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\User;
 
-/** Ratings class. */
+/**
+ * User Seller Ratings resource.
+ *
+ * Represents the seller's rating distribution from completed transactions,
+ * broken down into negative, neutral, and positive feedback counts.
+ */
 class Ratings
 {
     /** The number of negative ratings. */

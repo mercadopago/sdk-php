@@ -4,7 +4,15 @@ namespace MercadoPago\Resources;
 
 use MercadoPago\Net\MPResource;
 
-/** OAuth class. */
+/**
+ * OAuth resource.
+ *
+ * Represents an OAuth token response from the MercadoPago authorization server.
+ * Contains the access token, refresh token, and associated metadata needed to
+ * authenticate API requests on behalf of a seller (marketplace/platform integrations).
+ *
+ * @see \MercadoPago\Client\OAuth\OAuthClient
+ */
 class OAuth extends MPResource
 {
     /** Access token. */

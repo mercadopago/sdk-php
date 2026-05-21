@@ -4,25 +4,30 @@ namespace MercadoPago\Resources\Payment;
 
 use MercadoPago\Serialization\Mapper;
 
-/** BankInfo class. */
+/**
+ * Represents bank account information for bank transfer payments in the MercadoPago API.
+ *
+ * Contains the bank details of both the payer and collector involved in
+ * a bank transfer (e.g. Pix, TED) transaction. Nested within {@see TransactionData}.
+ */
 class BankInfo
 {
-    /** Class mapper. */
+    /** Maps nested objects to their corresponding DTO classes. */
     use Mapper;
 
-    /** Payer info. */
+    /** @var BankInfoPayer|array|null Bank account details of the payer (buyer). */
     public array|object|null $payer;
 
-    /** Collector info. */
+    /** @var BankInfoCollector|array|null Bank account details of the collector (seller). */
     public array|object|null $collector;
 
-    /** Is same bank account owner. */
+    /** Whether the payer and collector share the same bank account ownership. */
     public ?string $is_same_bank_account_owner;
 
-    /** Origin bank ID. */
+    /** Identifier of the originating bank in the transfer. */
     public ?string $origin_bank_id;
 
-    /** Origin wallet ID. */
+    /** Identifier of the originating digital wallet in the transfer. */
     public ?string $origin_wallet_id;
 
     private $map = [

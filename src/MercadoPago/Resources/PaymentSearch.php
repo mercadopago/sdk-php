@@ -5,16 +5,21 @@ namespace MercadoPago\Resources;
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
-/** PaymentSearch class. */
+/**
+ * Represents the paginated result of a payment search query in the MercadoPago API.
+ *
+ * Returned by {@see \MercadoPago\Client\Payment\PaymentClient::search()} and contains
+ * pagination metadata along with the list of matching payments.
+ */
 class PaymentSearch extends MPResource
 {
-    /** Class mapper. */
+    /** Maps nested objects to their corresponding DTO classes. */
     use Mapper;
 
-    /** Search paging. */
+    /** @var \MercadoPago\Resources\Common\Paging|array|null Pagination metadata (total, limit, offset). */
     public array|object|null $paging;
 
-    /** Search results. */
+    /** @var PaymentSearchResult[]|array|null List of payments matching the search criteria. */
     public array|object|null $results;
 
     private $map = [

@@ -12,7 +12,12 @@ use MercadoPago\Resources\MerchantOrder;
 use MercadoPago\Resources\MerchantOrderSearch;
 use MercadoPago\Serialization\Serializer;
 
-/** Client responsible for performing merchant order actions. */
+/**
+ * Client for the Merchant Orders API (`/merchant_orders`).
+ *
+ * Merchant orders group multiple payments and shipments into a single entity.
+ * Commonly used with preferences to track the fulfillment status of checkout flows.
+ */
 final class MerchantOrderClient extends MercadoPagoClient
 {
     private const URL = "/merchant_orders";
@@ -21,19 +26,20 @@ final class MerchantOrderClient extends MercadoPagoClient
 
     private const URL_SEARCH = "/merchant_orders/search";
 
-    /** Default constructor. Uses the default http client used by the SDK or custom http client provided. */
+    /** @param MPHttpClient|null $MPHttpClient Custom HTTP client. Defaults to the SDK global client. */
     public function __construct(?MPHttpClient $MPHttpClient = null)
     {
         parent::__construct($MPHttpClient ?: MercadoPagoConfig::getHttpClient());
     }
 
     /**
-     * Method responsible for creating merchant order.
-     * @param array $request merchant order data.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\MerchantOrder merchant order created.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Creates a new merchant order.
+     *
+     * @param array<string,mixed> $request Order data (items, preference_id, etc.).
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return MerchantOrder The created merchant order resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function create(array $request, ?RequestOptions $request_options = null): MerchantOrder
     {
@@ -44,12 +50,13 @@ final class MerchantOrderClient extends MercadoPagoClient
     }
 
     /**
-     * Method responsible for getting merchant order.
-     * @param int $id merchant order ID.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\MerchantOrder merchant order found.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Retrieves a merchant order by its ID.
+     *
+     * @param int $id Merchant order ID.
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return MerchantOrder The found merchant order resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function get(int $id, ?RequestOptions $request_options = null): MerchantOrder
     {
@@ -60,13 +67,14 @@ final class MerchantOrderClient extends MercadoPagoClient
     }
 
     /**
-     * Method responsible for update merchant order.
-     * @param int $id merchant order ID.
-     * @param array $request merchant order data.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\MerchantOrder merchant order updated.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Updates an existing merchant order.
+     *
+     * @param int $id Merchant order ID.
+     * @param array<string,mixed> $request Fields to update.
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return MerchantOrder The updated merchant order resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function update(int $id, array $request, ?RequestOptions $request_options = null): MerchantOrder
     {
@@ -77,12 +85,13 @@ final class MerchantOrderClient extends MercadoPagoClient
     }
 
     /**
-     * Method responsible for search merchant orders.
-     * @param \MercadoPago\Net\MPSearchRequest $request search request.
-     * @param \MercadoPago\Client\Common\RequestOptions request options to be sent.
-     * @return \MercadoPago\Resources\MerchantOrderSearch search results.
-     * @throws \MercadoPago\Exceptions\MPApiException if the request fails.
-     * @throws \Exception if the request fails.
+     * Searches merchant orders with pagination and filters.
+     *
+     * @param MPSearchRequest $request Search criteria (limit, offset, filters).
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return MerchantOrderSearch Paginated search results.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
      */
     public function search(MPSearchRequest $request, ?RequestOptions $request_options = null): MerchantOrderSearch
     {

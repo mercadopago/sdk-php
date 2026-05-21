@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\User;
 
-/** Sales class. */
+/**
+ * User Seller Sales Metric resource.
+ *
+ * Represents the seller's completed sales count for a specific period,
+ * used as part of the overall seller reputation scoring.
+ */
 class Sales
 {
     /** The sales period (e.g., "365 days"). */

@@ -4,7 +4,18 @@ namespace MercadoPago\Resources\Preference;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Payer class. */
+/**
+ * Preference Payer resource.
+ *
+ * Represents the buyer information within a checkout preference. Pre-filling payer
+ * details (name, email, phone, identification, address) streamlines the checkout
+ * experience by reducing data entry for the buyer.
+ *
+ * Fields are mapped to common DTOs:
+ * - identification -> {@see \MercadoPago\Resources\Common\Identification}
+ * - phone -> {@see \MercadoPago\Resources\Common\Phone}
+ * - address -> {@see \MercadoPago\Resources\Common\Address}
+ */
 class Payer
 {
     /** Class mapper. */

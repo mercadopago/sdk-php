@@ -4,25 +4,30 @@ namespace MercadoPago\Resources\Payment;
 
 use MercadoPago\Serialization\Mapper;
 
-/** AdditionalInfoPayer class. */
+/**
+ * Represents extended payer details provided as part of payment additional info.
+ *
+ * Supplements the main {@see Payer} data with contact details and registration
+ * history that help MercadoPago improve fraud analysis.
+ */
 class AdditionalInfoPayer
 {
-    /** Class mapper. */
+    /** Maps nested objects to their corresponding DTO classes. */
     use Mapper;
 
-    /** Payer's first name. */
+    /** Payer's given/first name. */
     public ?string $first_name;
 
-    /** Payer's last name. */
+    /** Payer's family/last name. */
     public ?string $last_name;
 
-    /** Payer's phone. */
+    /** @var \MercadoPago\Resources\Common\Phone|array|null Payer's contact phone number. */
     public array|object|null $phone;
 
-    /** Payer's address. */
+    /** @var \MercadoPago\Resources\Common\Address|array|null Payer's billing or residential address. */
     public array|object|null $address;
 
-    /** Date of registration of the payer on your site. */
+    /** ISO 8601 date when the payer registered on the integrator's platform. */
     public ?string $registration_date;
 
     private $map = [

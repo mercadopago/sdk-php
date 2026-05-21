@@ -4,19 +4,29 @@ namespace MercadoPago\Resources\Preference;
 
 use MercadoPago\Serialization\Mapper;
 
-/** PaymentMethods class. */
+/**
+ * Preference Payment Methods configuration resource.
+ *
+ * Configures which payment methods are available for a checkout preference.
+ * Allows setting a default payment method, installment limits, excluded payment
+ * methods, excluded payment types, and a default card.
+ *
+ * Fields are mapped to nested DTOs:
+ * - excluded_payment_methods -> {@see \MercadoPago\Resources\Preference\PaymentMethod}
+ * - excluded_payment_types -> {@see \MercadoPago\Resources\Preference\PaymentType}
+ */
 class PaymentMethods
 {
     /** Class mapper. */
     use Mapper;
 
-    /** URL to return when the payment succeed. */
+    /** Default payment method ID to pre-select in checkout. */
     public ?string $default_payment_method_id;
 
-    /** URL to return when the payment is pending. */
+    /** Maximum number of installments allowed. */
     public ?int $installments;
 
-    /** URL to return when the payment fail. */
+    /** Default number of installments pre-selected in checkout. */
     public ?int $default_installments;
 
     /** Payment methods not allowed in payment process (except account_money). */

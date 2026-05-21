@@ -3,7 +3,11 @@
 namespace MercadoPago\Net;
 
 /**
- * Search request class.
+ * Encapsulates pagination and filter parameters for API search endpoints.
+ *
+ * Used by client search methods (e.g., {@see \MercadoPago\Client\Payment\PaymentClient::search()})
+ * to build the query-string sent to `/search` endpoints. Filters are passed through
+ * as-is; `limit` and `offset` are injected only if not already present in the filters array.
  */
 class MPSearchRequest
 {
@@ -11,10 +15,9 @@ class MPSearchRequest
     private const OFFSET_PARAM = "offset";
 
     /**
-     * MPSearchRequest constructor.
-     * @param int $limit limit of the search.
-     * @param int $offset offset of the search.
-     * @param array $filters filters of the search.
+     * @param int|null   $limit   Maximum number of results to return.
+     * @param int|null   $offset  Zero-based offset for pagination.
+     * @param array<string,mixed> $filters Key-value pairs appended as query-string parameters (e.g., ['status' => 'approved']).
      */
     public function __construct(
         private ?int $limit,
@@ -23,36 +26,29 @@ class MPSearchRequest
     ) {
     }
 
-    /**
-     * Get the limit of the search.
-     * @return int limit of the search.
-     */
     public function getLimit(): ?int
     {
         return $this->limit;
     }
 
-    /**
-     * Get the offset of the search.
-     * @return int offset of the search.
-     */
     public function getOffset(): ?int
     {
         return $this->offset;
     }
 
-    /**
-     * Get the filters of the search.
-     * @return array filters of the search.
-     */
+    /** @return array<string,mixed> */
     public function getFilters(): array
     {
         return $this->filters;
     }
 
     /**
-     * Get the parameters of the search.
-     * @return array parameters of the search.
+     * Merges filters with pagination into a single query-parameter array.
+     *
+     * If the filters already contain `limit` or `offset` keys, those values
+     * take precedence over the constructor arguments.
+     *
+     * @return array<string,mixed> Ready-to-use query parameters.
      */
     public function getParameters(): array
     {

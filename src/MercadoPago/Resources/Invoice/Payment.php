@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\Invoice;
 
-/** Payment class. */
+/**
+ * Invoice Payment resource.
+ *
+ * Represents the payment resulting from a subscription invoice charge attempt.
+ * Contains the payment ID, its processing status, and a detailed status reason.
+ */
 class Payment
 {
     /** The ID of the payment. */

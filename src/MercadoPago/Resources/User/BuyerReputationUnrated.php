@@ -2,7 +2,12 @@
 
 namespace MercadoPago\Resources\User;
 
-/** BuyerReputationUnrated class. */
+/**
+ * User Buyer Reputation Unrated Transactions resource.
+ *
+ * Tracks transactions where the buyer did not provide a rating,
+ * broken down by paid and total counts.
+ */
 class BuyerReputationUnrated
 {
     /** The number of paid unrated transactions. */

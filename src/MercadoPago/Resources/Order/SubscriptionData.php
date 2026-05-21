@@ -6,22 +6,29 @@ namespace MercadoPago\Resources\Order;
 
 use MercadoPago\Serialization\Mapper;
 
-/** Subscription data class. */
+/**
+ * Represents subscription billing data associated with an order payment.
+ *
+ * Contains information about the recurring billing cycle, including which
+ * invoice in the sequence this payment corresponds to and the billing period.
+ *
+ * @see \MercadoPago\Resources\Order\Payment
+ */
 class SubscriptionData
 {
     /** Class mapper. */
     use Mapper;
 
-    /** Subscription sequence. */
+    /** Position of this payment within the subscription series. Maps to {@see SubscriptionSequence}. */
     public array|object|null $subscription_sequence;
 
-    /** Invoice ID. */
+    /** Unique identifier of the invoice being paid. */
     public ?string $invoice_id;
 
-    /** Invoice period. */
+    /** Billing period definition for this subscription cycle. Maps to {@see InvoicePeriod}. */
     public array|object|null $invoice_period;
 
-    /** Billing date. */
+    /** ISO 8601 date when this subscription billing was generated. */
     public ?string $billing_date;
 
     private $map = [
