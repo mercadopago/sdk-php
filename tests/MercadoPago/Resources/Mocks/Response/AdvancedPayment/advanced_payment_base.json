@@ -1,0 +1,23 @@
+{
+    "id": 20458724,
+    "status": "approved",
+    "application_id": "59441713004005",
+    "external_reference": "ADV-REF-001",
+    "description": "Marketplace split payment",
+    "binary_mode": false,
+    "capture": true,
+    "date_created": "2022-06-01T10:00:00.000-04:00",
+    "date_last_updated": "2022-06-01T10:01:00.000-04:00",
+    "disbursements": [
+        {
+            "id": 123456,
+            "collector_id": 488656838,
+            "amount": 80.00,
+            "external_reference": "SELLER-1-REF",
+            "application_fee": 2.00,
+            "money_release_date": "2022-06-15T00:00:00.000-04:00",
+            "status": "approved",
+            "status_detail": "accredited"
+        }
+    ]
+}
