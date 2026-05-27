@@ -1,0 +1,11 @@
+CHANGELOG.md
+  ai_agent 7-14
+src/MercadoPago/MercadoPagoConfig.php
+  ai_agent 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "0352582ef8ed3699955818ee20839fae48ba347d",
+  "prompts": {}
+}
