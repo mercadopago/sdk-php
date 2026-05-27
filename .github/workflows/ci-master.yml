@@ -24,3 +24,6 @@ jobs:
 
       - name: Run unit tests
         run: vendor/bin/phpunit --testsuite "Unit Tests"
+
+      - name: Dependency audit
+        run: composer audit
