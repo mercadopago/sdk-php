@@ -1,0 +1,33 @@
+tests/MercadoPago/Client/Unit/Chargeback/ChargebackClientUnitTest.php
+  s_ca33c7d96b2139::t_b4edff4f266cfe 1-54
+tests/MercadoPago/Resources/Mocks/Response/Chargeback/chargeback_list.json
+  s_ca33c7d96b2139::t_025b21c67c1240 1-18
+tests/MercadoPago/Client/Unit/DisbursementRefund/DisbursementRefundClientUnitTest.php
+  s_ca33c7d96b2139::t_6b4a3194652079 1-49
+tests/MercadoPago/Client/Unit/AdvancedPayment/AdvancedPaymentClientUnitTest.php
+  s_ca33c7d96b2139::t_f6c40f260eb24e 1-76
+tests/MercadoPago/Resources/Mocks/Response/AdvancedPayment/advanced_payment_list.json
+  s_ca33c7d96b2139::t_308d61acaa2694 1-25
+tests/MercadoPago/Resources/Mocks/Response/Chargeback/chargeback_base.json
+  s_ca33c7d96b2139::t_f4ef446af4d376 1-11
+tests/MercadoPago/Resources/Mocks/Response/AdvancedPayment/advanced_payment_base.json
+  s_ca33c7d96b2139::t_b8ad6480db71b7 1-23
+tests/MercadoPago/Resources/Mocks/Response/DisbursementRefund/disbursement_refund_base.json
+  s_ca33c7d96b2139::t_1e636fd695377a 1-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "ec06e9aca90c0790da638f49a32b9a6856ca0921",
+  "prompts": {},
+  "sessions": {
+    "s_ca33c7d96b2139": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "31d8d73a-8320-4e75-89be-a5971fd08efd",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
