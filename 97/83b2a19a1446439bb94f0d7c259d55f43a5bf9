@@ -1,0 +1,16 @@
+phpunit.xml
+  h_04a99bed328080 2
+composer.json
+  h_04a99bed328080 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "9783b2a19a1446439bb94f0d7c259d55f43a5bf9",
+  "prompts": {},
+  "humans": {
+    "h_04a99bed328080": {
+      "author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
