@@ -1,0 +1,14 @@
+composer.json
+  h_04a99bed328080 23-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "1dbe2fb57c2dae9ef8cf8691346e1f4a143f9356",
+  "prompts": {},
+  "humans": {
+    "h_04a99bed328080": {
+      "author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
