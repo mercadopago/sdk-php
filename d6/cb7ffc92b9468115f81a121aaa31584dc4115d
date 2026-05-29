@@ -1,0 +1,19 @@
+src/MercadoPago/Resources/Order/StoredCredential.php
+  s_9d868b010fbbae::t_accef02631c66f 29-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "d6cb7ffc92b9468115f81a121aaa31584dc4115d",
+  "prompts": {},
+  "sessions": {
+    "s_9d868b010fbbae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfad13d2-c7f9-4497-aca9-b81634739146",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
