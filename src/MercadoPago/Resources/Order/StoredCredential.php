@@ -26,4 +26,11 @@ class StoredCredential
 
     /** Whether this is the first payment in a series using these credentials. */
     public ?bool $first_payment;
+
+    /**
+     * Reference to the previous transaction in a recurring series. Required from the second
+     * charge onwards to link this payment to the original card-network authorization.
+     * Type: string (transaction ID).
+     */
+    public ?string $prev_transaction_ref;
 }
