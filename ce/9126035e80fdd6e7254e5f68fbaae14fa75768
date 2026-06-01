@@ -1,0 +1,14 @@
+README.md
+  h_04a99bed328080 24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "ce9126035e80fdd6e7254e5f68fbaae14fa75768",
+  "prompts": {},
+  "humans": {
+    "h_04a99bed328080": {
+      "author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
