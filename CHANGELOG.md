@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 This project follows Keep a Changelog and Semantic Versioning.
 
+## [3.11.0] - 2026-05-27
+
+### Added
+
+- **AdvancedPayment**: marketplace split-payment management — Create, Get, Search, Update, Capture, Cancel, UpdateReleaseDate (`POST/GET/PUT /v1/advanced_payments`).
+- **DisbursementRefund**: refund management for split-payment disbursements — ListAll, CreateAll, Create (`GET/POST /v1/advanced_payments/{id}/refunds`, `POST /v1/advanced_payments/{id}/disbursements/{id}/refunds`).
+- **Chargeback**: read-only access to payment dispute records — Get, Search (`GET /v1/chargebacks`).
+
 ## [3.7.1] - 2025-10-30
 
 ### Added

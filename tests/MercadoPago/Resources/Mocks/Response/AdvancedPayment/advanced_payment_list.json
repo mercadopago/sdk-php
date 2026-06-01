@@ -1,0 +1,25 @@
+{
+    "paging": {
+        "total": 1,
+        "limit": 20,
+        "offset": 0
+    },
+    "results": [
+        {
+            "id": 20458724,
+            "status": "approved",
+            "external_reference": "ADV-REF-001",
+            "description": "Marketplace split payment",
+            "capture": true,
+            "date_created": "2022-06-01T10:00:00.000-04:00",
+            "disbursements": [
+                {
+                    "id": 123456,
+                    "collector_id": 488656838,
+                    "amount": 80.00,
+                    "status": "approved"
+                }
+            ]
+        }
+    ]
+}

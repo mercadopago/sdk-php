@@ -1,0 +1,11 @@
+{
+    "id": "CB-001-2022",
+    "payment_id": 19951521071,
+    "status": "in_review",
+    "amount": 100.00,
+    "currency_id": "BRL",
+    "reason_id": "4853",
+    "reason": "Cardholder dispute",
+    "date_created": "2022-07-01T08:00:00.000-04:00",
+    "last_modified": "2022-07-02T10:00:00.000-04:00"
+}
