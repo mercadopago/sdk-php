@@ -1,0 +1,25 @@
+composer.lock
+  ai_agent 7,475,479,483-484,491,508-511,525,527,568,576,3238,3242,3246-3247,3251-3252,3300,3320,3404,3408,3412-3413,3417-3418,3451,3471,3475,3479,3483-3484,3488,3519,3539,3543,3547,3551-3552,3556,3590,3610,4345,4349,4353-4354,4358,4387,4407,4411,4415,4419-4420,4424,4477,4497,4556,4559-4561
+composer.json
+  s_07806306bc2023::t_ce511a26d80e74 18
+  s_07806306bc2023::t_844116d6599837 27-28,30-31
+  s_07806306bc2023::t_a3415b87d34b73 29
+.github/workflows/ci-master.yml
+  s_07806306bc2023::t_bc80c0b3351942 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.12",
+  "base_commit_sha": "46494930e88421e117b24bd26f0e919d3f1795cb",
+  "prompts": {},
+  "sessions": {
+    "s_07806306bc2023": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "def80c26-f45f-437e-8fc5-b599fc70860e",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Daniel Alfaro <daniel.alfaro@mercadolibre.com.co>"
+    }
+  }
+}
