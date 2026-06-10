@@ -1,0 +1,31 @@
+src/MercadoPago/Serialization/Serializer.php
+  s_19c23aa3595bac::t_8763bbad945b22 62-77
+  s_19c23aa3595bac::t_c224ee1940910c 52
+  s_19c23aa3595bac::t_0be57362f6ddf6 53
+tests/MercadoPago/Client/Unit/Preference/PreferenceClientUnitTest.php
+  s_19c23aa3595bac::t_aa1449efb0ac56 36-37
+  s_19c23aa3595bac::t_2c96d575688760 62-63
+tests/MercadoPago/Resources/Mocks/Response/Preference/preference_base.json
+  s_19c23aa3595bac::t_2a375334359e0e 37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "06c653a57ca6e8b4019d641500442fcce78a4844",
+  "prompts": {},
+  "humans": {
+    "h_4077232c5ab963": {
+      "author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  },
+  "sessions": {
+    "s_19c23aa3595bac": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "353a998d-a210-4def-a5a0-fe5fed2e5603",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
