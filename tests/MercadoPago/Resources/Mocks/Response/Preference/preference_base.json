@@ -34,7 +34,7 @@
   ],
   "marketplace": "MP-MKT-5887075667929427",
   "marketplace_fee": 0,
-  "metadata": {},
+  "metadata": {"key": "value", "custom_field": "custom_value"},
   "notification_url": null,
   "operation_type": "regular_payment",
   "payer": {
