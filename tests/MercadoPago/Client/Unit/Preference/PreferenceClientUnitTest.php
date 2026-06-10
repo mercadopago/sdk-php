@@ -33,6 +33,8 @@ final class PreferenceClientUnitTest extends BaseClient
         $this->assertSame("test name", $preference ->payer->name);
         $this->assertSame("test surname", $preference ->payer->surname);
         $this->assertSame("4567", $preference ->items[0]->id);
+        $this->assertSame("value", $preference->metadata["key"]);
+        $this->assertSame("custom_value", $preference->metadata["custom_field"]);
     }
 
     public function testGetSuccess(): void
@@ -57,6 +59,8 @@ final class PreferenceClientUnitTest extends BaseClient
         $this->assertSame("test name", $preference ->payer->name);
         $this->assertSame("test surname", $preference ->payer->surname);
         $this->assertSame("4567", $preference ->items[0]->id);
+        $this->assertSame("value", $preference->metadata["key"]);
+        $this->assertSame("custom_value", $preference->metadata["custom_field"]);
     }
 
     public function testUpdateSuccess(): void

@@ -49,6 +49,8 @@ class Serializer
                     } else {
                         $object->$key = self::_deserializeFromJson($class_name, $value);
                     }
+                } elseif (property_exists($object, $key) && self::propertyAcceptsArray($object, $key)) {
+                    $object->{$key} = $value;
                 }
             } elseif (property_exists($object, $key)) {
                 $object->{$key} = $value;
@@ -56,5 +58,21 @@ class Serializer
         }
 
         return $object;
+    }
+
+    private static function propertyAcceptsArray(object $object, string $key): bool
+    {
+        $prop = new \ReflectionProperty($object, $key);
+        $type = $prop->getType();
+        if ($type === null) {
+            return true;
+        }
+        $types = $type instanceof \ReflectionUnionType ? $type->getTypes() : [$type];
+        foreach ($types as $t) {
+            if ($t->getName() === 'array') {
+                return true;
+            }
+        }
+        return false;
     }
 }

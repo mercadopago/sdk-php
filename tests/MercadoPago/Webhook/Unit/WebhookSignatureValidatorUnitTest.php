@@ -23,7 +23,7 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     {
         $parts = [];
         if ($dataId) {
-            $parts[] = 'id:' . strtolower($dataId);
+            $parts[] = 'id:' . $dataId;
         }
         if ($requestId) {
             $parts[] = 'request-id:' . $requestId;
@@ -40,30 +40,31 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
 
     private static function validHash(): string
     {
-        return self::computeHash(self::DATA_ID_LOWER, self::REQUEST_ID, self::TS, self::SECRET);
+        return self::computeHash(self::DATA_ID_RAW, self::REQUEST_ID, self::TS, self::SECRET);
     }
 
     // case 1
-    public function testHappyPathLowercase(): void
+    public function testHappyPathUppercase(): void
     {
-        $header = self::buildHeader(self::validHash());
-        WebhookSignatureValidator::validate($header, self::REQUEST_ID, self::DATA_ID_LOWER, self::SECRET);
-        $this->assertTrue(true); // no throw expected
-    }
-
-    // case 2
-    public function testUppercaseDataIdIsLowercased(): void
-    {
+        $this->expectNotToPerformAssertions();
         $header = self::buildHeader(self::validHash());
         WebhookSignatureValidator::validate($header, self::REQUEST_ID, self::DATA_ID_RAW, self::SECRET);
-        $this->assertTrue(true);
+    }
+
+    // case 2 — MP sends data.id uppercase; validator must NOT lowercase it before computing HMAC
+    public function testUppercaseDataIdPreservedInManifest(): void
+    {
+        $this->expectNotToPerformAssertions();
+        $upperHash = self::computeHash(self::DATA_ID_RAW, self::REQUEST_ID, self::TS, self::SECRET);
+        $header = self::buildHeader($upperHash);
+        WebhookSignatureValidator::validate($header, self::REQUEST_ID, self::DATA_ID_RAW, self::SECRET);
     }
 
     // case 3
     public function testMalformedHeaderThrowsMalformed(): void
     {
         try {
-            WebhookSignatureValidator::validate('this-is-garbage', self::REQUEST_ID, self::DATA_ID_LOWER, self::SECRET);
+            WebhookSignatureValidator::validate('this-is-garbage', self::REQUEST_ID, self::DATA_ID_RAW, self::SECRET);
             $this->fail('expected throw');
         } catch (InvalidWebhookSignatureException $e) {
             $this->assertSame(SignatureFailureReason::MALFORMED_SIGNATURE_HEADER, $e->getReason());
@@ -75,7 +76,7 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     public function testMissingHeaderThrowsMissingHeader(): void
     {
         try {
-            WebhookSignatureValidator::validate(null, self::REQUEST_ID, self::DATA_ID_LOWER, self::SECRET);
+            WebhookSignatureValidator::validate(null, self::REQUEST_ID, self::DATA_ID_RAW, self::SECRET);
             $this->fail('expected throw');
         } catch (InvalidWebhookSignatureException $e) {
             $this->assertSame(SignatureFailureReason::MISSING_SIGNATURE_HEADER, $e->getReason());
@@ -86,7 +87,7 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     public function testMissingTsThrowsMissingTimestamp(): void
     {
         try {
-            WebhookSignatureValidator::validate('v1=' . self::validHash(), self::REQUEST_ID, self::DATA_ID_LOWER, self::SECRET);
+            WebhookSignatureValidator::validate('v1=' . self::validHash(), self::REQUEST_ID, self::DATA_ID_RAW, self::SECRET);
             $this->fail('expected throw');
         } catch (InvalidWebhookSignatureException $e) {
             $this->assertSame(SignatureFailureReason::MISSING_TIMESTAMP, $e->getReason());
@@ -97,7 +98,7 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     public function testMissingV1ThrowsMissingHash(): void
     {
         try {
-            WebhookSignatureValidator::validate('ts=' . self::TS, self::REQUEST_ID, self::DATA_ID_LOWER, self::SECRET);
+            WebhookSignatureValidator::validate('ts=' . self::TS, self::REQUEST_ID, self::DATA_ID_RAW, self::SECRET);
             $this->fail('expected throw');
         } catch (InvalidWebhookSignatureException $e) {
             $this->assertSame(SignatureFailureReason::MISSING_HASH, $e->getReason());
@@ -111,7 +112,7 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
         $h = self::validHash();
         $tampered = substr($h, 0, -2) . (str_ends_with($h, '00') ? 'ff' : '00');
         try {
-            WebhookSignatureValidator::validate(self::buildHeader($tampered), self::REQUEST_ID, self::DATA_ID_LOWER, self::SECRET);
+            WebhookSignatureValidator::validate(self::buildHeader($tampered), self::REQUEST_ID, self::DATA_ID_RAW, self::SECRET);
             $this->fail('expected throw');
         } catch (InvalidWebhookSignatureException $e) {
             $this->assertSame(SignatureFailureReason::SIGNATURE_MISMATCH, $e->getReason());
@@ -122,12 +123,12 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     public function testOutsideToleranceThrows(): void
     {
         $staleTs = (string) ((int) (microtime(true) * 1000) - 30 * 60 * 1000);
-        $h = self::computeHash(self::DATA_ID_LOWER, self::REQUEST_ID, $staleTs, self::SECRET);
+        $h = self::computeHash(self::DATA_ID_RAW, self::REQUEST_ID, $staleTs, self::SECRET);
         try {
             WebhookSignatureValidator::validate(
                 self::buildHeader($h, $staleTs),
                 self::REQUEST_ID,
-                self::DATA_ID_LOWER,
+                self::DATA_ID_RAW,
                 self::SECRET,
                 300
             );
@@ -140,11 +141,11 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     public function testWithinTolerancePasses(): void
     {
         $current = (string) (int) (microtime(true) * 1000);
-        $h = self::computeHash(self::DATA_ID_LOWER, self::REQUEST_ID, $current, self::SECRET);
+        $h = self::computeHash(self::DATA_ID_RAW, self::REQUEST_ID, $current, self::SECRET);
         WebhookSignatureValidator::validate(
             self::buildHeader($h, $current),
             self::REQUEST_ID,
-            self::DATA_ID_LOWER,
+            self::DATA_ID_RAW,
             self::SECRET,
             300
         );
@@ -162,8 +163,8 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     // case 10
     public function testRequestIdAbsentExcludesRequestIdPair(): void
     {
-        $h = self::computeHash(self::DATA_ID_LOWER, null, self::TS, self::SECRET);
-        WebhookSignatureValidator::validate(self::buildHeader($h), null, self::DATA_ID_LOWER, self::SECRET);
+        $h = self::computeHash(self::DATA_ID_RAW, null, self::TS, self::SECRET);
+        WebhookSignatureValidator::validate(self::buildHeader($h), null, self::DATA_ID_RAW, self::SECRET);
         $this->assertTrue(true);
     }
 
@@ -187,7 +188,7 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     public function testSupportsV1WhenBothPresent(): void
     {
         $header = sprintf('ts=%s,v1=%s,v2=aaaa', self::TS, self::validHash());
-        WebhookSignatureValidator::validate($header, self::REQUEST_ID, self::DATA_ID_LOWER, self::SECRET);
+        WebhookSignatureValidator::validate($header, self::REQUEST_ID, self::DATA_ID_RAW, self::SECRET);
         $this->assertTrue(true);
     }
 
@@ -195,7 +196,7 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     {
         $header = sprintf('ts=%s,v2=somehash', self::TS);
         try {
-            WebhookSignatureValidator::validate($header, self::REQUEST_ID, self::DATA_ID_LOWER, self::SECRET);
+            WebhookSignatureValidator::validate($header, self::REQUEST_ID, self::DATA_ID_RAW, self::SECRET);
             $this->fail('expected throw');
         } catch (InvalidWebhookSignatureException $e) {
             $this->assertSame(SignatureFailureReason::MISSING_HASH, $e->getReason());
@@ -205,6 +206,6 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     public function testEmptySecretRaisesInvalidArgument(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        WebhookSignatureValidator::validate(self::buildHeader(self::validHash()), self::REQUEST_ID, self::DATA_ID_LOWER, '');
+        WebhookSignatureValidator::validate(self::buildHeader(self::validHash()), self::REQUEST_ID, self::DATA_ID_RAW, '');
     }
 }
