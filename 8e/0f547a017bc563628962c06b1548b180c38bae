@@ -1,0 +1,23 @@
+src/MercadoPago/Resources/Order/PointConfig.php
+  s_5fdf4ed1da0b67::t_6c855674a298da 1-21
+src/MercadoPago/Resources/Order/Config.php
+  s_5fdf4ed1da0b67::t_9afbefb23f3e84 28-33,37-38
+src/MercadoPago/Resources/Order/QrConfig.php
+  s_5fdf4ed1da0b67::t_95c06579da6afd 1-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "8e0f547a017bc563628962c06b1548b180c38bae",
+  "prompts": {},
+  "sessions": {
+    "s_5fdf4ed1da0b67": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2c44a824-72f5-457b-9a43-0dbfe5cec3a2",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
