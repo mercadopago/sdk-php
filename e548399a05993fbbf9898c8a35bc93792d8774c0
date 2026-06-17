@@ -1,0 +1,16 @@
+README.md
+  h_7b86ed8346acdd 24
+src/MercadoPago/MercadoPagoConfig.php
+  h_7b86ed8346acdd 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "e548399a05993fbbf9898c8a35bc93792d8774c0",
+  "prompts": {},
+  "humans": {
+    "h_7b86ed8346acdd": {
+      "author": "Diego Gerardo Barajas Suarez <diego.barajassuarez@mercadolibre.com.co>"
+    }
+  }
+}

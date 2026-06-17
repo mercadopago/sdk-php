@@ -1,0 +1,21 @@
+src/MercadoPago/Webhook/WebhookSignatureValidator.php
+  s_19c23aa3595bac::t_c3f0f1e50efddb 200
+tests/MercadoPago/Webhook/Unit/WebhookSignatureValidatorUnitTest.php
+  s_19c23aa3595bac::t_c3f0f1e50efddb 26,43,47,49,51,54-55,57-59,67,79,90,101,115,126,131,144,148,166-167,191,199,209
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "ebbb6c83d953638acad252933324701ed724b9f7",
+  "prompts": {},
+  "sessions": {
+    "s_19c23aa3595bac": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "353a998d-a210-4def-a5a0-fe5fed2e5603",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
