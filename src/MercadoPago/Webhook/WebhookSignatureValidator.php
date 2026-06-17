@@ -197,7 +197,7 @@ final class WebhookSignatureValidator
     {
         $parts = [];
         if ($dataId !== null) {
-            $parts[] = 'id:' . strtolower($dataId);
+            $parts[] = 'id:' . $dataId;
         }
 
         if ($requestId !== null) {
