@@ -23,7 +23,7 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     {
         $parts = [];
         if ($dataId) {
-            $parts[] = 'id:' . strtolower($dataId);
+            $parts[] = 'id:' . $dataId;
         }
         if ($requestId) {
             $parts[] = 'request-id:' . $requestId;
@@ -52,9 +52,9 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
     }
 
     // case 2
-    public function testUppercaseDataIdIsLowercased(): void
+    public function testUppercaseDataIdIsPreserved(): void
     {
-        $header = self::buildHeader(self::validHash());
+        $header = self::buildHeader(self::computeHash(self::DATA_ID_RAW, self::REQUEST_ID, self::TS, self::SECRET));
         WebhookSignatureValidator::validate($header, self::REQUEST_ID, self::DATA_ID_RAW, self::SECRET);
         $this->assertTrue(true);
     }
