@@ -45,6 +45,9 @@ class Order extends MPResource
     /** MercadoPago user ID of the seller who owns the order. */
     public ?string $user_id;
 
+    /** URL to redirect the buyer to the Checkout PRO payment flow. Generated automatically on order creation. */
+    public ?string $checkout_url;
+
     /** Temporary token identifying the client session for the checkout. */
     public ?string $client_token;
 

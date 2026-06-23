@@ -19,6 +19,12 @@ class Config
     /** Class mapper. */
     use Mapper;
 
+    /** Text shown on the buyer's credit card statement. Approximately 10 characters max depending on the card issuer. */
+    public ?string $statement_descriptor;
+
+    /** Offline payment expiration duration in ISO 8601 format (e.g. "P1D" = 1 day). */
+    public ?string $default_payment_due_date;
+
     /** Payment method restrictions, defaults, and installment settings. Maps to {@see PaymentMethodConfig}. */
     public array|object|null $payment_method;
 

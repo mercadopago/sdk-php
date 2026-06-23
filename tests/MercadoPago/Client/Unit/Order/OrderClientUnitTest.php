@@ -357,6 +357,119 @@ final class OrderClientUnitTest extends BaseClient
         );
     }
 
+    public function testCreateCheckoutPROSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/Order/order_checkout_pro.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 201);
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+        $client = new OrderClient();
+
+        $request = [
+            "type" => "online",
+            "processing_mode" => "manual",
+            "total_amount" => "500.00",
+            "external_reference" => "ext_ref_checkout_pro_001",
+            "capture_mode" => "automatic",
+            "marketplace_fee" => "5.00",
+            "description" => "Travel package SAO-RIO with insurance",
+            "expiration_time" => "P1D",
+            "payer" => [
+                "email" => "buyer@testuser.com",
+                "first_name" => "John",
+                "last_name" => "Smith",
+                "identification" => ["type" => "CPF", "number" => "12345678909"],
+                "phone" => ["area_code" => "11", "number" => "999998888"],
+                "address" => ["zip_code" => "01310-100", "street_name" => "Av. Paulista", "street_number" => "1000"]
+            ],
+            "shipment" => [
+                "mode" => "custom",
+                "local_pickup" => false,
+                "cost" => "15.00",
+                "free_shipping" => false,
+                "free_methods" => [["id" => 73328]],
+                "address" => ["zip_code" => "01310-100", "street_name" => "Av. Paulista", "street_number" => "1000"]
+            ],
+            "config" => [
+                "statement_descriptor" => "MYSTORE",
+                "default_payment_due_date" => "P1D",
+                "online" => [
+                    "available_from" => "2026-01-01T00:00:00Z",
+                    "allowed_user_type" => "account_only",
+                    "success_url" => "https://example.com/success",
+                    "failure_url" => "https://example.com/failure",
+                    "pending_url" => "https://example.com/pending",
+                    "auto_return" => "approved",
+                    "tracks" => [
+                        ["type" => "google_ad", "values" => ["conversion_id" => "21312312312123", "conversion_label" => "TEST"]],
+                        ["type" => "facebook_ad", "values" => ["pixel_id" => "21312312312123"]]
+                    ]
+                ],
+                "payment_method" => [
+                    "max_installments" => 12,
+                    "not_allowed_ids" => ["amex"],
+                    "not_allowed_types" => ["ticket"],
+                    "installments" => ["interest_free" => ["type" => "range", "values" => [2, 6]]]
+                ]
+            ],
+            "items" => [
+                ["external_code" => "ITEM-001", "title" => "Flight SAO-RIO", "quantity" => 1, "unit_price" => "450.00"],
+                ["external_code" => "ITEM-002", "title" => "Travel insurance", "quantity" => 1, "unit_price" => "50.00"]
+            ]
+        ];
+
+        $order = $client->create($request);
+
+        $this->assertSame(201, $order->getResponse()->getStatusCode());
+        $this->assertSame("ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9", $order->id);
+        $this->assertSame("online", $order->type);
+        $this->assertSame("manual", $order->processing_mode);
+        $this->assertSame("created", $order->status);
+        $this->assertSame("500.00", $order->total_amount);
+        $this->assertSame("ext_ref_checkout_pro_001", $order->external_reference);
+        // checkout_url is the key field for Checkout PRO — redirect the buyer here
+        $this->assertNotNull($order->checkout_url);
+        $this->assertStringContainsString("ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9", $order->checkout_url);
+        // payer
+        $this->assertSame("buyer@testuser.com", $order->payer->email);
+        $this->assertSame("CPF", $order->payer->identification->type);
+        $this->assertSame("12345678909", $order->payer->identification->number);
+        // shipment
+        $this->assertSame("custom", $order->shipment->mode);
+        $this->assertFalse($order->shipment->local_pickup);
+        $this->assertSame("15.00", $order->shipment->cost);
+        $this->assertFalse($order->shipment->free_shipping);
+        $this->assertSame(73328, $order->shipment->free_methods[0]["id"]);
+        $this->assertSame("3", $order->shipment->address->floor);
+        $this->assertSame("B", $order->shipment->address->apartment);
+        // config root
+        $this->assertSame("MYSTORE", $order->config->statement_descriptor);
+        $this->assertSame("P1D", $order->config->default_payment_due_date);
+        // config.online
+        $this->assertSame("2026-01-01T00:00:00Z", $order->config->online->available_from);
+        $this->assertSame("account_only", $order->config->online->allowed_user_type);
+        $this->assertSame("https://example.com/success", $order->config->online->success_url);
+        $this->assertSame("https://example.com/failure", $order->config->online->failure_url);
+        $this->assertSame("https://example.com/pending", $order->config->online->pending_url);
+        $this->assertSame("approved", $order->config->online->auto_return);
+        $this->assertFalse($order->config->online->retries->allowed);
+        $this->assertSame("google_ad", $order->config->online->tracks[0]->type);
+        $this->assertSame("21312312312123", $order->config->online->tracks[0]->values["conversion_id"]);
+        $this->assertSame("facebook_ad", $order->config->online->tracks[1]->type);
+        $this->assertSame("21312312312123", $order->config->online->tracks[1]->values["pixel_id"]);
+        // config.payment_method
+        $this->assertSame(12, $order->config->payment_method->max_installments);
+        $this->assertSame(["amex"], $order->config->payment_method->not_allowed_ids);
+        $this->assertSame("range", $order->config->payment_method->installments->interest_free->type);
+        $this->assertSame([2, 6], $order->config->payment_method->installments->interest_free->values);
+        // items
+        $this->assertCount(2, $order->items);
+        $this->assertSame("Flight SAO-RIO", $order->items[0]->title);
+        $this->assertSame("450.00", $order->items[0]->unit_price);
+        $this->assertSame("Travel insurance", $order->items[1]->title);
+        $this->assertSame("50.00", $order->items[1]->unit_price);
+    }
+
     public function testSearchSuccess(): void
     {
         $filepath = '../../../../Resources/Mocks/Response/Order/order_search.json';
