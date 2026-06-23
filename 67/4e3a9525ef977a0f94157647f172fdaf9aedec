@@ -1,0 +1,41 @@
+tests/MercadoPago/Resources/Mocks/Response/Order/order_checkout_pro.json
+  s_cf3bfe8e13bfe0::t_53f595a301c5a2 1-36,38-53,55-122
+  s_cf3bfe8e13bfe0::t_746b3d595d914f 37,54
+tests/MercadoPago/Client/Unit/Order/OrderClientUnitTest.php
+  s_cf3bfe8e13bfe0::t_f37b2e4f2d8c8a 443-444,455-459
+  s_cf3bfe8e13bfe0::t_5b70a59ab0e390 360-442,445-454,460-472
+src/MercadoPago/Resources/Common/Address.php
+  s_cf3bfe8e13bfe0::t_7681623b3fb072 41-46
+src/MercadoPago/Resources/Order/Track.php
+  s_cf3bfe8e13bfe0::t_073c3356d6524d 1-24
+src/MercadoPago/Resources/Order/Shipment.php
+  s_cf3bfe8e13bfe0::t_4283ed451e9a9d 12-13,22-35
+src/MercadoPago/Resources/Order.php
+  s_cf3bfe8e13bfe0::t_d5616e88dd7062 48-50
+examples/Order/CreateCheckoutPRO.php
+  s_cf3bfe8e13bfe0::t_1a6dcd4b042b96 1-157
+src/MercadoPago/Resources/Order/Config.php
+  s_cf3bfe8e13bfe0::t_c4cab6252a6baf 22-27
+src/MercadoPago/Resources/Order/OnlineConfig.php
+  s_cf3bfe8e13bfe0::t_5bbba91204e645 13-14,23-28,44-46,48-49,51
+  s_cf3bfe8e13bfe0::t_fe6a82ac88e461 47,50
+  s_cf3bfe8e13bfe0::t_690ee615e1ac29 60-61
+src/MercadoPago/Resources/Order/Retries.php
+  s_cf3bfe8e13bfe0::t_2762d51e15653d 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "674e3a9525ef977a0f94157647f172fdaf9aedec",
+  "prompts": {},
+  "sessions": {
+    "s_cf3bfe8e13bfe0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9556c2e7-3863-46e5-97fb-9aa62ce137c7",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
