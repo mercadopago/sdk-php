@@ -1,0 +1,19 @@
+src/MercadoPago/Resources/Payment/Cardholder.php
+  s_cf3bfe8e13bfe0::t_7b390f409fafd5 26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "f7cc5554a23daa6c9189d172736e4c4cab1bed29",
+  "prompts": {},
+  "sessions": {
+    "s_cf3bfe8e13bfe0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9556c2e7-3863-46e5-97fb-9aa62ce137c7",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
