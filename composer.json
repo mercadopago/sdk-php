@@ -1,6 +1,7 @@
 {
     "name": "mercadopago/dx-php",
     "description": "Mercado Pago PHP SDK",
+    "version": "3.12.0-beta.1",
     "type": "library",
     "license": "MIT",
     "homepage": "https://github.com/mercadopago/sdk-php",
