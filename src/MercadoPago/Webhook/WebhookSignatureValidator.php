@@ -73,7 +73,7 @@ final class WebhookSignatureValidator
         $xRequestId = self::normalize($xRequestId);
         $dataId = self::normalize($dataId);
         $versions = $supportedVersions ?: self::DEFAULT_SUPPORTED_VERSIONS;
-        $now = $nowProvider ?? static fn(): int => (int) (microtime(true) * 1000);
+        $now = $nowProvider ?? static fn (): int => (int) (microtime(true) * 1000);
 
         if ($xSignature === null) {
             throw new InvalidWebhookSignatureException(

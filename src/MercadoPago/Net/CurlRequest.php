@@ -41,7 +41,6 @@ class CurlRequest implements HttpRequest
     /** @inheritDoc */
     public function close(): void
     {
-        curl_close($this->handle);
     }
 
     /** @inheritDoc */
