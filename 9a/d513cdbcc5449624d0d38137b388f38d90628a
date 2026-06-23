@@ -1,0 +1,19 @@
+src/MercadoPago/MercadoPagoConfig.php
+  s_cf3bfe8e13bfe0::t_938a84a9a6e5f6 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "9ad513cdbcc5449624d0d38137b388f38d90628a",
+  "prompts": {},
+  "sessions": {
+    "s_cf3bfe8e13bfe0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9556c2e7-3863-46e5-97fb-9aa62ce137c7",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
