@@ -1,0 +1,21 @@
+README.md
+  s_bd01000f922032::t_954f939e175d26 24
+composer.json
+  s_bd01000f922032::t_954f939e175d26 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "ebc90840cde3bb0913dcd8cc86f89ed87fd82f20",
+  "prompts": {},
+  "sessions": {
+    "s_bd01000f922032": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef6dd-7161-77d3-94a8-0b7289cfdf22",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
