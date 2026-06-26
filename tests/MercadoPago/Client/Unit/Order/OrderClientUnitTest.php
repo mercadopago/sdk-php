@@ -470,6 +470,232 @@ final class OrderClientUnitTest extends BaseClient
         $this->assertSame("50.00", $order->items[1]->unit_price);
     }
 
+    public function testCreateCheckoutPROSendsContractPayloadAndHeaders(): void
+    {
+        $captured_options = [];
+        $mock_http_request = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mock_http_request->expects($this->once())
+            ->method('setOptionArray')
+            ->with($this->callback(function (array $options) use (&$captured_options): bool {
+                $captured_options = $options;
+                return true;
+            }));
+        $mock_http_request->method('execute')->willReturn(json_encode([
+            'id' => 'ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9',
+            'status' => 'created',
+        ]));
+        $mock_http_request->method('getInfo')->willReturnCallback(
+            fn ($option) => $option === CURLINFO_HTTP_CODE ? 201 : null
+        );
+        $mock_http_request->method('close');
+
+        MercadoPagoConfig::setHttpClient(new MPDefaultHttpClient($mock_http_request));
+        $client = new OrderClient();
+        $request_options = new RequestOptions();
+        $request_options->setCustomHeaders(["X-Idempotency-Key: checkout-pro-create-key"]);
+
+        $client->create($this->createCheckoutProRequest(), $request_options);
+
+        $payload = json_decode($captured_options[CURLOPT_POSTFIELDS], true);
+        $this->assertSame('/v1/orders', parse_url($captured_options[CURLOPT_URL], PHP_URL_PATH));
+        $this->assertSame('POST', $captured_options[CURLOPT_CUSTOMREQUEST]);
+        $this->assertSame('online', $payload['type']);
+        $this->assertSame('manual', $payload['processing_mode']);
+        $this->assertSame('500.00', $payload['total_amount']);
+        $this->assertSame('450.00', $payload['items'][0]['unit_price']);
+        $this->assertSame('15.00', $payload['shipment']['cost']);
+        $this->assertFalse($payload['shipment']['local_pickup']);
+        $this->assertFalse($payload['shipment']['free_shipping']);
+        $this->assertSame(73328, $payload['shipment']['free_methods'][0]['id']);
+        $this->assertSame('approved', $payload['config']['online']['auto_return']);
+        $this->assertArrayNotHasKey('auto_return_url', $payload['config']['online']);
+        $this->assertSame('google_ad', $payload['config']['online']['tracks'][0]['type']);
+        $this->assertSame('21312312312123', $payload['config']['online']['tracks'][0]['values']['conversion_id']);
+        $this->assertSame('facebook_ad', $payload['config']['online']['tracks'][1]['type']);
+        $this->assertSame('21312312312123', $payload['config']['online']['tracks'][1]['values']['pixel_id']);
+        $this->assertSame('range', $payload['config']['payment_method']['installments']['interest_free']['type']);
+        $this->assertSame([2, 6], $payload['config']['payment_method']['installments']['interest_free']['values']);
+        $this->assertContains('X-Idempotency-Key: checkout-pro-create-key', $captured_options[CURLOPT_HTTPHEADER]);
+        $this->assertContains('X-Product-Id: ' . MercadoPagoConfig::$PRODUCT_ID, $captured_options[CURLOPT_HTTPHEADER]);
+    }
+
+    public function testGetCheckoutPROOrderMapsRedirectFields(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/Order/order_checkout_pro.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+        MercadoPagoConfig::setHttpClient(new MPDefaultHttpClient($mock_http_request));
+        $client = new OrderClient();
+
+        $order = $client->get("ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9");
+
+        $this->assertSame(200, $order->getResponse()->getStatusCode());
+        $this->assertSame("ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9", $order->id);
+        $this->assertSame("manual", $order->processing_mode);
+        $this->assertNotNull($order->checkout_url);
+        $this->assertNotEmpty($order->client_token);
+        $this->assertSame("approved", $order->config->online->auto_return);
+    }
+
+    public function testSearchCheckoutPROOrderMapsRedirectFields(): void
+    {
+        $mock_http_request = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mock_http_request->method('execute')->willReturn(json_encode([
+            'paging' => ['total' => 1, 'limit' => 1, 'offset' => 0, 'total_pages' => 1],
+            'data' => [
+                json_decode(file_get_contents(__DIR__ . '../../../../Resources/Mocks/Response/Order/order_checkout_pro.json'), true),
+            ],
+        ]));
+        $mock_http_request->method('getInfo')->willReturnCallback(
+            fn ($option) => $option === CURLINFO_HTTP_CODE ? 200 : null
+        );
+        $mock_http_request->method('close');
+        MercadoPagoConfig::setHttpClient(new MPDefaultHttpClient($mock_http_request));
+        $client = new OrderClient();
+
+        $search_result = $client->search(new \MercadoPago\Net\MPSearchRequest(1, 0, []));
+
+        $this->assertSame(200, $search_result->getResponse()->getStatusCode());
+        $this->assertSame(1, $search_result->paging->total);
+        $this->assertSame("ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9", $search_result->data[0]->id);
+        $this->assertNotNull($search_result->data[0]->checkout_url);
+        $this->assertNotEmpty($search_result->data[0]->client_token);
+        $this->assertSame("approved", $search_result->data[0]->config->online->auto_return);
+    }
+
+    public function testCancelCheckoutPROOrderUsesBaseHeaders(): void
+    {
+        $captured_options = [];
+        $mock_http_request = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mock_http_request->expects($this->once())
+            ->method('setOptionArray')
+            ->with($this->callback(function (array $options) use (&$captured_options): bool {
+                $captured_options = $options;
+                return true;
+            }));
+        $mock_http_request->method('execute')->willReturn(json_encode([
+            'id' => 'ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9',
+            'status' => 'cancelled',
+            'type' => 'online',
+            'processing_mode' => 'manual',
+        ]));
+        $mock_http_request->method('getInfo')->willReturnCallback(
+            fn ($option) => $option === CURLINFO_HTTP_CODE ? 200 : null
+        );
+        $mock_http_request->method('close');
+
+        MercadoPagoConfig::setHttpClient(new MPDefaultHttpClient($mock_http_request));
+        $client = new OrderClient();
+        $request_options = new RequestOptions();
+        $request_options->setCustomHeaders(["X-Idempotency-Key: checkout-pro-cancel-key"]);
+
+        $order = $client->cancel("ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9", $request_options);
+
+        $this->assertSame("cancelled", $order->status);
+        $this->assertSame('/v1/orders/ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9/cancel', parse_url($captured_options[CURLOPT_URL], PHP_URL_PATH));
+        $this->assertSame('POST', $captured_options[CURLOPT_CUSTOMREQUEST]);
+        $this->assertContains('X-Idempotency-Key: checkout-pro-cancel-key', $captured_options[CURLOPT_HTTPHEADER]);
+        $this->assertContains('X-Product-Id: ' . MercadoPagoConfig::$PRODUCT_ID, $captured_options[CURLOPT_HTTPHEADER]);
+    }
+
+    public function testRefundCheckoutPROOrderUsesBaseHeaders(): void
+    {
+        $captured_options = [];
+        $mock_http_request = $this->getMockBuilder(\MercadoPago\Net\HttpRequest::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mock_http_request->expects($this->once())
+            ->method('setOptionArray')
+            ->with($this->callback(function (array $options) use (&$captured_options): bool {
+                $captured_options = $options;
+                return true;
+            }));
+        $mock_http_request->method('execute')->willReturn(json_encode([
+            'id' => 'ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9',
+            'status' => 'refunded',
+            'type' => 'online',
+            'processing_mode' => 'manual',
+        ]));
+        $mock_http_request->method('getInfo')->willReturnCallback(
+            fn ($option) => $option === CURLINFO_HTTP_CODE ? 201 : null
+        );
+        $mock_http_request->method('close');
+
+        MercadoPagoConfig::setHttpClient(new MPDefaultHttpClient($mock_http_request));
+        $client = new OrderClient();
+        $request_options = new RequestOptions();
+        $request_options->setCustomHeaders(["X-Idempotency-Key: checkout-pro-refund-key"]);
+
+        $order = $client->refund("ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9", null, $request_options);
+
+        $this->assertSame("refunded", $order->status);
+        $this->assertSame('/v1/orders/ORDTST01KS5AJ6HTK2HRQ3XJ3C2JCKP9/refund', parse_url($captured_options[CURLOPT_URL], PHP_URL_PATH));
+        $this->assertSame('POST', $captured_options[CURLOPT_CUSTOMREQUEST]);
+        $this->assertContains('X-Idempotency-Key: checkout-pro-refund-key', $captured_options[CURLOPT_HTTPHEADER]);
+        $this->assertContains('X-Product-Id: ' . MercadoPagoConfig::$PRODUCT_ID, $captured_options[CURLOPT_HTTPHEADER]);
+    }
+
+    private function createCheckoutProRequest(): array
+    {
+        return [
+            "type" => "online",
+            "processing_mode" => "manual",
+            "total_amount" => "500.00",
+            "external_reference" => "ext_ref_checkout_pro_001",
+            "capture_mode" => "automatic",
+            "marketplace_fee" => "5.00",
+            "description" => "Travel package SAO-RIO with insurance",
+            "expiration_time" => "P1D",
+            "payer" => [
+                "email" => "buyer@testuser.com",
+                "first_name" => "John",
+                "last_name" => "Smith",
+                "identification" => ["type" => "CPF", "number" => "12345678909"],
+                "phone" => ["area_code" => "11", "number" => "999998888"],
+                "address" => ["zip_code" => "01310-100", "street_name" => "Av. Paulista", "street_number" => "1000"]
+            ],
+            "shipment" => [
+                "mode" => "custom",
+                "local_pickup" => false,
+                "cost" => "15.00",
+                "free_shipping" => false,
+                "free_methods" => [["id" => 73328]],
+                "address" => ["zip_code" => "01310-100", "street_name" => "Av. Paulista", "street_number" => "1000"]
+            ],
+            "config" => [
+                "statement_descriptor" => "MYSTORE",
+                "default_payment_due_date" => "P1D",
+                "online" => [
+                    "available_from" => "2026-01-01T00:00:00Z",
+                    "allowed_user_type" => "account_only",
+                    "success_url" => "https://example.com/success",
+                    "failure_url" => "https://example.com/failure",
+                    "pending_url" => "https://example.com/pending",
+                    "auto_return" => "approved",
+                    "tracks" => [
+                        ["type" => "google_ad", "values" => ["conversion_id" => "21312312312123", "conversion_label" => "TEST"]],
+                        ["type" => "facebook_ad", "values" => ["pixel_id" => "21312312312123"]]
+                    ]
+                ],
+                "payment_method" => [
+                    "max_installments" => 12,
+                    "not_allowed_ids" => ["amex"],
+                    "not_allowed_types" => ["ticket"],
+                    "installments" => ["interest_free" => ["type" => "range", "values" => [2, 6]]]
+                ]
+            ],
+            "items" => [
+                ["external_code" => "ITEM-001", "title" => "Flight SAO-RIO", "quantity" => 1, "unit_price" => "450.00"],
+                ["external_code" => "ITEM-002", "title" => "Travel insurance", "quantity" => 1, "unit_price" => "50.00"]
+            ]
+        ];
+    }
+
     public function testSearchSuccess(): void
     {
         $filepath = '../../../../Resources/Mocks/Response/Order/order_search.json';

@@ -38,10 +38,10 @@ class OnlineConfig
     /** URL to redirect the buyer after a failed payment. */
     public ?string $failure_url;
 
-    /** URL for automatic redirection after the buyer completes checkout. */
+    /** Legacy URL field for automatic redirection. Prefer auto_return plus success/failure/pending URLs for online orders. */
     public ?string $auto_return_url;
 
-    /** Controls automatic redirect behavior after payment. "approved" redirects to success_url on approval; "all" redirects on any outcome. */
+    /** Automatic redirect behavior. "approved" redirects to success_url on approval; "all" redirects on any outcome. */
     public ?string $auto_return;
 
     /** Tracking pixels fired at checkout completion. Supports "google_ad" and "facebook_ad" types. Each element maps to {@see Track}. */
