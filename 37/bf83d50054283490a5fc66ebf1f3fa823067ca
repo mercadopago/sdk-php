@@ -1,0 +1,21 @@
+src/MercadoPago/Resources/Order/OnlineConfig.php
+  s_4c671d9a1f7578::t_e931767c614d64 41,44
+tests/MercadoPago/Client/Unit/Order/OrderClientUnitTest.php
+  s_4c671d9a1f7578::t_48ccaff248a0ec 473-649
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "37bf83d50054283490a5fc66ebf1f3fa823067ca",
+  "prompts": {},
+  "sessions": {
+    "s_4c671d9a1f7578": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0163-32d8-7801-b29b-80695531622f",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
