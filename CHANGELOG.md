@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project follows Keep a Changelog and Semantic Versioning.
 
+## [3.12.0] - 2026-06-27
+
+### Changed
+
+- Bump the SDK version to `3.12.0` in `MercadoPagoConfig::$CURRENT_VERSION`
+
 ## [3.11.0] - 2026-05-27
 
 ### Added
