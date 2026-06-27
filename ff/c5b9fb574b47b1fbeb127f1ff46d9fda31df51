@@ -1,0 +1,21 @@
+CHANGELOG.md
+  s_58e4139ea7d1ca::t_84da989eba3fa0 7-12
+src/MercadoPago/MercadoPagoConfig.php
+  s_58e4139ea7d1ca::t_3bbc79067dfc91 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "ffc5b9fb574b47b1fbeb127f1ff46d9fda31df51",
+  "prompts": {},
+  "sessions": {
+    "s_58e4139ea7d1ca": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "15e9cdf8-b09b-4b06-a7a6-b04775bec911",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Luis Sanchez <luismiguel.sanchezgarcia@mercadolibre.com.co>"
+    }
+  }
+}
