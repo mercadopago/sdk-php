@@ -38,6 +38,12 @@ class Address
     /** Additional address details (e.g. apartment, suite, floor). */
     public ?string $complement;
 
+    /** Floor number within a building. */
+    public ?string $floor;
+
+    /** Apartment or unit identifier within a floor. */
+    public ?string $apartment;
+
     /** @var City|array|null City information associated with this address. */
     public array|object|null $city;
 
