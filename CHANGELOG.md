@@ -8,7 +8,7 @@ This project follows Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
-- Bump the SDK version to `3.12.0` in `MercadoPagoConfig::$CURRENT_VERSION`
+- Order CheckokutPRO capability
 
 ## [3.11.0] - 2026-05-27
 
