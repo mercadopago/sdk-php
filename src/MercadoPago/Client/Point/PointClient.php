@@ -58,7 +58,7 @@ final class PointClient extends MercadoPagoClient
      */
     public function createPaymentIntent(string $device_id, array $request, ?RequestOptions $request_options = null): PaymentIntent
     {
-        $response = parent::send(sprintf(self::PAYMENT_INTENT_URL, $device_id), HttpMethod::POST, json_encode($request), null, $request_options);
+        $response = parent::send(sprintf(self::PAYMENT_INTENT_URL, rawurlencode($device_id)), HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(PaymentIntent::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -75,7 +75,7 @@ final class PointClient extends MercadoPagoClient
      */
     public function searchPaymentIntent(string $payment_intent_id, ?RequestOptions $request_options = null): PaymentIntent
     {
-        $response = parent::send(sprintf(self::PAYMENT_INTENT_SEARCH_URL, $payment_intent_id), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::PAYMENT_INTENT_SEARCH_URL, rawurlencode($payment_intent_id)), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(PaymentIntent::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -93,7 +93,7 @@ final class PointClient extends MercadoPagoClient
      */
     public function cancelPaymentIntent(string $device_id, string $payment_intent_id, ?RequestOptions $request_options = null): PaymentIntentCancel
     {
-        $response = parent::send(sprintf(self::PAYMENT_INTENT_DELETE_URL, $device_id, $payment_intent_id), HttpMethod::DELETE, null, null, $request_options);
+        $response = parent::send(sprintf(self::PAYMENT_INTENT_DELETE_URL, rawurlencode($device_id), rawurlencode($payment_intent_id)), HttpMethod::DELETE, null, null, $request_options);
         $result = Serializer::deserializeFromJson(PaymentIntentCancel::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -127,7 +127,7 @@ final class PointClient extends MercadoPagoClient
      */
     public function getPaymentIntentStatus(string $payment_intent_id, ?RequestOptions $request_options = null): PaymentIntentStatus
     {
-        $response = parent::send(sprintf(self::PAYMENT_INTENT_STATUS_URL, $payment_intent_id), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::PAYMENT_INTENT_STATUS_URL, rawurlencode($payment_intent_id)), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(PaymentIntentStatus::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -163,7 +163,7 @@ final class PointClient extends MercadoPagoClient
      */
     public function changeDeviceOperatingMode(string $device_id, PointDeviceOperatingModeRequest $request, ?RequestOptions $request_options = null): PointDeviceOperatingMode
     {
-        $response = parent::send(sprintf(self::DEVICE_WITH_ID_URL, $device_id), HttpMethod::PATCH, json_encode($request), null, $request_options);
+        $response = parent::send(sprintf(self::DEVICE_WITH_ID_URL, rawurlencode($device_id)), HttpMethod::PATCH, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(PointDeviceOperatingMode::class, $response->getContent());
         $result->setResponse($response);
         return $result;

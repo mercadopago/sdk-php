@@ -43,7 +43,7 @@ final class ChargebackClient extends MercadoPagoClient
      */
     public function get(string $id, ?RequestOptions $request_options = null): Chargeback
     {
-        $response = parent::send(sprintf(self::URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_ID, rawurlencode($id)), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(Chargeback::class, $response->getContent());
         $result->setResponse($response);
         return $result;

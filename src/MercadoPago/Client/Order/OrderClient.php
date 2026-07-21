@@ -70,7 +70,7 @@ final class OrderClient extends MercadoPagoClient
      */
     public function capture(string $order_id, ?RequestOptions $request_options = null): Order
     {
-        $response = parent::send(sprintf(self::URL_CAPTURE, $order_id), HttpMethod::POST, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_CAPTURE, rawurlencode($order_id)), HttpMethod::POST, null, null, $request_options);
         $result = Serializer::deserializeFromJson(Order::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -88,7 +88,7 @@ final class OrderClient extends MercadoPagoClient
      */
     public function get(string $order_id, ?RequestOptions $request_options = null): Order
     {
-        $response = parent::send(sprintf(self::URL_WITH_ID, $order_id), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_ID, rawurlencode($order_id)), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(Order::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -109,7 +109,7 @@ final class OrderClient extends MercadoPagoClient
      */
     public function cancel(string $order_id, ?RequestOptions $request_options = null): Order
     {
-        $response = parent::send(sprintf(self::URL_CANCEL, $order_id), HttpMethod::POST, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_CANCEL, rawurlencode($order_id)), HttpMethod::POST, null, null, $request_options);
         $result = Serializer::deserializeFromJson(Order::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -130,7 +130,7 @@ final class OrderClient extends MercadoPagoClient
      */
     public function process(string $order_id, ?RequestOptions $request_options = null): Order
     {
-        $response = parent::send(sprintf(self::URL_PROCESS, $order_id), HttpMethod::POST, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_PROCESS, rawurlencode($order_id)), HttpMethod::POST, null, null, $request_options);
         $result = Serializer::deserializeFromJson(Order::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -152,7 +152,7 @@ final class OrderClient extends MercadoPagoClient
      */
     public function refund(string $order_id, ?array $request = null, ?RequestOptions $request_options = null): Order
     {
-        $path = sprintf(self::URL_REFUND, $order_id);
+        $path = sprintf(self::URL_REFUND, rawurlencode($order_id));
         if ($request !== null) {
             $request = json_encode($request);
         }

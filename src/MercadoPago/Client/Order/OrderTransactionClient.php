@@ -41,7 +41,7 @@ final class OrderTransactionClient extends MercadoPagoClient
      */
     public function create(string $order_id, array $request, ?RequestOptions $request_options = null): Transactions
     {
-        $path = sprintf(self::URL, $order_id);
+        $path = sprintf(self::URL, rawurlencode($order_id));
         $response = parent::send($path, HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(Transactions::class, $response->getContent());
         $result->setResponse($response);
@@ -61,7 +61,7 @@ final class OrderTransactionClient extends MercadoPagoClient
      */
     public function update(string $order_id, string $transaction_id, array $request, ?RequestOptions $request_options = null): UpdateTransaction
     {
-        $path = sprintf(self::URL_WITH_ID, $order_id, $transaction_id);
+        $path = sprintf(self::URL_WITH_ID, rawurlencode($order_id), rawurlencode($transaction_id));
         $response = parent::send($path, HttpMethod::PUT, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(UpdateTransaction::class, $response->getContent());
         $result->setResponse($response);
@@ -80,7 +80,7 @@ final class OrderTransactionClient extends MercadoPagoClient
      */
     public function delete(string $order_id, string $transaction_id, ?RequestOptions $request_options = null): MPResponse
     {
-        $path = sprintf(self::URL_WITH_ID, $order_id, $transaction_id);
+        $path = sprintf(self::URL_WITH_ID, rawurlencode($order_id), rawurlencode($transaction_id));
         return parent::send($path, HttpMethod::DELETE, null, null, $request_options);
     }
 }

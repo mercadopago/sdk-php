@@ -64,7 +64,7 @@ final class PreApprovalClient extends MercadoPagoClient
      */
     public function get(string $id, ?RequestOptions $request_options = null): PreApproval
     {
-        $response = parent::send(sprintf(self::URL_WITH_ID, $id), HttpMethod::GET, null, null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_ID, rawurlencode($id)), HttpMethod::GET, null, null, $request_options);
         $result = Serializer::deserializeFromJson(PreApproval::class, $response->getContent());
         $result->setResponse($response);
         return $result;
@@ -82,7 +82,7 @@ final class PreApprovalClient extends MercadoPagoClient
      */
     public function update(string $id, array $request, ?RequestOptions $request_options = null): PreApproval
     {
-        $response = parent::send(sprintf(self::URL_WITH_ID, $id), HttpMethod::PUT, json_encode($request), null, $request_options);
+        $response = parent::send(sprintf(self::URL_WITH_ID, rawurlencode($id)), HttpMethod::PUT, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(PreApproval::class, $response->getContent());
         $result->setResponse($response);
         return $result;
