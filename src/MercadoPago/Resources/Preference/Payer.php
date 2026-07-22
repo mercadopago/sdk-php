@@ -45,6 +45,18 @@ class Payer
     /** Date of the last purchase. */
     public ?string $last_purchase;
 
+    /** Authentication type used by the payer. */
+    public ?string $authentication_type;
+
+    /** Whether the payer is a prime user. */
+    public ?bool $is_prime_user;
+
+    /** Whether this is the payer's first online purchase. */
+    public ?bool $is_first_purchase_online;
+
+    /** ISO 8601 date when the payer registered. */
+    public ?string $registration_date;
+
     private $map = [
         "identification" => "MercadoPago\Resources\Common\Identification",
         "phone" => "MercadoPago\Resources\Common\Phone",
