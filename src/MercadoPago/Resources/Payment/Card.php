@@ -25,10 +25,10 @@ class Card
     public ?string $first_six_digits;
 
     /** Four-digit expiration year of the card. */
-    public ?int $expiration_year;
+    public int|string|null $expiration_year;
 
     /** Two-digit expiration month of the card (1-12). */
-    public ?int $expiration_month;
+    public int|string|null $expiration_month;
 
     /** ISO 8601 timestamp when the card record was created. */
     public ?string $date_created;
