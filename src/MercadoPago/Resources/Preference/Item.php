@@ -40,6 +40,15 @@ class Item
     /** Category Descriptor */
     public array|object|null $category_descriptor;
 
+    /** Whether the item includes a warranty. */
+    public ?bool $warranty;
+
+    /** Item type. */
+    public ?string $type;
+
+    /** ISO 8601 date of the event associated with the item. */
+    public ?string $event_date;
+
     public $map = [
         "category_descriptor" => "MercadoPago\Resources\Preference\CategoryDescriptor",
     ];

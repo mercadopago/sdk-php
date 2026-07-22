@@ -30,9 +30,25 @@ class AdditionalInfoPayer
     /** ISO 8601 date when the payer registered on the integrator's platform. */
     public ?string $registration_date;
 
+    /** Authentication type used by the payer. */
+    public ?string $authentication_type;
+
+    /** Whether the payer is a prime user. */
+    public ?bool $is_prime_user;
+
+    /** Whether this is the payer's first online purchase. */
+    public ?bool $is_first_purchase_online;
+
+    /** ISO 8601 date of the payer's last purchase. */
+    public ?string $last_purchase;
+
+    /** @var \MercadoPago\Resources\Common\Identification|array|null Payer's identification document. */
+    public array|object|null $identification;
+
     private $map = [
         "phone" => "MercadoPago\Resources\Common\Phone",
-        "address" => "MercadoPago\Resources\Common\Address"
+        "address" => "MercadoPago\Resources\Common\Address",
+        "identification" => "MercadoPago\Resources\Common\Identification",
     ];
 
     /**
