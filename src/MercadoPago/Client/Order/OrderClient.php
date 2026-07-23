@@ -4,6 +4,7 @@ namespace MercadoPago\Client\Order;
 
 use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\MercadoPagoClient;
+use MercadoPago\Client\Order\Request\OrderCreateRequest;
 use MercadoPago\Resources\Order;
 use MercadoPago\Resources\OrderSearch;
 use MercadoPago\MercadoPagoConfig;
@@ -40,15 +41,23 @@ final class OrderClient extends MercadoPagoClient
     /**
      * Creates a new order.
      *
-     * @param array<string,mixed> $request Order data (type, total_amount, external_reference, payer, transactions, items, etc.).
+     * Accepts either a plain array (dynamic form) or a typed {@see OrderCreateRequest}
+     * object. When a typed request is passed, it is converted to an array via
+     * {@see OrderCreateRequest::toArray()} before serialization; the resulting JSON
+     * body is identical for both forms.
+     *
+     * @param array<string,mixed>|OrderCreateRequest $request Order data (type, total_amount, external_reference, payer, transactions, items, etc.).
      * @param RequestOptions|null $request_options Per-request configuration overrides.
      * @return Order The created order resource.
      * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
      * @throws \Exception On transport-level errors.
      * @see https://www.mercadopago.com/developers/en/reference/order/_v1_orders/post
      */
-    public function create(array $request, ?RequestOptions $request_options = null): Order
+    public function create(array|OrderCreateRequest $request, ?RequestOptions $request_options = null): Order
     {
+        if ($request instanceof OrderCreateRequest) {
+            $request = $request->toArray();
+        }
         $response = parent::send(self::URL, HttpMethod::POST, json_encode($request), null, $request_options);
         $result = Serializer::deserializeFromJson(Order::class, $response->getContent());
         $result->setResponse($response);
