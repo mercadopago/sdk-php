@@ -39,8 +39,21 @@ class TransactionData
     /** End-to-end identifier for Pix transactions, used for reconciliation. */
     public ?string $e2e_id;
 
+    /** Indicates whether this is the first transaction in a CREDENTIAL_ON_FILE agreement. */
+    public ?bool $first_transaction;
+
+    /** Storage type for the credential-on-file agreement (e.g. "ON_DEMAND", "RECURRING"). */
+    public ?string $storage;
+
+    /** Initiator of the transaction in a CREDENTIAL_ON_FILE flow (e.g. "MERCHANT", "CUSTOMER"). */
+    public ?string $transaction_initiator;
+
+    /** @var TransactionDataReference|array|null Reference to the original stored-credential transaction. */
+    public array|object|null $reference;
+
     private $map = [
         "bank_info" => "MercadoPago\Resources\Payment\BankInfo",
+        "reference" => "MercadoPago\Resources\Payment\TransactionDataReference",
     ];
 
     /**
