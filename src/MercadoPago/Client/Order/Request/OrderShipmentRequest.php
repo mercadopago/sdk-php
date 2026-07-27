@@ -3,6 +3,7 @@
 namespace MercadoPago\Client\Order\Request;
 
 use JsonSerializable;
+use MercadoPago\Resources\Common\Address;
 
 /**
  * Typed request object for the order shipment.
@@ -21,7 +22,7 @@ final class OrderShipmentRequest implements JsonSerializable
         public readonly ?string $cost = null,
         public readonly ?bool $free_shipping = null,
         public readonly ?array $free_methods = null,
-        public readonly ?OrderAddressRequest $address = null,
+        public readonly ?Address $address = null,
     ) {
     }
 

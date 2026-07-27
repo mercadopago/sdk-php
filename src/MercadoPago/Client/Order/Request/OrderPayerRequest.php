@@ -3,6 +3,9 @@
 namespace MercadoPago\Client\Order\Request;
 
 use JsonSerializable;
+use MercadoPago\Resources\Common\Address;
+use MercadoPago\Resources\Common\Identification;
+use MercadoPago\Resources\Common\Phone;
 
 /**
  * Typed request object for the order payer.
@@ -19,9 +22,9 @@ final class OrderPayerRequest implements JsonSerializable
         public readonly ?string $last_name = null,
         public readonly ?string $customer_id = null,
         public readonly ?string $entity_type = null,
-        public readonly ?OrderIdentificationRequest $identification = null,
-        public readonly ?OrderPhoneRequest $phone = null,
-        public readonly ?OrderAddressRequest $address = null,
+        public readonly ?Identification $identification = null,
+        public readonly ?Phone $phone = null,
+        public readonly ?Address $address = null,
     ) {
     }
 
