@@ -198,7 +198,7 @@ final class OrderCreateRequestUnitTest extends BaseClient
         $this->assertSame("recurring", $sc["reason"]);
         $this->assertTrue($sc["store_payment_method"]);
         $this->assertFalse($sc["first_payment"]);
-        $this->assertSame("prev_txn_123", $sc["prev_transaction_ref"]);
+        $this->assertSame("prev_txn_123", $sc["previous_transaction_reference"]);
 
         $sd = $payment["subscription_data"];
         $this->assertSame("inv_1", $sd["invoice_id"]);
@@ -211,7 +211,7 @@ final class OrderCreateRequestUnitTest extends BaseClient
         // Round-trips cleanly through json.
         $json = json_encode($arr);
         $this->assertStringContainsString('"payment_profile_id"', $json);
-        $this->assertStringContainsString('"prev_transaction_ref"', $json);
+        $this->assertStringContainsString('"previous_transaction_reference"', $json);
         $this->assertStringContainsString('"subscription_sequence"', $json);
     }
 
