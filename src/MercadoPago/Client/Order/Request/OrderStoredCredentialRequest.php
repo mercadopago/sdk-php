@@ -29,7 +29,7 @@ final class OrderStoredCredentialRequest implements JsonSerializable
             "reason" => $this->reason,
             "store_payment_method" => $this->store_payment_method,
             "first_payment" => $this->first_payment,
-            "prev_transaction_ref" => $this->prev_transaction_ref,
+            "previous_transaction_reference" => $this->prev_transaction_ref,
         ], fn ($v) => $v !== null);
     }
 

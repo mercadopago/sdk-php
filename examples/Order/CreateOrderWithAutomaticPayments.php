@@ -91,7 +91,7 @@ try {
 
     // ── Step 7: Recurring charge ──────────────────────────────────────────────
     // Subsequent MIT charge — no card token needed, uses the payment profile.
-    // prev_transaction_ref links this charge to the original authorization.
+    // previous_transaction_reference links this charge to the original authorization.
     $recurringRequest = [
         "type" => "online",
         "processing_mode" => "automatic_async",
@@ -115,7 +115,7 @@ try {
                         "payment_initiator" => "merchant",
                         "reason" => "recurring",
                         "first_payment" => false,
-                        "prev_transaction_ref" => $firstPaymentId,
+                        "previous_transaction_reference" => $firstPaymentId,
                     ],
                     "subscription_data" => [
                         "invoice_id" => "INV-002",
