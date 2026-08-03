@@ -113,6 +113,22 @@ final class CustomerClient extends MercadoPagoClient
     }
 
     /**
+     * Deletes a customer by ID.
+     *
+     * @param string $id Customer ID.
+     * @param RequestOptions|null $request_options Request options.
+     * @return Customer The deleted customer resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     */
+    public function delete(string $id, ?RequestOptions $request_options = null): Customer
+    {
+        $response = $this->send("/v1/customers/" . $id, HttpMethod::DELETE, null, null, $request_options);
+        $result = Serializer::deserializeFromJson(Customer::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
+    }
+
+    /**
      * Searches customers with pagination and filters.
      *
      * @param MPSearchRequest|null $request Search criteria (limit, offset, filters like email).

@@ -71,6 +71,25 @@ final class PaymentClient extends MercadoPagoClient
         return $result;
     }
     /**
+     * Updates an existing payment with arbitrary fields.
+     *
+     * @param int $id Payment ID.
+     * @param array<string,mixed> $request Fields to update (e.g. status, transaction_amount).
+     * @param RequestOptions|null $request_options Per-request configuration overrides.
+     * @return Payment The updated payment resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     * @throws \Exception On transport-level errors.
+     * @see https://www.mercadopago.com/developers/en/reference/online-payments/checkout-api-payments/update-payment/put
+     */
+    public function update(int $id, array $request, ?RequestOptions $request_options = null): Payment
+    {
+        $response = parent::send(sprintf(self::URL_WITH_ID, strval($id)), HttpMethod::PUT, json_encode($request), null, $request_options);
+        $result = Serializer::deserializeFromJson(Payment::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
+    }
+
+    /**
      * Cancels a pending payment by setting its status to "cancelled".
      *
      * Only payments in "pending" status can be cancelled.
