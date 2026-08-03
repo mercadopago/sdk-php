@@ -151,6 +151,20 @@ final class WebhookSignatureValidatorUnitTest extends TestCase
         $this->assertTrue(true);
     }
 
+    public function testWithinTolerancePassesWithSecondsPrecisionTimestamp(): void
+    {
+        $tsSeconds = (string) time();
+        $h = self::computeHash(self::DATA_ID_LOWER, self::REQUEST_ID, $tsSeconds, self::SECRET);
+        WebhookSignatureValidator::validate(
+            self::buildHeader($h, $tsSeconds),
+            self::REQUEST_ID,
+            self::DATA_ID_LOWER,
+            self::SECRET,
+            3600
+        );
+        $this->assertTrue(true);
+    }
+
     // case 9
     public function testDataIdAbsentExcludesIdPair(): void
     {
