@@ -2,15 +2,13 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
-
 /**
  * Typed request object for automatic payments data.
  *
  * Serializes to the `automatic_payments` object nested under a payment.
  * Null fields are omitted from the resulting array (see {@see self::toArray()}).
  */
-final class OrderAutomaticPaymentsRequest implements JsonSerializable
+final class OrderAutomaticPaymentsRequest
 {
     public function __construct(
         public readonly ?string $payment_profile_id = null,
@@ -31,9 +29,4 @@ final class OrderAutomaticPaymentsRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

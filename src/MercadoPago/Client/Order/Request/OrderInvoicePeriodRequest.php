@@ -2,15 +2,13 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
-
 /**
  * Typed request object for an invoice period.
  *
  * Serializes to the `invoice_period` object nested under `subscription_data`.
  * Null fields are omitted from the resulting array (see {@see self::toArray()}).
  */
-final class OrderInvoicePeriodRequest implements JsonSerializable
+final class OrderInvoicePeriodRequest
 {
     public function __construct(
         public readonly ?string $type = null,
@@ -27,9 +25,4 @@ final class OrderInvoicePeriodRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

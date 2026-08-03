@@ -2,8 +2,6 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
-
 /**
  * Typed request object for subscription data.
  *
@@ -11,7 +9,7 @@ use JsonSerializable;
  * are omitted and nested objects (subscription_sequence, invoice_period) are
  * converted recursively (see {@see self::toArray()}).
  */
-final class OrderSubscriptionDataRequest implements JsonSerializable
+final class OrderSubscriptionDataRequest
 {
     public function __construct(
         public readonly ?string $invoice_id = null,
@@ -32,9 +30,4 @@ final class OrderSubscriptionDataRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

@@ -2,8 +2,6 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
-
 /**
  * Typed request object for creating an order (`POST /v1/orders`).
  *
@@ -15,7 +13,7 @@ use JsonSerializable;
  *
  * @see https://www.mercadopago.com/developers/en/reference/order/_v1_orders/post
  */
-final class OrderCreateRequest implements JsonSerializable
+final class OrderCreateRequest
 {
     /**
      * @param array<int,OrderItemRequest>|null $items List of typed item requests.
@@ -70,9 +68,4 @@ final class OrderCreateRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

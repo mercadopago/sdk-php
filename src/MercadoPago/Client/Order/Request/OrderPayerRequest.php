@@ -2,7 +2,6 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
 use MercadoPago\Resources\Common\Address;
 use MercadoPago\Resources\Common\Identification;
 use MercadoPago\Resources\Common\Phone;
@@ -14,7 +13,7 @@ use MercadoPago\Resources\Common\Phone;
  * nested objects (identification, phone, address) are converted recursively
  * (see {@see self::toArray()}).
  */
-final class OrderPayerRequest implements JsonSerializable
+final class OrderPayerRequest
 {
     public function __construct(
         public readonly ?string $email = null,
@@ -43,9 +42,4 @@ final class OrderPayerRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

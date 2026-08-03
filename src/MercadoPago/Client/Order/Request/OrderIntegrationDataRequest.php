@@ -2,15 +2,13 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
-
 /**
  * Typed request object for integration data.
  *
  * Serializes to the `integration_data` object at the order root. Null fields are
  * omitted and the nested sponsor is converted recursively (see {@see self::toArray()}).
  */
-final class OrderIntegrationDataRequest implements JsonSerializable
+final class OrderIntegrationDataRequest
 {
     public function __construct(
         public readonly ?string $integrator_id = null,
@@ -31,9 +29,4 @@ final class OrderIntegrationDataRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

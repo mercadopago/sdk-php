@@ -2,8 +2,6 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
-
 /**
  * Typed request object for a payment method.
  *
@@ -11,7 +9,7 @@ use JsonSerializable;
  * is treated as an opaque string and is never transformed. Null fields are omitted
  * from the resulting array (see {@see self::toArray()}).
  */
-final class OrderPaymentMethodRequest implements JsonSerializable
+final class OrderPaymentMethodRequest
 {
     public function __construct(
         public readonly ?string $id = null,
@@ -36,9 +34,4 @@ final class OrderPaymentMethodRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

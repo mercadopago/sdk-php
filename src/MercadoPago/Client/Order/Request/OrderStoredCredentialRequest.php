@@ -2,15 +2,13 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
-
 /**
  * Typed request object for stored credential (card-on-file) data.
  *
  * Serializes to the `stored_credential` object nested under a payment.
  * Null fields are omitted from the resulting array (see {@see self::toArray()}).
  */
-final class OrderStoredCredentialRequest implements JsonSerializable
+final class OrderStoredCredentialRequest
 {
     public function __construct(
         public readonly ?string $payment_initiator = null,
@@ -33,9 +31,4 @@ final class OrderStoredCredentialRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

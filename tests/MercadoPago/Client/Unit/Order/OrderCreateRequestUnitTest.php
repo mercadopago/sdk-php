@@ -265,11 +265,4 @@ final class OrderCreateRequestUnitTest extends BaseClient
         $this->assertSame("https://example.test/webhook", $arr["config"]["notification_url"]);
     }
 
-    /** jsonSerialize() returns the same structure as toArray(). */
-    public function testJsonSerializeMatchesToArray(): void
-    {
-        $request = $this->baseTyped();
-        $this->assertSame($request->toArray(), $request->jsonSerialize());
-        $this->assertSame(json_encode($request->toArray()), json_encode($request));
-    }
 }

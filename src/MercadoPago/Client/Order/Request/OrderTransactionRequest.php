@@ -2,15 +2,13 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
-
 /**
  * Typed request object for the order transactions.
  *
  * Serializes to the `transactions` object at the order root. Null fields are omitted
  * and each payment in `payments` is converted recursively (see {@see self::toArray()}).
  */
-final class OrderTransactionRequest implements JsonSerializable
+final class OrderTransactionRequest
 {
     /**
      * @param array<int,OrderPaymentRequest>|null $payments List of typed payment requests.
@@ -30,9 +28,4 @@ final class OrderTransactionRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

@@ -2,8 +2,6 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
-
 /**
  * Typed request object for a payment.
  *
@@ -12,7 +10,7 @@ use JsonSerializable;
  * stored_credential, subscription_data) are converted recursively
  * (see {@see self::toArray()}).
  */
-final class OrderPaymentRequest implements JsonSerializable
+final class OrderPaymentRequest
 {
     public function __construct(
         public readonly ?string $amount = null,
@@ -39,9 +37,4 @@ final class OrderPaymentRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

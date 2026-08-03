@@ -2,8 +2,6 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
-
 /**
  * Typed request object for the order config.
  *
@@ -13,7 +11,7 @@ use JsonSerializable;
  * it is nested under `config.online.transaction_security` per the canonical model.
  * Null/empty fields are omitted (see {@see self::toArray()}).
  */
-final class OrderConfigRequest implements JsonSerializable
+final class OrderConfigRequest
 {
     /**
      * @param array<string,mixed>|null $payment_method Free-form payment_method config block.
@@ -46,9 +44,4 @@ final class OrderConfigRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

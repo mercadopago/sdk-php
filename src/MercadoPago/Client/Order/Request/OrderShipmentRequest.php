@@ -2,7 +2,6 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
 use MercadoPago\Resources\Common\Address;
 
 /**
@@ -11,7 +10,7 @@ use MercadoPago\Resources\Common\Address;
  * Serializes to the `shipment` object at the order root. Null fields are omitted
  * and the nested address is converted recursively (see {@see self::toArray()}).
  */
-final class OrderShipmentRequest implements JsonSerializable
+final class OrderShipmentRequest
 {
     /**
      * @param array<int,array<string,mixed>>|null $free_methods List of free-shipping methods, e.g. [["id" => 1]].
@@ -39,9 +38,4 @@ final class OrderShipmentRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }

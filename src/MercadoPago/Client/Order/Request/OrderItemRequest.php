@@ -2,15 +2,13 @@
 
 namespace MercadoPago\Client\Order\Request;
 
-use JsonSerializable;
-
 /**
  * Typed request object for an order item.
  *
  * Serializes to an entry of the `items` array at the order root.
  * Null fields are omitted from the resulting array (see {@see self::toArray()}).
  */
-final class OrderItemRequest implements JsonSerializable
+final class OrderItemRequest
 {
     public function __construct(
         public readonly ?string $title = null,
@@ -43,9 +41,4 @@ final class OrderItemRequest implements JsonSerializable
         ], fn ($v) => $v !== null);
     }
 
-    /** @return array<string,mixed> */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }
