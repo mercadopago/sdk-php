@@ -55,7 +55,16 @@ class MercadoPagoClient
         ?RequestOptions $request_options = null
     ): MPRequest {
         $path = $this->formatUrlWithQueryParams($path, $query_params);
-        return new MPRequest($path, $method, $payload, $this->addHeaders($method, $request_options), $this->addConnectionTimeout($request_options));
+        $request = new MPRequest($path, $method, $payload, $this->addHeaders($method, $request_options), $this->addConnectionTimeout($request_options));
+        if ($request_options !== null) {
+            $request->setMaxRetries($request_options->getMaxRetries());
+            $request->setRetryOn($request_options->getRetryOn());
+            $request->setInitialDelayMs($request_options->getInitialDelayMs());
+            $request->setMaxDelayMs($request_options->getMaxDelayMs());
+            $request->setJitter($request_options->getJitter());
+            $request->setOnRetry($request_options->getOnRetry());
+        }
+        return $request;
     }
 
     private function formatUrlWithQueryParams(string $url, ?array $query_params): string
