@@ -47,6 +47,22 @@ final class PaymentClientUnitTest extends BaseClient
         $this->assertSame(17014025134, $payment->id);
     }
 
+    public function testUpdateSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/Payment/payment_cancelled.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new PaymentClient();
+        $payment_id = 17014025134;
+        $payment = $client->update($payment_id, ['status' => 'cancelled']);
+        $this->assertSame(200, $payment->getResponse()->getStatusCode());
+        $this->assertSame(17014025134, $payment->id);
+        $this->assertSame("cancelled", $payment->status);
+    }
+
     public function testCancelSuccess(): void
     {
         $filepath = '../../../../Resources/Mocks/Response/Payment/payment_cancelled.json';
@@ -106,7 +122,7 @@ final class PaymentClientUnitTest extends BaseClient
             "payment_method_id" => "pix",
             "payer" => [
                 "email" => "test_user_24634097@testuser.com",
-            ]
+            ],
         ];
         return $request;
     }

@@ -44,4 +44,20 @@ final class CardTokenClient extends MercadoPagoClient
         $result->setResponse($response);
         return $result;
     }
+
+    /**
+     * Retrieves a card token by ID.
+     *
+     * @param string $id Card token ID.
+     * @param RequestOptions|null $request_options Request options.
+     * @return CardToken The card token resource.
+     * @throws \MercadoPago\Exceptions\MPApiException When the API returns a non-2xx status code.
+     */
+    public function get(string $id, ?RequestOptions $request_options = null): CardToken
+    {
+        $response = $this->send("/v1/card_tokens/" . $id, HttpMethod::GET, null, null, $request_options);
+        $result = Serializer::deserializeFromJson(CardToken::class, $response->getContent());
+        $result->setResponse($response);
+        return $result;
+    }
 }
