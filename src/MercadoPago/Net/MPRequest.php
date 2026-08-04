@@ -53,4 +53,31 @@ class MPRequest
     {
         return $this->connection_timeout;
     }
+
+    // --- Optional per-request retry config (set by MercadoPagoClient after construction) ---
+
+    private ?int $max_retries = null;
+    private ?array $retry_on = null;
+    private ?int $initial_delay_ms = null;
+    private ?int $max_delay_ms = null;
+    private ?bool $jitter = null;
+    private $on_retry = null;
+
+    public function getMaxRetries(): ?int { return $this->max_retries; }
+    public function setMaxRetries(?int $v): void { $this->max_retries = $v; }
+
+    public function getRetryOn(): ?array { return $this->retry_on; }
+    public function setRetryOn(?array $v): void { $this->retry_on = $v; }
+
+    public function getInitialDelayMs(): ?int { return $this->initial_delay_ms; }
+    public function setInitialDelayMs(?int $v): void { $this->initial_delay_ms = $v; }
+
+    public function getMaxDelayMs(): ?int { return $this->max_delay_ms; }
+    public function setMaxDelayMs(?int $v): void { $this->max_delay_ms = $v; }
+
+    public function getJitter(): ?bool { return $this->jitter; }
+    public function setJitter(?bool $v): void { $this->jitter = $v; }
+
+    public function getOnRetry() { return $this->on_retry; }
+    public function setOnRetry($v): void { $this->on_retry = $v; }
 }

@@ -7,6 +7,7 @@ use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPHttpClient;
+use MercadoPago\Net\MPAutoPaginationGenerator;
 use MercadoPago\Net\MPSearchRequest;
 use MercadoPago\Resources\Payment;
 use MercadoPago\Resources\PaymentSearch;
@@ -150,5 +151,21 @@ final class PaymentClient extends MercadoPagoClient
         $result = Serializer::deserializeFromJson(PaymentSearch::class, $response->getContent());
         $result->setResponse($response);
         return $result;
+    }
+
+    /**
+     * Returns a Generator that lazily fetches all pages of payments matching the search criteria.
+     *
+     * @param MPSearchRequest $request Search filters and pagination seed.
+     * @param RequestOptions|null $request_options Per-request overrides.
+     * @return \Generator Yields individual PaymentSearchResult items.
+     */
+    public function searchAll(MPSearchRequest $request, ?RequestOptions $request_options = null): \Generator
+    {
+        return MPAutoPaginationGenerator::of(
+            fn($req, $opts) => $this->search($req, $opts),
+            $request,
+            $request_options
+        );
     }
 }

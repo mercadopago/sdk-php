@@ -7,6 +7,7 @@ use MercadoPago\Client\MercadoPagoClient;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Net\HttpMethod;
 use MercadoPago\Net\MPHttpClient;
+use MercadoPago\Net\MPAutoPaginationGenerator;
 use MercadoPago\Net\MPSearchRequest;
 use MercadoPago\Resources\Customer;
 use MercadoPago\Resources\CustomerSearch;
@@ -144,5 +145,22 @@ final class CustomerClient extends MercadoPagoClient
         $result = Serializer::deserializeFromJson(CustomerSearch::class, $response->getContent());
         $result->setResponse($response);
         return $result;
+    }
+
+    /**
+     * Returns a Generator that lazily fetches all pages of customers matching the search criteria.
+     *
+     * @param MPSearchRequest|null $request Search filters and pagination seed.
+     * @param RequestOptions|null $request_options Per-request overrides.
+     * @return \Generator Yields individual Customer items.
+     */
+    public function searchAll(?MPSearchRequest $request = null, ?RequestOptions $request_options = null): \Generator
+    {
+        $request = $request ?? new MPSearchRequest(100, 0);
+        return MPAutoPaginationGenerator::of(
+            fn($req, $opts) => $this->search($req, $opts),
+            $request,
+            $request_options
+        );
     }
 }
