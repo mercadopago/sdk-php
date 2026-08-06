@@ -1,0 +1,164 @@
+{
+  "feature": "order-request-dto-cleanup",
+  "local_config": {
+    "mysql": null,
+    "kvs": null,
+    "bigqueue": null
+  },
+  "stats": { "total": 8, "done": 0, "by_layer": { "1": 5, "2": 0, "3": 3 } },
+  "execution_strategy": "sequential",
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "title": "Eliminar la capa Request DTO",
+      "description": "Eliminar las 16 clases Order*Request y la carpeta src/MercadoPago/Client/Order/Request/ completa. Verificar previamente que no queden referencias reales fuera de OrderClient y el test dedicado.",
+      "status": "pending",
+      "layer": 1,
+      "complexity": "Low",
+      "depends_on": [],
+      "files": ["src/MercadoPago/Client/Order/Request/"],
+      "acceptance_criteria": [
+        "AC-1: La carpeta src/MercadoPago/Client/Order/Request/ no existe",
+        "AC-2: grep de 'Order\\Request\\' no retorna referencias reales (solo falsos positivos de RequestOptions)",
+        "GATE: composer dump-autoload -o ejecuta sin errores"
+      ],
+      "references": ["US-1", "US-2"],
+      "design_decisions": ["DD-1"]
+    },
+    {
+      "id": "TASK-002",
+      "title": "Revertir OrderClient::create a solo-array",
+      "description": "Quitar el import de OrderCreateRequest, revertir la firma a create(array $request, ...RequestOptions), y eliminar el branch instanceof que llamaba a toArray(). Debe quedar idéntico a master.",
+      "status": "pending",
+      "layer": 1,
+      "complexity": "Low",
+      "depends_on": ["TASK-001"],
+      "files": ["src/MercadoPago/Client/Order/OrderClient.php"],
+      "acceptance_criteria": [
+        "AC-1: create() tiene firma create(array $request, ?RequestOptions $request_options = null)",
+        "AC-2: No hay 'use ...OrderCreateRequest' ni bloque 'instanceof' en el archivo",
+        "AC-3: git diff master -- OrderClient.php no muestra diferencias",
+        "GATE: php -l OrderClient.php sin errores de sintaxis"
+      ],
+      "references": ["US-1", "US-2"],
+      "design_decisions": ["DD-1"]
+    },
+    {
+      "id": "TASK-003",
+      "title": "Revertir Resources/Common a la línea base de master",
+      "description": "Restaurar Address.php, Phone.php e Identification.php al estado de master (git checkout master -- <archivos>), removiendo JsonSerializable/toArray()/campos agregados solo para requests. Conservar el rename correcto de StoredCredential.",
+      "status": "pending",
+      "layer": 1,
+      "complexity": "Low",
+      "depends_on": [],
+      "files": [
+        "src/MercadoPago/Resources/Common/Address.php",
+        "src/MercadoPago/Resources/Common/Phone.php",
+        "src/MercadoPago/Resources/Common/Identification.php"
+      ],
+      "acceptance_criteria": [
+        "AC-1: git diff master -- Resources/Common/ no muestra diferencias",
+        "AC-2: StoredCredential.php conserva 'previous_transaction_reference' (no se revierte)",
+        "GATE: php -l sobre los 3 archivos sin errores"
+      ],
+      "references": ["US-2"],
+      "design_decisions": ["DD-2", "DD-3"]
+    },
+    {
+      "id": "TASK-004",
+      "title": "Eliminar el test obsoleto de la capa DTO",
+      "description": "Eliminar tests/MercadoPago/Client/Unit/Order/OrderCreateRequestUnitTest.php, que prueba exclusivamente los DTOs removidos. No tocar OrderClientUnitTest ni los IT tests.",
+      "status": "pending",
+      "layer": 1,
+      "complexity": "Low",
+      "depends_on": ["TASK-002"],
+      "files": ["tests/MercadoPago/Client/Unit/Order/OrderCreateRequestUnitTest.php"],
+      "acceptance_criteria": [
+        "AC-1: El archivo OrderCreateRequestUnitTest.php no existe",
+        "AC-2: OrderClientUnitTest.php y los IT tests permanecen intactos",
+        "GATE: no quedan referencias a clases Order*Request en tests/"
+      ],
+      "references": ["US-2"],
+      "design_decisions": ["DD-1"]
+    },
+    {
+      "id": "TASK-005",
+      "title": "Verificar cero regresiones (suite completa)",
+      "description": "Ejecutar la suite completa de tests (composer test / PHPUnit) y PHP CS Fixer. Confirmar que todo pasa en verde y que la deserialización de respuestas con stored_credential/automatic_payments/subscription_data sigue funcionando.",
+      "status": "pending",
+      "layer": 1,
+      "complexity": "Medium",
+      "depends_on": ["TASK-001", "TASK-002", "TASK-003", "TASK-004"],
+      "files": ["tests/"],
+      "acceptance_criteria": [
+        "AC-1: composer test finaliza en verde (0 fallos, 0 errores)",
+        "AC-2: PHP CS Fixer no reporta violaciones nuevas",
+        "AC-3: Los métodos públicos de OrderClient conservan firma y comportamiento previos",
+        "GATE: exit code 0 de la suite completa"
+      ],
+      "references": ["US-1", "US-2"],
+      "design_decisions": []
+    },
+    {
+      "id": "TASK-006",
+      "title": "Code Review",
+      "description": "Ejecutar revisión de código sobre el diff del refactoring vía meli-code-reviewer.",
+      "status": "pending",
+      "layer": 3,
+      "complexity": "Low",
+      "depends_on": ["TASK-005"],
+      "files": [],
+      "acceptance_criteria": [
+        "AC-1: Code review ejecutado sobre el diff completo",
+        "GATE: sin issues bloqueantes abiertos"
+      ],
+      "references": ["US-2"],
+      "design_decisions": []
+    },
+    {
+      "id": "TASK-007",
+      "title": "Performance Review",
+      "description": "Verificar vía meli-performance-expert que la eliminación de la capa DTO no introduce regresiones de performance (esperado: neutral o leve mejora por menos indirección).",
+      "status": "pending",
+      "layer": 3,
+      "complexity": "Low",
+      "depends_on": ["TASK-005"],
+      "files": [],
+      "acceptance_criteria": [
+        "AC-1: Análisis de performance ejecutado",
+        "GATE: sin anti-patrones nuevos detectados"
+      ],
+      "references": [],
+      "design_decisions": []
+    },
+    {
+      "id": "TASK-008",
+      "title": "Security Review",
+      "description": "Ejecutar revisión de seguridad vía meli-security-expert sobre el diff. Confirmar que no se introducen vectores nuevos (el cambio no toca auth, queries ni entrada de usuario final).",
+      "status": "pending",
+      "layer": 3,
+      "complexity": "Low",
+      "depends_on": ["TASK-005"],
+      "files": [],
+      "acceptance_criteria": [
+        "AC-1: Análisis de seguridad ejecutado sobre el diff",
+        "GATE: sin vulnerabilidades nuevas"
+      ],
+      "references": ["US-2"],
+      "design_decisions": []
+    }
+  ],
+  "dependency_graph": {
+    "by_layer": {
+      "1": {
+        "level_0": ["TASK-001", "TASK-003"],
+        "level_1": ["TASK-002"],
+        "level_2": ["TASK-004"],
+        "level_3": ["TASK-005"]
+      },
+      "3": {
+        "level_0": ["TASK-006", "TASK-007", "TASK-008"]
+      }
+    }
+  }
+}
