@@ -15,14 +15,14 @@ namespace MercadoPago\Resources\Order;
 class AutomaticPayments
 {
     /** Identifier of the stored payment profile used for automatic charges. */
-    public ?string $payment_profile_id = null;
+    public ?string $payment_profile_id;
 
     /** Number of retry attempts allowed if the automatic charge fails. */
-    public ?int $retries = null;
+    public ?int $retries;
 
     /** ISO 8601 date when the automatic payment is scheduled to be charged. */
-    public ?string $schedule_date = null;
+    public ?string $schedule_date;
 
     /** ISO 8601 date by which the payment must be completed before it is considered overdue. */
-    public ?string $due_date = null;
+    public ?string $due_date;
 }

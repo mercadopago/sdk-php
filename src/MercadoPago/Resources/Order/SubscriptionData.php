@@ -20,16 +20,16 @@ class SubscriptionData
     use Mapper;
 
     /** Position of this payment within the subscription series. Maps to {@see SubscriptionSequence}. */
-    public array|object|null $subscription_sequence = null;
+    public array|object|null $subscription_sequence;
 
     /** Unique identifier of the invoice being paid. */
-    public ?string $invoice_id = null;
+    public ?string $invoice_id;
 
     /** Billing period definition for this subscription cycle. Maps to {@see InvoicePeriod}. */
-    public array|object|null $invoice_period = null;
+    public array|object|null $invoice_period;
 
     /** ISO 8601 date when this subscription billing was generated. */
-    public ?string $billing_date = null;
+    public ?string $billing_date;
 
     private $map = [
         "subscription_sequence" => "MercadoPago\Resources\Order\SubscriptionSequence",
