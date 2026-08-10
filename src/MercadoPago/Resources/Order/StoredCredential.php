@@ -16,21 +16,21 @@ namespace MercadoPago\Resources\Order;
 class StoredCredential
 {
     /** Who initiated the payment: "cardholder" or "merchant". */
-    public ?string $payment_initiator;
+    public ?string $payment_initiator = null;
 
     /** Reason for using stored credentials (e.g., "recurring", "installment", "unscheduled"). */
-    public ?string $reason;
+    public ?string $reason = null;
 
     /** Whether to store the payment method for future transactions. */
-    public ?bool $store_payment_method;
+    public ?bool $store_payment_method = null;
 
     /** Whether this is the first payment in a series using these credentials. */
-    public ?bool $first_payment;
+    public ?bool $first_payment = null;
 
     /**
      * Reference to the previous transaction in a recurring series. Required from the second
      * charge onwards to link this payment to the original card-network authorization.
      * Type: string (transaction ID).
      */
-    public ?string $previous_transaction_reference;
+    public ?string $previous_transaction_reference = null;
 }

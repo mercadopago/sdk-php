@@ -13,5 +13,5 @@ namespace MercadoPago\Resources\Order;
 class InstallmentsAvailable
 {
     /** Installment availability type (e.g., "buyer_costs" when the buyer absorbs interest). */
-    public ?string $type;
+    public ?string $type = null;
 }

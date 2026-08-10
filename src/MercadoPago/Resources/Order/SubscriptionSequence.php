@@ -15,8 +15,8 @@ namespace MercadoPago\Resources\Order;
 class SubscriptionSequence
 {
     /** Current payment number in the subscription series (e.g., 3 for the third payment). */
-    public ?int $number;
+    public ?int $number = null;
 
     /** Total number of planned payments in the subscription (null if open-ended). */
-    public ?int $total;
+    public ?int $total = null;
 }

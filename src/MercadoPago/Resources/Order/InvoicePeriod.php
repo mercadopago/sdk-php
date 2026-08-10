@@ -14,8 +14,8 @@ namespace MercadoPago\Resources\Order;
 class InvoicePeriod
 {
     /** Number of units in the billing cycle (e.g., 1 for monthly, 7 for weekly). */
-    public ?int  $period;
+    public ?int $period = null;
 
     /** Unit type of the billing period (e.g., "monthly", "daily"). */
-    public ?string $type;
+    public ?string $type = null;
 }
