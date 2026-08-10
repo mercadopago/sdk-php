@@ -207,6 +207,23 @@ final class CustomerClientUnitTest extends BaseClient
         $this->assertSame("active", $customers->results[1]->status);
     }
 
+    public function testSearchAllSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/Customer/customer_search.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new CustomerClient();
+        $search_request = new \MercadoPago\Net\MPSearchRequest(10, 0, ["email" => "test@test.com"]);
+        $result = $client->searchAll($search_request);
+
+        $this->assertInstanceOf(\Generator::class, $result);
+        $pages = iterator_to_array($result);
+        $this->assertNotEmpty($pages);
+    }
+
     private function createRequest(): array
     {
         $request = [

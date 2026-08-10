@@ -114,6 +114,23 @@ final class PaymentClientUnitTest extends BaseClient
         $this->assertSame(1241012238, $search_result->results[0]->id);
     }
 
+    public function testSearchAllSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/Payment/payment_search.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new PaymentClient();
+        $search_request = new \MercadoPago\Net\MPSearchRequest(5, 0, []);
+        $result = $client->searchAll($search_request);
+
+        $this->assertInstanceOf(\Generator::class, $result);
+        $pages = iterator_to_array($result);
+        $this->assertNotEmpty($pages);
+    }
+
     private function createRequest(): array
     {
         $request = [

@@ -126,24 +126,41 @@ final class PreApprovalClientUnitTest extends BaseClient
     private function createRequest(): array
     {
         $request = [
-          "back_url" => "https://www.mercadopago.com.br",
-          "external_reference" => "23546246234",
-          "reason" => "Monthly subscription to premium package",
-          "auto_recurring" => array(
-            "frequency" => 1,
-            "frequency_type" => "months",
-            "transaction_amount" => 10,
-            "currency_id" => "BRL",
-          ),
-          "payer_email" => "test_user_28355466@testuser.com",
+            "back_url" => "https://www.mercadopago.com.br",
+            "external_reference" => "23546246234",
+            "reason" => "Monthly subscription to premium package",
+            "auto_recurring" => [
+                "frequency" => 1,
+                "frequency_type" => "months",
+                "transaction_amount" => 10,
+                "currency_id" => "BRL",
+            ],
+            "payer_email" => "test_user_28355466@testuser.com",
         ];
         return $request;
+    }
+
+    public function testSearchAllSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/PreApproval/preapproval_list.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new PreApprovalClient();
+        $search_request = new \MercadoPago\Net\MPSearchRequest(10, 0, []);
+        $result = $client->searchAll($search_request);
+
+        $this->assertInstanceOf(\Generator::class, $result);
+        $pages = iterator_to_array($result);
+        $this->assertNotEmpty($pages);
     }
 
     private function updateRequest(): array
     {
         $request = [
-          "reason" => "Updated reason",
+            "reason" => "Updated reason",
         ];
         return $request;
     }

@@ -1,0 +1,20 @@
+{
+    "refunds": [
+        {
+            "id": 78901234,
+            "advanced_payment_id": 20458724,
+            "disbursement_id": 123456,
+            "amount": 50.00,
+            "status": "approved",
+            "date_created": "2022-06-02T09:00:00.000-04:00"
+        },
+        {
+            "id": 78901235,
+            "advanced_payment_id": 20458724,
+            "disbursement_id": 123457,
+            "amount": 30.00,
+            "status": "approved",
+            "date_created": "2022-06-02T09:01:00.000-04:00"
+        }
+    ]
+}
