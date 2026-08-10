@@ -18,10 +18,10 @@ class Installments
     use Mapper;
 
     /** Interest-free installment promotion rules. Maps to {@see InstallmentsInterestFree}. */
-    public array|object|null $interest_free = null;
+    public array|object|null $interest_free;
 
     /** General installment availability settings. Maps to {@see InstallmentsAvailable}. */
-    public array|object|null $available = null;
+    public array|object|null $available;
 
     private $map = [
         "interest_free" => "MercadoPago\Resources\Order\InstallmentsInterestFree",

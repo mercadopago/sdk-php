@@ -13,17 +13,17 @@ namespace MercadoPago\Resources\Order;
 class Chargeback
 {
     /** Unique identifier of the chargeback assigned by MercadoPago. */
-    public ?string $id = null;
+    public ?string $id;
 
     /** Identifier of the original payment transaction that was disputed. */
-    public ?string $transaction_id = null;
+    public ?string $transaction_id;
 
     /** Case identifier opened with the card network or issuing bank. */
-    public ?string $case_id = null;
+    public ?string $case_id;
 
     /** Current status of the chargeback dispute (e.g., "opened", "closed"). */
-    public ?string $status = null;
+    public ?string $status;
 
     /** External references or evidence associated with this chargeback. */
-    public ?array $references = null;
+    public ?array $references;
 }
