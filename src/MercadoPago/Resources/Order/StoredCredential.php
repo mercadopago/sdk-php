@@ -32,5 +32,5 @@ class StoredCredential
      * charge onwards to link this payment to the original card-network authorization.
      * Type: string (transaction ID).
      */
-    public ?string $prev_transaction_ref;
+    public ?string $previous_transaction_reference = null;
 }

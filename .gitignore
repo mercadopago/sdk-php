@@ -1,4 +1,5 @@
 .DS_Store
+meli/
 /vendor/
 .phpunit.cache
 .php-cs-fixer.cache
