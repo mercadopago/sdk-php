@@ -29,7 +29,7 @@ final class AdvancedPaymentClientUnitTest extends BaseClient
             "payer" => ["email" => "test@test.com"],
             "external_reference" => "ADV-REF-001",
             "description" => "Marketplace split payment",
-            "capture" => true
+            "capture" => true,
         ];
         $result = $client->create($request);
 
@@ -72,5 +72,67 @@ final class AdvancedPaymentClientUnitTest extends BaseClient
         $this->assertSame(1, $result->paging->total);
         $this->assertSame(1, count($result->results));
         $this->assertSame(20458724, $result->results[0]->id);
+    }
+
+    public function testUpdateSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/AdvancedPayment/advanced_payment_base.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new AdvancedPaymentClient();
+        $result = $client->update(20458724, ["capture" => true]);
+
+        $this->assertSame(200, $result->getResponse()->getStatusCode());
+        $this->assertSame(20458724, $result->id);
+        $this->assertSame("approved", $result->status);
+    }
+
+    public function testCaptureSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/AdvancedPayment/advanced_payment_base.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new AdvancedPaymentClient();
+        $result = $client->capture(20458724);
+
+        $this->assertSame(200, $result->getResponse()->getStatusCode());
+        $this->assertSame(20458724, $result->id);
+        $this->assertSame(true, $result->capture);
+    }
+
+    public function testCancelSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/AdvancedPayment/advanced_payment_base.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new AdvancedPaymentClient();
+        $result = $client->cancel(20458724);
+
+        $this->assertSame(200, $result->getResponse()->getStatusCode());
+        $this->assertSame(20458724, $result->id);
+    }
+
+    public function testUpdateReleaseDateSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/AdvancedPayment/advanced_payment_base.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new AdvancedPaymentClient();
+        $result = $client->updateReleaseDate(20458724, "2022-07-01T00:00:00.000-04:00");
+
+        $this->assertSame(200, $result->getResponse()->getStatusCode());
+        $this->assertSame(20458724, $result->id);
     }
 }

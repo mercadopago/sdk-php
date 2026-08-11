@@ -46,4 +46,22 @@ final class DisbursementRefundClientUnitTest extends BaseClient
         $this->assertSame(78901234, $result->id);
         $this->assertSame("approved", $result->status);
     }
+
+    public function testListAllSuccess(): void
+    {
+        $filepath = '../../../../Resources/Mocks/Response/DisbursementRefund/disbursement_refund_list.json';
+        $mock_http_request = $this->mockHttpRequest($filepath, 200);
+
+        $http_client = new MPDefaultHttpClient($mock_http_request);
+        MercadoPagoConfig::setHttpClient($http_client);
+
+        $client = new DisbursementRefundClient();
+        $result = $client->listAll(20458724);
+
+        $this->assertSame(200, $result->getResponse()->getStatusCode());
+        $this->assertSame(2, count($result->refunds));
+        $this->assertSame(78901234, $result->refunds[0]->id);
+        $this->assertSame(20458724, $result->refunds[0]->advanced_payment_id);
+        $this->assertSame("approved", $result->refunds[0]->status);
+    }
 }
