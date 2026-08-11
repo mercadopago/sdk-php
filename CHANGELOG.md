@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 This project follows Keep a Changelog and Semantic Versioning.
 
+## [3.14.0] - 2026-08-11
+
+### Added
+- **Automatic Payments example**: two-step recurring flow ([#639](https://github.com/mercadopago/sdk-php/pull/639))
+- **Order typed Request classes** with dual acceptance in `create()` ([#639](https://github.com/mercadopago/sdk-php/pull/639))
+- **Order request layer**: reuse `Common\Address`, `Identification`, `Phone` ([#639](https://github.com/mercadopago/sdk-php/pull/639))
+- **Pagination**: support `data` key (Orders v2) and string paging totals in `MPAutoPaginationGenerator` ([#639](https://github.com/mercadopago/sdk-php/pull/639))
+
+### Fixed
+- **Stored credential**: rename `prev_transaction_ref` to `previous_transaction_reference` ([#639](https://github.com/mercadopago/sdk-php/pull/639))
+
+### CI
+- Add CD workflow ([#651](https://github.com/mercadopago/sdk-php/pull/651))
+- Standardize CI workflow ([#651](https://github.com/mercadopago/sdk-php/pull/651))
+- Add mock-based unit test coverage ([#651](https://github.com/mercadopago/sdk-php/pull/651))
+
+### Dependencies
+- Fix CVE-2026-67434: upgrade `squizlabs/php_codesniffer` to `4.0.4` ([#651](https://github.com/mercadopago/sdk-php/pull/651))
+
 ## [3.13.0] - 2026-08-04
 
 ### Added
