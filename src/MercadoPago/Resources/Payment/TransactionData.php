@@ -39,6 +39,9 @@ class TransactionData
     /** End-to-end identifier for Pix transactions, used for reconciliation. */
     public ?string $e2e_id;
 
+    /** Legacy card-network transaction identifier within transaction data. */
+    public ?string $network_transaction_id;
+
     /** Indicates whether this is the first transaction in a CREDENTIAL_ON_FILE agreement. */
     public ?bool $first_transaction;
 
