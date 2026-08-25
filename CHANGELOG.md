@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project follows Keep a Changelog and Semantic Versioning.
 
+## [3.15.0] - 2026-08-25
+
+### Added
+- **COF network data support**: new fields on `NetworkData` and `PointOfInteraction` payment resources
+
 ## [3.14.0] - 2026-08-11
 
 ### Added
