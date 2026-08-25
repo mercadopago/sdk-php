@@ -27,9 +27,13 @@ class PointOfInteraction
     /** @var TransactionData|array|null Transaction data generated at the point of interaction (e.g. QR content, ticket URL). */
     public array|object|null $transaction_data;
 
+    /** @var NetworkData|array|null Card-network identifiers for a COF payment. */
+    public array|object|null $network_data;
+
     private $map = [
         "application_data" => "MercadoPago\Resources\Payment\ApplicationData",
         "transaction_data" => "MercadoPago\Resources\Payment\TransactionData",
+        "network_data" => "MercadoPago\Resources\Payment\NetworkData",
     ];
 
     /**
