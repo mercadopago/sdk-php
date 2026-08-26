@@ -25,4 +25,7 @@ class AutomaticPayments
 
     /** ISO 8601 date by which the payment must be completed before it is considered overdue. */
     public ?string $due_date;
+
+    /** @var array|object|null Subscription metadata for the recurring payment. */
+    public array|object|null $subscription;
 }
