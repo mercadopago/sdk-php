@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project follows Keep a Changelog and Semantic Versioning.
 
+## [3.16.0] - 2026-08-27
+
+### Added
+- **Credential-on-file and automatic payments**: support nested `network_data`, expanded gateway network data, and `automatic_payments.subscription`.
+
 ## [3.15.0] - 2026-08-25
 
 ### Added
