@@ -1,133 +1,120 @@
 <?php
 
-/** API version: 7c223ec9-4635-4eae-8501-604c35ea1b00 */
-
 namespace MercadoPago\Resources;
 
 use MercadoPago\Net\MPResource;
 use MercadoPago\Serialization\Mapper;
 
 /**
- * Represents a MercadoPago Order resource.
+ * Represents an Order in the MercadoPago platform.
  *
- * An order is the top-level entity that groups items, payer information,
- * transactions (payments, refunds, chargebacks), shipping details, and
- * configuration for a purchase flow in the MercadoPago Orders API.
+ * Orders are comprehensive payment containers that support multiple transaction types
+ * (payments, refunds), complex payer information, items, shipments, taxes, and discounts.
+ * They can be processed in automatic or manual mode and support both online and offline flows.
+ *
+ * @property array|object|null $payer Payer information, mapped to {@see \MercadoPago\Resources\Order\Payer}.
+ * @property array|object|null $transactions Transaction details, mapped to {@see \MercadoPago\Resources\Order\Transactions}.
+ * @property array|object|null $items Order line items, mapped to {@see \MercadoPago\Resources\Order\Item}.
+ * @property array|object|null $shipment Shipment information, mapped to {@see \MercadoPago\Resources\Order\Shipment}.
+ * @property array|object|null $config Order configuration, mapped to {@see \MercadoPago\Resources\Order\Config}.
+ * @property array|object|null $discounts Discount details, mapped to {@see \MercadoPago\Resources\Order\Discounts}.
+ * @property array|object|null $taxes Tax information, mapped to {@see \MercadoPago\Resources\Order\Tax}.
  *
  * @see \MercadoPago\Client\Order\OrderClient
  */
 class Order extends MPResource
 {
-    /** Class mapper. */
     use Mapper;
 
-    /** Unique identifier of the order assigned by MercadoPago. */
+    /** Unique order identifier assigned by MercadoPago. */
     public ?string $id;
 
-    /** Order type (e.g., "online" for e-commerce transactions). */
+    /** Order type (e.g., "online", "offline"). */
     public ?string $type;
 
-    /** Seller-defined reference to correlate the order with an external system. */
-    public ?string $external_reference;
-
-    /** ISO 3166-1 alpha-2 country code where the order is processed. */
-    public ?string $country_code;
-
-    /** Current high-level status of the order (e.g., "opened", "closed", "expired"). */
-    public ?string $status;
-
-    /** Granular detail complementing the order status. */
-    public ?string $status_detail;
-
-    /** Determines how funds are captured (e.g., "automatic" or "manual"). */
-    public ?string $capture_mode;
-
-    /** MercadoPago user ID of the seller who owns the order. */
-    public ?string $user_id;
-
-    /** URL to redirect the buyer to the Checkout PRO payment flow. Generated automatically on order creation. */
-    public ?string $checkout_url;
-
-    /** Temporary token identifying the client session for the checkout. */
-    public ?string $client_token;
-
-    /** Total amount of the order before any discounts or fees. */
-    public ?string $total_amount;
-
-    /** Total amount effectively paid by the buyer. */
-    public ?string $total_paid_amount;
-
-    /** Processing mode for payments (e.g., "aggregator", "gateway"). */
+    /** Processing mode (e.g., "automatic", "manual", "automatic_async"). */
     public ?string $processing_mode;
 
-    /** Short description of the order shown to the buyer. */
-    public ?string $description;
+    /** Total amount of the order. */
+    public ?string $total_amount;
 
-    /** Marketplace identifier when the order is placed through a marketplace. */
-    public ?string $marketplace;
-
-    /** Fee charged by the marketplace on this order. */
-    public ?string $marketplace_fee;
-
-    /** ISO 8601 timestamp when the order was created. */
-    public ?string $created_date;
-
-    /** ISO 8601 timestamp of the last update to the order. */
-    public ?string $last_updated_date;
-
-    /** ISO 8601 timestamp indicating when the checkout becomes available. */
-    public ?string $checkout_available_at;
-
-    /** ISO 8601 duration or timestamp after which the order expires. */
-    public ?string $expiration_time;
-
-    /** Integration metadata linking the order to a platform, integrator, or sponsor. Maps to {@see IntegrationData}. */
-    public array|object|null $integration_data;
-
-    /** Buyer information associated with this order. Maps to {@see Payer}. */
-    public array|object|null $payer;
-
-    /** Transaction container holding payments, refunds, and chargebacks. Maps to {@see Transactions}. */
-    public array|object|null $transactions;
-
-    /** Line items included in the order. Each element maps to {@see Items}. */
-    public ?array $items;
-
-    /** Order-level configuration for payment methods and online checkout. Maps to {@see Config}. */
-    public array|object|null $config;
-
-    /** Arbitrary key-value pairs with additional context about the order. */
-    public ?array $additional_info;
-
-    /** Shipping details and delivery address for the order. Maps to {@see Shipment}. */
-    public array|object|null $shipment;
-
-    /** ISO 4217 currency code for the order amounts (e.g., "BRL", "ARS"). */
+    /** Currency code (ISO 4217, e.g., "BRL", "ARS", "COP"). */
     public ?string $currency;
 
-    /** Discount rules applied to the order by payment method. Maps to {@see Discounts}. */
+    /** Merchant's external reference identifier for this order. */
+    public ?string $external_reference;
+
+    /** Overall status of the order (e.g., "pending", "processed", "cancelled", "refunded"). */
+    public ?string $status;
+
+    /** Detailed status information providing context for the current status. */
+    public ?string $status_detail;
+
+    /** Description of the order. */
+    public ?string $description;
+
+    /** Capture mode (e.g., "automatic", "manual", "automatic_async"). */
+    public ?string $capture_mode;
+
+    /** Marketplace identifier (e.g., "NONE", "MARKETPLACE"). */
+    public ?string $marketplace;
+
+    /** Fee charged by the marketplace. */
+    public ?string $marketplace_fee;
+
+    /** URL to redirect buyers to complete payment (Checkout PRO). */
+    public ?string $checkout_url;
+
+    /** ISO 8601 duration string specifying when the order expires (e.g., "P3D" for 3 days). */
+    public ?string $expiration_time;
+
+    /** Timestamp when this order was created (ISO 8601). */
+    public ?string $date_created;
+
+    /** Timestamp of the last update to this order (ISO 8601). */
+    public ?string $date_last_updated;
+
+    /** Payer information (email, identification, address, etc.). */
+    public array|object|null $payer;
+
+    /** Transaction details including payments and refunds. */
+    public array|object|null $transactions;
+
+    /** Line items included in this order. */
+    public array|object|null $items;
+
+    /** Shipment/delivery information. */
+    public array|object|null $shipment;
+
+    /** Additional order configuration (online flow settings, payment method restrictions). */
+    public array|object|null $config;
+
+    /** Discount configurations applied to this order. */
     public array|object|null $discounts;
 
-    /** Tax entries applied to the order. Each element maps to {@see Taxes}. */
-    public ?array $taxes;
+    /** Tax information applied to this order. */
+    public array|object|null $taxes;
 
-    /** Type-specific response data (e.g., QR code for QR-based orders). Maps to {@see TypeResponse}. */
-    public array|object|null $type_response;
+    /** Additional industry-specific data (travel, platform metadata, etc.). */
+    public ?array $additional_info;
 
+    /**
+     * Maps nested JSON properties to their corresponding DTO classes.
+     *
+     * @var array<string, class-string>
+     */
     private $map = [
-        "transactions" => "MercadoPago\Resources\Order\Transactions",
-        "items" => "MercadoPago\Resources\Order\Items",
-        "integration_data" => "MercadoPago\Resources\Order\IntegrationData",
         "payer" => "MercadoPago\Resources\Order\Payer",
-        "config" => "MercadoPago\Resources\Order\Config",
+        "transactions" => "MercadoPago\Resources\Order\Transactions",
+        "items" => "MercadoPago\Resources\Order\Item",
         "shipment" => "MercadoPago\Resources\Order\Shipment",
+        "config" => "MercadoPago\Resources\Order\Config",
         "discounts" => "MercadoPago\Resources\Order\Discounts",
-        "taxes" => "MercadoPago\Resources\Order\Taxes",
-        "type_response" => "MercadoPago\Resources\Order\TypeResponse",
+        "taxes" => "MercadoPago\Resources\Order\Tax",
     ];
 
     /**
-     * Method responsible for getting map of entities.
+     * Returns the property-to-class mapping for nested object deserialization.
      */
     public function getMap(): array
     {
