@@ -6,12 +6,14 @@ on:
       - '**/*.md'
       - 'llms.txt'
       - 'assets/**'
+      - 'composer.json'
       - '.github/workflows/documentation.yml'
   push:
     paths:
       - '**/*.md'
       - 'llms.txt'
       - 'assets/**'
+      - 'composer.json'
       - '.github/workflows/documentation.yml'
 
 permissions:
@@ -56,7 +58,7 @@ jobs:
 
           exit "$failed"
 
-      - name: Require repository-local documentation images
+      - name: Require repository-owned documentation images
         shell: bash
         run: |
           set -euo pipefail
@@ -71,13 +73,25 @@ jobs:
                 ;;
             esac
 
-            if grep -nE "(<img[^>]+src=['\"]https?://|!\[[^]]*\]\(https?://)" "$file"; then
-              echo "::error file=$file::Documentation images must be stored in this repository"
+            while IFS= read -r url; do
+              if [[ "$url" == "https://github.com/mercadopago/sdk-php/actions/workflows/ci.yml/badge.svg?branch=master" ]]; then
+                continue
+              fi
+
+              echo "::error file=$file::Documentation image is not owned by this repository: $url"
               failed=1
-            fi
+            done < <(grep -oE "<img[^>]+src=['\"]https?://[^'\"]+|!\[[^]]*\]\(https?://[^)]+" "$file" | grep -oE "https?://[^)'\"[:space:]]+" || true)
           done < <(git ls-files '*.md' 'llms.txt')
 
           exit "$failed"
+
+      - name: Verify Packagist badge version
+        shell: bash
+        run: |
+          set -euo pipefail
+          version=$(php -r '$package = json_decode(file_get_contents("composer.json"), true); echo $package["version"];')
+          test -n "$version"
+          grep -F "aria-label=\"Packagist: v${version}\"" assets/badges/package.svg
 
       - name: Allow only Mercado Pago and repository links
         shell: bash
