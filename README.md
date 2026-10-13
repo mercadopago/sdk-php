@@ -1,10 +1,23 @@
-![image](https://github.com/mercadopago/sdk-php/assets/86324641/46001c9c-b28a-44cb-9fc3-211712be5022)
+<div align="center">
+  <img src="assets/mercado-pago.svg" alt="Mercado Pago" width="120" />
+  <h1>Mercado Pago SDK for PHP</h1>
+  <p><strong>The official Mercado Pago SDK for PHP applications.</strong></p>
+  <p>Integrate Mercado Pago APIs into your PHP application and start receiving payments.</p>
+  <p>
+    <a href="https://github.com/mercadopago/sdk-php/actions/workflows/ci.yml"><img src="assets/badges/ci.svg" alt="CI workflow" /></a>
+    <a href="#installation"><img src="assets/badges/package.svg" alt="Composer package" /></a>
+    <img src="assets/badges/runtime.svg" alt="PHP 8.2 or later" />
+    <a href="LICENSE"><img src="assets/badges/license.svg" alt="MIT license" /></a>
+  </p>
+  <p>
+    <a href="#installation">Installation</a> ·
+    <a href="#getting-started-with-payment-via-your-own-website-forms">Getting started</a> ·
+    <a href="#documentation">Documentation</a> ·
+    <a href="#contributing">Contributing</a>
+  </p>
+</div>
 
-# Mercado Pago SDK for PHP
-
-[![Latest Stable Version](https://poser.pugx.org/mercadopago/dx-php/v/stable)](https://packagist.org/packages/mercadopago/dx-php) [![Total Downloads](https://poser.pugx.org/mercadopago/dx-php/downloads)](https://packagist.org/packages/mercadopago/dx-php) [![License](https://poser.pugx.org/mercadopago/dx-php/license)](https://packagist.org/packages/mercadopago/dx-php)
-
-This library provides developers with a simple set of bindings to help you integrate Mercado Pago API to a website and start receiving payments.
+---
 
 ## 💡 Requirements
 
@@ -16,7 +29,7 @@ If you already use another version of MercadoPago PHP SDK, take a look at our [m
 
 First time using Mercado Pago? Create your [Mercado Pago account](https://www.mercadopago.com), if you don’t have one already.
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) if not already installed.
+1. Install Composer if it is not already available.
 
 2. Install PHP SDK for MercadoPago running in command line:
 
@@ -314,9 +327,9 @@ In case you need to retrieve the preference by ID:
 
 ## 📚 Documentation
 
-See our documentation for more details.
-
-- Mercado Pago reference API. [Portuguese](https://www.mercadopago.com/developers/pt/reference) / [English](https://www.mercadopago.com/developers/en/reference) / [Spanish](https://www.mercadopago.com/developers/es/reference)
+- [SDK guides](docs/README.md): request options, errors, webhooks, and production guidance.
+- [Examples](examples/README.md): integration flows supported by this SDK.
+- [API reference](https://www.mercadopago.com/developers/en/reference): request fields and response schemas.
 
 ## 🤝 Contributing
 
