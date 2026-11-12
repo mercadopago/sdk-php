@@ -1,0 +1,36 @@
+{
+    "paging": {
+        "total": 1,
+        "limit": 5,
+        "offset": 0
+    },
+    "results": [
+        {
+            "id": 1234567,
+            "user_id": 1160535239,
+            "name": "Test Store",
+            "date_created": "2024-01-15T10:30:00.000-04:00",
+            "updated_date": "2024-01-15T10:30:00.000-04:00",
+            "business_hours": {
+                "monday": [
+                    {
+                        "open": "08:00",
+                        "close": "18:00"
+                    }
+                ]
+            },
+            "location": {
+                "address_line": "Test Address 123",
+                "reference": "Near the park",
+                "city": {
+                    "id": "TUxBQ0NBUGZlZG1zY3A",
+                    "name": "Palermo"
+                },
+                "latitude": -34.5789,
+                "longitude": -58.4261,
+                "zip_code": "1425"
+            },
+            "external_id": "EXT-STORE-001"
+        }
+    ]
+}
