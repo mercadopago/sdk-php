@@ -1,0 +1,61 @@
+{
+    "paging": {
+        "limit": 10,
+        "offset": 0,
+        "total": 2
+    },
+    "results": [
+        {
+            "id": "1234567",
+            "name": "Loja principal",
+            "date_created": "2023-09-04T09:00:57.374-04:00",
+            "business_hours": {
+                "monday": [
+                    {
+                        "open": "08:00",
+                        "close": "18:00"
+                    }
+                ]
+            },
+            "location": {
+                "address_line": "Av. das Nações Unidas, 3000",
+                "reference": "Floor 3",
+                "city": {
+                    "id": "TUxCQ0FPSzA4MjE",
+                    "name": "Osasco"
+                },
+                "latitude": -23.5964,
+                "longitude": -46.6881,
+                "zip_code": "02675031"
+            },
+            "external_id": "store_ext_1",
+            "user_id": 1469979538
+        },
+        {
+            "id": 7654321,
+            "name": "Store Two",
+            "date_created": "2023-09-05T10:00:57.374-04:00",
+            "business_hours": {
+                "tuesday": [
+                    {
+                        "open": "09:00",
+                        "close": "17:00"
+                    }
+                ]
+            },
+            "location": {
+                "address_line": "Av. Paulista, 1000",
+                "reference": "Floor 1",
+                "city": {
+                    "id": "TUxCQ1NQTDI3NTk",
+                    "name": "São Paulo"
+                },
+                "latitude": -23.5613,
+                "longitude": -46.6448,
+                "zip_code": "01310100"
+            },
+            "external_id": "store_ext_2",
+            "user_id": 1469979538
+        }
+    ]
+}

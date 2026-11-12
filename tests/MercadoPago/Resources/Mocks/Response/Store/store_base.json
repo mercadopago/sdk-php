@@ -1,0 +1,55 @@
+{
+  "id": "1234567",
+  "user_id": "123456789",
+  "name": "Loja principal",
+  "date_created": "2023-09-04T09:00:57.374-04:00",
+  "date_last_updated": "2023-09-04T09:00:57.374-04:00",
+  "location": {
+    "address_line": "Av. das Nações Unidas, 3000",
+    "reference": "Floor 3",
+    "city": {
+      "id": "BR-SP-45",
+      "name": "Osasco"
+    },
+    "state": {
+      "id": "BR-SP",
+      "name": "São Paulo"
+    },
+    "zip_code": "02675031",
+    "latitude": -23.5966,
+    "longitude": -46.6849
+  },
+  "business_hours": {
+    "monday": [
+      {
+        "open": "08:00",
+        "close": "18:00"
+      }
+    ],
+    "tuesday": [
+      {
+        "open": "08:00",
+        "close": "18:00"
+      }
+    ],
+    "wednesday": [
+      {
+        "open": "08:00",
+        "close": "18:00"
+      }
+    ],
+    "thursday": [
+      {
+        "open": "08:00",
+        "close": "18:00"
+      }
+    ],
+    "friday": [
+      {
+        "open": "08:00",
+        "close": "18:00"
+      }
+    ]
+  },
+  "external_id": "1234567"
+}
