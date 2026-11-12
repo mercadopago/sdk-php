@@ -1,0 +1,43 @@
+{
+  "id": 2711281835,
+  "name": "Official Store",
+  "date_created": "2023-09-13T16:23:15.000-04:00",
+  "business_hours": {
+    "monday": [
+      {
+        "open": "08:00",
+        "close": "12:00"
+      },
+      {
+        "open": "14:00",
+        "close": "18:00"
+      }
+    ],
+    "tuesday": [
+      {
+        "open": "08:00",
+        "close": "18:00"
+      }
+    ]
+  },
+  "location": {
+    "address_line": "Av. das Nações Unidas, 3000",
+    "reference": "Floor 2",
+    "state": {
+      "id": "TUxBUFNBTzI1MzVa",
+      "name": "Sao Paulo"
+    },
+    "country_name": "Brasil",
+    "comments": "Near the main avenue",
+    "city": {
+      "id": "BR-SP-44",
+      "name": "Osasco"
+    },
+    "latitude": -23.5311,
+    "longitude": -46.7654,
+    "zip_code": "06233-000",
+    "open_hours": "08:00-18:00"
+  },
+  "external_id": "STORE-123",
+  "user_id": 123456789
+}
