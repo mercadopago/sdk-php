@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e19082c9b343b41d99da87350d3ea078",
+    "content-hash": "a8aee21a41432093c6114538fed0036d",
     "packages": [],
     "packages-dev": [
         {
@@ -3385,16 +3385,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v8.1.5",
+            "version": "v8.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "6b2f4a0eeb28b5d74f90862592923a654bc629b3"
+                "reference": "58f57b6a33e3495f7f41e01258f1ae5ef76cccd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/6b2f4a0eeb28b5d74f90862592923a654bc629b3",
-                "reference": "6b2f4a0eeb28b5d74f90862592923a654bc629b3",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/58f57b6a33e3495f7f41e01258f1ae5ef76cccd2",
+                "reference": "58f57b6a33e3495f7f41e01258f1ae5ef76cccd2",
                 "shasum": ""
             },
             "require": {
@@ -3432,7 +3432,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v8.1.5"
+                "source": "https://github.com/symfony/filesystem/tree/v8.1.11"
             },
             "funding": [
                 {
@@ -3452,7 +3452,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-21T12:16:08+00:00"
+            "time": "2026-11-04T08:39:20+00:00"
         },
         {
             "name": "symfony/finder",
