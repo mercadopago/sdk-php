@@ -1,0 +1,41 @@
+{
+  "elements": [
+    {
+      "id": 2711281835,
+      "name": "Official Store",
+      "date_created": "2023-09-12T13:55:01.933-04:00",
+      "business_hours": {
+        "monday": [
+          {
+            "open": "08:00",
+            "close": "18:00"
+          }
+        ],
+        "tuesday": [
+          {
+            "open": "08:00",
+            "close": "18:00"
+          }
+        ]
+      },
+      "location": {
+        "address_line": "Av. das Nações Unidas, 3000",
+        "reference": "Near the park",
+        "city": {
+          "id": "BR-SP-44",
+          "name": "Osasco"
+        },
+        "latitude": -23.5316,
+        "longitude": -46.7184,
+        "zip_code": "02675031",
+        "street_name": "Av. das Nações Unidas",
+        "street_number": "3000",
+        "state_name": "São Paulo",
+        "city_name": "Osasco"
+      },
+      "external_id": "STORE-123"
+    }
+  ],
+  "next_offset": 1,
+  "total": 1
+}
