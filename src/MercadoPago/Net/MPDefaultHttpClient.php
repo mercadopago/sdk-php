@@ -122,17 +122,17 @@ class MPDefaultHttpClient implements MPHttpClient
         }
         if ($this->isApiError($status_code)) {
             $this->httpRequest->close();
-            throw $this->buildApiException($status_code, $mp_response);
+            throw $this->buildApiException($status_code, $mp_response, $content);
         }
 
         $this->httpRequest->close();
         return $mp_response;
     }
 
-    private function buildApiException(int $status_code, MPResponse $response): MPApiException
+    private function buildApiException(int $status_code, MPResponse $response, ?array $body): MPApiException
     {
-        $msg = "Api error. Check response for details";
-        return match(true) {
+        $msg = $this->apiErrorMessage($status_code, $body);
+        return match (true) {
             $status_code === 400 => new MPBadRequestException($msg, $response),
             $status_code === 401 => new MPAuthenticationException($msg, $response),
             $status_code === 402 => new MPPaymentException($msg, $response),
@@ -146,6 +146,49 @@ class MPDefaultHttpClient implements MPHttpClient
             $status_code >= 500  => new MPServerException($msg, $response),
             default              => new MPApiException($msg, $response),
         };
+    }
+
+    private function apiErrorMessage(int $status_code, ?array $body): string
+    {
+        $messages = [];
+        $message = $body['message'] ?? null;
+        if (is_string($message) && trim($message) !== '') {
+            $messages[] = $message;
+        }
+        $code = $body['error'] ?? null;
+        if (is_string($code) && trim($code) !== '') {
+            $messages[] = $code;
+        }
+
+        $errors = $body['errors'] ?? null;
+        if (is_array($errors)) {
+            foreach ($errors as $error) {
+                if (!is_array($error)) {
+                    continue;
+                }
+                $code = $error['code'] ?? null;
+                if (is_string($code) && trim($code) !== '') {
+                    $messages[] = $code;
+                }
+                $message = $error['message'] ?? null;
+                if (is_string($message) && trim($message) !== '') {
+                    $messages[] = $message;
+                }
+                $details = $error['details'] ?? null;
+                if (is_array($details)) {
+                    foreach ($details as $detail) {
+                        if (is_string($detail) && trim($detail) !== '') {
+                            $messages[] = $detail;
+                        }
+                    }
+                }
+            }
+        }
+
+        $prefix = "API error (HTTP {$status_code})";
+        return $messages === []
+            ? $prefix . '. Check response for details'
+            : $prefix . ': ' . implode('; ', $messages);
     }
 
     private function computeDelayMicroseconds(int $attempt, int $initial_ms, int $max_ms, bool $use_jitter): int
@@ -169,15 +212,15 @@ class MPDefaultHttpClient implements MPHttpClient
     {
         $connection_timeout = $request->getConnectionTimeout() ?: MercadoPagoConfig::getConnectionTimeout();
 
-        $options = array(
+        $options = [
             CURLOPT_URL => MercadoPagoConfig::$BASE_URL . $request->getUri(),
             CURLOPT_CUSTOMREQUEST => $request->getMethod(),
             CURLOPT_HTTPHEADER => $request->getHeaders(),
             CURLOPT_POSTFIELDS => $request->getPayload(),
             CURLOPT_CONNECTTIMEOUT_MS => $connection_timeout,
             CURLOPT_MAXCONNECTS => MercadoPagoConfig::getMaxConnections(),
-            CURLOPT_RETURNTRANSFER => true
-        );
+            CURLOPT_RETURNTRANSFER => true,
+        ];
 
         if (MercadoPagoConfig::getRuntimeEnviroment() === MercadoPagoConfig::LOCAL) {
             $options += [CURLOPT_SSL_VERIFYHOST => false];
