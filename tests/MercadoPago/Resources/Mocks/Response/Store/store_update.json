@@ -1,0 +1,40 @@
+{
+    "id": 1023456789,
+    "user_id": 1160535239,
+    "name": "Updated Store",
+    "date_creation": "2023-09-04T09:00:57.374-04:00",
+    "business_hours": {
+        "monday": {
+            "open": "08:00",
+            "close": "18:00"
+        },
+        "tuesday": {
+            "open": "08:00",
+            "close": "18:00"
+        }
+    },
+    "location": {
+        "address_line": "Updated Address 456",
+        "reference": "Test reference",
+        "city": {
+            "id": "BR-SP-44",
+            "name": "São Paulo"
+        },
+        "state": {
+            "id": "BR-SP",
+            "name": "São Paulo"
+        },
+        "zip_code": "02675031",
+        "country": {
+            "id": "BR",
+            "name": "Brasil"
+        },
+        "neighborhood": {
+            "id": null,
+            "name": "Bonfim"
+        },
+        "latitude": -23.5,
+        "longitude": -46.6
+    },
+    "external_id": "external_id_1234"
+}
