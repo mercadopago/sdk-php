@@ -1,0 +1,56 @@
+{
+  "id": "24365688",
+  "name": "Loja 1",
+  "date_created": "2019-01-08T09:34:40.000-04:00",
+  "business_hours": {
+    "monday": [
+      {
+        "open": "08:00",
+        "close": "15:00"
+      }
+    ],
+    "tuesday": [
+      {
+        "open": "07:00",
+        "close": "21:00"
+      }
+    ],
+    "wednesday": [
+      {
+        "open": "07:30",
+        "close": "20:00"
+      }
+    ],
+    "thursday": [
+      {
+        "open": "08:00",
+        "close": "15:00"
+      }
+    ],
+    "friday": [
+      {
+        "open": "08:00",
+        "close": "13:00"
+      }
+    ]
+  },
+  "external_id": "A12S45",
+  "location": {
+    "address_line": "Av. das Nações Unidas, 3000",
+    "reference": "Mercado Pago",
+    "city": {
+      "id": "BR-SP-44",
+      "name": "São Paulo"
+    },
+    "latitude": -23.5967246,
+    "longitude": -46.6771472,
+    "open_hours": "Mon-Sat 10:00-22:00",
+    "zip_code": "04787000",
+    "country_code": "BR",
+    "state": {
+      "id": "BR-SP",
+      "name": "São Paulo"
+    }
+  },
+  "user_id": 465400966
+}

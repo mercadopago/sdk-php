@@ -1,0 +1,37 @@
+{
+  "id": "1234567",
+  "name": "Updated Store Name",
+  "date_created": "2023-09-04T09:00:57.374-04:00",
+  "date_last_updated": "2023-09-05T10:15:22.123-04:00",
+  "business_hours": {
+    "monday": {
+      "open": "08:00",
+      "close": "18:00"
+    },
+    "tuesday": {
+      "open": "08:00",
+      "close": "18:00"
+    }
+  },
+  "location": {
+    "address_line": "Av. das Nações Unidas, 3000",
+    "reference": "Store reference",
+    "city": {
+      "id": "BR-SP-45",
+      "name": "Osasco"
+    },
+    "state": {
+      "id": "BR-SP",
+      "name": "São Paulo"
+    },
+    "country": {
+      "id": "BR",
+      "name": "Brasil"
+    },
+    "zip_code": "02675031",
+    "latitude": -23.5966,
+    "longitude": -46.6834
+  },
+  "external_id": "EXT_STORE_001",
+  "user_id": 1469979538
+}
