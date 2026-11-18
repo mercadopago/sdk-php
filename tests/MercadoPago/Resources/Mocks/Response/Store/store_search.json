@@ -1,0 +1,93 @@
+{
+  "paging": {
+    "limit": 10,
+    "offset": 0,
+    "total": 2
+  },
+  "results": [
+    {
+      "id": 1023456789,
+      "user_id": 1469979538,
+      "name": "Sucursal Centro",
+      "date_created": "2023-09-04T09:00:57.374-04:00",
+      "opening_hours": {
+        "monday": {
+          "open": "09:00",
+          "close": "18:00"
+        },
+        "tuesday": {
+          "open": "09:00",
+          "close": "18:00"
+        },
+        "wednesday": {
+          "open": "09:00",
+          "close": "18:00"
+        },
+        "thursday": {
+          "open": "09:00",
+          "close": "18:00"
+        },
+        "friday": {
+          "open": "09:00",
+          "close": "18:00"
+        }
+      },
+      "location": {
+        "address_line": "Av. das Nações Unidas, 3000",
+        "city": "São Paulo",
+        "state": "SP",
+        "zip_code": "02675031",
+        "latitude": -23.5967082,
+        "longitude": -46.6873416,
+        "reference": "Próximo ao metrô"
+      },
+      "external_id": "STORE-CENTRO-001",
+      "business_hours": {
+        "open": "09:00",
+        "close": "18:00"
+      }
+    },
+    {
+      "id": 1023456790,
+      "user_id": 1469979538,
+      "name": "Sucursal Zona Sul",
+      "date_created": "2023-09-05T10:15:22.374-04:00",
+      "opening_hours": {
+        "monday": {
+          "open": "08:00",
+          "close": "20:00"
+        },
+        "tuesday": {
+          "open": "08:00",
+          "close": "20:00"
+        },
+        "wednesday": {
+          "open": "08:00",
+          "close": "20:00"
+        },
+        "thursday": {
+          "open": "08:00",
+          "close": "20:00"
+        },
+        "friday": {
+          "open": "08:00",
+          "close": "20:00"
+        }
+      },
+      "location": {
+        "address_line": "Rua Domingos de Morais, 1500",
+        "city": "São Paulo",
+        "state": "SP",
+        "zip_code": "04035000",
+        "latitude": -23.6103565,
+        "longitude": -46.6391274,
+        "reference": "Esquina com a Av. Ibirapuera"
+      },
+      "external_id": "STORE-ZONASUL-002",
+      "business_hours": {
+        "open": "08:00",
+        "close": "20:00"
+      }
+    }
+  ]
+}
