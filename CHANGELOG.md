@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project follows Keep a Changelog and Semantic Versioning.
 
+## [3.16.1] - 2026-11-13
+
+### Fixed
+- Include API error details in exception messages when available.
+
 ## [3.16.0] - 2026-08-27
 
 ### Added
