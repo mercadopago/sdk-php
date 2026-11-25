@@ -222,11 +222,6 @@ class MPDefaultHttpClient implements MPHttpClient
             CURLOPT_RETURNTRANSFER => true,
         ];
 
-        if (MercadoPagoConfig::getRuntimeEnviroment() === MercadoPagoConfig::LOCAL) {
-            $options += [CURLOPT_SSL_VERIFYHOST => false];
-            $options += [CURLOPT_SSL_VERIFYPEER => false];
-        }
-
         return $options;
     }
 

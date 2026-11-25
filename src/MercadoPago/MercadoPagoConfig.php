@@ -30,7 +30,7 @@ class MercadoPagoConfig
     /** @var string Internal product identifier sent in the X-Product-Id header. */
     public static string $PRODUCT_ID = "BC32A7RU643001OI3940";
 
-    /** Runtime environment: disables SSL verification for local development. */
+    /** Runtime environment for local development (TLS verification remains enabled). */
     public const LOCAL = 'local';
 
     /** Runtime environment: production-safe defaults (SSL verification enabled). */
@@ -65,6 +65,18 @@ class MercadoPagoConfig
 
     /** @var MPHttpClient|null Custom HTTP client. When null, a default cURL-based client is created lazily. */
     private static ?MPHttpClient $http_client = null;
+
+    /** Restore defaults between requests in long-lived, multi-tenant workers. */
+    public static function reset(): void
+    {
+        self::$runtime_enviroment = self::SERVER;
+        self::$access_token = self::$integrator_id = self::$corporation_id = self::$platform_id = "";
+        self::$max_retries = 3;
+        self::$retry_delay = 500;
+        self::$max_connections = 10;
+        self::$connection_timeout = 20000;
+        self::$http_client = null;
+    }
 
     /**
      * Returns the configured HTTP client, creating a default cURL-based one on first call.
@@ -188,7 +200,7 @@ class MercadoPagoConfig
 
     /**
      * Sets the runtime environment. Use {@see self::LOCAL} for development
-     * (disables SSL verification) or {@see self::SERVER} for production.
+     * or {@see self::SERVER} for production. TLS verification is always enabled.
      *
      * @param string $enviroment One of self::LOCAL or self::SERVER.
      * @throws InvalidArgumentException When the value is not LOCAL or SERVER.

@@ -352,3 +352,5 @@ If you require technical support, please contact our support team at our develop
 MIT license. Copyright (c) 2023 - Mercado Pago / Mercado Libre
 For more information, see the LICENSE file.
 ```
+
+For long-lived workers serving multiple merchants, prefer per-request `RequestOptions` for credentials. Call `MercadoPagoConfig::reset()` between requests to clear global credentials and restore default settings. TLS certificate and hostname verification remain enabled in both `LOCAL` and `SERVER` modes; configure a trusted CA in your PHP/cURL environment for local proxies.
