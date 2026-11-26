@@ -21,6 +21,9 @@ class TransactionData
     /** Base64-encoded QR code image for rendering in the payer's UI. */
     public ?string $qr_code_base64;
 
+    /** Subscription identifier associated with the transaction. */
+    public ?string $subscription_id = null;
+
     /** Unique transaction identifier within the point of interaction. */
     public ?string $transaction_id;
 

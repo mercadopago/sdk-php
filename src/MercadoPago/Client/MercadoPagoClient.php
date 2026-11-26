@@ -159,8 +159,8 @@ class MercadoPagoClient
     {
         $key = "x-idempotency-key";
         if (!is_null($request_options) && !is_null($request_options->getCustomHeaders())) {
-            $headers = $request_options->getCustomHeaders();
-            if (array_key_exists(strtolower($key), array_change_key_case($headers))) {
+            $headers = array_change_key_case($request_options->getCustomHeaders());
+            if (array_key_exists(strtolower($key), $headers)) {
                 return $headers[strtolower($key)];
             }
         }

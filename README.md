@@ -34,7 +34,7 @@ First time using Mercado Pago? Create your [Mercado Pago account](https://www.me
 2. Install PHP SDK for MercadoPago running in command line:
 
 ```
-composer require "mercadopago/dx-php:3.16.1"
+composer require "mercadopago/dx-php:3.16.2"
 ```
 
 > You can also run _composer require "mercadopago/dx-php:2.6.2"_ for PHP7.1 or _composer require "mercadopago/dx-php:1.12.6"_ for PHP5.6.
@@ -352,3 +352,5 @@ If you require technical support, please contact our support team at our develop
 MIT license. Copyright (c) 2023 - Mercado Pago / Mercado Libre
 For more information, see the LICENSE file.
 ```
+
+For long-lived workers serving multiple merchants, prefer per-request `RequestOptions` for credentials. Call `MercadoPagoConfig::reset()` between requests to clear global credentials and restore default settings. TLS certificate and hostname verification remain enabled in both `LOCAL` and `SERVER` modes; configure a trusted CA in your PHP/cURL environment for local proxies.
