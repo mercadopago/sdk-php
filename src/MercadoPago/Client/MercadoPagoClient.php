@@ -22,7 +22,9 @@ class MercadoPagoClient
     /**
      * @param MPHttpClient $http_client HTTP transport used to execute API requests.
      */
-    public function __construct(protected MPHttpClient $http_client) {}
+    public function __construct(protected MPHttpClient $http_client)
+    {
+    }
 
     /**
      * Assembles and sends an HTTP request to the MercadoPago API.
@@ -81,7 +83,7 @@ class MercadoPagoClient
 
     private function addHeaders(string $method, ?RequestOptions $request_options = null): array
     {
-        $headers = [];
+        $headers = array();
         $headers = $this->addCustomHeaders($headers, $request_options);
         $headers = $this->addTrackingHeaders($headers);
         $headers = $this->addDefaultHeaders($method, $headers, $request_options);
@@ -98,14 +100,14 @@ class MercadoPagoClient
 
     private function addDefaultHeaders(string $method, array $headers, ?RequestOptions $request_options = null): array
     {
-        $default_headers = [
+        $default_headers = array(
             'Accept: application/json',
             'Content-Type: application/json; charset=UTF-8',
             'Authorization: Bearer ' . $this->getAccessToken($request_options),
             'X-Product-Id: ' . MercadoPagoConfig::$PRODUCT_ID,
             'User-Agent: MercadoPago DX-PHP SDK/' . MercadoPagoConfig::$CURRENT_VERSION,
-            'X-Tracking-Id: platform:' . PHP_MAJOR_VERSION . '|' . PHP_VERSION . ',type:SDK' . MercadoPagoConfig::$CURRENT_VERSION . ',so;',
-        ];
+            'X-Tracking-Id: platform:' . PHP_MAJOR_VERSION . '|' . PHP_VERSION . ',type:SDK' . MercadoPagoConfig::$CURRENT_VERSION . ',so;'
+        );
 
         if ($this->shouldAddIdempotencyKey($method) && !$this->headerExists($headers, 'X-Idempotency-Key')) {
             array_push($default_headers, 'X-Idempotency-Key: ' . $this->getIdempotencyKey($request_options));
@@ -116,7 +118,7 @@ class MercadoPagoClient
 
     private function addTrackingHeaders(array $headers): array
     {
-        $tracking_headers = [];
+        $tracking_headers = array();
         if (!$this->headerExists($headers, 'X-Platform-Id') && !empty(MercadoPagoConfig::getPlatformId())) {
             array_push($tracking_headers, 'X-Platform-Id: ' . MercadoPagoConfig::getPlatformId());
         }
@@ -134,7 +136,7 @@ class MercadoPagoClient
 
     private function headerExists(array $headers, string $header): bool
     {
-        foreach ($headers as $h) {
+        foreach($headers as $h) {
             $headerName = trim(explode(':', $h, 2)[0]);
             if (strtolower($headerName) == strtolower($header)) {
                 return true;
